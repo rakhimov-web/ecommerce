@@ -1,0 +1,25 @@
+.appContainer {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: clip;
+  background-color: var(--background);
+}
+
+.pageWrapper {
+  width: 100%;
+}
+
+/* Sahifalar orasidagi tezkor, qisqa, ammo minimal va professional Apple-style fade perexod */
+.pageFade {
+  animation: pageFadeIn 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0.88;
+  }
+  to {
+    opacity: 1;
+  }
+}

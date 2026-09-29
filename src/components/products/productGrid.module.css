@@ -124,11 +124,6 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.favoriteBtn:hover {
-  background-color: rgba(0, 0, 0, 0.08);
-  color: #ef4444;
-}
-
 .favoriteBtn:active {
   background-color: rgba(0, 0, 0, 0.12);
 }

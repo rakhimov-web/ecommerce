@@ -1,0 +1,600 @@
+.searchPageContainer {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--background);
+  padding-top: 6.4rem;
+  padding-bottom: 7.6rem;
+  font-family: var(--font-primary);
+}
+
+/* ============================================================
+   1. FIXED HEADER (HOME HEADER BILAN 1-GA 1 MOS NATIVE APPS)
+   ============================================================ */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--white);
+  border-bottom: 1px solid var(--border);
+  margin: 0;
+  padding: 0;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.2rem 2.0rem;
+  gap: 1.2rem;
+  height: 6.4rem;
+}
+
+/* Home sahifasidagi iconBtn bilan 1-ga 1 mos ortga qaytish tugmasi */
+.backButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.2rem;
+  height: 4.2rem;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  color: var(--black);
+  cursor: pointer;
+  outline: none;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.15s ease;
+}
+
+.backButton:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.backButton:active {
+  background-color: rgba(0, 0, 0, 0.08);
+  opacity: 0.85;
+}
+
+/* 100% enni egallovchi qidiruv maydoni (Home searchBox bilan bir xil) */
+.searchBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  background-color: #f1f5f9;
+  border: 1px solid transparent;
+  border-radius: 1.2rem;
+  padding: 0 1.2rem;
+  height: 4.0rem;
+  outline: none;
+  transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.searchBox:focus-within {
+  border-color: transparent;
+  box-shadow: none;
+  background-color: #eef2f6;
+}
+
+.searchIcon {
+  color: var(--gray);
+  margin-right: 0.8rem;
+  flex-shrink: 0;
+}
+
+.searchInput {
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+  color: var(--black);
+  caret-color: var(--primary);
+}
+
+.searchInput::placeholder {
+  color: var(--gray);
+  font-size: 1.35rem;
+  font-weight: 400;
+}
+
+.clearBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: var(--gray);
+  cursor: pointer;
+  margin-left: 0.4rem;
+  outline: none;
+  transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.clearBtn:hover {
+  background-color: rgba(22, 25, 27, 0.06);
+  color: var(--black);
+}
+
+.clearBtn:active {
+  background-color: rgba(22, 25, 27, 0.12);
+}
+
+/* ============================================================
+   2. ASOSIY KONTENT MAYDONI
+   ============================================================ */
+
+.mainContent {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.8rem 2.0rem 3.6rem 2.0rem;
+}
+
+.defaultView {
+  width: 100%;
+}
+
+/* ============================================================
+   3. YAQINDA QIDIRILGANLAR (MEDIA_1790693989594.PNG BILAN 1-GA 1)
+   ============================================================ */
+
+.recentSection {
+  margin-bottom: 2.6rem;
+}
+
+.recentHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+
+.recentTitle {
+  font-family: var(--font-primary);
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--black);
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+.clearHistoryBtn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-family: var(--font-primary);
+  font-size: 1.4rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.6rem;
+  transition: color 0.15s ease, background-color 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.clearHistoryBtn:hover {
+  color: var(--black);
+  background-color: #f1f5f9;
+}
+
+.clearHistoryBtn:active {
+  background-color: #e2e8f0;
+}
+
+.recentList {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border-radius: 1.4rem;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.recentItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.3rem 1.6rem;
+  border-bottom: 1px solid #f1f5f9;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.recentItem:last-child {
+  border-bottom: none;
+}
+
+.recentItem:hover {
+  background-color: #f8fafd;
+}
+
+.recentItem:active {
+  background-color: #f1f5f9;
+}
+
+.recentItemLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex: 1;
+}
+
+.clockIcon {
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.recentText {
+  font-family: var(--font-primary);
+  font-size: 1.45rem;
+  font-weight: 500;
+  color: var(--black);
+  line-height: 1.2;
+}
+
+.removeItemBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.0rem;
+  height: 3.0rem;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s ease, background-color 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.removeItemBtn:hover {
+  color: var(--black);
+  background-color: #f1f5f9;
+}
+
+/* ============================================================
+   4. 5 TA ASOSIY TOIFA JADVALI (TABLE/LIST - OBJECT-FIT: COVER)
+   ============================================================ */
+
+.categorySection {
+  margin-bottom: 2.6rem;
+}
+
+.categorySectionTitle {
+  font-family: var(--font-primary);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--black);
+  margin: 0 0 1.2rem 0;
+  letter-spacing: -0.015em;
+}
+
+.categoryTable {
+  background: var(--white);
+  border-radius: 1.6rem;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.categoryRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.3rem 1.8rem;
+  border-bottom: 1px solid #f1f5f9;
+  cursor: pointer;
+  transition: background-color 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.categoryRow:last-child {
+  border-bottom: none;
+}
+
+.categoryRow:hover {
+  background-color: #f8fafd;
+}
+
+.categoryRow:active {
+  background-color: #f1f5f9;
+}
+
+.categoryRowLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  flex: 1;
+}
+
+/* Rasm kvadrat-dumaloq ramkasi: chetlaridan oshib ketmasligi uchun overflow: hidden */
+.categoryIconWrap {
+  width: 4.6rem;
+  height: 4.6rem;
+  border-radius: 1.2rem;
+  background-color: #f8fafd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 1px solid #edf2f7;
+}
+
+/* Kategoriya rasmi: aynan object-fit: cover */
+.categoryImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.categoryTextWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.categoryName {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--black);
+  line-height: 1.25;
+}
+
+.categorySubtitle {
+  font-size: 1.2rem;
+  color: var(--gray);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.categoryRowRight {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.categoryCount {
+  font-size: 1.2rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.chevronIcon {
+  color: #94a3b8;
+  flex-shrink: 0;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.categoryRow:hover .chevronIcon {
+  transform: translateX(3px);
+  color: var(--primary);
+}
+
+/* ============================================================
+   5. ULTRA-PROFESSIONAL EMPTY STATE (TOPILMADI)
+   ============================================================ */
+
+.notFoundWrapper {
+  width: 100%;
+}
+
+/* Foydalanuvchi talabiga asosan: shadow olib tashlangan, toza minimalist card */
+.emptyCard {
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 1.8rem;
+  padding: 3.6rem 2.0rem;
+  text-align: center;
+  margin-bottom: 2.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: none !important;
+}
+
+.vectorBox {
+  margin-bottom: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notFoundTitle {
+  font-family: var(--font-primary);
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--black);
+  margin: 0 0 0.8rem 0;
+  letter-spacing: -0.015em;
+}
+
+.notFoundSubtitle {
+  font-family: var(--font-primary);
+  font-size: 1.4rem;
+  color: var(--gray);
+  max-width: 400px;
+  margin: 0 0 1.8rem 0;
+  line-height: 1.5;
+}
+
+/* Foydalanuvchi talabiga asosan: :active bo'lganda transform scale olib tashlangan */
+.resetSearchBtn {
+  font-family: var(--font-primary);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--white);
+  background-color: var(--primary);
+  border: none;
+  border-radius: 1rem;
+  padding: 0.9rem 2.2rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  outline: none;
+  transform: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.resetSearchBtn:hover {
+  background-color: #0045d6;
+}
+
+.resetSearchBtn:active {
+  background-color: #0037ab;
+  transform: none !important;
+}
+
+/* ============================================================
+   6. NATIJALAR VA TAVSIYA ETAMIZ (HOME CARDS PANJARASI)
+   ============================================================ */
+
+.resultsSection,
+.recommendSection {
+  margin-top: 0.6rem;
+  width: 100%;
+}
+
+.resultsHeaderRow,
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.6rem;
+}
+
+.sectionTitle {
+  font-family: var(--font-primary);
+  font-size: var(--text-xl); /* 1.85rem (18.5px) */
+  font-weight: 700;
+  color: var(--black);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.countBadge {
+  font-size: 1.45rem;
+  font-weight: 500;
+  color: var(--gray);
+  margin-left: 0.4rem;
+}
+
+/* Home pagedagi kabi 4 ustunli desktop, 2 ustunli mobil panjara */
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  width: 100%;
+}
+
+/* ============================================================
+   7. RESPONSIVE BREAKPOINTS (MOBIL MOSLASHUVCHANLIK)
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .productGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .searchPageContainer {
+    padding-top: 6.0rem;
+  }
+
+  .headerContent {
+    padding: 1.1rem 2.0rem;
+    gap: 0.8rem;
+    height: 6.0rem;
+  }
+
+  .backButton {
+    width: 3.8rem;
+    height: 3.8rem;
+  }
+
+  .searchBox {
+    height: 3.8rem;
+    border-radius: 1.1rem;
+    padding: 0 1.0rem;
+  }
+
+  .searchInput {
+    font-size: 1.6rem; /* iOS Safari zoom oldini olish */
+  }
+
+  .searchInput::placeholder {
+    font-size: 1.35rem;
+  }
+
+  .mainContent {
+    padding: 1.4rem 2.0rem;
+  }
+
+  .productGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .categoryRow {
+    padding: 1.2rem 1.4rem;
+  }
+
+  .categoryIconWrap {
+    width: 4.2rem;
+    height: 4.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainContent {
+    padding: 1.2rem 2.0rem;
+  }
+
+  .productGrid {
+    gap: 2rem; /* Kichik telefonlarda ham 2.0rem saqlanadi */
+  }
+}
+
+@media (max-width: 360px) {
+  .searchPageContainer {
+    padding-top: 5.6rem;
+  }
+
+  .headerContent {
+    padding: 0.9rem 1.4rem;
+    gap: 0.6rem;
+    height: 5.6rem;
+  }
+
+  .backButton {
+    width: 3.6rem;
+    height: 3.6rem;
+  }
+
+  .mainContent {
+    padding: 1.0rem 1.6rem;
+  }
+
+  .productGrid {
+    gap: 1.4rem;
+  }
+}

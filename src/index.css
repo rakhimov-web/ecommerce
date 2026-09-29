@@ -69,6 +69,8 @@
 html {
   font-size: 10px;
   -webkit-text-size-adjust: 100%;
+  overflow-y: scroll; /* Doimo barqaror sichqoncha bilan scroll bo'lishi uchun */
+  overflow-x: clip;   /* Eniga scroll hosil qilmasdan ortiqcha elementlarni qirqadi */
 }
 
 body {
@@ -79,8 +81,15 @@ body {
   line-height: 1.4;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overscroll-behavior-y: none;
-  touch-action: manipulation;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
 }
 
 /* ========================================

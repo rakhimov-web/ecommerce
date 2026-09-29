@@ -4,7 +4,6 @@ import Header from "../../components/header/Header";
 import BannerCarousel from "../../components/banner/BannerCarousel";
 import CategoryGrid from "../../components/categories/CategoryGrid";
 import ProductGrid from "../../components/products/ProductGrid";
-import Menu from "../../components/menu/Menu";
 import BannerSkeleton from "../../components/skeleton/BannerSkeleton";
 import CategorySkeleton from "../../components/skeleton/CategorySkeleton";
 import ProductGridSkeleton from "../../components/skeleton/ProductGridSkeleton";
@@ -21,10 +20,18 @@ import prodIpad from "../../assets/products/prod_ipad.jpg";
 import prodWatch from "../../assets/products/prod_watch.jpg";
 import prodAirpods from "../../assets/products/prod_airpods.jpg";
 
-const Home = () => {
-  const [loading, setLoading] = useState(true);
+// Birinchi marta sayt ochilganda yuklanish bayrog'i (keyingi sahifalar almashishida skeleton takrorlanmaydi)
+let hasLoadedHomeOnce = false;
+
+const Home = ({ onSearchClick }) => {
+  const [loading, setLoading] = useState(!hasLoadedHomeOnce);
 
   useEffect(() => {
+    if (hasLoadedHomeOnce) {
+      setLoading(false);
+      return;
+    }
+
     // Rasmlarni orqa fonda oldindan GPU xotirasiga dekodlab yuklash (pre-cache)
     const imagesToPreload = [
       bannerImg,
@@ -49,6 +56,7 @@ const Home = () => {
     });
 
     const timer = setTimeout(() => {
+      hasLoadedHomeOnce = true;
       setLoading(false);
     }, 1100);
 
@@ -59,7 +67,7 @@ const Home = () => {
     <div
       style={{ paddingTop: "68px", paddingBottom: "76px", minHeight: "100vh" }}
     >
-      <Header />
+      <Header onSearchClick={onSearchClick} />
       <main>
         <AnimatePresence mode="wait">
           {loading ? (
@@ -97,7 +105,6 @@ const Home = () => {
           )}
         </AnimatePresence>
       </main>
-      <Menu />
     </div>
   );
 };

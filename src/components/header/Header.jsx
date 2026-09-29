@@ -2,25 +2,41 @@ import { useState } from "react";
 import { Search, Heart, ShoppingCart, X } from "lucide-react";
 import styles from "./header.module.css";
 
-const Header = () => {
+const Header = ({ onSearchClick }) => {
   const [searchValue, setSearchValue] = useState("");
 
-  const handleClear = () => {
+  const handleClear = (e) => {
+    e.stopPropagation();
     setSearchValue("");
+  };
+
+  const handleSearchBoxClick = () => {
+    if (onSearchClick) {
+      onSearchClick();
+    }
   };
 
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        {/* Qidiruv maydoni (O'zbekcha) */}
-        <div className={styles.searchBox}>
+        {/* Qidiruv maydoni (bosilganda to'g'ridan-to'g'ri SearchPage ga o'tadi) */}
+        <div
+          className={styles.searchBox}
+          onClick={handleSearchBoxClick}
+          role="button"
+          tabIndex={0}
+          style={{ cursor: "pointer" }}
+        >
           <Search size={18} className={styles.searchIcon} />
           <input
             type="text"
+            readOnly={!!onSearchClick}
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
-            placeholder="Nimani qidiryapsiz?"
+            onClick={handleSearchBoxClick}
+            placeholder="Mahsulot va toifalarni qidirish"
             className={styles.searchInput}
+            style={{ cursor: onSearchClick ? "pointer" : "text" }}
           />
           {searchValue && (
             <button

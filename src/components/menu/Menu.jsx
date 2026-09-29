@@ -12,9 +12,18 @@ const items = [
 
 const itemWidthPercent = 100 / items.length; // 25%
 
-const Menu = () => {
-  // Sayt ochilganda qat'iy ravishda 0-indeks (Bosh sahifa) tanlangan bo'ladi
-  const [active, setActive] = useState(0);
+const Menu = ({ active: controlledActive, onTabChange }) => {
+  const [internalActive, setInternalActive] = useState(0);
+  const active =
+    controlledActive !== undefined ? controlledActive : internalActive;
+
+  const handleSelect = (index) => {
+    if (onTabChange) {
+      onTabChange(index);
+    } else {
+      setInternalActive(index);
+    }
+  };
 
   return (
     <div className={styles.cover}>
@@ -24,7 +33,7 @@ const Menu = () => {
           return (
             <button
               key={item.id}
-              onClick={() => setActive(index)}
+              onClick={() => handleSelect(index)}
               className={`${styles.navItem} ${isActive ? styles.active : ""}`}
               type="button"
             >
@@ -34,7 +43,7 @@ const Menu = () => {
           );
         })}
 
-        {/* Sliding Active Indicator: initial={false} sayt ochilganda ortiqcha animatsiyasiz darhol Bosh sahifada turishini ta'minlaydi */}
+        {/* Sliding Active Indicator */}
         <motion.div
           initial={false}
           animate={{

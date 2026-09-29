@@ -1,0 +1,465 @@
+/* ============================================================
+   APP SEARCH MODAL - APPLE & SHADCN STYLE
+   ============================================================ */
+
+/* Qoraytirilgan va chuqur blur qilingan orqa fon (Backdrop) */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 6.0rem 1.6rem 2.4rem;
+  overflow-y: auto;
+  font-family: var(--font-primary);
+}
+
+/* Markaziy suzuvchi modal oynasi */
+.modalBox {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 1.8rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25),
+              0 0 0 1px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================================
+   1. MODAL QIDIRUV HEADER
+   ============================================================ */
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  padding: 0 1.6rem;
+  height: 5.6rem;
+  border-bottom: 1px solid #f1f5f9;
+  gap: 1.2rem;
+  background-color: var(--white);
+}
+
+.searchIcon {
+  color: var(--gray);
+  flex-shrink: 0;
+}
+
+.searchInput {
+  flex: 1;
+  height: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: var(--font-primary);
+  font-size: 1.55rem;
+  font-weight: 500;
+  color: var(--black);
+  caret-color: var(--primary);
+}
+
+.searchInput::placeholder {
+  color: #94a3b8;
+  font-size: 1.45rem;
+}
+
+.clearBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: var(--gray);
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.clearBtn:hover {
+  background-color: #f1f5f9;
+  color: var(--black);
+}
+
+.escBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #64748b;
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.55rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.escBadge:hover {
+  background-color: #e2e8f0;
+  color: var(--black);
+}
+
+/* ============================================================
+   2. MODAL TANASI (MAZMUN RO'YXATI)
+   ============================================================ */
+
+.modalBody {
+  max-height: 440px;
+  overflow-y: auto;
+  padding: 1.2rem 0;
+  overscroll-behavior: contain;
+}
+
+/* Bo'lim sarlavhalari */
+.sectionTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.6rem 1.8rem 0.6rem;
+  margin: 0;
+}
+
+/* Tezkor takliflar (Quick Chips) */
+.chipsRow {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0 1.8rem 1.4rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.chipsRow::-webkit-scrollbar {
+  display: none;
+}
+
+.chipBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-primary);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #475569;
+  background-color: #f8fafd;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  padding: 0.45rem 1.0rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chipBtn:hover {
+  background-color: #eef2f6;
+  color: var(--black);
+  border-color: #cbd5e1;
+}
+
+.chipBtn:active {
+  transform: scale(0.97);
+}
+
+/* 5 ta toifaning Table/List ko'rinishi */
+.categoryList {
+  display: flex;
+  flex-direction: column;
+}
+
+.categoryItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.8rem;
+  cursor: pointer;
+  transition: background-color 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.categoryItem:hover {
+  background-color: #f8fafd;
+}
+
+.categoryItem:active {
+  background-color: #f1f5f9;
+}
+
+.categoryLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.catIconWrap {
+  width: 3.8rem;
+  height: 3.8rem;
+  border-radius: 1.0rem;
+  background-color: #f8fafd;
+  border: 1px solid #edf2f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.catImg {
+  width: 2.6rem;
+  height: 2.6rem;
+  object-fit: contain;
+}
+
+.catText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.catTitle {
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--black);
+  line-height: 1.2;
+}
+
+.catSubtitle {
+  font-size: 1.2rem;
+  color: var(--gray);
+  font-weight: 400;
+}
+
+.chevronIcon {
+  color: #94a3b8;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.categoryItem:hover .chevronIcon {
+  transform: translateX(3px);
+  color: var(--primary);
+}
+
+/* ============================================================
+   3. TOPILGAN MAHSULOTLAR RO'YXATI
+   ============================================================ */
+
+.productsList {
+  display: flex;
+  flex-direction: column;
+}
+
+.productRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.0rem 1.8rem;
+  cursor: pointer;
+  transition: background-color 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-tap-highlight-color: transparent;
+  gap: 1.2rem;
+}
+
+.productRow:hover {
+  background-color: #f8fafd;
+}
+
+.productRow:active {
+  background-color: #f1f5f9;
+}
+
+.productLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.productThumb {
+  width: 4.4rem;
+  height: 4.4rem;
+  border-radius: 0.9rem;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid #f1f5f9;
+}
+
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.productTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--black);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+
+.productMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.productCategory {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--gray);
+  text-transform: capitalize;
+}
+
+.productPrice {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.productOldPrice {
+  font-size: 1.1rem;
+  color: #94a3b8;
+  text-decoration: line-through;
+  line-height: 1;
+}
+
+.selectIndicator {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary);
+  background-color: #eff6ff;
+  border-radius: 0.6rem;
+  padding: 0.35rem 0.8rem;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  flex-shrink: 0;
+}
+
+.productRow:hover .selectIndicator {
+  opacity: 1;
+}
+
+/* ============================================================
+   4. EMPTY STATE (TOPILMADI)
+   ============================================================ */
+
+.emptyBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 3.2rem 2.0rem;
+}
+
+.emptyTitle {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--black);
+  margin: 1.2rem 0 0.6rem;
+}
+
+.emptySubtitle {
+  font-size: 1.35rem;
+  color: var(--gray);
+  max-width: 320px;
+  line-height: 1.4;
+  margin-bottom: 1.6rem;
+}
+
+.resetBtn {
+  font-family: var(--font-primary);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--primary);
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 0.8rem;
+  padding: 0.6rem 1.4rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.resetBtn:hover {
+  background-color: #dbeafe;
+}
+
+/* ============================================================
+   5. MODAL FOOTER
+   ============================================================ */
+
+.modalFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.8rem;
+  border-top: 1px solid #f1f5f9;
+  background-color: #fbfcfe;
+  font-size: 1.2rem;
+  color: #94a3b8;
+}
+
+.footerLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.shortcutHint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.kbdKey {
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 600;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.4rem;
+  padding: 0.15rem 0.45rem;
+  color: #475569;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 640px) {
+  .backdrop {
+    padding: 2.0rem 1.2rem;
+    align-items: flex-start;
+  }
+
+  .modalBox {
+    border-radius: 1.6rem;
+  }
+
+  .modalHeader {
+    height: 5.2rem;
+  }
+
+  .searchInput {
+    font-size: 1.5rem;
+  }
+
+  .modalFooter {
+    display: none;
+  }
+}
