@@ -1,20 +1,21 @@
 .section {
   width: 100%;
-  margin: 1.2rem 0 1.8rem 0;
+  margin: 1.2rem 0 2.6rem 0;
   font-family: var(--font-primary);
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
 }
 
+/* Ekranga to'liq space-between bilan yoyilgan konteyner */
 .gridContainer {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   width: 100%;
-  max-width: 680px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 0 1.2rem;
+  padding: 0 1.6rem;
 }
 
 .categoryItem {
@@ -24,6 +25,7 @@
   text-decoration: none;
   cursor: pointer;
   outline: none;
+  flex: 0 0 auto;
   -webkit-tap-highlight-color: transparent;
   transition: opacity 0.2s ease;
 }
@@ -32,21 +34,22 @@
   opacity: 0.92;
 }
 
+/* Kattalashtirilgan, MUTLAQO BORDERSIZ silliq squircle kartochka */
 .iconWrapper {
   position: relative;
-  width: 6.2rem;
-  height: 6.2rem;
+  width: 6.8rem;
+  height: 6.8rem;
   border-radius: 1.8rem;
   overflow: hidden;
   background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: none !important; /* 1px border butunlay olib tashlandi */
+  box-shadow: none !important;
+  transform: none !important;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 0.6rem;
-  transform: none !important;
-  box-shadow: none !important;
-  transition: border-color 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
 .categoryIcon {
@@ -59,17 +62,17 @@
   -webkit-user-drag: none;
 }
 
-/* 2 qatorli ellipsis sarlavha — saytning base o'lchamiga mos (1.2rem / 12px) */
+/* Kategoriya sarlavhasi — Standart 12px (mobil e-commerce standarti) */
 .categoryTitle {
   font-family: var(--font-primary);
-  font-size: var(--text-base); /* 1.2rem (12px) */
+  font-size: var(--text-sm); /* 1.2rem (12px) */
   font-weight: 500;
   color: var(--black);
   text-align: center;
   line-height: 1.25;
   width: 100%;
   max-width: 6.8rem;
-  height: 2.8rem;
+  height: 2.7rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -79,7 +82,7 @@
   letter-spacing: -0.01em;
 }
 
-/* iOS-uslubidagi to'lqin (ripple) */
+/* iOS-uslubidagi sayoz to'lqin (ripple) */
 .ripple {
   position: absolute;
   width: 16px;
@@ -124,48 +127,64 @@
   opacity: 1;
 }
 
-/* Kichik ekranlar (telefonlar) */
-@media (max-width: 480px) {
+/* Mobil ekranlar uchun moslashuv */
+@media (max-width: 768px) {
   .section {
-    margin: 1rem 0 1.4rem 0;
+    margin: 1.0rem 0 2.2rem 0;
   }
 
   .gridContainer {
-    gap: 0 0.4rem;
-    padding: 0 0.8rem;
+    padding: 0 1.2rem; /* Header va mahsulotlar bilan 100% bir xil */
   }
 
   .iconWrapper {
-    width: 5.4rem;
-    height: 5.4rem;
-    border-radius: 1.5rem;
-    margin-bottom: 0.45rem;
+    width: 6.0rem;
+    height: 6.0rem;
+    border-radius: 1.6rem;
+    margin-bottom: 0.5rem;
   }
 
   .categoryTitle {
     font-size: 1.15rem; /* 11.5px */
-    max-width: 6.2rem;
-    height: 2.7rem;
+    max-width: 6.0rem;
+    height: 2.6rem;
   }
 }
 
-/* Juda kichik ekranlar (360px va undan kichik) */
-@media (max-width: 360px) {
+@media (max-width: 480px) {
   .gridContainer {
-    gap: 0 0.2rem;
-    padding: 0 0.4rem;
+    padding: 0 1.2rem;
   }
 
   .iconWrapper {
-    width: 4.6rem;
-    height: 4.6rem;
-    border-radius: 1.3rem;
-    margin-bottom: 0.35rem;
+    width: 5.8rem;
+    height: 5.8rem;
+    border-radius: 1.55rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .categoryTitle {
+    font-size: 1.12rem;
+    max-width: 5.8rem;
+  }
+}
+
+/* Kichik ekranlar (360px va undan kichik) */
+@media (max-width: 360px) {
+  .gridContainer {
+    padding: 0 1.0rem;
+  }
+
+  .iconWrapper {
+    width: 5.2rem;
+    height: 5.2rem;
+    border-radius: 1.4rem;
+    margin-bottom: 0.4rem;
   }
 
   .categoryTitle {
     font-size: 1.05rem; /* 10.5px */
-    max-width: 5.4rem;
-    height: 2.5rem;
+    max-width: 5.2rem;
+    height: 2.4rem;
   }
 }

@@ -1,0 +1,418 @@
+.section {
+  width: 100%;
+  max-width: 1000px;
+  margin: 1.6rem auto 3.6rem auto;
+  padding: 0 1.6rem;
+  font-family: var(--font-primary);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.6rem;
+}
+
+.sectionTitle {
+  font-family: var(--font-primary);
+  font-size: var(--text-xl); /* 1.85rem (18.5px) — E-commerce standart sarlavha */
+  font-weight: 700;
+  color: var(--black);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+/* 4 ustunli desktop, 2 ustunli mobil panjara */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.6rem;
+  width: 100%;
+}
+
+/* Kartaning o'zida border va orqa fon umuman yo'q - mutlaqo toza va yengil */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  border: none !important;
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none !important;
+  transform: none !important;
+  padding: 0;
+}
+
+/* 3/4 rasm freymi - 1PX BORDER LINIYASI BUTUNLAY OLIB TASHLANDI */
+.imageContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background-color: #ffffff;
+  border-radius: 1.6rem;
+  border: none !important; /* Mutlaqo bordersiz, toza studio yuzasi */
+  overflow: visible; /* 3D badge qatlanishi ramka chetidan erkin chiqishi uchun */
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Ichki rasm maydoni: rasm va to'lqinlarni silliq dumaloq burchak bilan qirqadi */
+.imageWrapper {
+  position: absolute;
+  inset: 0;
+  border-radius: 1.6rem;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.productImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Maxsus 3D Ticket Coupon Badge (AKSIYA va YANGI) */
+.badgeWrapper {
+  position: absolute;
+  top: 1.2rem;
+  left: -0.6rem; /* Ramka chetidan 6px chapga chiqib 3D qatlanadi */
+  z-index: 4;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.1));
+}
+
+.ticketSvg {
+  display: block;
+  width: 6.8rem;
+  height: 2.7rem;
+}
+
+/* Sevimlilar (Like) yurakcha tugmasi */
+.favoriteBtn {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--gray);
+  outline: none;
+  z-index: 5;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  transform: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.favoriteBtn:hover {
+  background-color: #ffffff;
+  color: var(--accent);
+}
+
+.favoriteBtn.liked {
+  color: #ef4444;
+}
+
+/* Kartochka matn qismi - to'liq native e-commerce standart font-sizelari */
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.2rem 0.2rem 0.4rem 0.2rem;
+  gap: 0.6rem;
+}
+
+/* Narx: Standart 16px bold, eski narx 11px */
+.priceBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.currentPrice {
+  font-size: var(--text-lg); /* 1.6rem (16px) */
+  font-weight: 700;
+  color: var(--black);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.oldPrice {
+  font-size: var(--text-xs); /* 1.1rem (11px) */
+  color: var(--gray);
+  text-decoration: line-through;
+  line-height: 1;
+}
+
+/* Mahsulot nomi — Standart 14px (1 qatorda silliq) */
+.productTitle {
+  font-size: var(--text-base); /* 1.4rem (14px) */
+  font-weight: 600;
+  color: var(--black);
+  margin: 0;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Tavsif — Standart 12px (2 qatorda "..." bilan qisqaradigan) */
+.productDescription {
+  font-size: var(--text-sm); /* 1.2rem (12px) */
+  color: var(--gray);
+  margin: 0;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  height: 3.2rem;
+}
+
+/* Savatga qo'shish tugmasi: Karta kengligi bilan teng (width: 100%) */
+.cartButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  height: 3.8rem;
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  border-radius: 1.0rem;
+  font-family: var(--font-primary);
+  font-size: 1.25rem; /* 12.5px */
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  margin-top: 0.6rem;
+  transform: none !important;
+  box-shadow: none !important;
+  transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cartButton:hover {
+  background-color: #0045d6;
+}
+
+.cartButton:active {
+  background-color: #0037ab;
+}
+
+.addedButton {
+  background-color: var(--success) !important;
+}
+
+/* Tugma ichidagi suv yoyiladigan to'lqin (Ripple) */
+.buttonRipple {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.6) 0%,
+    rgba(255, 255, 255, 0.2) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+  animation: rippleSpread 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Rasm bosilgandagi sayoz to'lqin */
+.imageRipple {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(0, 85, 255, 0.16) 0%,
+    rgba(0, 0, 0, 0.05) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+  animation: rippleSpread 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes rippleSpread {
+  0% {
+    width: 16px;
+    height: 16px;
+    opacity: 0.9;
+  }
+  100% {
+    width: 260px;
+    height: 260px;
+    opacity: 0;
+  }
+}
+
+.pressHighlight {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(255, 255, 255, 0.14);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.cartButton:active .pressHighlight {
+  opacity: 1;
+}
+
+.imageHighlight {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.03);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.imageContainer:active .imageHighlight {
+  opacity: 1;
+}
+
+/* Mobil ekranlar uchun moslashuv */
+@media (max-width: 768px) {
+  .section {
+    padding: 0 1.2rem;
+    margin: 1.4rem auto 3.0rem auto;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+
+  .imageContainer {
+    border-radius: 1.4rem;
+  }
+
+  .imageWrapper {
+    border-radius: 1.4rem;
+  }
+
+  .badgeWrapper {
+    top: 1.0rem;
+    left: -0.5rem;
+  }
+
+  .ticketSvg {
+    width: 6.2rem;
+    height: 2.45rem;
+  }
+
+  .content {
+    padding: 1.0rem 0.2rem 0.4rem 0.2rem;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 0 1.2rem;
+    margin: 1.2rem auto 2.6rem auto;
+  }
+
+  .sectionTitle {
+    font-size: 1.75rem; /* 17.5px */
+  }
+
+  .grid {
+    gap: 1.0rem;
+  }
+
+  .badgeWrapper {
+    top: 0.8rem;
+    left: -0.45rem;
+  }
+
+  .ticketSvg {
+    width: 5.8rem;
+    height: 2.3rem;
+  }
+
+  .currentPrice {
+    font-size: 1.5rem; /* 15px */
+  }
+
+  .productTitle {
+    font-size: 1.35rem; /* 13.5px */
+  }
+
+  .productDescription {
+    font-size: 1.15rem; /* 11.5px */
+    height: 3.1rem;
+  }
+
+  .cartButton {
+    height: 3.6rem;
+    font-size: 1.2rem; /* 12px */
+  }
+}
+
+@media (max-width: 360px) {
+  .section {
+    padding: 0 1.0rem;
+    margin: 1.0rem auto 2.2rem auto;
+  }
+
+  .grid {
+    gap: 0.8rem;
+  }
+
+  .badgeWrapper {
+    top: 0.7rem;
+    left: -0.4rem;
+  }
+
+  .ticketSvg {
+    width: 5.4rem;
+    height: 2.15rem;
+  }
+
+  .currentPrice {
+    font-size: 1.4rem; /* 14px */
+  }
+
+  .productTitle {
+    font-size: 1.25rem; /* 12.5px */
+  }
+
+  .productDescription {
+    font-size: 1.05rem; /* 10.5px */
+    height: 2.8rem;
+  }
+
+  .cartButton {
+    height: 3.4rem;
+    font-size: 1.15rem; /* 11.5px */
+  }
+}

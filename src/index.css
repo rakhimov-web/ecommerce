@@ -5,39 +5,54 @@
      BRAND
      ======================================== */
 
-  --primary: #0055ff; /* Main brand / buttons / links */
-  --accent: #ff6430; /* Sale / discount / attention */
+  --primary: #0055ff; /* Asosiy brand ko'k / faol elementlar */
+  --accent: #ff6430;  /* Aksiya / chegirma / savatcha badge */
 
   /* ========================================
      NEUTRALS
      ======================================== */
 
-  --black: #16191b; /* Main text / dark buttons */
-  --gray: #5f6b7a; /* Secondary text */
-  --border: #e3eaf5; /* Borders / dividers */
-  --background: #f8fafd; /* Page background */
-  --white: #ffffff; /* Cards / inputs / white surfaces */
+  --black: #16191b;      /* Asosiy matn / to'q elementlar */
+  --gray: #64748b;       /* Ikkilamchi matn / nofaol iconlar */
+  --border: #e2e8f0;     /* Nozik chiziqlar / ajratuvchilar */
+  --background: #f8fafd; /* Sahifa foni */
+  --white: #ffffff;      /* Kartochkalar / oq yuzalar */
 
   /* ========================================
      STATUS
      ======================================== */
 
-  --success: #16a34a; /* Success / in stock */
-  --error: #dc2626; /* Error / unavailable */
-  --warning: #ff6430; /* Warning / sale */
+  --success: #16a34a;
+  --error: #dc2626;
+  --warning: #ff6430;
 
   /* ========================================
-     TYPOGRAPHY & HARMONIZED SCALE (10px base)
+     PROFESSIONAL E-COMMERCE TYPOGRAPHY SCALE
+     (Native mobile app standartlari bo'yicha)
+     html font-size = 10px bo'lganda (1rem = 10px):
      ======================================== */
 
   --font-primary: "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  --text-xs: 1.05rem;   /* 10.5px - Badges, micro indicators */
-  --text-sm: 1.15rem;   /* 11.5px - Tab bar labels, small captions */
-  --text-base: 1.2rem;  /* 12.0px - Category titles, secondary info */
-  --text-md: 1.35rem;   /* 13.5px - Search inputs, body text */
-  --text-lg: 1.5rem;    /* 15.0px - Section subheadings, product titles */
-  --text-xl: 1.8rem;    /* 18.0px - Page headings */
+  --text-2xs: 1.05rem;  /* 10.5px - Savatcha badge raqamlari, status indikatorlari */
+  --text-xs: 1.1rem;    /* 11.0px - Pastki tab-bar menyu yozuvlari */
+  --text-sm: 1.2rem;    /* 12.0px - Kategoriya sarlavhalari, kichik ta'riflar */
+  --text-base: 1.4rem;  /* 14.0px - Mahsulot nomlari, placeholderlar, oddiy matn */
+  --text-md: 1.5rem;    /* 15.0px - Qidiruv maydoni matni (desktop) */
+  --text-lg: 1.6rem;    /* 16.0px - Qidiruv matni (mobil safari zoom-oldini olish), narxlar */
+  --text-xl: 1.9rem;    /* 19.0px - Bo'lim sarlavhalari */
+  --text-2xl: 2.4rem;   /* 24.0px - Asosiy katta sahifa sarlavhalari */
+
+  /* ========================================
+     STANDARD ICON & TOUCH TARGET SIZES
+     ======================================== */
+
+  --icon-xs: 1.5rem;     /* 15px - Tozalash (X) ikonkasi */
+  --icon-sm: 1.8rem;     /* 18px - Qidiruv lupasi */
+  --icon-md: 2.2rem;     /* 22px - Pastki tab bar va header action ikonkalar */
+  --icon-lg: 2.4rem;     /* 24px - Katta harakat ikonkasi */
+
+  --touch-target: 4.4rem; /* 44px - Apple HIG minimal sensor bosish maydoni */
 }
 
 /* ========================================
@@ -60,7 +75,7 @@ body {
   background: var(--background);
   color: var(--black);
   font-family: var(--font-primary);
-  font-size: var(--text-md);
+  font-size: var(--text-base);
   line-height: 1.4;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -94,10 +109,13 @@ body {
 
 .price {
   color: var(--black);
+  font-size: var(--text-lg);
+  font-weight: 700;
 }
 
 .old-price {
   color: var(--gray);
+  font-size: var(--text-sm);
   text-decoration: line-through;
 }
 

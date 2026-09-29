@@ -19,11 +19,12 @@
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 0.8rem 1.6rem;
+  padding: 0.7rem 1.6rem;
   gap: 1.2rem;
+  height: 5.6rem;
 }
 
-/* Qidiruv maydoni */
+/* Qidiruv maydoni (Standart balandlik: 40-42px) */
 .searchBox {
   position: relative;
   display: flex;
@@ -54,24 +55,24 @@
   color: var(--primary);
 }
 
-/* Qidiruv matni — saytning asosiy matn o'lchamiga mos (1.35rem / 13.5px) */
+/* Qidiruv matni — optimal 14px-15px (desktop), 16px (mobilda avtomatik kattalashishni oldini oladi) */
 .searchInput {
   width: 100%;
   border: none;
   background: transparent;
   outline: none;
   font-family: var(--font-primary);
-  font-size: var(--text-md); /* 1.35rem */
+  font-size: var(--text-base); /* 1.4rem (14px) */
   color: var(--black);
 }
 
 .searchInput::placeholder {
   color: var(--gray);
-  font-size: 1.3rem;
+  font-size: 1.35rem; /* 13.5px */
   font-weight: 400;
 }
 
-/* Qidiruvni tozalash tugmasi */
+/* Qidiruvni tozalash tugmasi (Standart 26x26px doira, 15px icon) */
 .clearBtn {
   display: flex;
   align-items: center;
@@ -102,11 +103,11 @@
 .actionGroup {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.4rem;
   flex-shrink: 0;
 }
 
-/* Professional iOS/Luxury doirasimon mikro-interaktiv tugma (Transformsiz) */
+/* Sensor teginish maydoni (Apple HIG: 40-44px doira, ichida 22-23px SVG) */
 .iconBtn {
   position: relative;
   display: flex;
@@ -139,17 +140,17 @@
   stroke: var(--primary);
 }
 
-/* Savatcha ustidagi doirasimon qizil badge */
+/* Savatcha ustidagi doirasimon qizil badge (Standart: 18x18px, shrift: 10.5px bold) */
 .cartBadge {
   position: absolute;
   top: 0.3rem;
   right: 0.3rem;
   background-color: var(--accent); /* #ff6430 */
   color: var(--white);
-  font-size: var(--text-xs); /* 1.05rem (10.5px) */
+  font-size: var(--text-2xs); /* 1.05rem (10.5px) */
   font-weight: 700;
-  min-width: 1.7rem;
-  height: 1.7rem;
+  min-width: 1.8rem;
+  height: 1.8rem;
   border-radius: 999px;
   display: flex;
   align-items: center;
@@ -160,11 +161,12 @@
   transition: background-color 0.25s ease;
 }
 
-/* Responsive moslashuv */
+/* Mobil ekranlar uchun moslashuv */
 @media (max-width: 640px) {
   .container {
-    padding: 0.7rem 1.2rem;
+    padding: 0.6rem 1.2rem;
     gap: 0.8rem;
+    height: 5.2rem;
   }
 
   .searchBox {
@@ -173,12 +175,13 @@
     padding: 0 1rem;
   }
 
+  /* iOS Safari fokuslanganda sahifani kattalashtirib yubormasligi uchun 16px */
   .searchInput {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
   }
 
   .searchInput::placeholder {
-    font-size: 1.25rem;
+    font-size: 1.35rem;
   }
 
   .iconBtn {
@@ -189,8 +192,8 @@
   .cartBadge {
     top: 0.2rem;
     right: 0.2rem;
-    min-width: 1.6rem;
-    height: 1.6rem;
+    min-width: 1.7rem;
+    height: 1.7rem;
     font-size: 1rem;
   }
 }
