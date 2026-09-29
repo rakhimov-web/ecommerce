@@ -1,5 +1,5 @@
-export function cn(...inputs: (string | undefined | null | false | Record<string, boolean>)[]) {
-  const classes: string[] = [];
+export function cn(...inputs) {
+  const classes = [];
   for (const input of inputs) {
     if (!input) continue;
     if (typeof input === 'string') {
