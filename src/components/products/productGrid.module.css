@@ -2,7 +2,8 @@
   width: 100%;
   max-width: 1000px;
   margin: 1.6rem auto 3.6rem auto;
-  padding: 0 1.6rem;
+  /* Ekran ikkita cheti aynan 2.0rem qilib belgilandi */
+  padding: 0 2rem;
   font-family: var(--font-primary);
   user-select: none;
   -webkit-user-select: none;
@@ -17,18 +18,20 @@
 
 .sectionTitle {
   font-family: var(--font-primary);
-  font-size: var(--text-xl); /* 1.85rem (18.5px) — E-commerce standart sarlavha */
+  font-size: var(
+    --text-xl
+  ); /* 1.85rem (18.5px) — E-commerce standart sarlavha */
   font-weight: 700;
   color: var(--black);
   letter-spacing: -0.02em;
   margin: 0;
 }
 
-/* 4 ustunli desktop, 2 ustunli mobil panjara */
+/* 4 ustunli desktop, 2 ustunli mobil panjara — kartalar orasidagi masofa aynan 2.0rem */
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.6rem;
+  gap: 2rem;
   width: 100%;
 }
 
@@ -46,14 +49,14 @@
   padding: 0;
 }
 
-/* 3/4 rasm freymi - 1PX BORDER LINIYASI BUTUNLAY OLIB TASHLANDI */
+/* 3/4 rasm freymi - MUTLAQO BORDERSIZ, TOZA STUDIO YUZASI */
 .imageContainer {
   position: relative;
   width: 100%;
   aspect-ratio: 3 / 4;
   background-color: #ffffff;
   border-radius: 1.6rem;
-  border: none !important; /* Mutlaqo bordersiz, toza studio yuzasi */
+  border: none !important; /* 1px border liniyasi butunlay olib tashlandi */
   overflow: visible; /* 3D badge qatlanishi ramka chetidan erkin chiqishi uchun */
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -96,18 +99,17 @@
   height: 2.7rem;
 }
 
-/* Sevimlilar (Like) yurakcha tugmasi */
+/* Sevimlilar (Like) yurakcha tugmasi — BORDERSIZ, SOYASIZ VA OPACITY LI FON */
 .favoriteBtn {
   position: absolute;
-  top: 0.9rem;
-  right: 0.9rem;
-  width: 3.2rem;
-  height: 3.2rem;
+  top: 1rem;
+  right: 1rem;
+  width: 3.4rem;
+  height: 3.4rem;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: none !important;
+  background-color: rgba(0, 0, 0, 0.05); /* Opacity li toza fon */
+  border: none !important; /* 1px border butunlay olib tashlandi */
+  box-shadow: none !important; /* Mutlaqo soyasiz */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,17 +117,29 @@
   color: var(--gray);
   outline: none;
   z-index: 5;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.2s ease;
   transform: none !important;
   -webkit-tap-highlight-color: transparent;
 }
 
 .favoriteBtn:hover {
-  background-color: #ffffff;
-  color: var(--accent);
+  background-color: rgba(0, 0, 0, 0.08);
+  color: #ef4444;
+}
+
+.favoriteBtn:active {
+  background-color: rgba(0, 0, 0, 0.12);
 }
 
 .favoriteBtn.liked {
+  background-color: rgba(
+    239,
+    68,
+    68,
+    0.12
+  ); /* Sevimlilar uchun shaffof qizil fon */
   color: #ef4444;
 }
 
@@ -199,7 +213,7 @@
   background-color: var(--primary);
   color: var(--white);
   border: none;
-  border-radius: 1.0rem;
+  border-radius: 1rem;
   font-family: var(--font-primary);
   font-size: 1.25rem; /* 12.5px */
   font-weight: 600;
@@ -225,7 +239,7 @@
   background-color: var(--success) !important;
 }
 
-/* Tugma ichidagi suv yoyiladigan to'lqin (Ripple) */
+/* Native ilovadek yumshoq va mayin suv yoyilishi (Ripple) */
 .buttonRipple {
   position: absolute;
   width: 16px;
@@ -234,15 +248,15 @@
   transform: translate(-50%, -50%);
   background: radial-gradient(
     circle,
-    rgba(255, 255, 255, 0.6) 0%,
-    rgba(255, 255, 255, 0.2) 60%,
+    rgba(255, 255, 255, 0.45) 0%,
+    rgba(255, 255, 255, 0.18) 60%,
     transparent 100%
   );
   pointer-events: none;
-  animation: rippleSpread 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: nativeRippleSpread 0.55s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
 }
 
-/* Rasm bosilgandagi sayoz to'lqin */
+/* Rasm bosilgandagi native sayoz to'lqin */
 .imageRipple {
   position: absolute;
   width: 16px;
@@ -251,23 +265,23 @@
   transform: translate(-50%, -50%);
   background: radial-gradient(
     circle,
-    rgba(0, 85, 255, 0.16) 0%,
-    rgba(0, 0, 0, 0.05) 60%,
+    rgba(0, 85, 255, 0.14) 0%,
+    rgba(0, 0, 0, 0.035) 60%,
     transparent 100%
   );
   pointer-events: none;
-  animation: rippleSpread 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: nativeRippleSpread 0.55s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
 }
 
-@keyframes rippleSpread {
+@keyframes nativeRippleSpread {
   0% {
     width: 16px;
     height: 16px;
     opacity: 0.9;
   }
   100% {
-    width: 260px;
-    height: 260px;
+    width: 280px;
+    height: 280px;
     opacity: 0;
   }
 }
@@ -289,7 +303,7 @@
 .imageHighlight {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(0, 0, 0, 0.035);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.15s ease;
@@ -302,13 +316,15 @@
 /* Mobil ekranlar uchun moslashuv */
 @media (max-width: 768px) {
   .section {
-    padding: 0 1.2rem;
-    margin: 1.4rem auto 3.0rem auto;
+    /* Mobilda chetlar aynan 2.0rem */
+    padding: 0 2rem;
+    margin: 1.4rem auto 3rem auto;
   }
 
   .grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
+    /* Kartalar orasidagi masofa mobilda ham aynan 2.0rem */
+    gap: 2rem;
   }
 
   .imageContainer {
@@ -320,7 +336,7 @@
   }
 
   .badgeWrapper {
-    top: 1.0rem;
+    top: 1rem;
     left: -0.5rem;
   }
 
@@ -330,14 +346,14 @@
   }
 
   .content {
-    padding: 1.0rem 0.2rem 0.4rem 0.2rem;
+    padding: 1rem 0.2rem 0.4rem 0.2rem;
     gap: 0.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .section {
-    padding: 0 1.2rem;
+    padding: 0 2rem;
     margin: 1.2rem auto 2.6rem auto;
   }
 
@@ -346,7 +362,7 @@
   }
 
   .grid {
-    gap: 1.0rem;
+    gap: 2rem; /* Kichik telefonlarda ham 2.0rem saqlanadi */
   }
 
   .badgeWrapper {
@@ -380,12 +396,12 @@
 
 @media (max-width: 360px) {
   .section {
-    padding: 0 1.0rem;
-    margin: 1.0rem auto 2.2rem auto;
+    padding: 0 1.6rem;
+    margin: 1rem auto 2.2rem auto;
   }
 
   .grid {
-    gap: 0.8rem;
+    gap: 1.4rem;
   }
 
   .badgeWrapper {

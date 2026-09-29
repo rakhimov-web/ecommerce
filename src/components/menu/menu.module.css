@@ -10,7 +10,7 @@
   border-radius: 0;
 }
 
-/* Standart mobil ilova pastki Tab Bar (Balandlik: 54-58px + safe area) */
+/* Standart mobil ilova pastki Tab Bar */
 .menu {
   position: relative;
   display: flex;
@@ -41,7 +41,14 @@
   color: var(--gray);
   font-family: var(--font-primary);
   border-radius: 0;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, opacity 0.15s ease;
+  transform: none !important; /* Hech qanday scale sakrashi yo'q */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.navItem:active {
+  opacity: 0.75;
+  transform: none !important;
 }
 
 .navItem.active {
@@ -75,15 +82,16 @@
   font-weight: 600;
 }
 
+/* Menu faol tugmasining nozik ko'k foni va 1px border chiziqdan ustun turuvchi ko'k top line */
 .indicator {
   position: absolute;
-  top: 0;
+  top: -1px; /* 1px border-top ustiga aniq o'tiradi va chiziqdan chiqib ketmaydi */
   bottom: 0;
-  border-radius: 0;
-  background: rgba(0, 85, 255, 0.08);
-  border-top: 3px solid var(--primary);
+  background-color: rgba(0, 85, 255, 0.09); /* O'sha yoqimli nozik ko'k fon to'liq qaytarildi */
+  border-top: 2.5px solid var(--primary); /* 1px borderdan ustun turuvchi yorqin ko'k top line */
   pointer-events: none;
-  z-index: 1;
+  z-index: 1; /* Tugma ikonkalari va matnlarining orqasida joylashadi */
+  border-radius: 0;
 }
 
 @media (max-width: 360px) {
