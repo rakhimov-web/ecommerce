@@ -9,21 +9,56 @@ import BannerSkeleton from "../../components/skeleton/BannerSkeleton";
 import CategorySkeleton from "../../components/skeleton/CategorySkeleton";
 import ProductGridSkeleton from "../../components/skeleton/ProductGridSkeleton";
 
+import bannerImg from "../../assets/images/banner.png";
+import telefonImg from "../../assets/categories/telefon.png";
+import noutbukImg from "../../assets/categories/noutbuk.png";
+import ipadImg from "../../assets/categories/ipad.png";
+import watchImg from "../../assets/categories/apple-watch.png";
+import aksessuarlarImg from "../../assets/categories/aksessuarlar.png";
+import prodIphone from "../../assets/products/prod_iphone.jpg";
+import prodMacbook from "../../assets/products/prod_macbook.jpg";
+import prodIpad from "../../assets/products/prod_ipad.jpg";
+import prodWatch from "../../assets/products/prod_watch.jpg";
+import prodAirpods from "../../assets/products/prod_airpods.jpg";
+
 const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Sahifa ochilganda yoki yangilanganda ma'lumotlar o'qib bo'linguncha
-    // 1.2 soniyalik ultra-smooth shimmer skeleton loader
+    // Rasmlarni orqa fonda oldindan GPU xotirasiga dekodlab yuklash (pre-cache)
+    const imagesToPreload = [
+      bannerImg,
+      telefonImg,
+      noutbukImg,
+      ipadImg,
+      watchImg,
+      aksessuarlarImg,
+      prodIphone,
+      prodMacbook,
+      prodIpad,
+      prodWatch,
+      prodAirpods,
+    ];
+
+    imagesToPreload.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+      if (img.decode) {
+        img.decode().catch(() => {});
+      }
+    });
+
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1200);
+    }, 1100);
 
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div style={{ paddingTop: "68px", paddingBottom: "76px", minHeight: "100vh" }}>
+    <div
+      style={{ paddingTop: "68px", paddingBottom: "76px", minHeight: "100vh" }}
+    >
       <Header />
       <main>
         <AnimatePresence mode="wait">

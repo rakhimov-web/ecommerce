@@ -41,7 +41,9 @@
   color: var(--gray);
   font-family: var(--font-primary);
   border-radius: 0;
-  transition: color 0.2s ease, opacity 0.15s ease;
+  transition:
+    color 0.2s ease,
+    opacity 0.15s ease;
   transform: none !important; /* Hech qanday scale sakrashi yo'q */
   -webkit-tap-highlight-color: transparent;
 }
@@ -87,7 +89,17 @@
   position: absolute;
   top: -1px; /* 1px border-top ustiga aniq o'tiradi va chiziqdan chiqib ketmaydi */
   bottom: 0;
-  background-color: rgba(0, 85, 255, 0.09); /* O'sha yoqimli nozik ko'k fon to'liq qaytarildi */
+  background-color: rgba(
+    0,
+    85,
+    255,
+    0.12
+  ); /* Yoqimli, aniq ko'rinadigan ko'k fon */
+  background: linear-gradient(
+    180deg,
+    rgba(0, 85, 255, 0.16) 0%,
+    rgba(0, 85, 255, 0.08) 100%
+  );
   border-top: 2.5px solid var(--primary); /* 1px borderdan ustun turuvchi yorqin ko'k top line */
   pointer-events: none;
   z-index: 1; /* Tugma ikonkalari va matnlarining orqasida joylashadi */
