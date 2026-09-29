@@ -59,8 +59,8 @@ const CATEGORIES = [
 // Dastlabki qidiruv tarixi (Foydalanuvchi skrinshotidagi kabi "macbook")
 const DEFAULT_RECENT = ["macbook"];
 
-const SearchPage = ({ onBack, initialQuery = "" }) => {
-  const [searchValue, setSearchValue] = useState(initialQuery);
+const SearchPage = ({ onBack }) => {
+  const [searchValue, setSearchValue] = useState("");
   const [recentSearches, setRecentSearches] = useState(() => {
     try {
       const saved = localStorage.getItem("ecommerce_recent_searches");
@@ -73,31 +73,12 @@ const SearchPage = ({ onBack, initialQuery = "" }) => {
 
   const inputRef = useRef(null);
 
-  // initialQuery o'zgarganda (masalan bosh sahifada toifa bosilganda) sinxronlashtirish
-  useEffect(() => {
-    if (initialQuery !== undefined) {
-      setSearchValue(initialQuery);
-    }
-  }, [initialQuery]);
-
   // Sahifa ochilganda inputga fokus berish
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, []);
-
-  // URL ni qidiruv so'ziga qarab jonli yangilab borish (/search?q=...)
-  const syncUrlWithQuery = (val) => {
-    const trimmed = val.trim();
-    const newUrl = trimmed ? `/search?q=${encodeURIComponent(trimmed)}` : "/search";
-    window.history.replaceState({ page: "search", query: trimmed }, "", newUrl);
-  };
-
-  const handleSearchChange = (val) => {
-    setSearchValue(val);
-    syncUrlWithQuery(val);
-  };
 
   const saveRecent = (newList) => {
     setRecentSearches(newList);
@@ -128,7 +109,7 @@ const SearchPage = ({ onBack, initialQuery = "" }) => {
   };
 
   const handleSelectRecent = (term) => {
-    handleSearchChange(term);
+    setSearchValue(term);
     addRecentQuery(term);
   };
 
@@ -143,14 +124,14 @@ const SearchPage = ({ onBack, initialQuery = "" }) => {
   };
 
   const handleClearInput = () => {
-    handleSearchChange("");
+    setSearchValue("");
     if (inputRef.current) {
       inputRef.current.focus();
     }
   };
 
   const handleCategoryClick = (category) => {
-    handleSearchChange(category.title);
+    setSearchValue(category.title);
     addRecentQuery(category.title);
   };
 
@@ -201,7 +182,7 @@ const SearchPage = ({ onBack, initialQuery = "" }) => {
               ref={inputRef}
               type="text"
               value={searchValue}
-              onChange={(e) => handleSearchChange(e.target.value)}
+              onChange={(e) => setSearchValue(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Mahsulot va toifalarni qidirish"
               className={styles.searchInput}
