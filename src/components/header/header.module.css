@@ -1,0 +1,190 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--white);
+  border-bottom: 1px solid var(--border);
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-primary);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0.8rem 1.6rem;
+  gap: 1.2rem;
+}
+
+/* Qidiruv maydoni */
+.searchBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 1.2rem;
+  padding: 0 1.2rem;
+  height: 4.2rem;
+  transition: border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.searchBox:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.08);
+}
+
+.searchIcon {
+  color: var(--gray);
+  margin-right: 0.8rem;
+  flex-shrink: 0;
+  transition: color 0.25s ease;
+}
+
+.searchBox:focus-within .searchIcon {
+  color: var(--primary);
+}
+
+.searchInput {
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: var(--font-primary);
+  font-size: 1.4rem;
+  color: var(--black);
+}
+
+.searchInput::placeholder {
+  color: var(--gray);
+  font-size: 1.35rem;
+  font-weight: 400;
+}
+
+/* Qidiruvni tozalash tugmasi (Transformsiz, yumshoq yuvilish) */
+.clearBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: var(--gray);
+  cursor: pointer;
+  margin-left: 0.4rem;
+  outline: none;
+  transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.clearBtn:hover {
+  background-color: rgba(22, 25, 27, 0.06);
+  color: var(--black);
+}
+
+.clearBtn:active {
+  background-color: rgba(22, 25, 27, 0.12);
+}
+
+/* O'ng tarafdagi harakatlar guruhi */
+.actionGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+/* Professional iOS/Luxury doirasimon mikro-interaktiv tugma (Transformsiz) */
+.iconBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.2rem;
+  height: 4.2rem;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  color: var(--black);
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hover: Scale bo'lmaydi, o'rniga nozik mayin fon nuri va rang o'tishi */
+.iconBtn:hover {
+  background-color: rgba(0, 85, 255, 0.07);
+  color: var(--primary);
+}
+
+/* Active (bosilganda): Hech qanday scale/sakrash yo'q, faqat chuqurroq mayin nur */
+.iconBtn:active {
+  background-color: rgba(0, 85, 255, 0.14);
+  color: var(--primary);
+}
+
+/* Like iconi hover bo'lganda mayin shaffof ichki tus paydo bo'lishi */
+.iconBtn:hover svg {
+  stroke: var(--primary);
+}
+
+/* Savatcha ustidagi doirasimon qizil badge */
+.cartBadge {
+  position: absolute;
+  top: 0.3rem;
+  right: 0.3rem;
+  background-color: var(--accent); /* #ff6430 */
+  color: var(--white);
+  font-size: 1.1rem;
+  font-weight: 700;
+  min-width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.3rem;
+  line-height: 1;
+  pointer-events: none;
+  transition: background-color 0.25s ease;
+}
+
+/* Responsive moslashuv */
+@media (max-width: 640px) {
+  .container {
+    padding: 0.7rem 1.2rem;
+    gap: 0.8rem;
+  }
+
+  .searchBox {
+    height: 3.8rem;
+    border-radius: 1rem;
+    padding: 0 1rem;
+  }
+
+  .iconBtn {
+    width: 3.8rem;
+    height: 3.8rem;
+  }
+
+  .cartBadge {
+    top: 0.2rem;
+    right: 0.2rem;
+    min-width: 1.7rem;
+    height: 1.7rem;
+    font-size: 1rem;
+  }
+}
