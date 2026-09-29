@@ -27,10 +27,17 @@
   --warning: #ff6430; /* Warning / sale */
 
   /* ========================================
-     TYPOGRAPHY
+     TYPOGRAPHY & HARMONIZED SCALE (10px base)
      ======================================== */
 
-  --font-primary: "Satoshi", sans-serif;
+  --font-primary: "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --text-xs: 1.05rem;   /* 10.5px - Badges, micro indicators */
+  --text-sm: 1.15rem;   /* 11.5px - Tab bar labels, small captions */
+  --text-base: 1.2rem;  /* 12.0px - Category titles, secondary info */
+  --text-md: 1.35rem;   /* 13.5px - Search inputs, body text */
+  --text-lg: 1.5rem;    /* 15.0px - Section subheadings, product titles */
+  --text-xl: 1.8rem;    /* 18.0px - Page headings */
 }
 
 /* ========================================
@@ -53,6 +60,8 @@ body {
   background: var(--background);
   color: var(--black);
   font-family: var(--font-primary);
+  font-size: var(--text-md);
+  line-height: 1.4;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior-y: none;

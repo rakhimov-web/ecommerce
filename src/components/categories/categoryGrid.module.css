@@ -38,7 +38,7 @@
   height: 6.2rem;
   border-radius: 1.8rem;
   overflow: hidden;
-  background-color: var(--white);
+  background-color: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.06);
   display: flex;
   align-items: center;
@@ -52,17 +52,17 @@
 .categoryIcon {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  padding: 0.5rem;
+  object-fit: cover;
   display: block;
   pointer-events: none;
   user-select: none;
   -webkit-user-drag: none;
 }
 
-/* 2 qatorli ellipsis sarlavha va kichrayganda "..." chiqishi */
+/* 2 qatorli ellipsis sarlavha — saytning base o'lchamiga mos (1.2rem / 12px) */
 .categoryTitle {
-  font-size: 1.2rem;
+  font-family: var(--font-primary);
+  font-size: var(--text-base); /* 1.2rem (12px) */
   font-weight: 500;
   color: var(--black);
   text-align: center;
@@ -76,9 +76,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-word;
+  letter-spacing: -0.01em;
 }
 
-/* iOS-uslubidagi to'lqin (ripple) — oq fonda chiroyli ko'rinuvchi mayin to'lqin */
+/* iOS-uslubidagi to'lqin (ripple) */
 .ripple {
   position: absolute;
   width: 16px;
@@ -141,14 +142,10 @@
     margin-bottom: 0.45rem;
   }
 
-  .categoryIcon {
-    padding: 0.4rem;
-  }
-
   .categoryTitle {
-    font-size: 1.1rem;
+    font-size: 1.15rem; /* 11.5px */
     max-width: 6.2rem;
-    height: 2.6rem;
+    height: 2.7rem;
   }
 }
 
@@ -166,13 +163,9 @@
     margin-bottom: 0.35rem;
   }
 
-  .categoryIcon {
-    padding: 0.3rem;
-  }
-
   .categoryTitle {
-    font-size: 0.98rem;
+    font-size: 1.05rem; /* 10.5px */
     max-width: 5.4rem;
-    height: 2.4rem;
+    height: 2.5rem;
   }
 }

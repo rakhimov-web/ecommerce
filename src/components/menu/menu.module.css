@@ -57,13 +57,15 @@
   display: block;
 }
 
+/* Sayt bo'ylab uyg'unlashtirilgan tab bar yozuv o'lchami */
 .label {
   font-family: var(--font-primary);
-  font-size: 1.2rem;
+  font-size: var(--text-sm); /* 1.15rem (11.5px) */
   font-weight: 500;
   color: inherit;
   margin: 0;
   line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
 .navItem.active .label {
@@ -79,4 +81,24 @@
   border-top: 3px solid var(--primary);
   pointer-events: none;
   z-index: 1;
+}
+
+@media (max-width: 480px) {
+  .menu {
+    padding: 0.7rem 0;
+  }
+
+  .label {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .menu {
+    padding: 0.6rem 0;
+  }
+
+  .label {
+    font-size: 1.02rem;
+  }
 }

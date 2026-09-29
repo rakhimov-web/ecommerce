@@ -54,23 +54,24 @@
   color: var(--primary);
 }
 
+/* Qidiruv matni — saytning asosiy matn o'lchamiga mos (1.35rem / 13.5px) */
 .searchInput {
   width: 100%;
   border: none;
   background: transparent;
   outline: none;
   font-family: var(--font-primary);
-  font-size: 1.4rem;
+  font-size: var(--text-md); /* 1.35rem */
   color: var(--black);
 }
 
 .searchInput::placeholder {
   color: var(--gray);
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   font-weight: 400;
 }
 
-/* Qidiruvni tozalash tugmasi (Transformsiz, yumshoq yuvilish) */
+/* Qidiruvni tozalash tugmasi */
 .clearBtn {
   display: flex;
   align-items: center;
@@ -124,19 +125,16 @@
               color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Hover: Scale bo'lmaydi, o'rniga nozik mayin fon nuri va rang o'tishi */
 .iconBtn:hover {
   background-color: rgba(0, 85, 255, 0.07);
   color: var(--primary);
 }
 
-/* Active (bosilganda): Hech qanday scale/sakrash yo'q, faqat chuqurroq mayin nur */
 .iconBtn:active {
   background-color: rgba(0, 85, 255, 0.14);
   color: var(--primary);
 }
 
-/* Like iconi hover bo'lganda mayin shaffof ichki tus paydo bo'lishi */
 .iconBtn:hover svg {
   stroke: var(--primary);
 }
@@ -148,10 +146,10 @@
   right: 0.3rem;
   background-color: var(--accent); /* #ff6430 */
   color: var(--white);
-  font-size: 1.1rem;
+  font-size: var(--text-xs); /* 1.05rem (10.5px) */
   font-weight: 700;
-  min-width: 1.8rem;
-  height: 1.8rem;
+  min-width: 1.7rem;
+  height: 1.7rem;
   border-radius: 999px;
   display: flex;
   align-items: center;
@@ -175,6 +173,14 @@
     padding: 0 1rem;
   }
 
+  .searchInput {
+    font-size: 1.3rem;
+  }
+
+  .searchInput::placeholder {
+    font-size: 1.25rem;
+  }
+
   .iconBtn {
     width: 3.8rem;
     height: 3.8rem;
@@ -183,8 +189,8 @@
   .cartBadge {
     top: 0.2rem;
     right: 0.2rem;
-    min-width: 1.7rem;
-    height: 1.7rem;
+    min-width: 1.6rem;
+    height: 1.6rem;
     font-size: 1rem;
   }
 }
