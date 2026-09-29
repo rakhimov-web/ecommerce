@@ -30,7 +30,7 @@ const baseBanners = [
 const L = baseBanners.length; // 3 ta banner
 
 const BannerCarousel = ({ isActive = true, onBannerClick }) => {
-  // Uzluksiz virtual indeks (0, 1, 2, 3, ...) — orqaga qaytmaydi, cheksiz aylanadi
+  // Uzluksiz virtual indeks (0, 1, 2, 3, ...) — cheksiz aylanadi
   const [currentIndex, setCurrentIndex] = useState(0);
   const [slideWidth, setSlideWidth] = useState(340);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -40,7 +40,6 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
   const containerRef = useRef(null);
   const isDragging = useRef(false);
   const dragDistance = useRef(0);
-  const pointerStartX = useRef(0);
   const autoplayTimer = useRef(null);
   const rippleCounter = useRef(0);
 
@@ -68,7 +67,7 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
     return () => window.removeEventListener("resize", updateDimensions);
   }, [updateDimensions]);
 
-  // Sahifa qayta faol bo'lganda (Search'dan qaytganda) o'lchamni yangilash
+  // Sahifa qayta faol bo'lganda o'lchamni yangilash
   useEffect(() => {
     if (isActive) {
       updateDimensions();
@@ -87,18 +86,18 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
     [containerWidth, slideWidth, gap]
   );
 
-  // Har safar currentIndex o'zgarganda x koordinatasini mayin, sakrashlarsiz animatsiya qilish
+  // Har safar currentIndex o'zgarganda (avtomatik yoki dot bosilganda) x koordinatasini mayin, sakrashlarsiz animatsiya qilish
   useEffect(() => {
-    if (containerWidth > 0) {
+    if (containerWidth > 0 && !isDragging.current && isActive) {
       const target = getTargetX(currentIndex);
       animate(x, target, {
         type: "spring",
-        stiffness: 125,
-        damping: 20,
-        mass: 0.9,
+        stiffness: 115,
+        damping: 18,
+        mass: 0.85,
       });
     }
-  }, [currentIndex, getTargetX, containerWidth, x]);
+  }, [currentIndex, getTargetX, containerWidth, x, isActive]);
 
   // Keyingi card
   const nextSlide = useCallback(() => {
@@ -110,13 +109,13 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
     setCurrentIndex((prev) => prev - 1);
   }, []);
 
-  // 5 soniyalik autoplay (faqat sahifa ko'rinib turganda va pauza bo'lmaganda)
+  // 4.5 soniyalik autoplay (faqat sahifa ko'rinib turganda va pauza bo'lmaganda)
   useEffect(() => {
     if (isPaused || !isActive) return;
 
     autoplayTimer.current = setInterval(() => {
       nextSlide();
-    }, 5000);
+    }, 4500);
 
     return () => {
       if (autoplayTimer.current) {
@@ -125,13 +124,12 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
     };
   }, [nextSlide, isPaused, isActive]);
 
-  // Drag boshlanishi (to'g'ridan-to'g'ri card ustiga bosilganda ham ishlaydi)
-  const handleDragStart = (e) => {
+  // Drag boshlanishi
+  const handleDragStart = () => {
     isDragging.current = true;
     dragDistance.current = 0;
-    pointerStartX.current =
-      e.clientX || (e.touches && e.touches[0].clientX) || 0;
     setIsPaused(true);
+    x.stop(); // Oldingi har qanday animatsiyani to'xtatish
   };
 
   // Drag jarayoni
@@ -139,32 +137,36 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
     dragDistance.current = Math.abs(info.offset.x);
   };
 
-  // Drag tugashi
+  // Drag tugashi — dragMomentum={false} bilan mayin bahoriy snap
   const handleDragEnd = (e, info) => {
     setIsPaused(false);
     isDragging.current = false;
+    x.stop();
 
-    const swipeThreshold = 40;
-    const velocityThreshold = 200;
+    const offset = info.offset.x;
+    const velocity = info.velocity.x;
+    const swipeThreshold = 45;
+    const velocityThreshold = 250;
 
-    if (
-      info.offset.x < -swipeThreshold ||
-      info.velocity.x < -velocityThreshold
-    ) {
-      nextSlide();
-    } else if (
-      info.offset.x > swipeThreshold ||
-      info.velocity.x > velocityThreshold
-    ) {
-      prevSlide();
-    } else {
-      // O'z o'rniga mayin qaytish
-      const target = getTargetX(currentIndex);
-      animate(x, target, {
-        type: "spring",
-        stiffness: 140,
-        damping: 20,
-      });
+    let targetIndex = currentIndex;
+    if (offset < -swipeThreshold || velocity < -velocityThreshold) {
+      targetIndex = currentIndex + 1;
+    } else if (offset > swipeThreshold || velocity > velocityThreshold) {
+      targetIndex = currentIndex - 1;
+    }
+
+    // Yangi target koordinatasi
+    const target = getTargetX(targetIndex);
+    animate(x, target, {
+      type: "spring",
+      stiffness: 130,
+      damping: 20,
+      mass: 0.8,
+      velocity: info.velocity.x,
+    });
+
+    if (targetIndex !== currentIndex) {
+      setCurrentIndex(targetIndex);
     }
   };
 
@@ -197,7 +199,7 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
     }, 600);
   };
 
-  // Card bosilganda mahsulotga o'tish (faqat surilmagan bo'lsa)
+  // Card bosilganda mahsulotga/qidiruvga o'tish (faqat surilmagan bo'lsa)
   const handleCardClick = (bannerData) => {
     if (dragDistance.current < 6) {
       if (onBannerClick) {
@@ -211,13 +213,26 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
   // Faol nuqta (0, 1, 2)
   const activeDotIndex = ((currentIndex % L) + L) % L;
 
-  // Ekranda ko'rinuvchi 5 ta virtual card
+  // Nuqta bosilganda aylanadagi eng yaqin yo'l bo'ylab siljish (sakrab ketmaslik uchun)
+  const handleDotClick = (targetDotIndex) => {
+    let diff = targetDotIndex - activeDotIndex;
+    if (diff > L / 2) {
+      diff -= L;
+    } else if (diff < -L / 2) {
+      diff += L;
+    }
+    setCurrentIndex((prev) => prev + diff);
+  };
+
+  // Ekranda ko'rinuvchi 7 ta virtual card (cheksiz aylanma doira)
   const visibleIndices = [
+    currentIndex - 3,
     currentIndex - 2,
     currentIndex - 1,
     currentIndex,
     currentIndex + 1,
     currentIndex + 2,
+    currentIndex + 3,
   ];
 
   return (
@@ -237,6 +252,7 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
           drag="x"
           dragConstraints={{ left: -100000, right: 100000 }}
           dragElastic={0.12}
+          dragMomentum={false}
           onDragStart={handleDragStart}
           onDrag={handleDrag}
           onDragEnd={handleDragEnd}
@@ -303,10 +319,7 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
               key={dotIdx}
               type="button"
               className={`${styles.dot} ${isActiveDot ? styles.activeDot : ""}`}
-              onClick={() => {
-                const diff = dotIdx - activeDotIndex;
-                setCurrentIndex((prev) => prev + diff);
-              }}
+              onClick={() => handleDotClick(dotIdx)}
               aria-label={`Banner ${dotIdx + 1}`}
             />
           );
