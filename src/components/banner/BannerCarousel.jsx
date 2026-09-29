@@ -50,97 +50,46 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
   // Cardlar orasidagi masofa
   const gap = 16;
 
-  // Markazga mos keluvchi koordinata hisoblash
+  // Ekran o'lchamini hisoblash
+  const updateDimensions = useCallback(() => {
+    if (containerRef.current) {
+      const cWidth = containerRef.current.offsetWidth;
+      if (cWidth > 0) {
+        setContainerWidth(cWidth);
+        const calculatedWidth = Math.min(Math.round(cWidth * 0.85), 940);
+        setSlideWidth(calculatedWidth);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, [updateDimensions]);
+
+  // Sahifa qayta faol bo'lganda (Search'dan qaytganda) o'lchamni yangilash
+  useEffect(() => {
+    if (isActive) {
+      updateDimensions();
+    }
+  }, [isActive, updateDimensions]);
+
+  // Card balandligi (984 / 323 proporsiyasi bo'yicha)
+  const slideHeight = Math.round(slideWidth * (323 / 984));
+
+  // Markazga mos keluvchi koordinata
   const getTargetX = useCallback(
-    (index, cWidth = containerWidth, sWidth = slideWidth) => {
-      const validCWidth =
-        cWidth > 0
-          ? cWidth
-          : containerRef.current?.offsetWidth || window.innerWidth || 390;
-      const validSWidth =
-        sWidth > 0 ? sWidth : Math.min(Math.round(validCWidth * 0.85), 940);
-      const centerOffset = (validCWidth - validSWidth) / 2;
-      return centerOffset - index * (validSWidth + gap);
+    (index) => {
+      const centerOffset = (containerWidth - slideWidth) / 2;
+      return centerOffset - index * (slideWidth + gap);
     },
     [containerWidth, slideWidth, gap]
   );
 
-  // Markaziy koordinataga bir zumda (sakrashlarsiz, rAF kechikishisiz) to'g'rilash
-  const snapToCurrent = useCallback(() => {
-    if (containerRef.current) {
-      const cWidth =
-        containerRef.current.offsetWidth || window.innerWidth || 390;
-      if (cWidth > 0) {
-        const calcW = Math.min(Math.round(cWidth * 0.85), 940);
-        setContainerWidth(cWidth);
-        setSlideWidth(calcW);
-        const centerOffset = (cWidth - calcW) / 2;
-        const target = centerOffset - currentIndex * (calcW + gap);
-        x.set(target);
-      }
-    }
-  }, [currentIndex, gap, x]);
-
-  // Dastlabki o'lchov va Window resize hodisasi
-  useEffect(() => {
-    snapToCurrent();
-
-    const handleResize = () => {
-      snapToCurrent();
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    // ResizeObserver: display: none dan display: block ga o'tganda darhol qayta hisoblash
-    let ro;
-    if (containerRef.current && typeof ResizeObserver !== "undefined") {
-      ro = new ResizeObserver((entries) => {
-        for (const entry of entries) {
-          const w = entry.contentRect.width;
-          if (w > 0) {
-            setContainerWidth(w);
-            const calcW = Math.min(Math.round(w * 0.85), 940);
-            setSlideWidth(calcW);
-            const centerOffset = (w - calcW) / 2;
-            const target = centerOffset - currentIndex * (calcW + gap);
-            x.set(target);
-          }
-        }
-      });
-      ro.observe(containerRef.current);
-    }
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      if (ro) ro.disconnect();
-    };
-  }, [snapToCurrent, currentIndex, gap, x]);
-
-  // isActive o'zgarganda (Search'dan Home'ga qaytilganda) darhol va bir zumda sinxronlash
-  useEffect(() => {
-    if (!isActive) {
-      // Sahifa yashirilganda autoplay taymerini darhol to'xtatish
-      if (autoplayTimer.current) {
-        clearInterval(autoplayTimer.current);
-        autoplayTimer.current = null;
-      }
-      return;
-    }
-
-    // Sahifa faol bo'lishi bilan: darhol snap + rAF + 40ms kafolatlangan o'rnatish
-    snapToCurrent();
-    const rafId = requestAnimationFrame(snapToCurrent);
-    const timerId = setTimeout(snapToCurrent, 40);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      clearTimeout(timerId);
-    };
-  }, [isActive, snapToCurrent]);
-
   // Har safar currentIndex o'zgarganda x koordinatasini mayin, sakrashlarsiz animatsiya qilish
   useEffect(() => {
-    if (containerWidth > 0 && isActive) {
+    if (containerWidth > 0) {
       const target = getTargetX(currentIndex);
       animate(x, target, {
         type: "spring",
@@ -149,7 +98,7 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
         mass: 0.9,
       });
     }
-  }, [currentIndex, getTargetX, containerWidth, x, isActive]);
+  }, [currentIndex, getTargetX, containerWidth, x]);
 
   // Keyingi card
   const nextSlide = useCallback(() => {
@@ -161,15 +110,9 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
     setCurrentIndex((prev) => prev - 1);
   }, []);
 
-  // 5 soniyalik autoplay (faqat sahifa faol va ko'rinib turganda ishlaydi)
+  // 5 soniyalik autoplay (faqat sahifa ko'rinib turganda va pauza bo'lmaganda)
   useEffect(() => {
-    if (isPaused || !isActive) {
-      if (autoplayTimer.current) {
-        clearInterval(autoplayTimer.current);
-        autoplayTimer.current = null;
-      }
-      return;
-    }
+    if (isPaused || !isActive) return;
 
     autoplayTimer.current = setInterval(() => {
       nextSlide();
@@ -178,7 +121,6 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
     return () => {
       if (autoplayTimer.current) {
         clearInterval(autoplayTimer.current);
-        autoplayTimer.current = null;
       }
     };
   }, [nextSlide, isPaused, isActive]);
@@ -255,11 +197,13 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
     }, 600);
   };
 
-  // Card bosilganda mahsulotga/qidiruvga o'tish (faqat surilmagan bo'lsa)
-  const handleCardClick = (banner) => {
+  // Card bosilganda mahsulotga o'tish (faqat surilmagan bo'lsa)
+  const handleCardClick = (bannerData) => {
     if (dragDistance.current < 6) {
       if (onBannerClick) {
-        onBannerClick(banner.alt || "Sony");
+        onBannerClick(bannerData.alt || "Sony");
+      } else if (bannerData.link) {
+        window.location.assign(bannerData.link);
       }
     }
   };
@@ -275,13 +219,6 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
     currentIndex + 1,
     currentIndex + 2,
   ];
-
-  // Card balandligi (984 / 323 proporsiyasi bo'yicha) — nolga tushib qolmaydi
-  const safeSlideWidth =
-    slideWidth > 0
-      ? slideWidth
-      : Math.min(Math.round((window.innerWidth || 390) * 0.85), 940);
-  const slideHeight = Math.round(safeSlideWidth * (323 / 984));
 
   return (
     <section
@@ -318,8 +255,8 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
                   isCenter ? styles.centerCard : styles.sideCard
                 }`}
                 style={{
-                  left: `${virtualIndex * (safeSlideWidth + gap)}px`,
-                  width: `${safeSlideWidth}px`,
+                  left: `${virtualIndex * (slideWidth + gap)}px`,
+                  width: `${slideWidth}px`,
                   height: `${slideHeight}px`,
                 }}
                 onPointerDown={(e) => handleCardPointerDown(e, virtualIndex)}
