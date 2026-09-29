@@ -23,7 +23,7 @@ import prodAirpods from "../../assets/products/prod_airpods.jpg";
 // Birinchi marta sayt ochilganda yuklanish bayrog'i (keyingi sahifalar almashishida skeleton takrorlanmaydi)
 let hasLoadedHomeOnce = false;
 
-const Home = ({ onSearchClick }) => {
+const Home = ({ isActive = true, onSearchClick, onCategoryClick }) => {
   const [loading, setLoading] = useState(!hasLoadedHomeOnce);
 
   useEffect(() => {
@@ -94,10 +94,10 @@ const Home = ({ onSearchClick }) => {
               transition={{ duration: 0.35, ease: [0.2, 0.8, 0.2, 1] }}
             >
               {/* Yuqori cheksiz banner */}
-              <BannerCarousel />
+              <BannerCarousel isActive={isActive} onBannerClick={onCategoryClick} />
 
               {/* Asosiy toifalar (Telefon, Noutbuk, iPad, Apple Watch, Aksessuarlar) */}
-              <CategoryGrid />
+              <CategoryGrid onCategoryClick={onCategoryClick} />
 
               {/* Tavsiya qilingan mahsulotlar (3/4 aspect ratio, 2 ustunli mobil panjara) */}
               <ProductGrid />

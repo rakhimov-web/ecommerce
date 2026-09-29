@@ -2,8 +2,8 @@
   width: 100%;
   min-height: 100vh;
   background-color: var(--background);
-  padding-top: 6.4rem;
-  padding-bottom: 7.6rem;
+  padding-top: 68px;
+  padding-bottom: 76px;
   font-family: var(--font-primary);
 }
 
@@ -142,7 +142,7 @@
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 1.8rem 2.0rem 3.6rem 2.0rem;
+  padding: 1.2rem 2.0rem 3.6rem 2.0rem;
 }
 
 .defaultView {
@@ -517,7 +517,8 @@
 
 @media (max-width: 768px) {
   .searchPageContainer {
-    padding-top: 6.0rem;
+    padding-top: 68px;
+    padding-bottom: 76px;
   }
 
   .headerContent {
@@ -546,7 +547,7 @@
   }
 
   .mainContent {
-    padding: 1.4rem 2.0rem;
+    padding: 1.0rem 2.0rem 3.6rem 2.0rem;
   }
 
   .productGrid {
@@ -566,7 +567,7 @@
 
 @media (max-width: 480px) {
   .mainContent {
-    padding: 1.2rem 2.0rem;
+    padding: 1.0rem 2.0rem 3.6rem 2.0rem;
   }
 
   .productGrid {
@@ -576,7 +577,8 @@
 
 @media (max-width: 360px) {
   .searchPageContainer {
-    padding-top: 5.6rem;
+    padding-top: 68px;
+    padding-bottom: 76px;
   }
 
   .headerContent {
@@ -591,7 +593,7 @@
   }
 
   .mainContent {
-    padding: 1.0rem 1.6rem;
+    padding: 1.0rem 1.6rem 3.6rem 1.6rem;
   }
 
   .productGrid {

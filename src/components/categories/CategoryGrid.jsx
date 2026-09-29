@@ -15,9 +15,16 @@ const categories = [
   { id: "aksessuarlar", title: "Aksessuarlar", icon: aksessuarlarImg, link: "/category/aksessuarlar" },
 ];
 
-const CategoryGrid = () => {
+const CategoryGrid = ({ onCategoryClick }) => {
   const [ripples, setRipples] = useState([]);
   const rippleCounter = useRef(0);
+
+  const handleClick = (e, cat) => {
+    e.preventDefault();
+    if (onCategoryClick) {
+      onCategoryClick(cat.title);
+    }
+  };
 
   const handlePointerDown = (e, catId) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -53,6 +60,7 @@ const CategoryGrid = () => {
               key={cat.id}
               href={cat.link}
               className={styles.categoryItem}
+              onClick={(e) => handleClick(e, cat)}
               onPointerDown={(e) => handlePointerDown(e, cat.id)}
             >
               <div className={styles.iconWrapper}>

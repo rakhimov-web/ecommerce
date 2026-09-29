@@ -29,7 +29,7 @@ const baseBanners = [
 
 const L = baseBanners.length; // 3 ta banner
 
-const BannerCarousel = () => {
+const BannerCarousel = ({ isActive = true, onBannerClick }) => {
   // Uzluksiz virtual indeks (0, 1, 2, 3, ...) — orqaga qaytmaydi, cheksiz aylanadi
   const [currentIndex, setCurrentIndex] = useState(0);
   const [slideWidth, setSlideWidth] = useState(340);
@@ -53,37 +53,89 @@ const BannerCarousel = () => {
   // Ekran o'lchamini hisoblash
   const updateDimensions = useCallback(() => {
     if (containerRef.current) {
-      const cWidth = containerRef.current.offsetWidth;
-      setContainerWidth(cWidth);
-
-      // Card kengligi: ekranning 85% qismi (maksimum 940px)
-      // Ikki chetida oldingi va keyingi cardlar ko'rinib turadi
-      const calculatedWidth = Math.min(Math.round(cWidth * 0.85), 940);
-      setSlideWidth(calculatedWidth);
+      const cWidth = containerRef.current.offsetWidth || window.innerWidth;
+      if (cWidth > 0) {
+        setContainerWidth(cWidth);
+        const calculatedWidth = Math.min(Math.round(cWidth * 0.85), 940);
+        setSlideWidth(calculatedWidth);
+        return { cWidth, calculatedWidth };
+      }
     }
+    return null;
   }, []);
-
-  useEffect(() => {
-    updateDimensions();
-    window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
-  }, [updateDimensions]);
-
-  // Card balandligi (984 / 323 proporsiyasi bo'yicha)
-  const slideHeight = Math.round(slideWidth * (323 / 984));
 
   // Markazga mos keluvchi koordinata
   const getTargetX = useCallback(
-    (index) => {
-      const centerOffset = (containerWidth - slideWidth) / 2;
-      return centerOffset - index * (slideWidth + gap);
+    (index, cWidth = containerWidth, sWidth = slideWidth) => {
+      const validCWidth = cWidth > 0 ? cWidth : (containerRef.current?.offsetWidth || window.innerWidth);
+      const validSWidth = sWidth > 0 ? sWidth : Math.min(Math.round(validCWidth * 0.85), 940);
+      const centerOffset = (validCWidth - validSWidth) / 2;
+      return centerOffset - index * (validSWidth + gap);
     },
     [containerWidth, slideWidth, gap]
   );
 
+  // ResizeObserver va Window resize hodisalari
+  useEffect(() => {
+    const res = updateDimensions();
+    if (res) {
+      const centerOffset = (res.cWidth - res.calculatedWidth) / 2;
+      x.set(centerOffset - currentIndex * (res.calculatedWidth + gap));
+    }
+
+    const handleResize = () => {
+      const r = updateDimensions();
+      if (r) {
+        const centerOffset = (r.cWidth - r.calculatedWidth) / 2;
+        x.set(centerOffset - currentIndex * (r.calculatedWidth + gap));
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // ResizeObserver: display: none dan display: block ga o'tganda darhol qayta hisoblash
+    let ro;
+    if (containerRef.current && typeof ResizeObserver !== "undefined") {
+      ro = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          const w = entry.contentRect.width;
+          if (w > 0) {
+            setContainerWidth(w);
+            const calcW = Math.min(Math.round(w * 0.85), 940);
+            setSlideWidth(calcW);
+            const centerOffset = (w - calcW) / 2;
+            const target = centerOffset - currentIndex * (calcW + gap);
+            x.set(target);
+          }
+        }
+      });
+      ro.observe(containerRef.current);
+    }
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (ro) ro.disconnect();
+    };
+  }, [updateDimensions, currentIndex, gap, x]);
+
+  // isActive o'zgarganda (Search'dan Home'ga qaytilganda) darhol va sakrashlarsiz sinxronlash
+  useEffect(() => {
+    if (isActive && containerRef.current) {
+      const w = containerRef.current.offsetWidth || window.innerWidth;
+      if (w > 0) {
+        setContainerWidth(w);
+        const calcW = Math.min(Math.round(w * 0.85), 940);
+        setSlideWidth(calcW);
+        const centerOffset = (w - calcW) / 2;
+        const target = centerOffset - currentIndex * (calcW + gap);
+        x.set(target);
+      }
+    }
+  }, [isActive, currentIndex, gap, x]);
+
   // Har safar currentIndex o'zgarganda x koordinatasini mayin, sakrashlarsiz animatsiya qilish
   useEffect(() => {
-    if (containerWidth > 0) {
+    if (containerWidth > 0 && isActive) {
       const target = getTargetX(currentIndex);
       animate(x, target, {
         type: "spring",
@@ -92,7 +144,7 @@ const BannerCarousel = () => {
         mass: 0.9,
       });
     }
-  }, [currentIndex, getTargetX, containerWidth, x]);
+  }, [currentIndex, getTargetX, containerWidth, x, isActive]);
 
   // Keyingi card
   const nextSlide = useCallback(() => {
@@ -104,9 +156,9 @@ const BannerCarousel = () => {
     setCurrentIndex((prev) => prev - 1);
   }, []);
 
-  // 5 soniyalik autoplay
+  // 5 soniyalik autoplay (faqat sahifa faol va ko'rinib turganda ishlaydi)
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || !isActive) return;
 
     autoplayTimer.current = setInterval(() => {
       nextSlide();
@@ -117,7 +169,7 @@ const BannerCarousel = () => {
         clearInterval(autoplayTimer.current);
       }
     };
-  }, [nextSlide, isPaused]);
+  }, [nextSlide, isPaused, isActive]);
 
   // Drag boshlanishi (to'g'ridan-to'g'ri card ustiga bosilganda ham ishlaydi)
   const handleDragStart = (e) => {
@@ -178,10 +230,12 @@ const BannerCarousel = () => {
     }, 600);
   };
 
-  // Card bosilganda mahsulotga o'tish (faqat surilmagan bo'lsa)
-  const handleCardClick = (link) => {
+  // Card bosilganda mahsulotga/qidiruvga o'tish (faqat surilmagan bo'lsa)
+  const handleCardClick = (banner) => {
     if (dragDistance.current < 6) {
-      window.location.assign(link);
+      if (onBannerClick) {
+        onBannerClick(banner.alt || "Sony");
+      }
     }
   };
 
@@ -196,6 +250,9 @@ const BannerCarousel = () => {
     currentIndex + 1,
     currentIndex + 2,
   ];
+
+  // Card balandligi (984 / 323 proporsiyasi bo'yicha)
+  const slideHeight = Math.round(slideWidth * (323 / 984));
 
   return (
     <section
@@ -235,7 +292,7 @@ const BannerCarousel = () => {
                   height: `${slideHeight}px`,
                 }}
                 onPointerDown={(e) => handleCardPointerDown(e, virtualIndex)}
-                onClick={() => handleCardClick(bannerData.link)}
+                onClick={() => handleCardClick(bannerData)}
                 role="button"
                 tabIndex={isCenter ? 0 : -1}
                 aria-label={bannerData.alt}
@@ -272,12 +329,12 @@ const BannerCarousel = () => {
       {/* Minimalist pagination nuqtalari */}
       <div className={styles.pagination}>
         {baseBanners.map((_, dotIdx) => {
-          const isActive = dotIdx === activeDotIndex;
+          const isActiveDot = dotIdx === activeDotIndex;
           return (
             <button
               key={dotIdx}
               type="button"
-              className={`${styles.dot} ${isActive ? styles.activeDot : ""}`}
+              className={`${styles.dot} ${isActiveDot ? styles.activeDot : ""}`}
               onClick={() => {
                 const diff = dotIdx - activeDotIndex;
                 setCurrentIndex((prev) => prev + diff);

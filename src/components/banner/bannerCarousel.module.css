@@ -18,7 +18,6 @@
   width: 100%;
   cursor: grab;
   touch-action: pan-y;
-  will-change: transform;
 }
 
 .track:active {
