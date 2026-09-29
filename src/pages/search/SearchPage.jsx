@@ -56,11 +56,11 @@ const CATEGORIES = [
   },
 ];
 
-// Dastlabki qidiruv tarixi (Foydalanuvchi skrinshotidagi kabi "macbook")
+// Dastlabki qidiruv tarixi
 const DEFAULT_RECENT = ["macbook"];
 
-const SearchPage = ({ onBack }) => {
-  const [searchValue, setSearchValue] = useState("");
+const SearchPage = ({ onBack, initialQuery = "" }) => {
+  const [searchValue, setSearchValue] = useState(initialQuery);
   const [recentSearches, setRecentSearches] = useState(() => {
     try {
       const saved = localStorage.getItem("ecommerce_recent_searches");
@@ -73,12 +73,33 @@ const SearchPage = ({ onBack }) => {
 
   const inputRef = useRef(null);
 
+  // initialQuery o'zgarganda sinxronlashtirish
+  useEffect(() => {
+    if (initialQuery !== undefined) {
+      setSearchValue(initialQuery);
+    }
+  }, [initialQuery]);
+
   // Sahifa ochilganda inputga fokus berish
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, []);
+
+  // URL ni qidiruv so'ziga qarab jonli yangilab borish (/search?q=...)
+  const syncUrlWithQuery = (val) => {
+    const trimmed = val.trim();
+    const newUrl = trimmed
+      ? `/search?q=${encodeURIComponent(trimmed)}`
+      : "/search";
+    window.history.replaceState({ page: "search", query: trimmed }, "", newUrl);
+  };
+
+  const handleSearchChange = (val) => {
+    setSearchValue(val);
+    syncUrlWithQuery(val);
+  };
 
   const saveRecent = (newList) => {
     setRecentSearches(newList);
@@ -109,7 +130,7 @@ const SearchPage = ({ onBack }) => {
   };
 
   const handleSelectRecent = (term) => {
-    setSearchValue(term);
+    handleSearchChange(term);
     addRecentQuery(term);
   };
 
@@ -124,14 +145,14 @@ const SearchPage = ({ onBack }) => {
   };
 
   const handleClearInput = () => {
-    setSearchValue("");
+    handleSearchChange("");
     if (inputRef.current) {
       inputRef.current.focus();
     }
   };
 
   const handleCategoryClick = (category) => {
-    setSearchValue(category.title);
+    handleSearchChange(category.title);
     addRecentQuery(category.title);
   };
 
@@ -182,7 +203,7 @@ const SearchPage = ({ onBack }) => {
               ref={inputRef}
               type="text"
               value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
+              onChange={(e) => handleSearchChange(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Mahsulot va toifalarni qidirish"
               className={styles.searchInput}
@@ -206,12 +227,12 @@ const SearchPage = ({ onBack }) => {
       <main className={styles.mainContent}>
         {/* ============================================================
             1-HOLAT: QIDIRUV BO'SH BO'LGANDA (STANDART KO'RINISH)
-            1. Yaqinda qidirilganlar tarixi (Foydalanuvchi yuborgan media_1790693989594.png)
+            1. Yaqinda qidirilganlar tarixi (media_1790693989594.png)
             2. 5 ta toifaning Table/List ro'yxati (media_1790692262832), rasmlar object-fit: cover
             ============================================================ */}
         {!hasQuery && (
           <div className={styles.defaultView}>
-            {/* 1. Yaqinda qidirilganlar tarixi (media_1790693989594.png) */}
+            {/* 1. Yaqinda qidirilganlar tarixi */}
             {recentSearches.length > 0 && (
               <section className={styles.recentSection} aria-label="Qidiruv tarixi">
                 <div className={styles.recentHeader}>
@@ -254,7 +275,7 @@ const SearchPage = ({ onBack }) => {
               </section>
             )}
 
-            {/* 2. 5 ta toifaning professional table/list ro'yxati (media_1790692262832) */}
+            {/* 2. 5 ta toifaning professional table/list ro'yxati */}
             <section className={styles.categorySection} aria-label="Bo'limlar jadvali">
               <h2 className={styles.categorySectionTitle}>Kategoriyalar</h2>
               <div className={styles.categoryTable}>
