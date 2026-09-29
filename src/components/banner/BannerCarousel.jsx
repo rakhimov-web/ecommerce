@@ -83,7 +83,7 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
       const centerOffset = (containerWidth - slideWidth) / 2;
       return centerOffset - index * (slideWidth + gap);
     },
-    [containerWidth, slideWidth, gap]
+    [containerWidth, slideWidth, gap],
   );
 
   // Har safar currentIndex o'zgarganda (avtomatik yoki dot bosilganda) x koordinatasini mayin, sakrashlarsiz animatsiya qilish
@@ -261,7 +261,7 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
             const bannerData = baseBanners[((virtualIndex % L) + L) % L];
             const isCenter = virtualIndex === currentIndex;
             const cardRipples = ripples.filter(
-              (r) => r.cardIndex === virtualIndex
+              (r) => r.cardIndex === virtualIndex,
             );
 
             return (
