@@ -31,10 +31,10 @@ const LETTERS = [
 
 const BrandSplashLoader = ({ onComplete }) => {
   useEffect(() => {
-    // 1.35s davomida to'liq dinamik animatsiya tugagach, saytga silliq o'tish
+    // 1.55s: Qalam chizilishi, rang to'lishi va nafis sheen yakunlangach, silliq o'tish
     const timer = setTimeout(() => {
       if (onComplete) onComplete();
-    }, 1380);
+    }, 1550);
 
     return () => clearTimeout(timer);
   }, [onComplete]);
@@ -45,19 +45,22 @@ const BrandSplashLoader = ({ onComplete }) => {
       initial={{ opacity: 1 }}
       exit={{
         opacity: 0,
-        transition: { duration: 0.38, ease: [0.4, 0, 0.2, 1] },
+        transition: { duration: 0.35, ease: [0.4, 0, 0.2, 1] },
       }}
     >
       <motion.div
         className={styles.loaderContent}
-        initial={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 1, scale: 0.99 }}
+        animate={{ opacity: 1, scale: 1 }}
         exit={{
           opacity: 0,
-          scale: 0.98,
-          transition: { duration: 0.35, ease: [0.32, 0.72, 0, 1] },
+          scale: 0.985,
+          y: -4,
+          transition: { duration: 0.32, ease: [0.32, 0.72, 0, 1] },
         }}
+        transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
       >
-        {/* Asosiy animatsiyali SVG logotip */}
+        {/* Asosiy animatsiyali SVG logotip — sof oq fonda, mutlaqo tegilmagan original shakllar */}
         <div className={styles.svgWrapper}>
           <svg
             className={styles.logoSvg}
@@ -79,108 +82,158 @@ const BrandSplashLoader = ({ onComplete }) => {
               </linearGradient>
             </defs>
 
-            {/* 1. Moviy rangli savat/xalta belgisi (Liquid spring pop & organic settle) */}
+            {/*
+              1. Moviy rangli savat/xalta belgisi:
+              Qalam bilan chizilayotgandek chiziq (stroke-draw) bo'ylab nozik chiziladi,
+              so'ngra ichki qismi moviy rang bilan to'lib, qat'iy va jiddiy original shaklga aylanadi.
+            */}
             <motion.path
               d={BLUE_BAG_PATH}
+              stroke="#005AFD"
+              strokeWidth={3.6}
+              strokeLinecap="round"
+              strokeLinejoin="round"
               fill="#005AFD"
               fillRule="evenodd"
               clipRule="evenodd"
               initial={{
-                scale: 0.15,
+                pathLength: 0,
                 opacity: 0,
-                rotate: -7,
-                transformOrigin: "115px 120px",
+                strokeOpacity: 1,
+                fillOpacity: 0,
               }}
               animate={{
-                scale: 1,
+                pathLength: 1,
                 opacity: 1,
-                rotate: 0,
+                strokeOpacity: 0,
+                fillOpacity: 1,
               }}
               transition={{
-                type: "spring",
-                damping: 13,
-                stiffness: 210,
-                mass: 0.8,
-                delay: 0.04,
+                opacity: { duration: 0.04, delay: 0.06 },
+                pathLength: {
+                  duration: 0.72,
+                  ease: [0.65, 0, 0.35, 1],
+                  delay: 0.06,
+                },
+                fillOpacity: {
+                  duration: 0.32,
+                  ease: [0.25, 0.1, 0.25, 1],
+                  delay: 0.58,
+                },
+                strokeOpacity: {
+                  duration: 0.22,
+                  ease: "easeOut",
+                  delay: 0.78,
+                },
               }}
             />
 
-            {/* Zarg'aldoq nuqta atrofidagi nozik elastik to'lqin halqasi */}
-            <motion.circle
-              cx="204"
-              cy="69"
-              r="22"
-              fill="none"
-              stroke="#FD7434"
-              strokeWidth="2.5"
-              initial={{
-                scale: 0.15,
-                opacity: 0,
-                transformOrigin: "204px 69px",
-              }}
-              animate={{
-                scale: [0.15, 1.75],
-                opacity: [0, 0.45, 0],
-              }}
-              transition={{
-                duration: 0.65,
-                ease: "easeOut",
-                delay: 0.32,
-              }}
-            />
-
-            {/* 2. Zarg'aldoq dumaloq aksent (Organik sakrab tushish va squash-stretch) */}
+            {/*
+              2. Zarg'aldoq dumaloq aksent nuqta:
+              Chizilish bilan boshlanadi va yorqin brend gradienti bilan nurlanadi.
+            */}
             <motion.path
               d={ORANGE_DOT_PATH}
+              stroke="#FD7434"
+              strokeWidth={3.6}
+              strokeLinecap="round"
+              strokeLinejoin="round"
               fill="url(#loader_orange_grad)"
               fillRule="evenodd"
               clipRule="evenodd"
               initial={{
-                scale: 0,
+                pathLength: 0,
                 opacity: 0,
-                y: -26,
-                transformOrigin: "204px 69px",
+                strokeOpacity: 1,
+                fillOpacity: 0,
               }}
               animate={{
-                scale: [0, 1.28, 0.94, 1.04, 1],
+                pathLength: 1,
                 opacity: 1,
-                y: [-26, 2, -1, 0],
+                strokeOpacity: 0,
+                fillOpacity: 1,
               }}
               transition={{
-                duration: 0.58,
-                ease: [0.18, 0.9, 0.3, 1.15],
-                delay: 0.22,
+                opacity: { duration: 0.04, delay: 0.24 },
+                pathLength: {
+                  duration: 0.48,
+                  ease: [0.65, 0, 0.35, 1],
+                  delay: 0.24,
+                },
+                fillOpacity: {
+                  duration: 0.28,
+                  ease: [0.25, 0.1, 0.25, 1],
+                  delay: 0.54,
+                },
+                strokeOpacity: {
+                  duration: 0.2,
+                  ease: "easeOut",
+                  delay: 0.72,
+                },
               }}
             />
 
-            {/* 3. 'savatcha' so'zining 8 ta harfi tartibli chiqishi (Staggered kinetic typography) */}
-            {LETTERS.map((letterPath, index) => (
-              <motion.path
-                key={index}
-                d={letterPath}
-                fill="#090D0F"
-                fillRule="evenodd"
-                clipRule="evenodd"
-                initial={{ opacity: 0, y: 12, scale: 0.94 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{
-                  duration: 0.42,
-                  ease: [0.16, 1, 0.3, 1],
-                  delay: 0.32 + index * 0.04,
-                }}
-              />
-            ))}
+            {/*
+              3. 'savatcha' matnining 8 ta harfi:
+              Ketma-ket tartibda chizmachilik aniqligida chiziladi va to'liq jiddiy brend tipografiyasiga aylanadi.
+            */}
+            {LETTERS.map((letterPath, index) => {
+              const letterDelay = 0.18 + index * 0.06;
+              return (
+                <motion.path
+                  key={index}
+                  d={letterPath}
+                  stroke="#090D0F"
+                  strokeWidth={3.2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="#090D0F"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  initial={{
+                    pathLength: 0,
+                    opacity: 0,
+                    strokeOpacity: 1,
+                    fillOpacity: 0,
+                  }}
+                  animate={{
+                    pathLength: 1,
+                    opacity: 1,
+                    strokeOpacity: 0,
+                    fillOpacity: 1,
+                  }}
+                  transition={{
+                    opacity: { duration: 0.04, delay: letterDelay },
+                    pathLength: {
+                      duration: 0.5,
+                      ease: [0.65, 0, 0.35, 1],
+                      delay: letterDelay,
+                    },
+                    fillOpacity: {
+                      duration: 0.28,
+                      ease: [0.25, 0.1, 0.25, 1],
+                      delay: letterDelay + 0.3,
+                    },
+                    strokeOpacity: {
+                      duration: 0.2,
+                      ease: "easeOut",
+                      delay: letterDelay + 0.46,
+                    },
+                  }}
+                />
+              );
+            })}
           </svg>
 
-          {/* Logotip uzra o'tuvchi mayin nur (GPU hardware-accelerated translateX gleam) */}
+          {/* Logotip ustidan o'tuvchi nafis, minimalist yorug'lik nuri (Specular gleam) */}
           <motion.div
             className={styles.shimmerBeam}
             initial={{ x: "-120px", opacity: 0 }}
-            animate={{ x: ["-120px", "380px"], opacity: [0, 0.85, 0] }}
+            animate={{ x: ["-120px", "380px"], opacity: [0, 0.55, 0] }}
             transition={{
-              duration: 0.72,
+              duration: 0.65,
               ease: [0.25, 0.1, 0.25, 1],
-              delay: 0.76,
+              delay: 1.02,
             }}
           />
         </div>
