@@ -16,7 +16,7 @@
   box-shadow: none !important;
 }
 
-/* 
+/*
   Kapsula: Qora rangli (var(--black) / rgba(22, 25, 27, 0.95)),
   mutlaqo soyasiz (box-shadow: none !important),
   nozik oq chiziq (1px solid rgba(255, 255, 255, 0.12)),
@@ -31,7 +31,7 @@
   justify-content: center;
   gap: 0.85rem;
   height: 4.2rem;
-  padding: 0 2.0rem 0 1.6rem;
+  padding: 0 2rem 0 1.6rem;
   background: rgba(22, 25, 27, 0.95);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
