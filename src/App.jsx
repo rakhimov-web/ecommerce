@@ -7,56 +7,25 @@ import BrandSplashLoader from "./components/loader/BrandSplashLoader";
 import { initTelegramApp, syncTelegramBackButton } from "./lib/telegram";
 import "./App.css";
 
-// URL dan joriy sahifani aniqlash (/search -> "search", boshqasi -> "home")
-const getPageFromPath = () => {
-  if (typeof window === "undefined") return "home";
-  const path = window.location.pathname.toLowerCase();
-  return path.startsWith("/search") ? "search" : "home";
-};
-
-// URL dan qidiruv parametrini olish (?q=...)
-const getSearchQueryFromUrl = () => {
-  if (typeof window === "undefined") return "";
-  try {
-    const params = new URLSearchParams(window.location.search);
-    return params.get("q") || "";
-  } catch {
-    return "";
-  }
-};
-
 const App = () => {
   // Sayt har safar yangilanganda (refresh) to'g'ridan-to'g'ri Home sahifasidan va Brand Loader bilan ochiladi
   const [currentPage, setCurrentPage] = useState("home");
   const [searchQuery, setSearchQuery] = useState("");
   const [isSplashActive, setIsSplashActive] = useState(true);
 
-  // Sahifalar scroll pozitsiyalarini eslab qolish (Apple & Android native tab memory)
-  const scrollPositions = useRef({ home: 0, search: 0 });
-
-  // Sahifa yangilanganda URL ni tozalash, scrollni 0 ga surish va Telegram xususiyatlarini tayyorlash
+  // Sahifa yangilanganda URL ni tozalash va Telegram xususiyatlarini tayyorlash
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      if ("scrollRestoration" in window.history) {
-        window.history.scrollRestoration = "manual";
-      }
-      window.scrollTo(0, 0);
-      scrollPositions.current = { home: 0, search: 0 };
-      if (window.location.pathname !== "/" || window.location.search) {
-        window.history.replaceState({ page: "home" }, "", "/");
-      }
+    if (
+      typeof window !== "undefined" &&
+      (window.location.pathname !== "/" || window.location.search)
+    ) {
+      window.history.replaceState({ page: "home" }, "", "/");
     }
     initTelegramApp();
   }, []);
 
-  // Brand Splash Loader tugaganda silliq Home sahifasining eng tepasiga ochilish
-  const handleSplashComplete = useCallback(() => {
-    if (typeof window !== "undefined") {
-      window.scrollTo(0, 0);
-    }
-    scrollPositions.current = { home: 0, search: 0 };
-    setIsSplashActive(false);
-  }, []);
+  // Sahifalar scroll pozitsiyalarini eslab qolish (Apple & Android native tab memory)
+  const scrollPositions = useRef({ home: 0, search: 0 });
 
   // Brauzer tarixi (Back, Forward, Swipe-back) hodisasini boshqarish
   useEffect(() => {
@@ -176,7 +145,7 @@ const App = () => {
         {isSplashActive && (
           <BrandSplashLoader
             key="brand-splash-loader"
-            onComplete={handleSplashComplete}
+            onComplete={() => setIsSplashActive(false)}
           />
         )}
       </AnimatePresence>

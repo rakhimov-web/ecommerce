@@ -20,7 +20,7 @@
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 0 2.0rem;
+  padding: 0 2rem;
   gap: 1.2rem;
   height: 100%;
 }
@@ -35,7 +35,7 @@
   border: 1px solid transparent;
   border-radius: 1.2rem;
   padding: 0 1.2rem;
-  height: 4.0rem;
+  height: 4rem;
   outline: none;
   transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -86,8 +86,9 @@
   cursor: pointer;
   margin-left: 0.4rem;
   outline: none;
-  transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-              color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .clearBtn:hover {
@@ -122,8 +123,9 @@
   cursor: pointer;
   outline: none;
   -webkit-tap-highlight-color: transparent;
-  transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.15s ease;
+  transition:
+    background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.15s ease;
 }
 
 .iconBtn:active {
@@ -154,7 +156,7 @@
 /* Mobil ekranlar uchun moslashuv */
 @media (max-width: 768px) {
   .container {
-    padding: 0 2.0rem;
+    padding: 0 2rem;
     gap: 0.8rem;
     height: 100%;
   }

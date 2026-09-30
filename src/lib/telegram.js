@@ -1,7 +1,7 @@
 /**
- * Telegram Mini App (TMA) Integratsiya moduli
- * Telegram WebApp SDK bilan ishlash, ma'lumot almashish,
- * Haptic Feedback, BackButton va foydalanuvchi ma'lumotlarini boshqarish.
+ * Telegram Mini App (TMA) Maksimal Integratsiya moduli
+ * Telegram WebApp SDK bilan ishlash, bot bilan ma'lumot almashish,
+ * Haptic Feedback, BackButton, swipe-to-close himoyasi va safe-area boshqaruvi.
  */
 
 // Telegram WebApp obyektini xavfsiz olish
@@ -16,60 +16,67 @@ export const getTelegramWebApp = () => {
   return null;
 };
 
-// Ilova haqiqatdan ham Telegram ichida ochilganini tekshirish
+// Ilova haqiqatdan ham Telegram ichida ochilganini aniqlash
 export const isTelegramApp = () => {
   if (typeof window === "undefined") return false;
-
-  // Dasturchi rejimi (Brauzerda test qilish uchun bypass)
-  if (sessionStorage.getItem("tma_dev_bypass") === "true") {
-    return true;
-  }
 
   const tg = getTelegramWebApp();
   if (!tg) return false;
 
-  // URL parametrlarida Telegram Mini App tokeni yoki platformasi borligini tekshirish
   const hasTgParams =
     window.location.hash.includes("tgWebAppData") ||
     window.location.search.includes("tgWebAppData") ||
     window.location.search.includes("tgWebAppVersion") ||
     Boolean(tg.initData && tg.initData.length > 0);
 
-  // Desktop Telegram, iOS yoki Android Telegram Webview
   const hasPlatform = tg.platform && tg.platform !== "unknown";
 
   return Boolean(hasTgParams || (hasPlatform && tg.initDataUnsafe?.user));
 };
 
-// Brauzer orqali test qilish uchun bypass rejimi
-export const enableDevBrowserMode = () => {
-  sessionStorage.setItem("tma_dev_bypass", "true");
-  window.location.reload();
-};
-
-// Telegram Mini App ni to'liq ishga tushirish va sozlash
+// Telegram Mini App ni to'liq ishga tushirish va maksimal botga moslash
 export const initTelegramApp = () => {
   const tg = getTelegramWebApp();
   if (!tg) return;
 
   try {
-    // 1. Mini App tayyorligini botga bildirish
+    // 1. Mini App tayyorligini Telegram bot mijoziga bildirish
     tg.ready();
 
-    // 2. Ilovani butun ekran bo'ylab kengaytirish (swipe-down yopilib ketishining oldini oladi)
+    // 2. Ilovani butun ekran bo'ylab maksimal kengaytirish
     tg.expand();
 
-    // 3. Telegram sarlavhasi va foni ranglarini sayt dizayniga moslashtirish
+    // 3. Telegram 7.7+ vertikal tortib tasodifiy yopilib ketishining oldini olish (Swipe-to-close blocking)
+    if (tg.disableVerticalSwipes) {
+      tg.disableVerticalSwipes();
+    }
+
+    // 4. Telegram sarlavhasi va foni ranglarini sayt dizayni bilan 100% uyg'unlashtirish
     if (tg.setHeaderColor) {
       tg.setHeaderColor("#ffffff");
     }
     if (tg.setBackgroundColor) {
       tg.setBackgroundColor("#f8fafd");
     }
+    if (tg.setBottomBarColor) {
+      tg.setBottomBarColor("#ffffff");
+    }
 
-    // 4. Tasodifiy yopilishlarni oldini olish
+    // 5. Tasodifiy yopilishlarni oldini olish uchun tasdiqlovchi dialog yoqish
     if (tg.enableClosingConfirmation) {
       tg.enableClosingConfirmation();
+    }
+
+    // 6. Safe area insets (Telegram ekrani qirralari) ni CSS o'zgaruvchilariga ulash
+    if (tg.safeAreaInset) {
+      document.documentElement.style.setProperty(
+        "--tg-safe-top",
+        `${tg.safeAreaInset.top}px`
+      );
+      document.documentElement.style.setProperty(
+        "--tg-safe-bottom",
+        `${tg.safeAreaInset.bottom}px`
+      );
     }
   } catch (err) {
     console.warn("Telegram WebApp init xatosi:", err);
@@ -106,7 +113,7 @@ export const triggerHaptic = (type = "light") => {
   }
 };
 
-// Telegram foydalanuvchisi ma'lumotlarini olish (Ism, Username, ID, Til)
+// Telegram foydalanuvchisi ma'lumotlarini olish (Ism, Username, ID, Til, Photo)
 export const getTelegramUser = () => {
   const tg = getTelegramWebApp();
   if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
@@ -115,12 +122,13 @@ export const getTelegramUser = () => {
   return null;
 };
 
-// Botga ma'lumot yuborish (Savat buyurtmasi yoki harakat haqida)
+// Botga ma'lumot yuborish (Savat buyurtmasi yoki buyurtma tafsilotlari)
 export const sendTelegramData = (data) => {
   const tg = getTelegramWebApp();
   if (!tg) return false;
 
   try {
+    triggerHaptic("success");
     const payload = typeof data === "string" ? data : JSON.stringify(data);
     tg.sendData(payload);
     return true;
@@ -139,7 +147,7 @@ export const syncTelegramBackButton = (show, onClick) => {
     if (show) {
       tg.BackButton.show();
       if (onClick) {
-        tg.BackButton.offClick(onClick); // Oldingi listenerlarni tozalash
+        tg.BackButton.offClick(onClick);
         tg.BackButton.onClick(onClick);
       }
     } else {
@@ -147,5 +155,15 @@ export const syncTelegramBackButton = (show, onClick) => {
     }
   } catch {
     // Ignore in non-TMA
+  }
+};
+
+// Telegram havolasini ochish
+export const openTelegramLink = (url) => {
+  const tg = getTelegramWebApp();
+  if (tg && tg.openTelegramLink) {
+    tg.openTelegramLink(url);
+  } else if (typeof window !== "undefined") {
+    window.open(url, "_blank");
   }
 };
