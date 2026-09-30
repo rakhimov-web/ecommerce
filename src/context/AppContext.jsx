@@ -76,8 +76,8 @@ export const AppProvider = ({ children }) => {
   }, [toast.visible, toast.id]);
 
   // Toast ko'rsatish: agar alert allaqachon ko'rinib turgan bo'lsa, uni yo'qotmasdan va ikkinchisini chiqarmasdan
-  // mavjud alertning hisoblagichini oshiradi va taymerni yangitdan boshlaydi
-  const showToast = useCallback((message = "Mahsulot savatga qo'shildi") => {
+  // mavjud alertning taymerini yangitdan boshlaydi
+  const showToast = useCallback((message = "Qo'shildi") => {
     setToast((prev) => {
       const isAlreadyVisible = prev.visible;
       return {
@@ -113,7 +113,7 @@ export const AppProvider = ({ children }) => {
           [productId]: currentQty + 1,
         };
       });
-      showToast("Mahsulot savatga qo'shildi");
+      showToast("Qo'shildi");
     },
     [showToast],
   );
@@ -134,7 +134,7 @@ export const AppProvider = ({ children }) => {
 
         if (delta > 0) {
           triggerHaptic("selection");
-          showToast("Mahsulot savatga qo'shildi");
+          showToast("Qo'shildi");
         } else {
           triggerHaptic("light");
         }

@@ -4,64 +4,40 @@ import { useApp } from "../../context/useApp";
 import styles from "./toastAlert.module.css";
 
 const ToastAlert = () => {
-  const { toast, totalCartCount } = useApp();
+  const { toast } = useApp();
 
   return (
     <div className={styles.toastContainer} aria-live="polite">
       <AnimatePresence>
         {toast.visible && (
           <motion.div
-            key="apple-master-alert"
-            className={styles.toastCard}
-            initial={{ opacity: 0, y: 16 }}
+            key="apple-minimal-alert"
+            className={styles.alertPill}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{
               opacity: 0,
-              y: 10,
-              transition: { duration: 0.15, ease: "easeOut" },
+              y: 8,
+              transition: { duration: 0.2, ease: [0.16, 1, 0.3, 1] },
             }}
             transition={{
-              type: "spring",
-              stiffness: 480,
-              damping: 32,
-              mass: 0.8,
+              duration: 0.38,
+              ease: [0.16, 1, 0.3, 1],
             }}
           >
-            {/* Apple uslubidagi minimalist squircle belgi */}
-            <motion.div
+            {/* Minimalist Apple Checkmark badge */}
+            <motion.span
               key={`icon-${toast.id}`}
-              className={styles.iconBox}
-              initial={{ scale: 0.88 }}
-              animate={{ scale: 1 }}
-              transition={{ type: "spring", stiffness: 500, damping: 24 }}
+              className={styles.iconWrapper}
+              initial={{ opacity: 0.5 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              <Check size={15} strokeWidth={2.6} />
-            </motion.div>
+              <Check size={14} strokeWidth={2.6} />
+            </motion.span>
 
-            {/* Ikki pog'onali professional axborot iyerarxiyasi */}
-            <div className={styles.textContent}>
-              <div className={styles.titleRow}>
-                <span className={styles.title}>
-                  {toast.message || "Savatga qo'shildi"}
-                </span>
-              </div>
-              <span className={styles.subtitle}>
-                Savatda jami: {totalCartCount} ta mahsulot
-              </span>
-            </div>
-
-            {/* O'ng tomondagi ketma-ket qo'shilish hisoblagich nishoni */}
-            {toast.count > 1 && (
-              <motion.span
-                key={`badge-${toast.count}`}
-                className={styles.streakBadge}
-                initial={{ scale: 0.75, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ type: "spring", stiffness: 550, damping: 22 }}
-              >
-                +{toast.count}
-              </motion.span>
-            )}
+            {/* Sof va jiddiy xabarnoma yozuvi */}
+            <span className={styles.label}>Qo'shildi</span>
           </motion.div>
         )}
       </AnimatePresence>

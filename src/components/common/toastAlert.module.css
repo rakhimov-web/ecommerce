@@ -1,7 +1,7 @@
-/* Apple Store & Master E-Commerce Uslubidagi Shadowless Alert HUD */
+/* Master Apple-Grade Minimalist Confirmation Capsule HUD */
 .toastContainer {
   position: fixed;
-  bottom: calc(var(--menu-height) + 1.2rem);
+  bottom: calc(var(--menu-height) + 1.4rem);
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -16,33 +16,37 @@
   box-shadow: none !important;
 }
 
-/* Master Card: Mutlaqo soyasiz (box-shadow: none !important), toza Apple chegarasi (1px solid var(--border)) */
-.toastCard {
+/* 
+  Kapsula: Mutlaqo soyasiz (box-shadow: none !important), 
+  toza Apple chizig'i (1px solid var(--border)), 
+  yuqori darajadagi shisha tiniqligi va xushbichim mutanosiblik
+*/
+.alertPill {
   pointer-events: auto;
   user-select: none;
   -webkit-user-select: none;
-  width: 100%;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 1.2rem;
-  background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  justify-content: center;
+  gap: 0.85rem;
+  height: 4.2rem;
+  padding: 0 2.2rem 0 1.8rem;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid var(--border);
-  border-radius: 1.4rem;
-  padding: 0.95rem 1.4rem;
-  box-shadow: none !important; /* AI-generated soxta soyalar mutlaqo olib tashlandi */
+  border-radius: 999px;
+  box-shadow: none !important;
   font-family: var(--font-primary);
   box-sizing: border-box;
 }
 
-/* Apple uslubidagi nafis squircle belgi foni */
-.iconBox {
-  width: 3.2rem;
-  height: 3.2rem;
-  border-radius: 0.95rem;
+/* Nafis Apple checkmark doirachasi */
+.iconWrapper {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
   background-color: var(--primary-subtle); /* #0055ff yengil nozik foni */
-  border: 1px solid rgba(0, 85, 255, 0.12);
   color: var(--primary);
   display: flex;
   align-items: center;
@@ -51,98 +55,55 @@
   box-shadow: none !important;
 }
 
-/* Ikki qatorli jiddiy e-commerce ma'lumot qismi */
-.textContent {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-width: 0;
-  gap: 0.2rem;
-}
-
-.titleRow {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.title {
+/* Jiddiy va toza yozuv */
+.label {
   font-size: 1.35rem; /* 13.5px */
-  font-weight: 700;
+  font-weight: 600;
   color: var(--black);
   letter-spacing: -0.015em;
-  line-height: 1.2;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.subtitle {
-  font-size: 1.15rem; /* 11.5px */
-  font-weight: 500;
-  color: var(--gray);
-  letter-spacing: -0.01em;
-  line-height: 1.2;
-}
-
-/* Ketma-ket qo'shilish nishoni (streak) */
-.streakBadge {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.35rem 0.85rem;
-  border-radius: 999px;
-  background-color: var(--surface-subtle);
-  border: 1px solid var(--border);
-  color: var(--black);
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
   line-height: 1;
-  box-shadow: none !important;
+  white-space: nowrap;
 }
 
 /* Tablet va Katta ekranlarda (Desktop) */
 @media (min-width: 768px) {
   .toastContainer {
-    bottom: calc(var(--menu-height) + 2.8rem);
-    max-width: 440px;
+    bottom: calc(var(--menu-height) + 3.2rem);
   }
 
-  .toastCard {
-    padding: 1.05rem 1.6rem;
+  .alertPill {
+    height: 4.4rem;
+    padding: 0 2.4rem 0 2rem;
+    gap: 0.9rem;
+  }
+
+  .iconWrapper {
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+
+  .label {
+    font-size: 1.4rem;
   }
 }
 
 @media (max-width: 360px) {
   .toastContainer {
-    bottom: calc(var(--menu-height) + 1rem);
-    padding: 0 1.2rem;
+    bottom: calc(var(--menu-height) + 1.2rem);
   }
 
-  .toastCard {
-    padding: 0.85rem 1.1rem;
-    gap: 0.9rem;
-    border-radius: 1.2rem;
+  .alertPill {
+    height: 4rem;
+    padding: 0 1.8rem 0 1.5rem;
+    gap: 0.75rem;
   }
 
-  .iconBox {
-    width: 2.8rem;
-    height: 2.8rem;
-    border-radius: 0.8rem;
+  .iconWrapper {
+    width: 2rem;
+    height: 2rem;
   }
 
-  .title {
+  .label {
     font-size: 1.25rem;
-  }
-
-  .subtitle {
-    font-size: 1.05rem;
-  }
-
-  .streakBadge {
-    padding: 0.25rem 0.65rem;
-    font-size: 1.05rem;
   }
 }
