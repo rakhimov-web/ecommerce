@@ -74,12 +74,12 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
 
   const inputRef = useRef(null);
 
-  // initialQuery o'zgarganda sinxronlashtirish
-  useEffect(() => {
-    if (initialQuery !== undefined) {
-      setSearchValue(initialQuery);
-    }
-  }, [initialQuery]);
+  // initialQuery o'zgarganda sinxronlashtirish (React pattern: adjust state during render)
+  const [prevInitialQuery, setPrevInitialQuery] = useState(initialQuery);
+  if (initialQuery !== prevInitialQuery) {
+    setPrevInitialQuery(initialQuery);
+    setSearchValue(initialQuery || "");
+  }
 
   // Sahifa ochilganda yoki faollashganda (agar bo'sh qidiruv bo'lsa) inputga fokus berish
   useEffect(() => {
@@ -179,9 +179,9 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
 
   const isNotFound = hasQuery && filteredProducts.length === 0;
 
-  // Tavsiya etiladigan mahsulotlar: tasodifiy (randomly) aralashtirilgan 4-6 ta Home cardlari
+  // Tavsiya etiladigan mahsulotlar: 6 ta Home cardlari
   const randomRecommended = useMemo(() => {
-    return [...productsData].sort(() => 0.5 - Math.random()).slice(0, 6);
+    return productsData.slice(0, 6);
   }, []);
 
   return (

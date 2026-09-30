@@ -59,15 +59,22 @@ const AppSearchModal = ({ isOpen, onClose }) => {
   // Modal ochilganda avtomatik fokus qilish
   useEffect(() => {
     if (isOpen) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         if (inputRef.current) {
           inputRef.current.focus();
         }
       }, 50);
-    } else {
-      setQuery("");
+      return () => clearTimeout(timer);
     }
   }, [isOpen]);
+
+  const [prevIsOpen, setPrevIsOpen] = useState(isOpen);
+  if (isOpen !== prevIsOpen) {
+    setPrevIsOpen(isOpen);
+    if (!isOpen) {
+      setQuery("");
+    }
+  }
 
   // ESC tugmasi bosilganda yopish
   useEffect(() => {
