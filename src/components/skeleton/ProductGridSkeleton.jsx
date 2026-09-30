@@ -18,10 +18,14 @@ const ProductGridSkeleton = () => {
 
             {/* Matn va narx skeleti */}
             <div className={styles.productContent}>
-              <div className={`${styles.priceSkeleton} ${styles.shimmer}`} />
+              <div className={styles.priceBlockSkeleton}>
+                <div className={`${styles.priceSkeleton} ${styles.shimmer}`} />
+              </div>
               <div className={`${styles.nameSkeleton} ${styles.shimmer}`} />
-              <div className={`${styles.descLine1} ${styles.shimmer}`} />
-              <div className={`${styles.descLine2} ${styles.shimmer}`} />
+              <div className={styles.descSkeletonWrap}>
+                <div className={`${styles.descLine1} ${styles.shimmer}`} />
+                <div className={`${styles.descLine2} ${styles.shimmer}`} />
+              </div>
               <div className={`${styles.buttonSkeleton} ${styles.shimmer}`} />
             </div>
           </div>

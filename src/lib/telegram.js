@@ -6,7 +6,11 @@
 
 // Telegram WebApp obyektini xavfsiz olish
 export const getTelegramWebApp = () => {
-  if (typeof window !== "undefined" && window.Telegram && window.Telegram.WebApp) {
+  if (
+    typeof window !== "undefined" &&
+    window.Telegram &&
+    window.Telegram.WebApp
+  ) {
     return window.Telegram.WebApp;
   }
   return null;

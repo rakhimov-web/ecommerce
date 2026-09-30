@@ -68,7 +68,7 @@
 
 .searchInput::placeholder {
   color: var(--gray);
-  font-size: 1.35rem; /* 13.5px */
+  font-size: var(--text-base);
   font-weight: 400;
 }
 

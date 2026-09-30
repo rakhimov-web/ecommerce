@@ -7,7 +7,9 @@ const CategorySkeleton = () => {
         {[1, 2, 3, 4, 5].map((item) => (
           <div key={item} className={styles.categoryItem}>
             <div className={`${styles.categoryIcon} ${styles.shimmer}`} />
-            <div className={`${styles.categoryTitle} ${styles.shimmer}`} />
+            <div className={styles.categoryTitleWrap}>
+              <div className={`${styles.categoryTitle} ${styles.shimmer}`} />
+            </div>
           </div>
         ))}
       </div>

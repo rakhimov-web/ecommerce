@@ -115,7 +115,11 @@ const BrandSplashLoader = ({ onComplete }) => {
               fill="none"
               stroke="#FD7434"
               strokeWidth="2.5"
-              initial={{ scale: 0.2, opacity: 0, transformOrigin: "204px 69px" }}
+              initial={{
+                scale: 0.2,
+                opacity: 0,
+                transformOrigin: "204px 69px",
+              }}
               animate={{
                 scale: [0.2, 1.8],
                 opacity: [0, 0.55, 0],
