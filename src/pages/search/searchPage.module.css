@@ -516,7 +516,7 @@
 @media (max-width: 900px) {
   .productGrid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.8rem;
+    gap: 2rem;
   }
 }
 
@@ -577,7 +577,7 @@
 
 @media (max-width: 360px) {
   .headerContent {
-    padding: 0 1.4rem;
+    padding: 0 2rem;
     gap: 0.6rem;
     height: 100%;
   }
@@ -588,10 +588,10 @@
   }
 
   .mainContent {
-    padding: var(--content-gap-top) 1.6rem var(--content-gap-bottom) 1.6rem;
+    padding: var(--content-gap-top) 2rem var(--content-gap-bottom) 2rem;
   }
 
   .productGrid {
-    gap: 1.4rem;
+    gap: 2rem;
   }
 }

@@ -173,7 +173,7 @@
 /* Kichik ekranlar (360px va undan kichik) */
 @media (max-width: 360px) {
   .gridContainer {
-    padding: 0 1.6rem;
+    padding: 0 2rem;
   }
 
   .iconWrapper {

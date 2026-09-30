@@ -391,12 +391,12 @@
 
 @media (max-width: 360px) {
   .section {
-    padding: 0 1.6rem;
+    padding: 0 2rem;
     margin: 1rem auto 0 auto;
   }
 
   .grid {
-    gap: 1.4rem;
+    gap: 2rem;
   }
 
   .badgeWrapper {
