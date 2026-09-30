@@ -207,11 +207,7 @@ const App = () => {
       </div>
 
       {/* Pastki navigatsiya menyusi — indicator silliq siljiydi */}
-      <Menu
-        active={activeTab}
-        onTabChange={handleTabChange}
-        cartCount={2}
-      />
+      <Menu active={activeTab} onTabChange={handleTabChange} cartCount={2} />
     </div>
   );
 };

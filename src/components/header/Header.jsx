@@ -3,11 +3,7 @@ import { Search, Heart, ShoppingCart, X } from "lucide-react";
 import NotificationBadge from "../common/NotificationBadge";
 import styles from "./header.module.css";
 
-const Header = ({
-  onSearchClick,
-  likedCount = 3,
-  cartCount = 2,
-}) => {
+const Header = ({ onSearchClick, likedCount = 3, cartCount = 2 }) => {
   const [searchValue, setSearchValue] = useState("");
 
   const handleClear = (e) => {

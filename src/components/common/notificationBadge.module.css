@@ -4,7 +4,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--accent); /* #ff6430 / #FD7434 brend qizil-to'q sariq */
+  background-color: var(
+    --accent
+  ); /* #ff6430 / #FD7434 brend qizil-to'q sariq */
   color: var(--white);
   font-family: var(--font-primary);
   font-size: 1.05rem; /* 10.5px */
