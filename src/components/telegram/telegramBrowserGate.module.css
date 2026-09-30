@@ -1,0 +1,153 @@
+.gateContainer {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f0f4f9 0%, #e5eef9 50%, #d8e5f8 100%);
+  position: relative;
+  overflow: hidden;
+  font-family:
+    "Satoshi",
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    sans-serif;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Orqa fondagi ambient yorug'lik aylanalari */
+.ambientOrb1 {
+  position: absolute;
+  top: -100px;
+  right: -80px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 90, 253, 0.22) 0%, rgba(0, 90, 253, 0) 70%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.ambientOrb2 {
+  position: absolute;
+  bottom: -100px;
+  left: -80px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(253, 116, 52, 0.18) 0%, rgba(253, 116, 52, 0) 70%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 28px;
+  padding: 2.25rem 2rem;
+  box-shadow:
+    0 20px 48px -12px rgba(0, 40, 120, 0.12),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #f0f7ff;
+  border: 1px solid #d4e7fe;
+  color: #005afd;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.4rem 0.875rem;
+  border-radius: 999px;
+  margin-bottom: 1.5rem;
+}
+
+.logoPreview {
+  width: 180px;
+  height: auto;
+  margin-bottom: 1.75rem;
+}
+
+.iconCircle {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2aabee 0%, #229ed9 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 12px 24px -6px rgba(34, 158, 217, 0.4);
+}
+
+.title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: #090d0f;
+  margin: 0 0 0.75rem 0;
+  letter-spacing: -0.02em;
+}
+
+.description {
+  font-size: 0.9375rem;
+  color: #64748b;
+  line-height: 1.55;
+  margin: 0 0 1.75rem 0;
+}
+
+.openTelegramBtn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  background: linear-gradient(135deg, #005afd 0%, #0046c7 100%);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.9375rem 1.5rem;
+  border-radius: 16px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 8px 20px -4px rgba(0, 90, 253, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.openTelegramBtn:active {
+  transform: scale(0.98);
+}
+
+.devBypassBtn {
+  margin-top: 1.25rem;
+  background: transparent;
+  border: none;
+  color: #8a99a8;
+  font-size: 0.84rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.devBypassBtn:hover {
+  color: #005afd;
+  background: rgba(0, 90, 253, 0.06);
+}

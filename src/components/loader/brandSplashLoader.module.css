@@ -1,0 +1,108 @@
+.splashOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+/* Orqa fondagi nafis radial ambient yorug'lik */
+.ambientCenter {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(0, 90, 253, 0.08) 0%,
+    rgba(253, 116, 52, 0.04) 40%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  filter: blur(48px);
+  pointer-events: none;
+}
+
+.loaderContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+/* Asosiy Brand SVG konteyneri */
+.svgWrapper {
+  position: relative;
+  width: 250px;
+  max-width: 75vw;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 8px 24px rgba(0, 90, 253, 0.08));
+}
+
+.logoSvg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  display: block;
+}
+
+/* Orqa fonda zarracha nur taralishi */
+.shimmerBeam {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.75) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Minimalist Telegram/Apple uslubidagi progress chizig'i */
+.progressContainer {
+  margin-top: 2rem;
+  width: 64px;
+  height: 3px;
+  background: #f1f4f8;
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progressBar {
+  height: 100%;
+  background: linear-gradient(90deg, #005afd 0%, #2aabee 50%, #fd7434 100%);
+  border-radius: 999px;
+}
+
+/* Brend shiori yoki kichik status */
+.caption {
+  margin-top: 1rem;
+  font-family:
+    "Satoshi",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}

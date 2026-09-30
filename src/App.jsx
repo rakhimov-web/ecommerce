@@ -1,7 +1,15 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { AnimatePresence } from "framer-motion";
 import Home from "./pages/home/Home";
 import SearchPage from "./pages/search/SearchPage";
 import Menu from "./components/menu/Menu";
+import BrandSplashLoader from "./components/loader/BrandSplashLoader";
+import TelegramBrowserGate from "./components/telegram/TelegramBrowserGate";
+import {
+  isTelegramApp,
+  initTelegramApp,
+  syncTelegramBackButton,
+} from "./lib/telegram";
 import "./App.css";
 
 // URL dan joriy sahifani aniqlash (/search -> "search", boshqasi -> "home")
@@ -23,8 +31,15 @@ const getSearchQueryFromUrl = () => {
 };
 
 const App = () => {
+  const [inTelegram, setInTelegram] = useState(() => isTelegramApp());
+  const [isSplashActive, setIsSplashActive] = useState(true);
   const [currentPage, setCurrentPage] = useState(getPageFromPath);
   const [searchQuery, setSearchQuery] = useState(getSearchQueryFromUrl);
+
+  // Telegram Mini App xususiyatlarini ishga tushirish
+  useEffect(() => {
+    initTelegramApp();
+  }, []);
 
   // Sahifalar scroll pozitsiyalarini eslab qolish (Apple & Android native tab memory)
   const scrollPositions = useRef({ home: 0, search: 0 });
@@ -109,6 +124,19 @@ const App = () => {
     });
   }, [currentPage]);
 
+  // Telegram nativ orqaga qaytish (BackButton) tugmasini sahifalar bilan sinxronlash
+  useEffect(() => {
+    if (currentPage === "search") {
+      syncTelegramBackButton(true, handleGoToHome);
+    } else {
+      syncTelegramBackButton(false);
+    }
+
+    return () => {
+      syncTelegramBackButton(false);
+    };
+  }, [currentPage, handleGoToHome]);
+
   // Pastki Tab bar menyusi orqali o'tish
   const handleTabChange = useCallback(
     (index) => {
@@ -124,12 +152,30 @@ const App = () => {
   const activeTab = currentPage === "search" ? 1 : 0;
   const isHomeActive = currentPage === "home";
 
+  // Agar ilova Telegramdan tashqarida ochilsa -> Telegram Gate ko'rsatiladi
+  if (!inTelegram) {
+    return <TelegramBrowserGate onDevBypass={() => setInTelegram(true)} />;
+  }
+
   return (
     <div className="appContainer">
       {/*
+        Lottie sifatidagi yuqori darajadagi brend animatsiyali SVG loader
+        Har bir sayt ochilishida va refresh bo'lganda ko'rinadi
+      */}
+      <AnimatePresence mode="wait">
+        {isSplashActive && (
+          <BrandSplashLoader
+            key="brand-splash-loader"
+            onComplete={() => setIsSplashActive(false)}
+          />
+        )}
+      </AnimatePresence>
+
+      {/*
         Bosh sahifa (Home) doimo DOM-da saqlanadi:
-        Qidiruvdan qaytganda sayt qayta yangilanmaydi,
-        skeleton qaytadan chiqmaydi va scroll joyi saqlanadi.
+        Splash tugagach, ma'lumotlar kelgunicha Skeleton loader ko'rinadi,
+        so'ng haqiqiy kontent namoyon bo'ladi.
       */}
       <div
         className={`pageWrapper ${isHomeActive ? "pageFade" : ""}`}
@@ -137,6 +183,7 @@ const App = () => {
       >
         <Home
           isActive={isHomeActive}
+          isSplashFinished={!isSplashActive}
           onSearchClick={() => handleGoToSearch("")}
           onCategoryClick={(catTitle) => handleGoToSearch(catTitle)}
         />

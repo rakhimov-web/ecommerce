@@ -3,6 +3,7 @@ import { ShoppingCart, Heart, Check } from "lucide-react";
 import TicketBadge from "./TicketBadge";
 import styles from "./productGrid.module.css";
 import { formatPrice } from "../../data/products";
+import { triggerHaptic } from "../../lib/telegram";
 
 const ProductCard = ({ product }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -14,11 +15,13 @@ const ProductCard = ({ product }) => {
   const toggleLike = (e) => {
     e.stopPropagation();
     e.preventDefault();
+    triggerHaptic("medium");
     setIsLiked((prev) => !prev);
   };
 
   const handleAddToCart = (e) => {
     e.stopPropagation();
+    triggerHaptic("success");
     const rect = e.currentTarget.getBoundingClientRect();
     const rippleX =
       (e.clientX ||

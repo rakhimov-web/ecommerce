@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Home, Search, ShoppingCart, User } from "lucide-react";
+import { triggerHaptic } from "../../lib/telegram";
 import styles from "./menu.module.css";
 
 const items = [
@@ -18,6 +19,7 @@ const Menu = ({ active: controlledActive, onTabChange }) => {
     controlledActive !== undefined ? controlledActive : internalActive;
 
   const handleSelect = (index) => {
+    triggerHaptic("selection");
     if (onTabChange) {
       onTabChange(index);
     } else {

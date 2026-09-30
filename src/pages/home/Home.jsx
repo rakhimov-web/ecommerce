@@ -24,14 +24,16 @@ import prodAirpods from "../../assets/products/prod_airpods.jpg";
 // Birinchi marta sayt ochilganda yuklanish bayrog'i (keyingi sahifalar almashishida skeleton takrorlanmaydi)
 let hasLoadedHomeOnce = false;
 
-const Home = ({ isActive = true, onSearchClick, onCategoryClick }) => {
+const Home = ({
+  isActive = true,
+  isSplashFinished = false,
+  onSearchClick,
+  onCategoryClick,
+}) => {
   const [loading, setLoading] = useState(!hasLoadedHomeOnce);
 
   useEffect(() => {
-    if (hasLoadedHomeOnce) {
-      setLoading(false);
-      return;
-    }
+    if (hasLoadedHomeOnce || !isSplashFinished) return;
 
     // Rasmlarni orqa fonda oldindan GPU xotirasiga dekodlab yuklash (pre-cache)
     const imagesToPreload = [
@@ -56,13 +58,14 @@ const Home = ({ isActive = true, onSearchClick, onCategoryClick }) => {
       }
     });
 
+    // Splash tugagach, ma'lumotlar kelgunicha chiroyli skeleton loader ko'rsatiladi
     const timer = setTimeout(() => {
       hasLoadedHomeOnce = true;
       setLoading(false);
-    }, 1100);
+    }, 850);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [isSplashFinished]);
 
   return (
     <div className={styles.homeContainer}>
