@@ -77,7 +77,7 @@ const Menu = ({ active: controlledActive, onTabChange }) => {
           );
         })}
 
-        {/* 
+        {/*
           Yuqoridagi silliq suzuvchi neon indikator (Top Floating Pill & Ambient Glow):
           To'liq enli qattiq chiziq emas, balki markazlashgan, yumaloq va nurli premium pill
         */}
