@@ -4,17 +4,17 @@
      ======================================== */
 
   --primary: #0055ff; /* Asosiy brand ko'k / faol elementlar */
-  --accent: #ff6430;  /* Aksiya / chegirma / savatcha badge */
+  --accent: #ff6430; /* Aksiya / chegirma / savatcha badge */
 
   /* ========================================
      NEUTRALS
      ======================================== */
 
-  --black: #16191b;      /* Asosiy matn / to'q elementlar */
-  --gray: #64748b;       /* Ikkilamchi matn / nofaol iconlar */
-  --border: #e2e8f0;     /* Nozik chiziqlar / ajratuvchilar */
+  --black: #16191b; /* Asosiy matn / to'q elementlar */
+  --gray: #64748b; /* Ikkilamchi matn / nofaol iconlar */
+  --border: #e2e8f0; /* Nozik chiziqlar / ajratuvchilar */
   --background: #f8fafd; /* Sahifa foni */
-  --white: #ffffff;      /* Kartochkalar / oq yuzalar */
+  --white: #ffffff; /* Kartochkalar / oq yuzalar */
 
   /* ========================================
      STATUS
@@ -30,50 +30,52 @@
      html font-size = 10px bo'lganda (1rem = 10px):
      ======================================== */
 
-  --font-primary: "Satoshi", -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-primary:
+    "Satoshi", -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-  --text-2xs: 1.05rem;  /* 10.5px - Savatcha badge raqamlari, status indikatorlari */
-  --text-xs: 1.1rem;    /* 11.0px - Pastki tab-bar menyu yozuvlari */
-  --text-sm: 1.2rem;    /* 12.0px - Kategoriya sarlavhalari, kichik ta'riflar */
-  --text-base: 1.4rem;  /* 14.0px - Mahsulot nomlari, placeholderlar, oddiy matn */
-  --text-md: 1.5rem;    /* 15.0px - Qidiruv maydoni matni (desktop) */
-  --text-lg: 1.6rem;    /* 16.0px - Qidiruv matni (mobil safari zoom-oldini olish), narxlar */
-  --text-xl: 1.9rem;    /* 19.0px - Bo'lim sarlavhalari */
-  --text-2xl: 2.4rem;   /* 24.0px - Asosiy katta sahifa sarlavhalari */
+  --text-2xs: 1.05rem; /* 10.5px - Savatcha badge raqamlari, status indikatorlari */
+  --text-xs: 1.1rem; /* 11.0px - Pastki tab-bar menyu yozuvlari */
+  --text-sm: 1.2rem; /* 12.0px - Kategoriya sarlavhalari, kichik ta'riflar */
+  --text-base: 1.4rem; /* 14.0px - Mahsulot nomlari, placeholderlar, oddiy matn */
+  --text-md: 1.5rem; /* 15.0px - Qidiruv maydoni matni (desktop) */
+  --text-lg: 1.6rem; /* 16.0px - Qidiruv matni (mobil safari zoom-oldini olish), narxlar */
+  --text-xl: 1.9rem; /* 19.0px - Bo'lim sarlavhalari */
+  --text-2xl: 2.4rem; /* 24.0px - Asosiy katta sahifa sarlavhalari */
 
   /* ========================================
      STANDARD ICON & TOUCH TARGET SIZES
      ======================================== */
 
-  --icon-xs: 1.5rem;     /* 15px - Tozalash (X) ikonkasi */
-  --icon-sm: 1.8rem;     /* 18px - Qidiruv lupasi */
-  --icon-md: 2.2rem;     /* 22px - Pastki tab bar va header action ikonkalar */
-  --icon-lg: 2.4rem;     /* 24px - Katta harakat ikonkasi */
+  --icon-xs: 1.5rem; /* 15px - Tozalash (X) ikonkasi */
+  --icon-sm: 1.8rem; /* 18px - Qidiruv lupasi */
+  --icon-md: 2.2rem; /* 22px - Pastki tab bar va header action ikonkalar */
+  --icon-lg: 2.4rem; /* 24px - Katta harakat ikonkasi */
 
   --touch-target: 4.4rem; /* 44px - Apple HIG minimal sensor bosish maydoni */
 
   /* ========================================
      UNIFIED APP LAYOUT CONSTANTS (PIXEL MATCHED)
      ======================================== */
-  --header-height: 6.4rem;      /* 64px desktop */
-  --menu-height: 5.6rem;        /* 56px desktop va mobil */
-  --content-gap-top: 1.6rem;    /* 16px desktop */
+  --header-height: 6.4rem; /* 64px desktop */
+  --menu-height: 5.6rem; /* 56px desktop va mobil */
+  --content-gap-top: 1.6rem; /* 16px desktop */
   --content-gap-bottom: 3.6rem; /* 36px desktop */
 }
 
 @media (max-width: 768px) {
   :root {
-    --header-height: 6.0rem;      /* 60px mobil */
-    --content-gap-top: 1.4rem;    /* 14px mobil */
+    --header-height: 6rem; /* 60px mobil */
+    --content-gap-top: 1.4rem; /* 14px mobil */
     --content-gap-bottom: 3.2rem; /* 32px mobil */
   }
 }
 
 @media (max-width: 360px) {
   :root {
-    --header-height: 5.6rem;      /* 56px kichik mobil */
-    --menu-height: 5.2rem;        /* 52px kichik mobil */
-    --content-gap-top: 1.2rem;    /* 12px kichik mobil */
+    --header-height: 5.6rem; /* 56px kichik mobil */
+    --menu-height: 5.2rem; /* 52px kichik mobil */
+    --content-gap-top: 1.2rem; /* 12px kichik mobil */
     --content-gap-bottom: 2.8rem; /* 28px kichik mobil */
   }
 }
@@ -93,7 +95,7 @@ html {
   font-size: 10px;
   -webkit-text-size-adjust: 100%;
   overflow-y: scroll; /* Doimo barqaror sichqoncha bilan scroll bo'lishi uchun */
-  overflow-x: clip;   /* Eniga scroll hosil qilmasdan ortiqcha elementlarni qirqadi */
+  overflow-x: clip; /* Eniga scroll hosil qilmasdan ortiqcha elementlarni qirqadi */
   overscroll-behavior-y: none;
   overscroll-behavior: none;
 }
@@ -118,12 +120,16 @@ body {
 }
 
 /* Barcha tugma, sarlavha va boshqaruv elementlarida font bir xil bo'lishi kafolati */
-button, input, textarea, select {
+button,
+input,
+textarea,
+select {
   font-family: var(--font-primary);
 }
 
 /* Faqat matn kiritish maydonlarida matn tanlash va tahrirlashga ruxsat */
-input, textarea {
+input,
+textarea {
   user-select: text;
   -webkit-user-select: text;
 }

@@ -48,6 +48,8 @@ const BrandSplashLoader = ({ onComplete }) => {
         transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
       }}
     >
+      <div className={styles.ambientCenter} />
+
       <motion.div
         className={styles.loaderContent}
         initial={{ opacity: 1, scale: 1, y: 0 }}

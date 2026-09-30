@@ -13,6 +13,22 @@
   pointer-events: all;
 }
 
+/* Nozik va premium radial ambient nur */
+.ambientCenter {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(0, 90, 253, 0.09) 0%,
+    rgba(253, 116, 52, 0.05) 35%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  filter: blur(54px);
+  pointer-events: none;
+}
+
 .loaderContent {
   position: relative;
   z-index: 2;
@@ -22,7 +38,7 @@
   padding: 1.5rem;
 }
 
-/* Asosiy Brand SVG konteyneri - Hech qanday ko'k shadow yoki glow yo'q */
+/* Asosiy Brand SVG konteyneri */
 .svgWrapper {
   position: relative;
   width: 260px;
@@ -31,7 +47,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: none !important;
+  filter: drop-shadow(0 14px 32px rgba(0, 90, 253, 0.12));
 }
 
 .logoSvg {
