@@ -18,9 +18,7 @@
 
 .sectionTitle {
   font-family: var(--font-primary);
-  font-size: var(
-    --text-xl
-  ); /* 1.9rem (19px) — E-commerce standart sarlavha */
+  font-size: var(--text-xl); /* 1.9rem (19px) — E-commerce standart sarlavha */
   font-weight: 700;
   color: var(--black);
   letter-spacing: -0.025em;
@@ -130,7 +128,9 @@
 }
 
 .favoriteBtn.liked {
-  background-color: var(--error-subtle); /* Sevimlilar uchun shaffof qizil fon */
+  background-color: var(
+    --error-subtle
+  ); /* Sevimlilar uchun shaffof qizil fon */
   color: var(--error);
 }
 
