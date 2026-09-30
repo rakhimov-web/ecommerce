@@ -71,7 +71,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <article className={styles.card}>
-      {/* 1/1 kvadrat rasm freymi - Apple va Uzum kabi xalqaro studio standartida */}
+      {/* 3/4 rasm freymi - 1:1 dan balandroq, 2:3 kabi haddan tashqari uzun bo'lmagan optimal nisbat */}
       <div
         className={styles.imageContainer}
         onPointerDown={handleImagePointerDown}

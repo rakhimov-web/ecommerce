@@ -49,11 +49,11 @@
   padding: 0;
 }
 
-/* Xalqaro standartdagi 1:1 kvadrat studiya rasm freymi - MUTLAQO BORDERSIZ, TOZA STUDIO YUZASI */
+/* Optimal 3:4 portret rasm freymi - 1:1 dan balandroq, 2:3 kabi haddan tashqari cho'zilmagan */
 .imageContainer {
   position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 3 / 4;
   background-color: #ffffff;
   border-radius: 1.6rem;
   border: none !important; /* 1px border liniyasi butunlay olib tashlandi */
@@ -71,16 +71,12 @@
   border-radius: 1.6rem;
   overflow: hidden;
   background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .productImage {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  padding: 0.8rem;
+  object-fit: cover;
   display: block;
   pointer-events: none;
   user-select: none;
@@ -332,10 +328,6 @@
 
   .imageWrapper {
     border-radius: 1.4rem;
-  }
-
-  .productImage {
-    padding: 0.6rem;
   }
 
   .badgeWrapper {
