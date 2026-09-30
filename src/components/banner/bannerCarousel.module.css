@@ -32,7 +32,7 @@
   border-radius: 1.8rem;
   overflow: hidden;
   background-color: var(--white);
-  border: 1px solid var(--border);
+  border: none !important;
   box-shadow: none !important; /* Mutlaqo soyasiz */
   transform: none !important; /* Bosganda yoki hoverda hech qanday sakrovchi transform bo'lmaydi */
   outline: none;

@@ -56,6 +56,7 @@
   aspect-ratio: 3 / 4;
   background-color: var(--white);
   border-radius: 1.6rem;
+  border: none !important;
   overflow: visible; /* 3D badge qatlanishi ramka chetidan erkin chiqishi uchun */
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -70,7 +71,7 @@
   border-radius: 1.6rem;
   overflow: hidden;
   background-color: var(--white);
-  border: 1px solid var(--border);
+  border: none !important;
 }
 
 .productImage {
