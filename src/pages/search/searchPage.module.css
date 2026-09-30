@@ -74,7 +74,7 @@
   display: flex;
   align-items: center;
   flex: 1;
-  background-color: #f1f5f9;
+  background-color: var(--surface-subtle);
   border: 1px solid transparent;
   border-radius: 1.2rem;
   padding: 0 1.2rem;
@@ -86,7 +86,7 @@
 .searchBox:focus-within {
   border-color: transparent;
   box-shadow: none;
-  background-color: #eef2f6;
+  background-color: var(--surface-hover);
 }
 
 .searchIcon {
@@ -183,7 +183,7 @@
 .clearHistoryBtn {
   background: transparent;
   border: none;
-  color: #64748b;
+  color: var(--gray);
   font-family: var(--font-primary);
   font-size: 1.3rem;
   font-weight: 500;
@@ -198,11 +198,11 @@
 
 .clearHistoryBtn:hover {
   color: var(--black);
-  background-color: #f1f5f9;
+  background-color: var(--surface-subtle);
 }
 
 .clearHistoryBtn:active {
-  background-color: #e2e8f0;
+  background-color: var(--border);
 }
 
 .recentList {
@@ -219,7 +219,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.3rem 1.6rem;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--border-subtle);
   cursor: pointer;
   transition: background-color 0.15s ease;
   -webkit-tap-highlight-color: transparent;
@@ -230,11 +230,11 @@
 }
 
 .recentItem:hover {
-  background-color: #f8fafd;
+  background-color: var(--background);
 }
 
 .recentItem:active {
-  background-color: #f1f5f9;
+  background-color: var(--surface-subtle);
 }
 
 .recentItemLeft {
@@ -245,7 +245,7 @@
 }
 
 .clockIcon {
-  color: #94a3b8;
+  color: var(--gray-muted);
   flex-shrink: 0;
 }
 
@@ -266,7 +266,7 @@
   background: transparent;
   border: none;
   border-radius: 50%;
-  color: #94a3b8;
+  color: var(--gray-muted);
   cursor: pointer;
   padding: 0;
   transition:
@@ -277,7 +277,7 @@
 
 .removeItemBtn:hover {
   color: var(--black);
-  background-color: #f1f5f9;
+  background-color: var(--surface-subtle);
 }
 
 /* ============================================================
@@ -309,7 +309,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.2rem 1.6rem;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--border-subtle);
   cursor: pointer;
   transition: background-color 0.15s cubic-bezier(0.16, 1, 0.3, 1);
   -webkit-tap-highlight-color: transparent;
@@ -320,11 +320,11 @@
 }
 
 .categoryRow:hover {
-  background-color: #f8fafd;
+  background-color: var(--background);
 }
 
 .categoryRow:active {
-  background-color: #f1f5f9;
+  background-color: var(--surface-subtle);
 }
 
 .categoryRowLeft {
@@ -339,13 +339,13 @@
   width: 4.6rem;
   height: 4.6rem;
   border-radius: 1.2rem;
-  background-color: #f8fafd;
+  background-color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   overflow: hidden;
-  border: 1px solid #edf2f7;
+  border: 1px solid var(--border);
 }
 
 /* Kategoriya rasmi: aynan object-fit: cover */
@@ -385,12 +385,12 @@
 
 .categoryCount {
   font-size: var(--text-sm); /* 1.2rem (12px) */
-  color: #94a3b8;
+  color: var(--gray-muted);
   font-weight: 500;
 }
 
 .chevronIcon {
-  color: #94a3b8;
+  color: var(--gray-muted);
   flex-shrink: 0;
   transition:
     transform 0.15s ease,
@@ -457,7 +457,7 @@
   color: var(--white);
   background-color: var(--primary);
   border: none;
-  border-radius: 1rem;
+  border-radius: 1.1rem;
   padding: 0.9rem 2.2rem;
   cursor: pointer;
   transition: background-color 0.15s ease;
@@ -467,11 +467,11 @@
 }
 
 .resetSearchBtn:hover {
-  background-color: #0045d6;
+  background-color: var(--primary-hover);
 }
 
 .resetSearchBtn:active {
-  background-color: #0037ab;
+  background-color: var(--primary-active);
   transform: none !important;
 }
 

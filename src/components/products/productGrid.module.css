@@ -54,9 +54,8 @@
   position: relative;
   width: 100%;
   aspect-ratio: 3 / 4;
-  background-color: #ffffff;
+  background-color: var(--white);
   border-radius: 1.6rem;
-  border: none !important; /* 1px border liniyasi butunlay olib tashlandi */
   overflow: visible; /* 3D badge qatlanishi ramka chetidan erkin chiqishi uchun */
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -70,7 +69,8 @@
   inset: 0;
   border-radius: 1.6rem;
   overflow: hidden;
-  background-color: #ffffff;
+  background-color: var(--white);
+  border: 1px solid var(--border);
 }
 
 .productImage {
@@ -129,13 +129,8 @@
 }
 
 .favoriteBtn.liked {
-  background-color: rgba(
-    239,
-    68,
-    68,
-    0.12
-  ); /* Sevimlilar uchun shaffof qizil fon */
-  color: #ef4444;
+  background-color: var(--error-subtle); /* Sevimlilar uchun shaffof qizil fon */
+  color: var(--error);
 }
 
 /* Kartochka matn qismi - to'liq native e-commerce standart font-sizelari */
@@ -164,7 +159,7 @@
 
 .oldPrice {
   font-size: 1.15rem; /* 11.5px */
-  color: #94a3b8;
+  color: var(--gray-muted);
   text-decoration: line-through;
   line-height: 1;
 }
@@ -223,11 +218,11 @@
 }
 
 .cartButton:hover {
-  background-color: #0045d6;
+  background-color: var(--primary-hover);
 }
 
 .cartButton:active {
-  background-color: #0037ab;
+  background-color: var(--primary-active);
 }
 
 .addedButton {

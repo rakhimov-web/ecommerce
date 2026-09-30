@@ -200,12 +200,12 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
             onClick={onBack}
             aria-label="Bosh sahifaga qaytish"
           >
-            <ChevronLeft size={24} strokeWidth={2.4} />
+            <ChevronLeft size={22} strokeWidth={1.8} />
           </button>
 
           {/* 100% qidiruv maydoni (Home search inputi bilan bir xil dizayn) */}
           <div className={styles.searchBox}>
-            <Search size={18} className={styles.searchIcon} />
+            <Search size={18} strokeWidth={1.8} className={styles.searchIcon} />
             <input
               ref={inputRef}
               type="text"
@@ -223,7 +223,7 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
                 className={styles.clearBtn}
                 aria-label="Tozalash"
               >
-                <X size={15} />
+                <X size={15} strokeWidth={2} />
               </button>
             )}
           </div>
@@ -268,7 +268,11 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
                       tabIndex={0}
                     >
                       <div className={styles.recentItemLeft}>
-                        <Clock size={18} className={styles.clockIcon} />
+                        <Clock
+                          size={16}
+                          strokeWidth={1.8}
+                          className={styles.clockIcon}
+                        />
                         <span className={styles.recentText}>{term}</span>
                       </div>
                       <button
@@ -277,7 +281,7 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
                         className={styles.removeItemBtn}
                         aria-label={`${term}ni tarixdan o'chirish`}
                       >
-                        <X size={16} />
+                        <X size={15} strokeWidth={2} />
                       </button>
                     </div>
                   ))}
@@ -319,7 +323,11 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
                     </div>
                     <div className={styles.categoryRowRight}>
                       <span className={styles.categoryCount}>{cat.count}</span>
-                      <ChevronRight size={18} className={styles.chevronIcon} />
+                      <ChevronRight
+                        size={17}
+                        strokeWidth={1.8}
+                        className={styles.chevronIcon}
+                      />
                     </div>
                   </div>
                 ))}

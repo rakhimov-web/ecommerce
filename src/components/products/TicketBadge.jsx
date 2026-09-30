@@ -5,9 +5,9 @@ const TicketBadge = ({ type }) => {
 
   const isAksiya = type.toLowerCase() === "aksiya";
   const label = isAksiya ? "AKSIYA" : "YANGI";
-  // AKSIYA uchun jonli binafsha (#735bf2), YANGI uchun premium zumrad yashil (#10b981)
-  const mainColor = isAksiya ? "#735bf2" : "#10b981";
-  const foldColor = isAksiya ? "#4d359b" : "#047857";
+  // AKSIYA uchun brend accent rangi (#ff6430), YANGI uchun brend success yashil (#16a34a)
+  const mainColor = isAksiya ? "#ff6430" : "#16a34a";
+  const foldColor = isAksiya ? "#cc4410" : "#0f7634";
 
   return (
     <div className={styles.badgeWrapper} aria-label={label}>

@@ -77,8 +77,8 @@ const BrandSplashLoader = ({ onComplete }) => {
                 y2="90"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop offset="0%" stopColor="#FD7434" />
-                <stop offset="100%" stopColor="#FB5B1B" />
+                <stop offset="0%" stopColor="#ff6430" />
+                <stop offset="100%" stopColor="#e55320" />
               </linearGradient>
             </defs>
 
@@ -89,11 +89,11 @@ const BrandSplashLoader = ({ onComplete }) => {
             */}
             <motion.path
               d={BLUE_BAG_PATH}
-              stroke="#005AFD"
+              stroke="#0055ff"
               strokeWidth={3.6}
               strokeLinecap="round"
               strokeLinejoin="round"
-              fill="#005AFD"
+              fill="#0055ff"
               fillRule="evenodd"
               clipRule="evenodd"
               initial={{
@@ -134,7 +134,7 @@ const BrandSplashLoader = ({ onComplete }) => {
             */}
             <motion.path
               d={ORANGE_DOT_PATH}
-              stroke="#FD7434"
+              stroke="#ff6430"
               strokeWidth={3.6}
               strokeLinecap="round"
               strokeLinejoin="round"

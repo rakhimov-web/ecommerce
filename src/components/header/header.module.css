@@ -31,7 +31,7 @@
   display: flex;
   align-items: center;
   flex: 1;
-  background-color: #f1f5f9; /* Native mobil ilovalardagi nozik kulrang fon */
+  background-color: var(--surface-subtle); /* Native mobil ilovalardagi nozik kulrang fon */
   border: 1px solid transparent;
   border-radius: 1.2rem;
   padding: 0 1.2rem;
@@ -44,7 +44,7 @@
 .searchBox:focus-within {
   border-color: transparent;
   box-shadow: none;
-  background-color: #eef2f6;
+  background-color: var(--surface-hover);
 }
 
 .searchIcon {

@@ -38,7 +38,7 @@
   border: none;
   cursor: pointer;
   padding: 0.35rem 0.2rem;
-  color: #8a92a6;
+  color: var(--gray);
   font-family: var(--font-primary);
   border-radius: 0;
   transition: color 0.18s ease;
@@ -72,7 +72,7 @@
 .activeCapsule {
   position: absolute;
   inset: 0;
-  background: rgba(0, 90, 253, 0.07);
+  background: var(--primary-subtle);
   border-radius: 12px;
   z-index: 1;
   pointer-events: none;
@@ -140,7 +140,7 @@
   height: 2.5px;
   background: var(--primary);
   border-radius: 999px;
-  box-shadow: 0 1.5px 6px rgba(0, 90, 253, 0.4);
+  box-shadow: 0 1.5px 6px rgba(0, 85, 255, 0.35);
 }
 
 .topIndicatorAura {
@@ -150,7 +150,7 @@
   height: 20px;
   background: radial-gradient(
     ellipse at top,
-    rgba(0, 90, 253, 0.12) 0%,
+    rgba(0, 85, 255, 0.12) 0%,
     transparent 75%
   );
   pointer-events: none;

@@ -4,7 +4,13 @@
      ======================================== */
 
   --primary: #0055ff; /* Asosiy brand ko'k / faol elementlar */
-  --accent: #ff6430; /* Aksiya / chegirma / savatcha badge */
+  --primary-hover: #0045d6; /* Tugma va havolalar hover holati */
+  --primary-active: #0037ab; /* Tugma va havolalar bosilish holati */
+  --primary-subtle: rgba(0, 85, 255, 0.08); /* Nozik faol fon (Active capsule/tag) */
+
+  --accent: #ff6430; /* Aksiya / chegirma / bildirishnoma badge */
+  --accent-hover: #e55320; /* Hover holati */
+  --accent-subtle: rgba(255, 100, 48, 0.12); /* Aksiya yengil foni */
 
   /* ========================================
      NEUTRALS
@@ -12,8 +18,12 @@
 
   --black: #16191b; /* Asosiy matn / to'q elementlar */
   --gray: #64748b; /* Ikkilamchi matn / nofaol iconlar */
-  --border: #e2e8f0; /* Nozik chiziqlar / ajratuvchilar */
-  --background: #f8fafd; /* Sahifa foni */
+  --gray-muted: #94a3b8; /* Uchlamchi yengil matn / nofaol qidiruv elementlari / chevron */
+  --border: #e2e8f0; /* Yagona asosiy chegara chizig'i (1px solid var(--border)) */
+  --border-subtle: #f1f5f9; /* Nozik ichki ajratuvchi chiziq */
+  --background: #f8fafd; /* Sahifa asosiy foni */
+  --surface-subtle: #f1f5f9; /* Qidiruv maydoni va yordamchi bloklar foni */
+  --surface-hover: #eef2f6; /* Input yoki element hover/focus foni */
   --white: #ffffff; /* Kartochkalar / oq yuzalar */
 
   /* ========================================
@@ -21,7 +31,9 @@
      ======================================== */
 
   --success: #16a34a;
-  --error: #dc2626;
+  --success-subtle: rgba(22, 163, 74, 0.1);
+  --error: #ef4444; /* Qizil / Like / xatolik */
+  --error-subtle: rgba(239, 68, 68, 0.12);
   --warning: #ff6430;
 
   /* ========================================

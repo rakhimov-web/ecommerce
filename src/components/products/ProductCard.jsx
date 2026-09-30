@@ -94,9 +94,9 @@ const ProductCard = ({ product }) => {
         >
           <Heart
             size={17}
-            fill={isLiked ? "#ef4444" : "none"}
-            stroke={isLiked ? "#ef4444" : "currentColor"}
-            strokeWidth={2}
+            fill={isLiked ? "var(--error)" : "none"}
+            stroke={isLiked ? "var(--error)" : "currentColor"}
+            strokeWidth={1.8}
           />
         </button>
 
