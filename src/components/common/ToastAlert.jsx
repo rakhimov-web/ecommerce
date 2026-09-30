@@ -1,7 +1,32 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Check } from "lucide-react";
 import { useApp } from "../../context/useApp";
 import styles from "./toastAlert.module.css";
+
+// Instagram rasmiy tasdiqlangan (verified) nishoni (scalloped rosette + oq galochka)
+const InstagramVerifiedBadge = ({ size = 18 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={styles.verifiedSvg}
+  >
+    {/* Instagram scalloped gulbarg shakli (sayt brand ko'k rangida: #0055ff) */}
+    <path
+      d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"
+      fill="var(--primary)"
+    />
+    {/* Oq rangdagi nozik va o'tkir galochka */}
+    <path
+      d="m16 9-5.5 5.5L8 12"
+      stroke="#ffffff"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 const ToastAlert = () => {
   const { toast } = useApp();
@@ -11,7 +36,7 @@ const ToastAlert = () => {
       <AnimatePresence>
         {toast.visible && (
           <motion.div
-            key="apple-minimal-alert"
+            key="apple-dark-alert"
             className={styles.alertPill}
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -25,18 +50,18 @@ const ToastAlert = () => {
               ease: [0.16, 1, 0.3, 1],
             }}
           >
-            {/* Minimalist Apple Checkmark badge */}
+            {/* Instagram Verified Galochka belgisi */}
             <motion.span
               key={`icon-${toast.id}`}
               className={styles.iconWrapper}
-              initial={{ opacity: 0.5 }}
+              initial={{ opacity: 0.6 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              <Check size={14} strokeWidth={2.6} />
+              <InstagramVerifiedBadge size={19} />
             </motion.span>
 
-            {/* Sof va jiddiy xabarnoma yozuvi */}
+            {/* Oq rangdagi jiddiy va toza yozuv */}
             <span className={styles.label}>Qo'shildi</span>
           </motion.div>
         )}
@@ -46,4 +71,3 @@ const ToastAlert = () => {
 };
 
 export default ToastAlert;
-
