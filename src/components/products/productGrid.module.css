@@ -1,7 +1,7 @@
 .section {
   width: 100%;
   max-width: 1000px;
-  margin: 1.6rem auto 3.6rem auto;
+  margin: 1.6rem auto 0 auto;
   /* Ekran ikkita cheti aynan 2.0rem qilib belgilandi */
   padding: 0 2rem;
   font-family: var(--font-primary);
@@ -49,11 +49,11 @@
   padding: 0;
 }
 
-/* 3/4 rasm freymi - MUTLAQO BORDERSIZ, TOZA STUDIO YUZASI */
+/* 2/3 flagman portret rasm freymi - MUTLAQO BORDERSIZ, TOZA STUDIO YUZASI */
 .imageContainer {
   position: relative;
   width: 100%;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 2 / 3;
   background-color: #ffffff;
   border-radius: 1.6rem;
   border: none !important; /* 1px border liniyasi butunlay olib tashlandi */
@@ -313,7 +313,7 @@
   .section {
     /* Mobilda chetlar aynan 2.0rem */
     padding: 0 2rem;
-    margin: 1.4rem auto 3rem auto;
+    margin: 1.4rem auto 0 auto;
   }
 
   .grid {
@@ -349,7 +349,7 @@
 @media (max-width: 480px) {
   .section {
     padding: 0 2rem;
-    margin: 1.2rem auto 2.6rem auto;
+    margin: 1.2rem auto 0 auto;
   }
 
   .sectionTitle {
@@ -392,7 +392,7 @@
 @media (max-width: 360px) {
   .section {
     padding: 0 1.6rem;
-    margin: 1rem auto 2.2rem auto;
+    margin: 1rem auto 0 auto;
   }
 
   .grid {

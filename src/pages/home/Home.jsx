@@ -7,6 +7,7 @@ import ProductGrid from "../../components/products/ProductGrid";
 import BannerSkeleton from "../../components/skeleton/BannerSkeleton";
 import CategorySkeleton from "../../components/skeleton/CategorySkeleton";
 import ProductGridSkeleton from "../../components/skeleton/ProductGridSkeleton";
+import styles from "./home.module.css";
 
 import bannerImg from "../../assets/images/banner.png";
 import telefonImg from "../../assets/categories/telefon.png";
@@ -64,11 +65,9 @@ const Home = ({ isActive = true, onSearchClick, onCategoryClick }) => {
   }, []);
 
   return (
-    <div
-      style={{ paddingTop: "68px", paddingBottom: "76px", minHeight: "100vh" }}
-    >
+    <div className={styles.homeContainer}>
       <Header onSearchClick={onSearchClick} />
-      <main>
+      <main className={styles.mainContent}>
         <AnimatePresence mode="wait">
           {loading ? (
             <motion.div
@@ -99,7 +98,7 @@ const Home = ({ isActive = true, onSearchClick, onCategoryClick }) => {
               {/* Asosiy toifalar (Telefon, Noutbuk, iPad, Apple Watch, Aksessuarlar) */}
               <CategoryGrid onCategoryClick={onCategoryClick} />
 
-              {/* Tavsiya qilingan mahsulotlar (3/4 aspect ratio, 2 ustunli mobil panjara) */}
+              {/* Tavsiya qilingan mahsulotlar (2/3 flagman aspect ratio, 2 ustunli mobil panjara) */}
               <ProductGrid />
             </motion.div>
           )}

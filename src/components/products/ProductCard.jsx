@@ -71,7 +71,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <article className={styles.card}>
-      {/* 3/4 rasm freymi - Home pagedagi kabi studiosifat, toza yuzada */}
+      {/* 2/3 rasm freymi - Home pagedagi kabi studiosifat, toza yuzada */}
       <div
         className={styles.imageContainer}
         onPointerDown={handleImagePointerDown}

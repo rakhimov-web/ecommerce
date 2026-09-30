@@ -4,6 +4,7 @@
   left: 0;
   right: 0;
   width: 100%;
+  height: var(--header-height);
   z-index: 1000;
   background-color: var(--white);
   border-bottom: 1px solid var(--border);
@@ -19,10 +20,9 @@
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  /* Tepadan va pastdan qulay, mutanosib padding (defaultdan kengroq), chetlari 2.0rem */
-  padding: 1.2rem 2.0rem;
+  padding: 0 2.0rem;
   gap: 1.2rem;
-  height: 6.4rem;
+  height: 100%;
 }
 
 /* Qidiruv maydoni (Native app uslubida tinch va toza, nozik kulrang fon) */
@@ -154,10 +154,9 @@
 /* Mobil ekranlar uchun moslashuv */
 @media (max-width: 768px) {
   .container {
-    /* Mobilda tepadan va pastdan to'laqonli 1.1rem, ikkala chetdan aynan 2.0rem */
-    padding: 1.1rem 2.0rem;
+    padding: 0 2.0rem;
     gap: 0.8rem;
-    height: 6.0rem;
+    height: 100%;
   }
 
   .searchBox {
@@ -191,9 +190,9 @@
 
 @media (max-width: 360px) {
   .container {
-    padding: 0.9rem 1.6rem;
+    padding: 0 1.6rem;
     gap: 0.6rem;
-    height: 5.6rem;
+    height: 100%;
   }
 
   .iconBtn {

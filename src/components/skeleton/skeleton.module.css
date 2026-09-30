@@ -29,7 +29,7 @@
 
 .bannerSection {
   width: 100%;
-  margin: 1.2rem 0 2.2rem 0;
+  margin: 0 0 2.2rem 0;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -65,7 +65,7 @@
 
 @media (max-width: 640px) {
   .bannerSection {
-    margin: 0.8rem 0 1.6rem 0;
+    margin: 0 0 1.6rem 0;
   }
 
   .bannerCard {
@@ -177,7 +177,7 @@
 .productSection {
   width: 100%;
   max-width: 1000px;
-  margin: 1.6rem auto 3.6rem auto;
+  margin: 1.6rem auto 0 auto;
   padding: 0 2.0rem;
   user-select: none;
   -webkit-user-select: none;
@@ -208,10 +208,10 @@
   padding: 0;
 }
 
-/* 3/4 rasm joyi */
+/* 2/3 rasm joyi */
 .imageSkeleton {
   width: 100%;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 2 / 3;
   border-radius: 1.6rem;
   overflow: hidden;
 }
@@ -257,7 +257,7 @@
 @media (max-width: 768px) {
   .productSection {
     padding: 0 2.0rem;
-    margin: 1.4rem auto 3.0rem auto;
+    margin: 1.4rem auto 0 auto;
   }
 
   .productGrid {
@@ -282,7 +282,7 @@
 @media (max-width: 480px) {
   .productSection {
     padding: 0 2.0rem;
-    margin: 1.2rem auto 2.6rem auto;
+    margin: 1.2rem auto 0 auto;
   }
 
   .productGrid {
@@ -306,7 +306,7 @@
 @media (max-width: 360px) {
   .productSection {
     padding: 0 1.6rem;
-    margin: 1.0rem auto 2.2rem auto;
+    margin: 1.0rem auto 0 auto;
   }
 
   .productGrid {
