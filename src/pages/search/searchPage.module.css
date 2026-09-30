@@ -166,17 +166,17 @@
 
 .recentHeader {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.4rem;
 }
 
 .recentTitle {
   font-family: var(--font-primary);
-  font-size: var(--text-xl);
-  font-weight: 700;
+  font-size: 1.6rem;
+  font-weight: 600;
   color: var(--black);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
   margin: 0;
 }
 
@@ -185,7 +185,7 @@
   border: none;
   color: #64748b;
   font-family: var(--font-primary);
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 500;
   cursor: pointer;
   padding: 0.2rem 0.6rem;
@@ -293,7 +293,7 @@
   font-size: var(--text-xl);
   font-weight: 700;
   color: var(--black);
-  margin: 0 0 1.2rem 0;
+  margin: 0 0 1.6rem 0;
   letter-spacing: -0.02em;
 }
 
@@ -308,7 +308,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.3rem 1.8rem;
+  padding: 1.2rem 1.6rem;
   border-bottom: 1px solid #f1f5f9;
   cursor: pointer;
   transition: background-color 0.15s cubic-bezier(0.16, 1, 0.3, 1);
@@ -364,14 +364,14 @@
 }
 
 .categoryName {
-  font-size: 1.5rem;
+  font-size: var(--text-base); /* 1.4rem (14px) - Home productTitle bilan aynan bir xil */
   font-weight: 600;
   color: var(--black);
   line-height: 1.25;
 }
 
 .categorySubtitle {
-  font-size: 1.2rem;
+  font-size: var(--text-sm); /* 1.2rem (12px) - Home categoryTitle bilan bir xil */
   color: var(--gray);
   font-weight: 400;
   line-height: 1.2;
@@ -384,7 +384,7 @@
 }
 
 .categoryCount {
-  font-size: 1.2rem;
+  font-size: var(--text-sm); /* 1.2rem (12px) */
   color: #94a3b8;
   font-weight: 500;
 }
@@ -433,16 +433,16 @@
 
 .notFoundTitle {
   font-family: var(--font-primary);
-  font-size: 1.85rem;
+  font-size: var(--text-xl); /* 1.85rem - Home sectionTitle bilan bir xil */
   font-weight: 700;
   color: var(--black);
   margin: 0 0 0.8rem 0;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
 }
 
 .notFoundSubtitle {
   font-family: var(--font-primary);
-  font-size: 1.4rem;
+  font-size: var(--text-base); /* 1.4rem */
   color: var(--gray);
   max-width: 400px;
   margin: 0 0 1.8rem 0;
@@ -503,7 +503,7 @@
 }
 
 .countBadge {
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   font-weight: 500;
   color: var(--gray);
   margin-left: 0.4rem;
@@ -558,6 +558,16 @@
     padding: var(--content-gap-top) 2rem var(--content-gap-bottom) 2rem;
   }
 
+  .sectionTitle,
+  .categorySectionTitle,
+  .notFoundTitle {
+    font-size: 1.8rem;
+  }
+
+  .recentTitle {
+    font-size: 1.55rem;
+  }
+
   .productGrid {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
@@ -581,6 +591,55 @@
   .productGrid {
     gap: 2rem; /* Kichik telefonlarda ham 2.0rem saqlanadi */
   }
+
+  /* Home pagedagi 17.5px bilan 100% uyg'unlashgan sarlavhalar */
+  .sectionTitle,
+  .categorySectionTitle,
+  .notFoundTitle {
+    font-size: 1.75rem; /* 17.5px — Home sectionTitle bilan bir xil */
+  }
+
+  .recentTitle {
+    font-size: 1.45rem; /* 14.5px */
+  }
+
+  .recentHeader {
+    margin-bottom: 1.2rem;
+  }
+
+  .categorySectionTitle {
+    margin-bottom: 1.4rem;
+  }
+
+  .categoryName {
+    font-size: 1.35rem; /* 13.5px */
+  }
+
+  .categorySubtitle,
+  .categoryCount {
+    font-size: 1.15rem; /* 11.5px */
+  }
+
+  .recentText {
+    font-size: 1.35rem; /* 13.5px */
+  }
+
+  .clearHistoryBtn {
+    font-size: 1.25rem; /* 12.5px */
+  }
+
+  .countBadge {
+    font-size: 1.25rem;
+  }
+
+  .notFoundSubtitle {
+    font-size: 1.3rem;
+  }
+
+  .resetSearchBtn {
+    font-size: 1.25rem;
+    padding: 0.8rem 1.8rem;
+  }
 }
 
 @media (max-width: 360px) {
@@ -601,5 +660,28 @@
 
   .productGrid {
     gap: 1.4rem;
+  }
+
+  .sectionTitle,
+  .categorySectionTitle,
+  .notFoundTitle {
+    font-size: 1.65rem; /* 16.5px — Home sectionTitle bilan bir xil */
+  }
+
+  .recentTitle {
+    font-size: 1.38rem; /* 13.8px */
+  }
+
+  .categoryName {
+    font-size: 1.28rem;
+  }
+
+  .categorySubtitle,
+  .categoryCount {
+    font-size: 1.1rem;
+  }
+
+  .recentText {
+    font-size: 1.25rem;
   }
 }

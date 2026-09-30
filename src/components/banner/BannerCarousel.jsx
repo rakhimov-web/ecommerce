@@ -105,7 +105,7 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
   }, []);
 
   // Oldingi card
-  const prevSlide = useCallback(() => {
+  const _prevSlide = useCallback(() => {
     setCurrentIndex((prev) => prev - 1);
   }, []);
 

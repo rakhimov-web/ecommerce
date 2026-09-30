@@ -95,7 +95,7 @@ const AppSearchModal = ({ isOpen, onClose }) => {
 
   const isNotFound = hasQuery && filteredProducts.length === 0;
 
-  const handleSelectProduct = (product) => {
+  const handleSelectProduct = (_product) => {
     onClose();
   };
 

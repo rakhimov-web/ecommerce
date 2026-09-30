@@ -56,20 +56,40 @@ export const initTelegramApp = () => {
     // 1. Mini App tayyorligini botga bildirish
     tg.ready();
 
-    // 2. Ilovani butun ekran bo'ylab kengaytirish (swipe-down yopilib ketishining oldini oladi)
+    // 2. Ilovani butun ekran bo'ylab kengaytirish
     tg.expand();
 
-    // 3. Telegram sarlavhasi va foni ranglarini sayt dizayniga moslashtirish
+    // 3. Telegram 7.7+ vertikal tortib tasodifiy yopilib ketishining oldini olish (Swipe-to-close blocking)
+    if (tg.disableVerticalSwipes) {
+      tg.disableVerticalSwipes();
+    }
+
+    // 4. Telegram sarlavhasi va foni ranglarini sayt dizayniga moslashtirish
     if (tg.setHeaderColor) {
       tg.setHeaderColor("#ffffff");
     }
     if (tg.setBackgroundColor) {
       tg.setBackgroundColor("#f8fafd");
     }
+    if (tg.setBottomBarColor) {
+      tg.setBottomBarColor("#ffffff");
+    }
 
-    // 4. Tasodifiy yopilishlarni oldini olish
+    // 5. Tasodifiy yopilishlarni oldini olish
     if (tg.enableClosingConfirmation) {
       tg.enableClosingConfirmation();
+    }
+
+    // 6. Safe area insets (Telegram ekrani qirralari) ni CSS ga ulash
+    if (tg.safeAreaInset) {
+      document.documentElement.style.setProperty(
+        "--tg-safe-top",
+        `${tg.safeAreaInset.top}px`
+      );
+      document.documentElement.style.setProperty(
+        "--tg-safe-bottom",
+        `${tg.safeAreaInset.bottom}px`
+      );
     }
   } catch (err) {
     console.warn("Telegram WebApp init xatosi:", err);
