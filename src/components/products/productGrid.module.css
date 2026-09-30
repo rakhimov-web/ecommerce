@@ -266,6 +266,8 @@
 }
 
 .stepperBtn {
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -278,19 +280,49 @@
   cursor: pointer;
   outline: none;
   padding: 0;
-  transition:
-    background-color 0.15s ease,
-    transform 0.1s ease;
+  transform: none !important;
+  transition: background-color 0.15s ease;
   -webkit-tap-highlight-color: transparent;
 }
 
 .stepperBtn:hover {
   background-color: #cbd5e1;
+  transform: none !important;
 }
 
 .stepperBtn:active {
   background-color: #bcc8d6;
-  transform: scale(0.94);
+  transform: none !important;
+}
+
+/* Stepper tugmalaridagi ([ - ] va [ + ]) mayin suv to'lqini effekti */
+.stepperRipple {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0.14) 0%,
+    rgba(0, 0, 0, 0.04) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+  animation: stepperRippleSpread 0.45s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes stepperRippleSpread {
+  0% {
+    width: 14px;
+    height: 14px;
+    opacity: 0.8;
+  }
+  100% {
+    width: 72px;
+    height: 72px;
+    opacity: 0;
+  }
 }
 
 .stepperCount {

@@ -19,6 +19,9 @@ const ProductCard = ({ product }) => {
   const isLiked = checkIsLiked(product.id);
 
   const [isAdding, setIsAdding] = useState(false);
+  const [btnRipples, setBtnRipples] = useState([]);
+  const [decRipples, setDecRipples] = useState([]);
+  const [incRipples, setIncRipples] = useState([]);
   const [imgRipples, setImgRipples] = useState([]);
   const rippleCounter = useRef(0);
 
@@ -28,10 +31,31 @@ const ProductCard = ({ product }) => {
     handleToggleLikeContext(product.id);
   };
 
+  const createRipple = (e, setter) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const rippleX =
+      (e.clientX ||
+        (e.touches && e.touches[0]?.clientX) ||
+        rect.left + rect.width / 2) - rect.left;
+    const rippleY =
+      (e.clientY ||
+        (e.touches && e.touches[0]?.clientY) ||
+        rect.top + rect.height / 2) - rect.top;
+
+    rippleCounter.current += 1;
+    const rippleId = rippleCounter.current;
+    setter((prev) => [...prev, { id: rippleId, x: rippleX, y: rippleY }]);
+
+    setTimeout(() => {
+      setter((prev) => prev.filter((r) => r.id !== rippleId));
+    }, 550);
+  };
+
   const handleInitialAddToCart = (e) => {
     e.stopPropagation();
     if (isAdding || quantity > 0) return;
 
+    createRipple(e, setBtnRipples);
     setIsAdding(true);
     setTimeout(() => {
       addToCart(product.id);
@@ -41,11 +65,13 @@ const ProductCard = ({ product }) => {
 
   const handleDecrement = (e) => {
     e.stopPropagation();
+    createRipple(e, setDecRipples);
     updateCartQuantity(product.id, -1);
   };
 
   const handleIncrement = (e) => {
     e.stopPropagation();
+    createRipple(e, setIncRipples);
     updateCartQuantity(product.id, 1);
   };
 
@@ -53,11 +79,11 @@ const ProductCard = ({ product }) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const rippleX =
       (e.clientX ||
-        (e.touches && e.touches[0].clientX) ||
+        (e.touches && e.touches[0]?.clientX) ||
         rect.left + rect.width / 2) - rect.left;
     const rippleY =
       (e.clientY ||
-        (e.touches && e.touches[0].clientY) ||
+        (e.touches && e.touches[0]?.clientY) ||
         rect.top + rect.height / 2) - rect.top;
 
     rippleCounter.current += 1;
@@ -155,6 +181,16 @@ const ProductCard = ({ product }) => {
               aria-label="Bir dona kamaytirish"
             >
               <Minus size={15} strokeWidth={2.4} />
+              {decRipples.map((ripple) => (
+                <span
+                  key={ripple.id}
+                  className={styles.stepperRipple}
+                  style={{
+                    left: `${ripple.x}px`,
+                    top: `${ripple.y}px`,
+                  }}
+                />
+              ))}
             </button>
 
             <span className={styles.stepperCount} aria-live="polite">
@@ -168,6 +204,16 @@ const ProductCard = ({ product }) => {
               aria-label="Bir dona oshirish"
             >
               <Plus size={15} strokeWidth={2.4} />
+              {incRipples.map((ripple) => (
+                <span
+                  key={ripple.id}
+                  className={styles.stepperRipple}
+                  style={{
+                    left: `${ripple.x}px`,
+                    top: `${ripple.y}px`,
+                  }}
+                />
+              ))}
             </button>
           </div>
         ) : (
@@ -186,6 +232,16 @@ const ProductCard = ({ product }) => {
                 <span>Savatga</span>
               </>
             )}
+            {btnRipples.map((ripple) => (
+              <span
+                key={ripple.id}
+                className={styles.buttonRipple}
+                style={{
+                  left: `${ripple.x}px`,
+                  top: `${ripple.y}px`,
+                }}
+              />
+            ))}
             <div className={styles.pressHighlight} />
           </button>
         )}

@@ -42,6 +42,7 @@ export const AppProvider = ({ children }) => {
   const [toast, setToast] = useState({
     visible: false,
     message: "",
+    count: 1,
     id: 0,
   });
 
@@ -63,29 +64,34 @@ export const AppProvider = ({ children }) => {
     }
   }, [likedIds]);
 
-  // Toast avtomatik yopilishi uchun taymer
+  // Toast avtomatik yopilishi uchun taymer (har safar yangi qo'shilganda yangilanadi)
   useEffect(() => {
     if (!toast.visible) return;
 
     const timer = setTimeout(() => {
-      setToast((prev) => ({ ...prev, visible: false }));
+      setToast((prev) => ({ ...prev, visible: false, count: 1 }));
     }, 2800);
 
     return () => clearTimeout(timer);
   }, [toast.visible, toast.id]);
 
-  // Toast ko'rsatish
+  // Toast ko'rsatish: agar alert allaqachon ko'rinib turgan bo'lsa, uni yo'qotmasdan va ikkinchisini chiqarmasdan
+  // mavjud alertning hisoblagichini oshiradi va taymerni yangitdan boshlaydi
   const showToast = useCallback((message = "Mahsulot savatga qo'shildi") => {
-    setToast({
-      visible: true,
-      message,
-      id: Date.now(),
+    setToast((prev) => {
+      const isAlreadyVisible = prev.visible;
+      return {
+        visible: true,
+        message,
+        count: isAlreadyVisible ? prev.count + 1 : 1,
+        id: Date.now(),
+      };
     });
   }, []);
 
   // Toast yopish
   const hideToast = useCallback(() => {
-    setToast((prev) => ({ ...prev, visible: false }));
+    setToast((prev) => ({ ...prev, visible: false, count: 1 }));
   }, []);
 
   // Mahsulotning savatdagi soni

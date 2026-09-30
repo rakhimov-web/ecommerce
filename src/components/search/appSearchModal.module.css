@@ -172,7 +172,8 @@
 }
 
 .chipBtn:active {
-  transform: scale(0.97);
+  background-color: #e2e8f0;
+  transform: none;
 }
 
 /* 5 ta toifaning Table/List ko'rinishi */

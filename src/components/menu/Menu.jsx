@@ -8,9 +8,14 @@ import styles from "./menu.module.css";
 
 const itemWidthPercent = 25; // 100 / 4
 
-const Menu = ({ active: controlledActive, onTabChange, cartCount: propCartCount }) => {
+const Menu = ({
+  active: controlledActive,
+  onTabChange,
+  cartCount: propCartCount,
+}) => {
   const { totalCartCount } = useApp();
-  const cartCount = propCartCount !== undefined ? propCartCount : totalCartCount;
+  const cartCount =
+    propCartCount !== undefined ? propCartCount : totalCartCount;
   const [internalActive, setInternalActive] = useState(0);
   const active =
     controlledActive !== undefined ? controlledActive : internalActive;
