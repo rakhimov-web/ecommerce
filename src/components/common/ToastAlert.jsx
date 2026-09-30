@@ -4,53 +4,58 @@ import { useApp } from "../../context/useApp";
 import styles from "./toastAlert.module.css";
 
 const ToastAlert = () => {
-  const { toast } = useApp();
+  const { toast, totalCartCount } = useApp();
 
   return (
     <div className={styles.toastContainer} aria-live="polite">
       <AnimatePresence>
         {toast.visible && (
           <motion.div
-            key="ios-app-alert"
-            className={styles.toastPill}
-            initial={{ opacity: 0, y: 20 }}
+            key="apple-master-alert"
+            className={styles.toastCard}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{
               opacity: 0,
-              y: 14,
-              transition: { duration: 0.16, ease: "easeOut" },
+              y: 10,
+              transition: { duration: 0.15, ease: "easeOut" },
             }}
             transition={{
               type: "spring",
-              stiffness: 440,
-              damping: 30,
+              stiffness: 480,
+              damping: 32,
               mass: 0.8,
             }}
           >
-            {/* iOS uslubidagi yashil doiracha va oq galochka */}
+            {/* Apple uslubidagi minimalist squircle belgi */}
             <motion.div
               key={`icon-${toast.id}`}
-              className={styles.iconCircle}
-              initial={{ scale: 0.82 }}
+              className={styles.iconBox}
+              initial={{ scale: 0.88 }}
               animate={{ scale: 1 }}
-              transition={{ type: "spring", stiffness: 500, damping: 22 }}
+              transition={{ type: "spring", stiffness: 500, damping: 24 }}
             >
-              <Check size={15} strokeWidth={2.8} />
+              <Check size={15} strokeWidth={2.6} />
             </motion.div>
 
-            {/* Xabarnoma matni */}
-            <div className={styles.textContainer}>
-              <span className={styles.message}>
-                {toast.message || "Mahsulot savatga qo'shildi"}
+            {/* Ikki pog'onali professional axborot iyerarxiyasi */}
+            <div className={styles.textContent}>
+              <div className={styles.titleRow}>
+                <span className={styles.title}>
+                  {toast.message || "Savatga qo'shildi"}
+                </span>
+              </div>
+              <span className={styles.subtitle}>
+                Savatda jami: {totalCartCount} ta mahsulot
               </span>
             </div>
 
-            {/* Ketma-ket qo'shilganda aqlli hisoblagich (masalan, +2, +3) */}
+            {/* O'ng tomondagi ketma-ket qo'shilish hisoblagich nishoni */}
             {toast.count > 1 && (
               <motion.span
                 key={`badge-${toast.count}`}
                 className={styles.streakBadge}
-                initial={{ scale: 0.7, opacity: 0 }}
+                initial={{ scale: 0.75, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ type: "spring", stiffness: 550, damping: 22 }}
               >
