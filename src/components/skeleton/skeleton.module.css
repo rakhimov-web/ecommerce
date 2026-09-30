@@ -208,10 +208,10 @@
   padding: 0;
 }
 
-/* 2/3 rasm joyi */
+/* 1/1 kvadrat rasm joyi */
 .imageSkeleton {
   width: 100%;
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 1 / 1;
   border-radius: 1.6rem;
   overflow: hidden;
 }

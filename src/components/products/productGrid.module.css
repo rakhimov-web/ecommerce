@@ -49,11 +49,11 @@
   padding: 0;
 }
 
-/* 2/3 flagman portret rasm freymi - MUTLAQO BORDERSIZ, TOZA STUDIO YUZASI */
+/* Xalqaro standartdagi 1:1 kvadrat studiya rasm freymi - MUTLAQO BORDERSIZ, TOZA STUDIO YUZASI */
 .imageContainer {
   position: relative;
   width: 100%;
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 1 / 1;
   background-color: #ffffff;
   border-radius: 1.6rem;
   border: none !important; /* 1px border liniyasi butunlay olib tashlandi */
@@ -71,12 +71,16 @@
   border-radius: 1.6rem;
   overflow: hidden;
   background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .productImage {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 0.8rem;
   display: block;
   pointer-events: none;
   user-select: none;
@@ -328,6 +332,10 @@
 
   .imageWrapper {
     border-radius: 1.4rem;
+  }
+
+  .productImage {
+    padding: 0.6rem;
   }
 
   .badgeWrapper {

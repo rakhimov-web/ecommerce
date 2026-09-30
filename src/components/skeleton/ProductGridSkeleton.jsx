@@ -10,7 +10,7 @@ const ProductGridSkeleton = () => {
       <div className={styles.productGrid}>
         {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
           <div key={item} className={styles.productCard}>
-            {/* 2/3 rasm ramkasi */}
+            {/* 1/1 kvadrat rasm ramkasi */}
             <div className={`${styles.imageSkeleton} ${styles.shimmer}`} />
 
             {/* Matn va narx skeleti */}

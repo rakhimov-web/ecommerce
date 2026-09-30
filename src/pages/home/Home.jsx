@@ -98,7 +98,7 @@ const Home = ({ isActive = true, onSearchClick, onCategoryClick }) => {
               {/* Asosiy toifalar (Telefon, Noutbuk, iPad, Apple Watch, Aksessuarlar) */}
               <CategoryGrid onCategoryClick={onCategoryClick} />
 
-              {/* Tavsiya qilingan mahsulotlar (2/3 flagman aspect ratio, 2 ustunli mobil panjara) */}
+              {/* Tavsiya qilingan mahsulotlar (1/1 kvadrat aspect ratio, 2 ustunli mobil panjara) */}
               <ProductGrid />
             </motion.div>
           )}

@@ -62,21 +62,26 @@ const App = () => {
 
       if (
         window.location.pathname !== "/search" ||
-        window.location.search !== (trimmed ? `?q=${encodeURIComponent(trimmed)}` : "")
+        window.location.search !==
+          (trimmed ? `?q=${encodeURIComponent(trimmed)}` : "")
       ) {
-        window.history.pushState({ page: "search", query: trimmed }, "", targetUrl);
+        window.history.pushState(
+          { page: "search", query: trimmed },
+          "",
+          targetUrl,
+        );
       }
 
       setSearchQuery(trimmed);
       setCurrentPage("search");
 
       // Agar kategoriya bosilgan bo'lsa tepadan ochiladi, tab bosilganda saqlangan joyiga qaytadi
-      const targetY = trimmed ? 0 : (scrollPositions.current.search || 0);
+      const targetY = trimmed ? 0 : scrollPositions.current.search || 0;
       requestAnimationFrame(() => {
         window.scrollTo({ top: targetY, behavior: "instant" });
       });
     },
-    [currentPage]
+    [currentPage],
   );
 
   // Home sahifasiga qaytish (route / ga o'zgaradi)
@@ -113,7 +118,7 @@ const App = () => {
         handleGoToHome();
       }
     },
-    [handleGoToSearch, handleGoToHome]
+    [handleGoToSearch, handleGoToHome],
   );
 
   const activeTab = currentPage === "search" ? 1 : 0;
@@ -121,7 +126,7 @@ const App = () => {
 
   return (
     <div className="appContainer">
-      {/* 
+      {/*
         Bosh sahifa (Home) doimo DOM-da saqlanadi:
         Qidiruvdan qaytganda sayt qayta yangilanmaydi,
         skeleton qaytadan chiqmaydi va scroll joyi saqlanadi.
@@ -137,7 +142,7 @@ const App = () => {
         />
       </div>
 
-      {/* 
+      {/*
         Professional Qidiruv Sahifasi (SearchPage):
         Jahon darajasidagi e-commerce ilovalari (Apple, Uzum) standartida yaratilgan.
       */}

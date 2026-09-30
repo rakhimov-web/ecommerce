@@ -107,7 +107,10 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
   const saveRecent = (newList) => {
     setRecentSearches(newList);
     try {
-      localStorage.setItem("ecommerce_recent_searches", JSON.stringify(newList));
+      localStorage.setItem(
+        "ecommerce_recent_searches",
+        JSON.stringify(newList),
+      );
     } catch {
       // ignore
     }
@@ -117,7 +120,7 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
     const trimmed = query.trim();
     if (!trimmed) return;
     const filtered = recentSearches.filter(
-      (item) => item.toLowerCase() !== trimmed.toLowerCase()
+      (item) => item.toLowerCase() !== trimmed.toLowerCase(),
     );
     const updated = [trimmed, ...filtered].slice(0, 6);
     saveRecent(updated);
@@ -237,7 +240,10 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
           <div className={styles.defaultView}>
             {/* 1. Yaqinda qidirilganlar tarixi */}
             {recentSearches.length > 0 && (
-              <section className={styles.recentSection} aria-label="Qidiruv tarixi">
+              <section
+                className={styles.recentSection}
+                aria-label="Qidiruv tarixi"
+              >
                 <div className={styles.recentHeader}>
                   <h3 className={styles.recentTitle}>
                     Yaqinda shularni qidirgansiz:
@@ -279,7 +285,10 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
             )}
 
             {/* 2. 5 ta toifaning professional table/list ro'yxati */}
-            <section className={styles.categorySection} aria-label="Bo'limlar jadvali">
+            <section
+              className={styles.categorySection}
+              aria-label="Bo'limlar jadvali"
+            >
               <h2 className={styles.categorySectionTitle}>Kategoriyalar</h2>
               <div className={styles.categoryTable}>
                 {CATEGORIES.map((cat) => (
@@ -328,10 +337,13 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
               <div className={styles.vectorBox}>
                 <EmptyStateVector width={160} height={135} />
               </div>
-              <h3 className={styles.notFoundTitle}>Bunday mahsulot topilmadi</h3>
+              <h3 className={styles.notFoundTitle}>
+                Bunday mahsulot topilmadi
+              </h3>
               <p className={styles.notFoundSubtitle}>
                 "{searchValue}" so‘rovi bo‘yicha hech qanday mahsulot topilmadi.
-                Qidiruv so‘zini tekshirib ko‘ring yoki toifalardan birini tanlang.
+                Qidiruv so‘zini tekshirib ko‘ring yoki toifalardan birini
+                tanlang.
               </p>
               <button
                 type="button"
@@ -343,7 +355,10 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
             </section>
 
             {/* Tavsiya etamiz: Home pagedagi 2-ustunli cardlar tasodifiy (randomly) tartibda */}
-            <section className={styles.recommendSection} aria-label="Tavsiya etamiz">
+            <section
+              className={styles.recommendSection}
+              aria-label="Tavsiya etamiz"
+            >
               <div className={styles.sectionHeader}>
                 <h2 className={styles.sectionTitle}>Tavsiya qilamiz</h2>
               </div>
@@ -361,7 +376,10 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
             Home pagedagi 2-ustunli (desktopda 4) cardlar qidiruv natijasiga moslab chiqadi.
             ============================================================ */}
         {hasQuery && !isNotFound && (
-          <section className={styles.resultsSection} aria-label="Topilgan natijalar">
+          <section
+            className={styles.resultsSection}
+            aria-label="Topilgan natijalar"
+          >
             <div className={styles.resultsHeaderRow}>
               <h2 className={styles.sectionTitle}>
                 Topilgan mahsulotlar{" "}
