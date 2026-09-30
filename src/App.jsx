@@ -120,22 +120,9 @@ const App = () => {
     };
   }, [currentPage, handleGoToHome]);
 
-  // Pastki Tab bar menyusi holati (0: Bosh sahifa, 1: Qidirish, 2: Savatcha, 3: Profil)
-  const [activeTab, setActiveTab] = useState(0);
-  const [prevPage, setPrevPage] = useState(currentPage);
-  if (currentPage !== prevPage) {
-    setPrevPage(currentPage);
-    if (currentPage === "search") {
-      setActiveTab(1);
-    } else if (currentPage === "home") {
-      setActiveTab(0);
-    }
-  }
-
   // Pastki Tab bar menyusi orqali o'tish
   const handleTabChange = useCallback(
     (index) => {
-      setActiveTab(index);
       if (index === 1) {
         handleGoToSearch();
       } else if (index === 0) {
@@ -145,6 +132,7 @@ const App = () => {
     [handleGoToSearch, handleGoToHome],
   );
 
+  const activeTab = currentPage === "search" ? 1 : 0;
   const isHomeActive = currentPage === "home";
 
   return (
@@ -153,7 +141,7 @@ const App = () => {
         Lottie sifatidagi yuqori darajadagi brend animatsiyali SVG loader
         Har bir sayt ochilishida va refresh bo'lganda ko'rinadi
       */}
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {isSplashActive && (
           <BrandSplashLoader
             key="brand-splash-loader"

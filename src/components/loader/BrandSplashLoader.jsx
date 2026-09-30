@@ -45,18 +45,18 @@ const BrandSplashLoader = ({ onComplete }) => {
       initial={{ opacity: 1 }}
       exit={{
         opacity: 0,
-        transition: { duration: 0.35, ease: [0.4, 0, 0.2, 1] },
+        transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
       }}
     >
       <motion.div
         className={styles.loaderContent}
-        initial={{ opacity: 1, scale: 0.99 }}
+        initial={{ opacity: 1, scale: 1 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{
           opacity: 0,
-          scale: 0.985,
-          y: -4,
-          transition: { duration: 0.32, ease: [0.32, 0.72, 0, 1] },
+          scale: 1.008,
+          filter: "blur(2.5px)",
+          transition: { duration: 0.38, ease: [0.22, 1, 0.36, 1] },
         }}
         transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
       >

@@ -10,7 +10,7 @@
   border-radius: 0;
 }
 
-/* Standart mobil ilova pastki Tab Bar (Apple iOS / Telegram Mini App standartida) */
+/* Standart mobil ilova pastki Tab Bar */
 .menu {
   position: relative;
   display: flex;
@@ -21,10 +21,8 @@
   border-top: 1px solid var(--border);
   height: var(--menu-height);
   padding: 0 0 env(safe-area-inset-bottom, 0px);
-  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.04);
   border-radius: 0;
-  user-select: none;
-  -webkit-user-select: none;
 }
 
 .navItem {
@@ -43,9 +41,15 @@
   color: #8A92A6;
   font-family: var(--font-primary);
   border-radius: 0;
-  transition: color 0.22s ease;
+  transition: color 0.18s ease;
+  transform: none !important; /* Hech qanday scale yoki transform sakrashi yo'q */
   -webkit-tap-highlight-color: transparent;
   outline: none;
+}
+
+.navItem:active {
+  opacity: 0.72;
+  transform: none !important;
 }
 
 .navItem.active {
@@ -58,17 +62,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
+  width: 48px;
   height: 30px;
   margin-bottom: 0.2rem;
+  transform: none !important;
 }
 
-/* Active tab orqasidagi silliq suzuvchi kapsula (Apple iOS / Raycast fluid pill) */
+/* Active tab orqasidagi silliq suzuvchi kapsula (Jiddiy, xotirjam va toza) */
 .activeCapsule {
   position: absolute;
   inset: 0;
-  background: rgba(0, 90, 253, 0.08);
-  border-radius: 15px;
+  background: rgba(0, 90, 253, 0.07);
+  border-radius: 12px;
   z-index: 1;
   pointer-events: none;
 }
@@ -80,12 +85,13 @@
   align-items: center;
   justify-content: center;
   color: inherit;
-  transition: color 0.2s ease;
+  transition: color 0.18s ease;
+  transform: none !important;
 }
 
 .iconSvg {
   display: block;
-  transition: stroke 0.2s ease;
+  transition: stroke 0.18s ease;
 }
 
 /* Savatcha bildirishnoma belgisi (Notification badge) */
@@ -111,7 +117,7 @@
   z-index: 5;
 }
 
-/* Native ilova tab yorlig'i (Apple/Material standarti: 10.5-11px) */
+/* Native ilova tab yorlig'i: font-weight sakrashsiz, barqaror o'lcham */
 .label {
   position: relative;
   z-index: 2;
@@ -121,13 +127,17 @@
   color: inherit;
   margin: 0;
   line-height: 1.15;
-  letter-spacing: -0.015em;
-  transition: color 0.2s ease, font-weight 0.15s ease;
+  letter-spacing: -0.012em;
+  transition: color 0.18s ease;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .navItem.active .label {
-  font-weight: 600;
   color: var(--primary);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  text-shadow: 0 0 0.35px var(--primary); /* 0px layout shift bilan silliq qalinlik optikasi */
 }
 
 /* Yuqoridagi silliq suzuvchi neon indikator (Top Floating Pill & Ambient Glow) */
@@ -143,21 +153,21 @@
 }
 
 .topIndicatorPill {
-  width: 26px;
-  height: 3px;
+  width: 22px;
+  height: 2.5px;
   background: var(--primary);
   border-radius: 999px;
-  box-shadow: 0 2px 7px rgba(0, 90, 253, 0.42);
+  box-shadow: 0 1.5px 6px rgba(0, 90, 253, 0.4);
 }
 
 .topIndicatorAura {
   position: absolute;
   top: 0;
-  width: 52px;
-  height: 22px;
+  width: 48px;
+  height: 20px;
   background: radial-gradient(
     ellipse at top,
-    rgba(0, 90, 253, 0.14) 0%,
+    rgba(0, 90, 253, 0.12) 0%,
     transparent 75%
   );
   pointer-events: none;
@@ -169,7 +179,7 @@
   }
 
   .iconContainer {
-    width: 44px;
+    width: 42px;
     height: 26px;
   }
 
@@ -178,8 +188,8 @@
   }
 
   .topIndicatorPill {
-    width: 22px;
-    height: 2.5px;
+    width: 18px;
+    height: 2px;
   }
 }
 
@@ -206,11 +216,7 @@
     padding: 0 0.8rem;
   }
 
-  .topIndicatorTrack {
-    top: 0;
-  }
-
-  .topIndicatorPill {
-    margin-top: 1px;
+  .indicator {
+    border-radius: 999px;
   }
 }

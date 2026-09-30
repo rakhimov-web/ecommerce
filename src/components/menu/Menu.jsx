@@ -35,13 +35,11 @@ const Menu = ({ active: controlledActive, onTabChange }) => {
           const Icon = item.Icon;
 
           return (
-            <motion.button
+            <button
               key={item.id}
               onClick={() => handleSelect(index)}
               className={`${styles.navItem} ${isActive ? styles.active : ""}`}
               type="button"
-              whileTap={{ scale: 0.94 }}
-              transition={{ type: "spring", stiffness: 500, damping: 26 }}
               aria-label={item.label}
             >
               {/* Ikonka maydoni va orqa fondagi silliq harakatlanuvchi kapsula (active pill) */}
@@ -52,28 +50,17 @@ const Menu = ({ active: controlledActive, onTabChange }) => {
                     className={styles.activeCapsule}
                     transition={{
                       type: "spring",
-                      stiffness: 440,
-                      damping: 34,
-                      mass: 0.75,
+                      stiffness: 380,
+                      damping: 32,
+                      mass: 0.8,
                     }}
                   />
                 )}
 
-                <motion.span
-                  className={styles.iconWrapper}
-                  animate={{
-                    scale: isActive ? 1.08 : 1,
-                    y: isActive ? -1 : 0,
-                  }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 440,
-                    damping: 24,
-                  }}
-                >
+                <span className={styles.iconWrapper}>
                   <Icon
                     size={21}
-                    strokeWidth={isActive ? 2.35 : 1.75}
+                    strokeWidth={isActive ? 2.25 : 1.75}
                     className={styles.iconSvg}
                   />
 
@@ -81,12 +68,12 @@ const Menu = ({ active: controlledActive, onTabChange }) => {
                   {item.badge !== undefined && (
                     <span className={styles.tabBadge}>{item.badge}</span>
                   )}
-                </motion.span>
+                </span>
               </div>
 
-              {/* Tab yorlig'i matni */}
+              {/* Tab yorlig'i matni — sakrashsiz, barqaror */}
               <span className={styles.label}>{item.label}</span>
-            </motion.button>
+            </button>
           );
         })}
 
@@ -103,9 +90,9 @@ const Menu = ({ active: controlledActive, onTabChange }) => {
           }}
           transition={{
             type: "spring",
-            stiffness: 440,
-            damping: 34,
-            mass: 0.75,
+            stiffness: 380,
+            damping: 32,
+            mass: 0.8,
           }}
         >
           <div className={styles.topIndicatorPill} />
