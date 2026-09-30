@@ -16,6 +16,15 @@ export const getTelegramWebApp = () => {
 export const isTelegramApp = () => {
   if (typeof window === "undefined") return false;
 
+  // Localhost yoki 127.0.0.1 da dasturchi test qilayotganda doimo ilova va loader ochiladi
+  if (
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1" ||
+    window.location.hostname.endsWith(".local")
+  ) {
+    return true;
+  }
+
   // Dasturchi rejimi (Brauzerda test qilish uchun bypass)
   if (sessionStorage.getItem("tma_dev_bypass") === "true") {
     return true;
