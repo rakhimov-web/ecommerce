@@ -69,7 +69,11 @@ const Home = ({
 
   return (
     <div className={styles.homeContainer}>
-      <Header onSearchClick={onSearchClick} />
+      <Header
+        onSearchClick={onSearchClick}
+        likedCount={3}
+        cartCount={2}
+      />
       <main className={styles.mainContent}>
         <AnimatePresence mode="wait">
           {loading ? (

@@ -133,24 +133,10 @@
   opacity: 0.85;
 }
 
-/* Savatcha ustidagi doirasimon qizil badge */
-.cartBadge {
-  position: absolute;
-  top: 0.4rem;
-  right: 0.4rem;
-  background-color: var(--accent); /* #ff6430 */
-  color: var(--white);
-  font-size: var(--text-2xs); /* 1.05rem (10.5px) */
-  font-weight: 700;
-  min-width: 1.8rem;
-  height: 1.8rem;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 0.3rem;
-  line-height: 1;
-  pointer-events: none;
+/* Header Like va Savatcha ustidagi bildirishnoma badge */
+.headerBadge {
+  top: 0.2rem;
+  right: 0.2rem;
 }
 
 /* Mobil ekranlar uchun moslashuv */
@@ -181,12 +167,9 @@
     height: 3.8rem;
   }
 
-  .cartBadge {
-    top: 0.2rem;
-    right: 0.2rem;
-    min-width: 1.7rem;
-    height: 1.7rem;
-    font-size: 1rem;
+  .headerBadge {
+    top: 0.1rem;
+    right: 0.1rem;
   }
 }
 

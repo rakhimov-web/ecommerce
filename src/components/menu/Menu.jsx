@@ -1,22 +1,27 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Home, Search, ShoppingCart, User } from "lucide-react";
+import NotificationBadge from "../common/NotificationBadge";
 import { triggerHaptic } from "../../lib/telegram";
 import styles from "./menu.module.css";
 
-const items = [
-  { id: 0, label: "Bosh sahifa", Icon: Home },
-  { id: 1, label: "Qidirish", Icon: Search },
-  { id: 2, label: "Savatcha", Icon: ShoppingCart, badge: 2 },
-  { id: 3, label: "Profil", Icon: User },
-];
+const itemWidthPercent = 25; // 100 / 4
 
-const itemWidthPercent = 100 / items.length; // 25%
-
-const Menu = ({ active: controlledActive, onTabChange }) => {
+const Menu = ({
+  active: controlledActive,
+  onTabChange,
+  cartCount = 2,
+}) => {
   const [internalActive, setInternalActive] = useState(0);
   const active =
     controlledActive !== undefined ? controlledActive : internalActive;
+
+  const items = [
+    { id: 0, label: "Bosh sahifa", Icon: Home },
+    { id: 1, label: "Qidirish", Icon: Search },
+    { id: 2, label: "Savatcha", Icon: ShoppingCart, badge: cartCount },
+    { id: 3, label: "Profil", Icon: User },
+  ];
 
   const handleSelect = (index) => {
     triggerHaptic("selection");
@@ -59,15 +64,16 @@ const Menu = ({ active: controlledActive, onTabChange }) => {
 
                 <span className={styles.iconWrapper}>
                   <Icon
-                    size={21}
-                    strokeWidth={isActive ? 2.25 : 1.75}
+                    size={22}
+                    strokeWidth={isActive ? 2.2 : 1.8}
                     className={styles.iconSvg}
                   />
 
                   {/* Savatcha bildirishnoma belgisi (badge) */}
-                  {item.badge !== undefined && (
-                    <span className={styles.tabBadge}>{item.badge}</span>
-                  )}
+                  <NotificationBadge
+                    count={item.badge}
+                    className={styles.menuBadge}
+                  />
                 </span>
               </div>
 

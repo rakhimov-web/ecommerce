@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { Search, Heart, ShoppingCart, X } from "lucide-react";
+import NotificationBadge from "../common/NotificationBadge";
 import styles from "./header.module.css";
 
-const Header = ({ onSearchClick }) => {
+const Header = ({
+  onSearchClick,
+  likedCount = 3,
+  cartCount = 2,
+}) => {
   const [searchValue, setSearchValue] = useState("");
 
   const handleClear = (e) => {
@@ -50,14 +55,18 @@ const Header = ({ onSearchClick }) => {
           )}
         </div>
 
-        {/* O'ng tarafdagi harakatlar: Sevimlilar va Savatcha */}
+        {/* O'ng tarafdagi harakatlar: Sevimlilar (3 ta) va Savatcha (2 ta) */}
         <div className={styles.actionGroup}>
           <button
             type="button"
             className={styles.iconBtn}
             aria-label="Sevimlilar"
           >
-            <Heart size={23} strokeWidth={1.8} />
+            <Heart size={22} strokeWidth={1.8} />
+            <NotificationBadge
+              count={likedCount}
+              className={styles.headerBadge}
+            />
           </button>
 
           <button
@@ -65,8 +74,11 @@ const Header = ({ onSearchClick }) => {
             className={styles.iconBtn}
             aria-label="Savatcha"
           >
-            <ShoppingCart size={23} strokeWidth={1.8} />
-            <span className={styles.cartBadge}>2</span>
+            <ShoppingCart size={22} strokeWidth={1.8} />
+            <NotificationBadge
+              count={cartCount}
+              className={styles.headerBadge}
+            />
           </button>
         </div>
       </div>

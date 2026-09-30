@@ -94,27 +94,10 @@
   transition: stroke 0.18s ease;
 }
 
-/* Savatcha bildirishnoma belgisi (Notification badge) */
-.tabBadge {
-  position: absolute;
+/* Savatcha bildirishnoma belgisi (Universal NotificationBadge joylashuvi) */
+.menuBadge {
   top: -4px;
-  right: -8px;
-  min-width: 15px;
-  height: 15px;
-  padding: 0 4px;
-  background-color: var(--accent); /* #FD7434 brand orange */
-  color: var(--white);
-  font-size: 0.95rem; /* 9.5px */
-  font-weight: 700;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1.5px solid var(--white);
-  line-height: 1;
-  box-shadow: 0 1px 4px rgba(253, 116, 52, 0.4);
-  pointer-events: none;
-  z-index: 5;
+  right: -9px;
 }
 
 /* Native ilova tab yorlig'i: font-weight sakrashsiz, barqaror o'lcham */

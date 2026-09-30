@@ -1,0 +1,48 @@
+/* Universal e-commerce bildirishnoma belgisi (Header va Menu uchun yagona stil) */
+.badge {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent); /* #ff6430 / #FD7434 brend qizil-to'q sariq */
+  color: var(--white);
+  font-family: var(--font-primary);
+  font-size: 1.05rem; /* 10.5px */
+  font-weight: 700;
+  line-height: 1;
+  min-width: 1.7rem;
+  height: 1.7rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--white);
+  box-shadow: 0 1.5px 4px rgba(255, 100, 48, 0.35);
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  z-index: 5;
+  box-sizing: border-box;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+/* 2 yoki 3 xonali (masalan: 12, 99, 99+) bo'lganda kapsulaning silliq kengayishi */
+.pill {
+  padding: 0 0.45rem;
+  min-width: 2rem;
+  font-size: 0.98rem;
+}
+
+@media (max-width: 360px) {
+  .badge {
+    min-width: 1.55rem;
+    height: 1.55rem;
+    font-size: 0.95rem;
+    padding: 0 0.3rem;
+  }
+
+  .pill {
+    min-width: 1.8rem;
+    padding: 0 0.4rem;
+    font-size: 0.9rem;
+  }
+}
