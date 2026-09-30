@@ -59,7 +59,7 @@ const CATEGORIES = [
 // Dastlabki qidiruv tarixi
 const DEFAULT_RECENT = ["macbook"];
 
-const SearchPage = ({ onBack, initialQuery = "" }) => {
+const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
   const [searchValue, setSearchValue] = useState(initialQuery);
   const [recentSearches, setRecentSearches] = useState(() => {
     try {
@@ -80,12 +80,15 @@ const SearchPage = ({ onBack, initialQuery = "" }) => {
     }
   }, [initialQuery]);
 
-  // Sahifa ochilganda inputga fokus berish
+  // Sahifa ochilganda yoki faollashganda (agar bo'sh qidiruv bo'lsa) inputga fokus berish
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
+    if (isActive && !searchValue && inputRef.current) {
+      const timer = setTimeout(() => {
+        inputRef.current?.focus();
+      }, 50);
+      return () => clearTimeout(timer);
     }
-  }, []);
+  }, [isActive, searchValue]);
 
   // URL ni qidiruv so'ziga qarab jonli yangilab borish (/search?q=...)
   const syncUrlWithQuery = (val) => {

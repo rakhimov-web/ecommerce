@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Home from "./pages/home/Home";
 import SearchPage from "./pages/search/SearchPage";
 import Menu from "./components/menu/Menu";
@@ -26,6 +26,9 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(getPageFromPath);
   const [searchQuery, setSearchQuery] = useState(getSearchQueryFromUrl);
 
+  // Sahifalar scroll pozitsiyalarini eslab qolish (Apple & Android native tab memory)
+  const scrollPositions = useRef({ home: 0, search: 0 });
+
   // Brauzer tarixi (Back, Forward, Swipe-back) hodisasini boshqarish
   useEffect(() => {
     const handlePopState = () => {
@@ -40,32 +43,66 @@ const App = () => {
   }, []);
 
   // Search sahifasiga o'tish (route /search yoki /search?q=... ga o'zgaradi)
-  const handleGoToSearch = useCallback((query = "") => {
-    const trimmed = typeof query === "string" ? query.trim() : "";
-    const targetUrl = trimmed
-      ? `/search?q=${encodeURIComponent(trimmed)}`
-      : "/search";
+  const handleGoToSearch = useCallback(
+    (query = "") => {
+      // Agar allaqachon Qidiruvda bo'lsa va tab yana bosilsa -> tepaga silliq qaytish
+      if (currentPage === "search" && !query) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
 
-    if (
-      window.location.pathname !== "/search" ||
-      window.location.search !== (trimmed ? `?q=${encodeURIComponent(trimmed)}` : "")
-    ) {
-      window.history.pushState({ page: "search", query: trimmed }, "", targetUrl);
-    }
+      if (currentPage === "home") {
+        scrollPositions.current.home = window.scrollY;
+      }
 
-    setSearchQuery(trimmed);
-    setCurrentPage("search");
-    window.scrollTo({ top: 0, behavior: "instant" });
-  }, []);
+      const trimmed = typeof query === "string" ? query.trim() : "";
+      const targetUrl = trimmed
+        ? `/search?q=${encodeURIComponent(trimmed)}`
+        : "/search";
+
+      if (
+        window.location.pathname !== "/search" ||
+        window.location.search !== (trimmed ? `?q=${encodeURIComponent(trimmed)}` : "")
+      ) {
+        window.history.pushState({ page: "search", query: trimmed }, "", targetUrl);
+      }
+
+      setSearchQuery(trimmed);
+      setCurrentPage("search");
+
+      // Agar kategoriya bosilgan bo'lsa tepadan ochiladi, tab bosilganda saqlangan joyiga qaytadi
+      const targetY = trimmed ? 0 : (scrollPositions.current.search || 0);
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: targetY, behavior: "instant" });
+      });
+    },
+    [currentPage]
+  );
 
   // Home sahifasiga qaytish (route / ga o'zgaradi)
   const handleGoToHome = useCallback(() => {
+    // Agar foydalanuvchi allaqachon Homeda bo'lsa va tabni qayta bossa -> smooth scroll tepaga
+    if (currentPage === "home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
+    if (currentPage === "search") {
+      scrollPositions.current.search = window.scrollY;
+    }
+
     if (window.location.pathname !== "/") {
       window.history.pushState({ page: "home" }, "", "/");
     }
     setCurrentPage("home");
     setSearchQuery("");
-  }, []);
+
+    // Home sahifasidagi oldingi scroll joyini tiklash
+    const targetY = scrollPositions.current.home || 0;
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: targetY, behavior: "instant" });
+    });
+  }, [currentPage]);
 
   // Pastki Tab bar menyusi orqali o'tish
   const handleTabChange = useCallback(
@@ -109,6 +146,7 @@ const App = () => {
         style={{ display: currentPage === "search" ? "block" : "none" }}
       >
         <SearchPage
+          isActive={currentPage === "search"}
           onBack={handleGoToHome}
           initialQuery={searchQuery}
         />
