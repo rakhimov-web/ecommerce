@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { Search, Heart, ShoppingCart, X } from "lucide-react";
 import NotificationBadge from "../common/NotificationBadge";
+import { useApp } from "../../context/useApp";
 import styles from "./header.module.css";
 
-const Header = ({ onSearchClick, likedCount = 3, cartCount = 2 }) => {
+const Header = ({ onSearchClick, likedCount: propLikedCount, cartCount: propCartCount }) => {
+  const { totalLikedCount, totalCartCount } = useApp();
+  const likedCount = propLikedCount !== undefined ? propLikedCount : totalLikedCount;
+  const cartCount = propCartCount !== undefined ? propCartCount : totalCartCount;
   const [searchValue, setSearchValue] = useState("");
 
   const handleClear = (e) => {

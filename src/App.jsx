@@ -4,6 +4,8 @@ import Home from "./pages/home/Home";
 import SearchPage from "./pages/search/SearchPage";
 import Menu from "./components/menu/Menu";
 import BrandSplashLoader from "./components/loader/BrandSplashLoader";
+import ToastAlert from "./components/common/ToastAlert";
+import { AppProvider } from "./context/AppContext";
 import { initTelegramApp, syncTelegramBackButton } from "./lib/telegram";
 import "./App.css";
 
@@ -25,7 +27,7 @@ const getSearchQueryFromUrl = () => {
   }
 };
 
-const App = () => {
+const AppContent = () => {
   // Sayt har safar yangilanganda (refresh) to'g'ridan-to'g'ri Home sahifasidan va Brand Loader bilan ochiladi
   const [currentPage, setCurrentPage] = useState("home");
   const [searchQuery, setSearchQuery] = useState("");
@@ -206,9 +208,20 @@ const App = () => {
         />
       </div>
 
+      {/* Suzuvchi savatcha bildirishnomasi (Toast Alert — barmoq bilan surib yopish imkoniyati bilan) */}
+      <ToastAlert />
+
       {/* Pastki navigatsiya menyusi — indicator silliq siljiydi */}
-      <Menu active={activeTab} onTabChange={handleTabChange} cartCount={2} />
+      <Menu active={activeTab} onTabChange={handleTabChange} />
     </div>
+  );
+};
+
+const App = () => {
+  return (
+    <AppProvider>
+      <AppContent />
+    </AppProvider>
   );
 };
 

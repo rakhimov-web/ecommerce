@@ -1,0 +1,105 @@
+/* Floating Toast Alert — Pastki Tab Bar tepasidagi silliq bildirishnoma */
+.toastContainer {
+  position: fixed;
+  bottom: calc(var(--menu-height) + 1.4rem);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: calc(100% - 3.2rem);
+  max-width: 380px;
+  z-index: 1050;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.toastPill {
+  pointer-events: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+  cursor: grab;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  background: rgba(22, 25, 27, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 0.85rem 1.6rem 0.85rem 1.1rem;
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.28),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+  font-family: var(--font-primary);
+}
+
+.toastPill:active {
+  cursor: grabbing;
+}
+
+.iconCircle {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  background: var(--success); /* #16a34a */
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.4);
+}
+
+.message {
+  font-size: var(--text-base); /* 1.35rem (13.5px) */
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: -0.012em;
+  line-height: 1.3;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hint {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.45);
+  font-weight: 400;
+  flex-shrink: 0;
+}
+
+/* Tablet va Katta ekranlarda (Desktop) suzuvchi menyuning ustida turishi */
+@media (min-width: 768px) {
+  .toastContainer {
+    bottom: calc(var(--menu-height) + 3.8rem);
+    max-width: 400px;
+  }
+
+  .toastPill {
+    padding: 0.95rem 1.8rem 0.95rem 1.2rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .toastContainer {
+    bottom: calc(var(--menu-height) + 1.2rem);
+    width: calc(100% - 2.4rem);
+  }
+
+  .toastPill {
+    padding: 0.75rem 1.3rem 0.75rem 0.9rem;
+    gap: 0.9rem;
+  }
+
+  .iconCircle {
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+
+  .message {
+    font-size: 1.25rem;
+  }
+}

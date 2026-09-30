@@ -226,8 +226,82 @@
   background-color: var(--primary-active);
 }
 
-.addedButton {
-  background-color: var(--success) !important;
+/* Savatga tugmasidagi qisqa va nozik yuklanish animatsiyasi (Spinner) */
+.loadingButton {
+  cursor: default;
+  opacity: 0.92;
+}
+
+.buttonSpinner {
+  width: 1.7rem;
+  height: 1.7rem;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spinnerRotate 0.65s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spinnerRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Miqdor boshqaruvi (Stepper Counter — media_1790792345497.png bilan 1-ga 1 mos) */
+.stepperContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 3.8rem;
+  background-color: var(--surface-subtle); /* #f1f5f9 yumshoq neytral fon */
+  border-radius: 1.1rem;
+  padding: 0.3rem;
+  margin-top: 0.6rem;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.stepperBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 0.85rem;
+  background-color: #dbe2ea; /* Screenshotdagi yumshoq tugmacha foni */
+  border: none;
+  color: var(--black);
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  transition:
+    background-color 0.15s ease,
+    transform 0.1s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.stepperBtn:hover {
+  background-color: #cbd5e1;
+}
+
+.stepperBtn:active {
+  background-color: #bcc8d6;
+  transform: scale(0.94);
+}
+
+.stepperCount {
+  font-family: var(--font-primary);
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: var(--black);
+  text-align: center;
+  min-width: 2.8rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
 }
 
 /* Native ilovadek yumshoq va mayin suv yoyilishi (Ripple) */
@@ -398,6 +472,21 @@
     font-size: 1.2rem; /* 12px */
     border-radius: 1rem;
   }
+
+  .stepperContainer {
+    height: 3.6rem;
+    border-radius: 1rem;
+  }
+
+  .stepperBtn {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.8rem;
+  }
+
+  .stepperCount {
+    font-size: 1.38rem;
+  }
 }
 
 @media (max-width: 360px) {
@@ -440,5 +529,20 @@
   .cartButton {
     height: 3.4rem;
     font-size: 1.15rem; /* 11.5px */
+  }
+
+  .stepperContainer {
+    height: 3.4rem;
+    border-radius: 0.95rem;
+  }
+
+  .stepperBtn {
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 0.75rem;
+  }
+
+  .stepperCount {
+    font-size: 1.3rem;
   }
 }

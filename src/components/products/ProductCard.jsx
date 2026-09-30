@@ -1,53 +1,52 @@
 import { useState, useRef } from "react";
-import { ShoppingCart, Heart, Check } from "lucide-react";
+import { ShoppingCart, Heart, Minus, Plus } from "lucide-react";
 import TicketBadge from "./TicketBadge";
 import SmoothImage from "../common/SmoothImage";
 import styles from "./productGrid.module.css";
 import { formatPrice } from "../../data/products";
-import { triggerHaptic } from "../../lib/telegram";
+import { useApp } from "../../context/useApp";
 
 const ProductCard = ({ product }) => {
-  const [isLiked, setIsLiked] = useState(false);
-  const [isAdded, setIsAdded] = useState(false);
-  const [btnRipples, setBtnRipples] = useState([]);
+  const {
+    getCartQuantity,
+    addToCart,
+    updateCartQuantity,
+    isLiked: checkIsLiked,
+    toggleLike: handleToggleLikeContext,
+  } = useApp();
+
+  const quantity = getCartQuantity(product.id);
+  const isLiked = checkIsLiked(product.id);
+
+  const [isAdding, setIsAdding] = useState(false);
   const [imgRipples, setImgRipples] = useState([]);
   const rippleCounter = useRef(0);
 
   const toggleLike = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    triggerHaptic("medium");
-    setIsLiked((prev) => !prev);
+    handleToggleLikeContext(product.id);
   };
 
-  const handleAddToCart = (e) => {
+  const handleInitialAddToCart = (e) => {
     e.stopPropagation();
-    triggerHaptic("success");
-    const rect = e.currentTarget.getBoundingClientRect();
-    const rippleX =
-      (e.clientX ||
-        (e.touches && e.touches[0].clientX) ||
-        rect.left + rect.width / 2) - rect.left;
-    const rippleY =
-      (e.clientY ||
-        (e.touches && e.touches[0].clientY) ||
-        rect.top + rect.height / 2) - rect.top;
+    if (isAdding || quantity > 0) return;
 
-    rippleCounter.current += 1;
-    const rippleId = rippleCounter.current;
-    setBtnRipples((prev) => [
-      ...prev,
-      { id: rippleId, x: rippleX, y: rippleY },
-    ]);
-
-    setIsAdded(true);
+    setIsAdding(true);
     setTimeout(() => {
-      setIsAdded(false);
-    }, 1500);
+      addToCart(product.id);
+      setIsAdding(false);
+    }, 320);
+  };
 
-    setTimeout(() => {
-      setBtnRipples((prev) => prev.filter((r) => r.id !== rippleId));
-    }, 600);
+  const handleDecrement = (e) => {
+    e.stopPropagation();
+    updateCartQuantity(product.id, -1);
+  };
+
+  const handleIncrement = (e) => {
+    e.stopPropagation();
+    updateCartQuantity(product.id, 1);
   };
 
   const handleImagePointerDown = (e) => {
@@ -141,37 +140,55 @@ const ProductCard = ({ product }) => {
           {product.description}
         </p>
 
-        {/* Savatga qo'shish tugmasi */}
-        <button
-          type="button"
-          className={`${styles.cartButton} ${isAdded ? styles.addedButton : ""}`}
-          onClick={handleAddToCart}
-          aria-label={`${product.title}ni savatga qo'shish`}
-        >
-          {isAdded ? (
-            <>
-              <Check size={16} strokeWidth={2.5} />
-              <span>Qo'shildi</span>
-            </>
-          ) : (
-            <>
-              <ShoppingCart size={16} strokeWidth={2} />
-              <span>Savatga</span>
-            </>
-          )}
+        {/* Savatga qo'shish yoki Miqdor boshqaruvi (Stepper — media_1790792345497.png) */}
+        {quantity > 0 ? (
+          <div
+            className={styles.stepperContainer}
+            onClick={(e) => e.stopPropagation()}
+            role="group"
+            aria-label={`${product.title} miqdori`}
+          >
+            <button
+              type="button"
+              className={styles.stepperBtn}
+              onClick={handleDecrement}
+              aria-label="Bir dona kamaytirish"
+            >
+              <Minus size={15} strokeWidth={2.4} />
+            </button>
 
-          {btnRipples.map((ripple) => (
-            <span
-              key={ripple.id}
-              className={styles.buttonRipple}
-              style={{
-                left: `${ripple.x}px`,
-                top: `${ripple.y}px`,
-              }}
-            />
-          ))}
-          <div className={styles.pressHighlight} />
-        </button>
+            <span className={styles.stepperCount} aria-live="polite">
+              {quantity}
+            </span>
+
+            <button
+              type="button"
+              className={styles.stepperBtn}
+              onClick={handleIncrement}
+              aria-label="Bir dona oshirish"
+            >
+              <Plus size={15} strokeWidth={2.4} />
+            </button>
+          </div>
+        ) : (
+          <button
+            type="button"
+            className={`${styles.cartButton} ${isAdding ? styles.loadingButton : ""}`}
+            onClick={handleInitialAddToCart}
+            aria-label={`${product.title}ni savatga qo'shish`}
+            disabled={isAdding}
+          >
+            {isAdding ? (
+              <span className={styles.buttonSpinner} />
+            ) : (
+              <>
+                <ShoppingCart size={16} strokeWidth={2} />
+                <span>Savatga</span>
+              </>
+            )}
+            <div className={styles.pressHighlight} />
+          </button>
+        )}
       </div>
     </article>
   );

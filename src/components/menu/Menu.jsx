@@ -2,12 +2,15 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Home, Search, ShoppingCart, User } from "lucide-react";
 import NotificationBadge from "../common/NotificationBadge";
+import { useApp } from "../../context/useApp";
 import { triggerHaptic } from "../../lib/telegram";
 import styles from "./menu.module.css";
 
 const itemWidthPercent = 25; // 100 / 4
 
-const Menu = ({ active: controlledActive, onTabChange, cartCount = 2 }) => {
+const Menu = ({ active: controlledActive, onTabChange, cartCount: propCartCount }) => {
+  const { totalCartCount } = useApp();
+  const cartCount = propCartCount !== undefined ? propCartCount : totalCartCount;
   const [internalActive, setInternalActive] = useState(0);
   const active =
     controlledActive !== undefined ? controlledActive : internalActive;
