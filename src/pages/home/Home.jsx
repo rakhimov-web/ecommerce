@@ -93,7 +93,10 @@ const Home = ({ isActive = true, onSearchClick, onCategoryClick }) => {
               transition={{ duration: 0.35, ease: [0.2, 0.8, 0.2, 1] }}
             >
               {/* Yuqori cheksiz banner */}
-              <BannerCarousel isActive={isActive} onBannerClick={onCategoryClick} />
+              <BannerCarousel
+                isActive={isActive}
+                onBannerClick={onCategoryClick}
+              />
 
               {/* Asosiy toifalar (Telefon, Noutbuk, iPad, Apple Watch, Aksessuarlar) */}
               <CategoryGrid onCategoryClick={onCategoryClick} />

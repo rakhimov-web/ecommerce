@@ -2,7 +2,10 @@ import styles from "./skeleton.module.css";
 
 const ProductGridSkeleton = () => {
   return (
-    <section className={styles.productSection} aria-label="Mahsulotlar yuklanmoqda">
+    <section
+      className={styles.productSection}
+      aria-label="Mahsulotlar yuklanmoqda"
+    >
       <div className={styles.sectionHeader}>
         <div className={`${styles.titleSkeleton} ${styles.shimmer}`} />
       </div>
