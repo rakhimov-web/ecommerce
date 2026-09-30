@@ -16,15 +16,6 @@ export const getTelegramWebApp = () => {
 export const isTelegramApp = () => {
   if (typeof window === "undefined") return false;
 
-  // Localhost yoki 127.0.0.1 da dasturchi test qilayotganda doimo ilova va loader ochiladi
-  if (
-    window.location.hostname === "localhost" ||
-    window.location.hostname === "127.0.0.1" ||
-    window.location.hostname.endsWith(".local")
-  ) {
-    return true;
-  }
-
   // Dasturchi rejimi (Brauzerda test qilish uchun bypass)
   if (sessionStorage.getItem("tma_dev_bypass") === "true") {
     return true;
@@ -106,7 +97,7 @@ export const triggerHaptic = (type = "light") => {
       default:
         tg.HapticFeedback.impactOccurred("light");
     }
-  } catch (_e) {
+  } catch {
     // Brauzerda xatolik bermaydi
   }
 };
@@ -150,7 +141,7 @@ export const syncTelegramBackButton = (show, onClick) => {
     } else {
       tg.BackButton.hide();
     }
-  } catch (_e) {
+  } catch {
     // Ignore in non-TMA
   }
 };

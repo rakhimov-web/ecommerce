@@ -1,43 +1,26 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Home from "./pages/home/Home";
 import SearchPage from "./pages/search/SearchPage";
 import Menu from "./components/menu/Menu";
 import BrandSplashLoader from "./components/loader/BrandSplashLoader";
-import TelegramBrowserGate from "./components/telegram/TelegramBrowserGate";
 import {
-  isTelegramApp,
   initTelegramApp,
   syncTelegramBackButton,
 } from "./lib/telegram";
 import "./App.css";
 
-// URL dan joriy sahifani aniqlash (/search -> "search", boshqasi -> "home")
-const getPageFromPath = () => {
-  if (typeof window === "undefined") return "home";
-  const path = window.location.pathname.toLowerCase();
-  return path.startsWith("/search") ? "search" : "home";
-};
-
-// URL dan qidiruv parametrini olish (?q=...)
-const getSearchQueryFromUrl = () => {
-  if (typeof window === "undefined") return "";
-  try {
-    const params = new URLSearchParams(window.location.search);
-    return params.get("q") || "";
-  } catch {
-    return "";
-  }
-};
-
 const App = () => {
-  const [inTelegram, setInTelegram] = useState(() => isTelegramApp());
+  // Sayt har safar yangilanganda (refresh) to'g'ridan-to'g'ri Home sahifasidan va Brand Loader bilan ochiladi
+  const [currentPage, setCurrentPage] = useState("home");
+  const [searchQuery, setSearchQuery] = useState("");
   const [isSplashActive, setIsSplashActive] = useState(true);
-  const [currentPage, setCurrentPage] = useState(getPageFromPath);
-  const [searchQuery, setSearchQuery] = useState(getSearchQueryFromUrl);
 
-  // Telegram Mini App xususiyatlarini ishga tushirish
+  // Sahifa yangilanganda URL ni tozalash va Telegram xususiyatlarini tayyorlash
   useEffect(() => {
+    if (typeof window !== "undefined" && (window.location.pathname !== "/" || window.location.search)) {
+      window.history.replaceState({ page: "home" }, "", "/");
+    }
     initTelegramApp();
   }, []);
 
@@ -152,11 +135,6 @@ const App = () => {
   const activeTab = currentPage === "search" ? 1 : 0;
   const isHomeActive = currentPage === "home";
 
-  // Agar ilova Telegramdan tashqarida ochilsa -> Telegram Gate ko'rsatiladi
-  if (!inTelegram) {
-    return <TelegramBrowserGate onDevBypass={() => setInTelegram(true)} />;
-  }
-
   return (
     <div className="appContainer">
       {/*
@@ -177,9 +155,12 @@ const App = () => {
         Splash tugagach, ma'lumotlar kelgunicha Skeleton loader ko'rinadi,
         so'ng haqiqiy kontent namoyon bo'ladi.
       */}
-      <div
+      <motion.div
         className={`pageWrapper ${isHomeActive ? "pageFade" : ""}`}
         style={{ display: isHomeActive ? "block" : "none" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isSplashActive ? 0 : 1 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
       >
         <Home
           isActive={isHomeActive}
@@ -187,7 +168,7 @@ const App = () => {
           onSearchClick={() => handleGoToSearch("")}
           onCategoryClick={(catTitle) => handleGoToSearch(catTitle)}
         />
-      </div>
+      </motion.div>
 
       {/*
         Professional Qidiruv Sahifasi (SearchPage):

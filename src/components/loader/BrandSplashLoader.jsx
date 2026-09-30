@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import styles from "./brandSplashLoader.module.css";
 
-// 10 ta original SVG path-lari (assets/icons/logo.svg dan olingan)
+// 10 ta original SVG path-lari (assets/icons/logo.svg dan aynan olingan)
 const BLUE_BAG_PATH =
   "M220.37 95.5531C222.18 95.5531 223.22 91.8431 199.19 171.553C195.8 182.833 191.96 193.893 190.67 196.133C187.5 201.663 181.13 207.233 174.34 210.413C168.72 213.053 168.72 213.053 110.72 213.053C46.1197 213.053 49.1597 213.353 39.2097 206.043C30.7897 199.863 29.5997 197.003 13.7697 145.053C-2.26029 92.4031 -2.0603 93.5431 3.1797 85.2731C7.0697 79.1331 14.3397 75.5531 22.8997 75.5531C28.6197 75.5531 29.2197 75.3531 29.6197 73.3031C31.8497 61.6931 32.7597 58.1931 34.9797 52.5531C46.2797 23.9131 72.0397 4.04313 102.49 0.493126C131.5 -2.89687 161.53 11.4231 177.63 36.3131C182.76 44.2331 183.17 46.3832 180.12 49.1432C177.24 51.7432 175.42 55.5131 174.14 61.5031C173.05 66.5531 173.05 66.5531 168.39 66.5531C163.72 66.5431 163.72 66.5431 160.07 58.8031C153.55 44.9431 141 34.0431 126.36 29.5131C118.6 27.1131 105.14 26.9031 96.9197 29.0431C78.8197 33.7531 62.8697 49.0231 57.7997 66.4831C54.8597 76.6031 48.1197 75.5531 115.75 75.5531C171.57 75.5531 175.32 75.6631 175.83 77.3031C179.01 87.4731 183.86 93.1231 193 97.3031C197.49 99.3631 199.52 99.7031 205.54 99.3831C209.63 99.1631 214.19 98.2531 216.12 97.2731C218 96.3331 219.91 95.5531 220.37 95.5531ZM167.22 139.303C167.22 133.863 162.93 129.543 157.55 129.573C153.16 129.603 150.81 131.283 146.8 137.283C138.89 149.123 123.29 156.273 107.52 155.293C93.3997 154.413 82.5497 147.943 71.4097 133.763C68.4097 129.933 67.6997 129.553 63.6197 129.553C57.3497 129.553 54.2197 132.723 54.2197 139.073C54.2197 144.543 57.3797 149.693 65.7497 157.863C77.5597 169.403 93.0497 175.713 109.72 175.793C127.41 175.873 141.64 170.493 154 159.053C163.08 150.643 167.22 144.463 167.22 139.303Z";
 
@@ -31,10 +31,10 @@ const LETTERS = [
 
 const BrandSplashLoader = ({ onComplete }) => {
   useEffect(() => {
-    // Animatsiya to'liq o'tgandan so'ng asosiy sahifani ochish
+    // Animatsiya to'liq namoyon bo'lgach (1.35s), silliq chiqib ketishni boshlash
     const timer = setTimeout(() => {
       if (onComplete) onComplete();
-    }, 1450);
+    }, 1350);
 
     return () => clearTimeout(timer);
   }, [onComplete]);
@@ -45,13 +45,22 @@ const BrandSplashLoader = ({ onComplete }) => {
       initial={{ opacity: 1 }}
       exit={{
         opacity: 0,
-        scale: 1.03,
-        transition: { duration: 0.35, ease: [0.32, 0.72, 0, 1] },
+        transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
       }}
     >
       <div className={styles.ambientCenter} />
 
-      <div className={styles.loaderContent}>
+      <motion.div
+        className={styles.loaderContent}
+        initial={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{
+          opacity: 0,
+          scale: 1.05,
+          y: -8,
+          filter: "blur(4px)",
+          transition: { duration: 0.38, ease: [0.32, 0.72, 0, 1] },
+        }}
+      >
         {/* Asosiy animatsiyali SVG logotip */}
         <div className={styles.svgWrapper}>
           <svg
@@ -72,34 +81,53 @@ const BrandSplashLoader = ({ onComplete }) => {
                 <stop offset="0%" stopColor="#FD7434" />
                 <stop offset="100%" stopColor="#FB5B1B" />
               </linearGradient>
-
-              {/* Shimmer sweep gradient */}
-              <linearGradient id="shimmerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="white" stopOpacity="0" />
-                <stop offset="50%" stopColor="white" stopOpacity="0.4" />
-                <stop offset="100%" stopColor="white" stopOpacity="0" />
-              </linearGradient>
             </defs>
 
-            {/* 1. Moviy rangli savat/xalta belgisi (Spring pop & silliq tabassum tebranishi) */}
+            {/* 1. Moviy rangli savat/xalta belgisi (Liquid spring pop & nozik tabassum tebranishi) */}
             <motion.path
               d={BLUE_BAG_PATH}
               fill="#005AFD"
               fillRule="evenodd"
               clipRule="evenodd"
-              initial={{ scale: 0.45, opacity: 0, transformOrigin: "115px 120px" }}
+              initial={{
+                scale: 0.35,
+                opacity: 0,
+                rotate: -5,
+                transformOrigin: "115px 120px",
+              }}
               animate={{
-                scale: [0.45, 1.05, 1],
+                scale: [0.35, 1.06, 1],
                 opacity: 1,
+                rotate: [-5, 0],
               }}
               transition={{
                 duration: 0.65,
-                ease: [0.175, 0.885, 0.32, 1.275],
-                delay: 0.08,
+                ease: [0.16, 1, 0.3, 1],
+                delay: 0.05,
               }}
             />
 
-            {/* 2. Zarg'aldoq dumaloq aksent (Sakrab tushish va nur taralishi) */}
+            {/* Zarg'aldoq nuqta atrofidagi yumshoq to'lqin halqasi */}
+            <motion.circle
+              cx="204"
+              cy="69"
+              r="22"
+              fill="none"
+              stroke="#FD7434"
+              strokeWidth="2.5"
+              initial={{ scale: 0.2, opacity: 0, transformOrigin: "204px 69px" }}
+              animate={{
+                scale: [0.2, 1.8],
+                opacity: [0, 0.55, 0],
+              }}
+              transition={{
+                duration: 0.7,
+                ease: "easeOut",
+                delay: 0.32,
+              }}
+            />
+
+            {/* 2. Zarg'aldoq dumaloq aksent (Sakrab tushish va squash-stretch) */}
             <motion.path
               d={ORANGE_DOT_PATH}
               fill="url(#loader_orange_grad)"
@@ -108,20 +136,22 @@ const BrandSplashLoader = ({ onComplete }) => {
               initial={{
                 scale: 0,
                 opacity: 0,
-                transformOrigin: "205px 70px",
+                y: -24,
+                transformOrigin: "204px 69px",
               }}
               animate={{
-                scale: [0, 1.3, 1],
+                scale: [0, 1.45, 0.88, 1.1, 1],
                 opacity: 1,
+                y: [-24, 2, -1, 0],
               }}
               transition={{
-                duration: 0.5,
-                ease: [0.175, 0.885, 0.32, 1.275],
-                delay: 0.28,
+                duration: 0.55,
+                ease: [0.2, 0.9, 0.3, 1.2],
+                delay: 0.24,
               }}
             />
 
-            {/* 3. 'savatcha' so'zining 8 ta harfi tartibli chiqishi (Staggered motion) */}
+            {/* 3. 'savatcha' so'zining 8 ta harfi tartibli chiqishi (Staggered kinetic typography) */}
             {LETTERS.map((letterPath, index) => (
               <motion.path
                 key={index}
@@ -132,46 +162,27 @@ const BrandSplashLoader = ({ onComplete }) => {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
-                  duration: 0.4,
+                  duration: 0.42,
                   ease: [0.22, 1, 0.36, 1],
-                  delay: 0.38 + index * 0.055,
+                  delay: 0.34 + index * 0.045,
                 }}
               />
             ))}
           </svg>
 
-          {/* Yorug'lik nuri (Shimmer sweep beam) */}
+          {/* Logotip ustidan o'tuvchi mayin nur (Specular gleam) */}
           <motion.div
             className={styles.shimmerBeam}
-            initial={{ left: "-40%", opacity: 0 }}
-            animate={{ left: "140%", opacity: [0, 1, 0] }}
+            initial={{ left: "-35%", opacity: 0 }}
+            animate={{ left: "135%", opacity: [0, 1, 0] }}
             transition={{
-              duration: 0.8,
+              duration: 0.65,
               ease: "easeInOut",
-              delay: 0.85,
+              delay: 0.8,
             }}
           />
         </div>
-
-        {/* Minimalist zamonaviy yuklanish chizig'i */}
-        <div className={styles.progressContainer}>
-          <motion.div
-            className={styles.progressBar}
-            initial={{ width: "0%" }}
-            animate={{ width: "100%" }}
-            transition={{ duration: 1.35, ease: [0.4, 0, 0.2, 1] }}
-          />
-        </div>
-
-        <motion.span
-          className={styles.caption}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.75 }}
-          transition={{ duration: 0.4, delay: 0.5 }}
-        >
-          Yuklanmoqda...
-        </motion.span>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };

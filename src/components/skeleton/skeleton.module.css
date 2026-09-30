@@ -249,6 +249,14 @@
   margin-top: 0.6rem;
 }
 
+/* Tablet ekranlar uchun 3 ustunli karkas */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .productGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
 @media (max-width: 768px) {
   .productSection {
     padding: 0 2rem;

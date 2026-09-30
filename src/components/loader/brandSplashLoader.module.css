@@ -4,28 +4,28 @@
   z-index: 99999;
   background: #ffffff;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   user-select: none;
   -webkit-user-select: none;
   touch-action: none;
+  pointer-events: all;
 }
 
-/* Orqa fondagi nafis radial ambient yorug'lik */
+/* Nozik va premium radial ambient nur */
 .ambientCenter {
   position: absolute;
-  width: 420px;
-  height: 420px;
+  width: 500px;
+  height: 500px;
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(0, 90, 253, 0.08) 0%,
-    rgba(253, 116, 52, 0.04) 40%,
+    rgba(0, 90, 253, 0.09) 0%,
+    rgba(253, 116, 52, 0.05) 35%,
     rgba(255, 255, 255, 0) 70%
   );
-  filter: blur(48px);
+  filter: blur(54px);
   pointer-events: none;
 }
 
@@ -33,7 +33,6 @@
   position: relative;
   z-index: 2;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
@@ -42,13 +41,13 @@
 /* Asosiy Brand SVG konteyneri */
 .svgWrapper {
   position: relative;
-  width: 250px;
-  max-width: 75vw;
+  width: 260px;
+  max-width: 78vw;
   height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(0 8px 24px rgba(0, 90, 253, 0.08));
+  filter: drop-shadow(0 14px 32px rgba(0, 90, 253, 0.12));
 }
 
 .logoSvg {
@@ -58,51 +57,25 @@
   display: block;
 }
 
-/* Orqa fonda zarracha nur taralishi */
+/* Logotip uzra o'tuvchi mayin nur (Shimmer gleam) */
 .shimmerBeam {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 60px;
+  top: -10%;
+  bottom: -10%;
+  width: 55px;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.75) 50%,
+    rgba(255, 255, 255, 0.85) 50%,
     transparent 100%
   );
-  transform: skewX(-20deg);
+  transform: skewX(-22deg);
   pointer-events: none;
-  z-index: 3;
+  z-index: 5;
 }
 
-/* Minimalist Telegram/Apple uslubidagi progress chizig'i */
-.progressContainer {
-  margin-top: 2rem;
-  width: 64px;
-  height: 3px;
-  background: #f1f4f8;
-  border-radius: 999px;
-  overflow: hidden;
-  position: relative;
-}
-
-.progressBar {
-  height: 100%;
-  background: linear-gradient(90deg, #005afd 0%, #2aabee 50%, #fd7434 100%);
-  border-radius: 999px;
-}
-
-/* Brend shiori yoki kichik status */
-.caption {
-  margin-top: 1rem;
-  font-family:
-    "Satoshi",
-    -apple-system,
-    BlinkMacSystemFont,
-    sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #94a3b8;
+@media (min-width: 768px) {
+  .svgWrapper {
+    width: 320px;
+  }
 }

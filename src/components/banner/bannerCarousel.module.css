@@ -1,7 +1,8 @@
 .bannerSection {
   width: 100%;
+  max-width: 1000px;
   position: relative;
-  margin: 0 0 1.6rem 0;
+  margin: 0 auto 1.6rem auto;
   user-select: none;
   -webkit-user-select: none;
 }

@@ -308,6 +308,14 @@
   opacity: 1;
 }
 
+/* Tablet ekranlar uchun 3 ustunli qulay panjara */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
 /* Mobil ekranlar uchun moslashuv */
 @media (max-width: 768px) {
   .section {
