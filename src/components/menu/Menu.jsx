@@ -5,10 +5,10 @@ import { triggerHaptic } from "../../lib/telegram";
 import styles from "./menu.module.css";
 
 const items = [
-  { id: 0, icon: <Home size={22} />, label: "Bosh sahifa" },
-  { id: 1, icon: <Search size={22} />, label: "Qidirish" },
-  { id: 2, icon: <ShoppingCart size={22} />, label: "Savatcha" },
-  { id: 3, icon: <User size={22} />, label: "Profil" },
+  { id: 0, label: "Bosh sahifa", Icon: Home },
+  { id: 1, label: "Qidirish", Icon: Search },
+  { id: 2, label: "Savatcha", Icon: ShoppingCart, badge: 2 },
+  { id: 3, label: "Profil", Icon: User },
 ];
 
 const itemWidthPercent = 100 / items.length; // 25%
@@ -32,29 +32,85 @@ const Menu = ({ active: controlledActive, onTabChange }) => {
       <nav className={styles.menu}>
         {items.map((item, index) => {
           const isActive = active === index;
+          const Icon = item.Icon;
+
           return (
-            <button
+            <motion.button
               key={item.id}
               onClick={() => handleSelect(index)}
               className={`${styles.navItem} ${isActive ? styles.active : ""}`}
               type="button"
+              whileTap={{ scale: 0.94 }}
+              transition={{ type: "spring", stiffness: 500, damping: 26 }}
+              aria-label={item.label}
             >
-              <span className={styles.iconWrapper}>{item.icon}</span>
-              <p className={styles.label}>{item.label}</p>
-            </button>
+              {/* Ikonka maydoni va orqa fondagi silliq harakatlanuvchi kapsula (active pill) */}
+              <div className={styles.iconContainer}>
+                {isActive && (
+                  <motion.div
+                    layoutId="activeNavPill"
+                    className={styles.activeCapsule}
+                    transition={{
+                      type: "spring",
+                      stiffness: 440,
+                      damping: 34,
+                      mass: 0.75,
+                    }}
+                  />
+                )}
+
+                <motion.span
+                  className={styles.iconWrapper}
+                  animate={{
+                    scale: isActive ? 1.08 : 1,
+                    y: isActive ? -1 : 0,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 440,
+                    damping: 24,
+                  }}
+                >
+                  <Icon
+                    size={21}
+                    strokeWidth={isActive ? 2.35 : 1.75}
+                    className={styles.iconSvg}
+                  />
+
+                  {/* Savatcha bildirishnoma belgisi (badge) */}
+                  {item.badge !== undefined && (
+                    <span className={styles.tabBadge}>{item.badge}</span>
+                  )}
+                </motion.span>
+              </div>
+
+              {/* Tab yorlig'i matni */}
+              <span className={styles.label}>{item.label}</span>
+            </motion.button>
           );
         })}
 
-        {/* Sliding Active Indicator */}
+        {/* 
+          Yuqoridagi silliq suzuvchi neon indikator (Top Floating Pill & Ambient Glow):
+          To'liq enli qattiq chiziq emas, balki markazlashgan, yumaloq va nurli premium pill
+        */}
         <motion.div
+          className={styles.topIndicatorTrack}
           initial={false}
           animate={{
             left: `${active * itemWidthPercent}%`,
             width: `${itemWidthPercent}%`,
           }}
-          transition={{ type: "spring", stiffness: 380, damping: 30 }}
-          className={styles.indicator}
-        />
+          transition={{
+            type: "spring",
+            stiffness: 440,
+            damping: 34,
+            mass: 0.75,
+          }}
+        >
+          <div className={styles.topIndicatorPill} />
+          <div className={styles.topIndicatorAura} />
+        </motion.div>
       </nav>
     </div>
   );
