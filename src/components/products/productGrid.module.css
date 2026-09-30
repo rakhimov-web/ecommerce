@@ -1,7 +1,7 @@
 .section {
   width: 100%;
   max-width: 1000px;
-  margin: 1.6rem auto 0 auto;
+  margin: 0 auto;
   /* Ekran ikkita cheti aynan 2.0rem qilib belgilandi */
   padding: 0 2rem;
   font-family: var(--font-primary);
@@ -13,17 +13,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.8rem;
 }
 
 .sectionTitle {
   font-family: var(--font-primary);
   font-size: var(
     --text-xl
-  ); /* 1.85rem (18.5px) — E-commerce standart sarlavha */
+  ); /* 1.9rem (19px) — E-commerce standart sarlavha */
   font-weight: 700;
   color: var(--black);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   margin: 0;
 }
 
@@ -147,7 +147,7 @@
   gap: 0.6rem;
 }
 
-/* Narx: Standart 16px bold, eski narx 11px */
+/* Narx: Standart 16.5px bold, eski narx 11.5px */
 .priceBlock {
   display: flex;
   flex-direction: column;
@@ -155,16 +155,16 @@
 }
 
 .currentPrice {
-  font-size: var(--text-lg); /* 1.6rem (16px) */
+  font-size: 1.65rem; /* 16.5px */
   font-weight: 700;
   color: var(--black);
   line-height: 1.2;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
 .oldPrice {
-  font-size: var(--text-xs); /* 1.1rem (11px) */
-  color: var(--gray);
+  font-size: 1.15rem; /* 11.5px */
+  color: #94a3b8;
   text-decoration: line-through;
   line-height: 1;
 }
@@ -175,7 +175,7 @@
   font-weight: 600;
   color: var(--black);
   margin: 0;
-  line-height: 1.25;
+  line-height: 1.3;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -186,14 +186,14 @@
   font-size: var(--text-sm); /* 1.2rem (12px) */
   color: var(--gray);
   margin: 0;
-  line-height: 1.35;
+  line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-word;
-  height: 3.2rem;
+  height: 3.3rem;
 }
 
 /* Savatga qo'shish tugmasi: Karta kengligi bilan teng (width: 100%) */
@@ -208,7 +208,7 @@
   background-color: var(--primary);
   color: var(--white);
   border: none;
-  border-radius: 1rem;
+  border-radius: 1.1rem;
   font-family: var(--font-primary);
   font-size: 1.25rem; /* 12.5px */
   font-weight: 600;
@@ -319,14 +319,16 @@
 /* Mobil ekranlar uchun moslashuv */
 @media (max-width: 768px) {
   .section {
-    /* Mobilda chetlar aynan 2.0rem */
     padding: 0 2rem;
-    margin: 1.4rem auto 0 auto;
+    margin: 0 auto;
+  }
+
+  .sectionHeader {
+    margin-bottom: 1.6rem;
   }
 
   .grid {
     grid-template-columns: repeat(2, 1fr);
-    /* Kartalar orasidagi masofa mobilda ham aynan 2.0rem */
     gap: 2rem;
   }
 
@@ -349,7 +351,7 @@
   }
 
   .content {
-    padding: 1rem 0.2rem 0.4rem 0.2rem;
+    padding: 1rem 0.2rem 0.2rem 0.2rem;
     gap: 0.5rem;
   }
 }
@@ -357,7 +359,11 @@
 @media (max-width: 480px) {
   .section {
     padding: 0 2rem;
-    margin: 1.2rem auto 0 auto;
+    margin: 0 auto;
+  }
+
+  .sectionHeader {
+    margin-bottom: 1.5rem;
   }
 
   .sectionTitle {
@@ -379,7 +385,7 @@
   }
 
   .currentPrice {
-    font-size: 1.5rem; /* 15px */
+    font-size: 1.55rem; /* 15.5px */
   }
 
   .productTitle {
@@ -388,19 +394,24 @@
 
   .productDescription {
     font-size: 1.15rem; /* 11.5px */
-    height: 3.1rem;
+    height: 3.2rem;
   }
 
   .cartButton {
     height: 3.6rem;
     font-size: 1.2rem; /* 12px */
+    border-radius: 1rem;
   }
 }
 
 @media (max-width: 360px) {
   .section {
     padding: 0 1.6rem;
-    margin: 1rem auto 0 auto;
+    margin: 0 auto;
+  }
+
+  .sectionTitle {
+    font-size: 1.65rem;
   }
 
   .grid {
@@ -418,16 +429,16 @@
   }
 
   .currentPrice {
-    font-size: 1.4rem; /* 14px */
+    font-size: 1.45rem; /* 14.5px */
   }
 
   .productTitle {
-    font-size: 1.25rem; /* 12.5px */
+    font-size: 1.28rem; /* 12.8px */
   }
 
   .productDescription {
-    font-size: 1.05rem; /* 10.5px */
-    height: 2.8rem;
+    font-size: 1.08rem; /* 10.8px */
+    height: 3rem;
   }
 
   .cartButton {

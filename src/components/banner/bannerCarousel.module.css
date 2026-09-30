@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 1000px;
   position: relative;
-  margin: 0 auto 1.6rem auto;
+  margin: 0 auto 2.2rem auto;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -156,10 +156,9 @@
   background-color: var(--primary);
 }
 
-/* Responsive moslashuv */
 @media (max-width: 640px) {
   .bannerSection {
-    margin: 0 0 1.2rem 0;
+    margin: 0 auto 1.8rem auto;
   }
 
   .slideCard {

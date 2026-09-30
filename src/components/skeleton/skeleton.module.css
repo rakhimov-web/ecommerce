@@ -25,7 +25,7 @@
 .bannerSection {
   width: 100%;
   max-width: 1000px;
-  margin: 0 auto 1.6rem auto;
+  margin: 0 auto 2.2rem auto;
   padding: 0.4rem 0;
   user-select: none;
   -webkit-user-select: none;
@@ -62,7 +62,7 @@
 
 @media (max-width: 640px) {
   .bannerSection {
-    margin: 0 auto 1.2rem auto;
+    margin: 0 auto 1.8rem auto;
   }
 
   .bannerCard {
@@ -76,7 +76,7 @@
 
 .categorySection {
   width: 100%;
-  margin: 1.2rem 0 2.6rem 0;
+  margin: 0.6rem 0 3.2rem 0;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -102,7 +102,7 @@
   width: 6.4rem;
   height: 6.4rem;
   border-radius: 1.8rem;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.7rem;
 }
 
 .categoryTitleWrap {
@@ -123,7 +123,7 @@
 
 @media (max-width: 768px) {
   .categorySection {
-    margin: 1rem 0 2.2rem 0;
+    margin: 0.4rem 0 2.8rem 0;
   }
 
   .categoryContainer {
@@ -195,14 +195,14 @@
 .productSection {
   width: 100%;
   max-width: 1000px;
-  margin: 1.6rem auto 0 auto;
+  margin: 0 auto;
   padding: 0 2rem;
   user-select: none;
   -webkit-user-select: none;
 }
 
 .sectionHeader {
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.8rem;
 }
 
 .titleSkeleton {
@@ -298,7 +298,7 @@
 @media (max-width: 768px) {
   .productSection {
     padding: 0 2rem;
-    margin: 1.4rem auto 0 auto;
+    margin: 0 auto;
   }
 
   .productGrid {
@@ -323,7 +323,7 @@
 @media (max-width: 480px) {
   .productSection {
     padding: 0 2rem;
-    margin: 1.2rem auto 0 auto;
+    margin: 0 auto;
   }
 
   .productGrid {
@@ -351,7 +351,7 @@
 @media (max-width: 360px) {
   .productSection {
     padding: 0 1.6rem;
-    margin: 1rem auto 0 auto;
+    margin: 0 auto;
   }
 
   .productGrid {

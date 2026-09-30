@@ -3,6 +3,7 @@ import { ChevronLeft, Search, X, ChevronRight, Clock } from "lucide-react";
 import { productsData } from "../../data/products";
 import ProductCard from "../../components/products/ProductCard";
 import EmptyStateVector from "../../components/search/EmptyStateVector";
+import SmoothImage from "../../components/common/SmoothImage";
 import styles from "./searchPage.module.css";
 
 // 5 ta asosiy toifa ikonkalari
@@ -302,7 +303,7 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
                     <div className={styles.categoryRowLeft}>
                       {/* Squircle konteyner: rasmlar object-fit: cover */}
                       <div className={styles.categoryIconWrap}>
-                        <img
+                        <SmoothImage
                           src={cat.icon}
                           alt={cat.title}
                           className={styles.categoryImg}

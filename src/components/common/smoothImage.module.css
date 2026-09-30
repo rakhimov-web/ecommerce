@@ -1,0 +1,64 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #f1f5f9;
+}
+
+/* Shimmer placeholder - rasm yuklangunicha ko'rinadi */
+.placeholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #edf2f7 0%,
+    #f8fafc 50%,
+    #edf2f7 100%
+  );
+  background-size: 200% 100%;
+  animation: smoothShimmer 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  opacity: 1;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.placeholderHidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes smoothShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Asosiy rasm: yuklanishidan oldin mayin blurry va 1.04 scale */
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  filter: blur(12px);
+  transform: scale(1.04) translateZ(0);
+  transition:
+    opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, filter, transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Rasm to'liq kelganda — 100% tiniq va silliq Apple blur-up paydo bo'lishi */
+.imageLoaded {
+  opacity: 1;
+  filter: blur(0px);
+  transform: scale(1) translateZ(0);
+}

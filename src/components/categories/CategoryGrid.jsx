@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import SmoothImage from "../common/SmoothImage";
 import styles from "./categoryGrid.module.css";
 
 import telefonImg from "../../assets/categories/telefon.png";
@@ -64,7 +65,7 @@ const CategoryGrid = ({ onCategoryClick }) => {
               onPointerDown={(e) => handlePointerDown(e, cat.id)}
             >
               <div className={styles.iconWrapper}>
-                <img
+                <SmoothImage
                   src={cat.icon}
                   alt={cat.title}
                   className={styles.categoryIcon}

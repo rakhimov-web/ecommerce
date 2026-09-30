@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, useMotionValue, animate } from "framer-motion";
 import bannerImg from "../../assets/images/banner.png";
+import SmoothImage from "../common/SmoothImage";
 import styles from "./bannerCarousel.module.css";
 
 const baseBanners = [
@@ -282,10 +283,11 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
                 aria-label={bannerData.alt}
               >
                 <div className={styles.imageWrapper}>
-                  <img
+                  <SmoothImage
                     src={bannerData.image}
                     alt={bannerData.alt}
                     className={styles.bannerImage}
+                    loading={isCenter ? "eager" : "lazy"}
                     draggable={false}
                   />
 

@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { ShoppingCart, Heart, Check } from "lucide-react";
 import TicketBadge from "./TicketBadge";
+import SmoothImage from "../common/SmoothImage";
 import styles from "./productGrid.module.css";
 import { formatPrice } from "../../data/products";
 import { triggerHaptic } from "../../lib/telegram";
@@ -101,7 +102,7 @@ const ProductCard = ({ product }) => {
 
         {/* Silliq qirqilgan ichki rasm maydoni */}
         <div className={styles.imageWrapper}>
-          <img
+          <SmoothImage
             src={product.image}
             alt={product.title}
             className={styles.productImage}

@@ -20,6 +20,10 @@
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 /* Asosiy Brand SVG konteyneri — hech qanday ko'k nur yoki soyasiz, ultra toza */
@@ -32,6 +36,8 @@
   align-items: center;
   justify-content: center;
   filter: none !important;
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 .logoSvg {
@@ -41,21 +47,23 @@
   display: block;
 }
 
-/* Logotip uzra o'tuvchi mayin nur (Shimmer gleam) */
+/* Logotip uzra o'tuvchi mayin nur (Shimmer gleam - GPU transform) */
 .shimmerBeam {
   position: absolute;
   top: -10%;
   bottom: -10%;
-  width: 55px;
+  left: 0;
+  width: 60px;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.85) 50%,
+    rgba(255, 255, 255, 0.8) 50%,
     transparent 100%
   );
-  transform: skewX(-22deg);
+  transform: skewX(-22deg) translateZ(0);
   pointer-events: none;
   z-index: 5;
+  will-change: transform, opacity;
 }
 
 @media (min-width: 768px) {

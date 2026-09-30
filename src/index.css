@@ -59,15 +59,15 @@
      ======================================== */
   --header-height: 6.4rem; /* 64px desktop */
   --menu-height: 5.6rem; /* 56px desktop va mobil */
-  --content-gap-top: 1.6rem; /* 16px desktop */
-  --content-gap-bottom: 3.6rem; /* 36px desktop */
+  --content-gap-top: 1.8rem; /* 18px desktop - Apple uslubida nafas oluvchi bo'shliq */
+  --content-gap-bottom: 4.2rem; /* 42px desktop */
 }
 
 @media (max-width: 768px) {
   :root {
     --header-height: 6rem; /* 60px mobil */
-    --content-gap-top: 1.4rem; /* 14px mobil */
-    --content-gap-bottom: 3.2rem; /* 32px mobil */
+    --content-gap-top: 1.6rem; /* 16px mobil */
+    --content-gap-bottom: 3.8rem; /* 38px mobil */
   }
 }
 
@@ -75,8 +75,8 @@
   :root {
     --header-height: 5.6rem; /* 56px kichik mobil */
     --menu-height: 5.2rem; /* 52px kichik mobil */
-    --content-gap-top: 1.2rem; /* 12px kichik mobil */
-    --content-gap-bottom: 2.8rem; /* 28px kichik mobil */
+    --content-gap-top: 1.4rem; /* 14px kichik mobil */
+    --content-gap-bottom: 3.2rem; /* 32px kichik mobil */
   }
 }
 
