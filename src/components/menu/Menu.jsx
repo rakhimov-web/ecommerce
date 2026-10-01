@@ -43,6 +43,7 @@ const Menu = ({
           qanchalik scroll qilinganidan qat'i nazar mutlaqo Y o'qida sakramaydi
           va faqat X o'qi bo'yicha "ship" etib silliq o'tadi.
         */}
+        {/* Orqa fondagi silliq ko'k kapsula (z-index: 1, ikonkalar orqasida) */}
         <div className={styles.pillTrack} aria-hidden="true">
           <motion.div
             className={styles.activeCapsule}
@@ -57,13 +58,29 @@ const Menu = ({
               mass: 0.6,
             }}
           >
-            {/* Active tab tepasidagi nozik yumaloq chiziqcha */}
-            <div className={styles.topIndicatorLine} />
-
             <div className={styles.pillShapeBox}>
               <div className={styles.pillShape} />
             </div>
             <div className={styles.pillLabelSpacer} />
+          </motion.div>
+        </div>
+
+        {/* Top borderdan ustun turuvchi yuqori indikator chizig'i (z-index: 25, top: -1px) */}
+        <div className={styles.topLineTrack} aria-hidden="true">
+          <motion.div
+            className={styles.topLineSlot}
+            initial={false}
+            animate={{
+              x: `${active * 100}%`,
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 460,
+              damping: 34,
+              mass: 0.6,
+            }}
+          >
+            <div className={styles.topIndicatorLine} />
           </motion.div>
         </div>
 

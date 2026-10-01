@@ -81,12 +81,31 @@
   will-change: transform;
 }
 
-/* Active tab tepasidagi nozik, no-shadow yumaloq chiziqcha */
-.topIndicatorLine {
+/* Top borderdan USTUN turuvchi rels (z-index: 25, top: -1px) */
+.topLineTrack {
   position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  pointer-events: none;
+  z-index: 25;
+  display: flex;
+}
+
+/* Top line harakatlanuvchi slot (25% kenglikda) */
+.topLineSlot {
+  position: relative;
+  width: 25%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+/* Active tab tepasidagi nozik, no-shadow yumaloq chiziqcha (top border ustida qat'iy ustun) */
+.topIndicatorLine {
   width: 22px;
   height: 2.5px;
   background-color: var(--primary);
@@ -228,12 +247,16 @@
     padding: 0 0.8rem;
   }
 
-  .topIndicatorLine {
-    top: 2px;
-  }
-
   .pillTrack {
     left: 0.8rem;
     right: 0.8rem;
+    width: calc(100% - 1.6rem);
+  }
+
+  .topLineTrack {
+    top: -1px;
+    left: 0.8rem;
+    right: 0.8rem;
+    width: calc(100% - 1.6rem);
   }
 }

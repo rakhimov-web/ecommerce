@@ -53,9 +53,15 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.categoryPill:hover {
-  color: var(--black);
-  border-color: var(--black);
+.categoryPill:active {
+  opacity: 0.8;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .categoryPill:hover {
+    color: var(--black);
+    border-color: var(--black);
+  }
 }
 
 .activeCategoryPill {
@@ -139,9 +145,15 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.filterActionBtn:hover {
-  background-color: rgba(22, 25, 27, 0.05);
-  border-color: var(--black);
+.filterActionBtn:active {
+  background-color: var(--surface-hover);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .filterActionBtn:hover {
+    background-color: var(--surface-subtle);
+    border-color: var(--black);
+  }
 }
 
 .hasActiveFilter {
@@ -216,9 +228,15 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.sortTriggerBtn:hover {
-  border-color: var(--black);
-  background-color: rgba(22, 25, 27, 0.02);
+.sortTriggerBtn:active {
+  background-color: var(--surface-hover);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sortTriggerBtn:hover {
+    border-color: var(--black);
+    background-color: var(--surface-subtle);
+  }
 }
 
 .sortTriggerActive {
@@ -283,8 +301,14 @@
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-.sortOptionItem:hover {
-  background-color: rgba(22, 25, 27, 0.05);
+.sortOptionItem:active {
+  background-color: var(--surface-hover);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .sortOptionItem:hover {
+    background-color: var(--surface-subtle);
+  }
 }
 
 .selectedSortOption {
@@ -374,8 +398,14 @@
   transition: background-color 0.2s ease;
 }
 
-.closeModalBtn:hover {
-  background: rgba(22, 25, 27, 0.1);
+.closeModalBtn:active {
+  background: var(--surface-hover);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .closeModalBtn:hover {
+    background: var(--surface-subtle);
+  }
 }
 
 .modalBody {
@@ -448,8 +478,14 @@
   transition: border-color 0.2s ease;
 }
 
-.modalColorItem:hover {
-  border-color: var(--black);
+.modalColorItem:active {
+  background-color: var(--surface-hover);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .modalColorItem:hover {
+    border-color: var(--black);
+  }
 }
 
 .selectedModalColor {
@@ -549,10 +585,14 @@
   cursor: pointer;
   outline: none;
   transition: background-color 0.2s ease;
+.resetBtn:active {
+  background-color: var(--surface-hover);
 }
 
-.resetBtn:hover {
-  background-color: rgba(22, 25, 27, 0.05);
+@media (hover: hover) and (pointer: fine) {
+  .resetBtn:hover {
+    background-color: var(--surface-subtle);
+  }
 }
 
 .applyBtn {
@@ -573,8 +613,14 @@
   transition: background-color 0.2s ease;
 }
 
-.applyBtn:hover {
-  background-color: var(--primary-hover);
+.applyBtn:active {
+  background-color: var(--primary-active);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .applyBtn:hover {
+    background-color: var(--primary-hover);
+  }
 }
 
 /* Responsive moslashuv */

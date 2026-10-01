@@ -91,13 +91,19 @@
     color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.clearBtn:hover {
-  background-color: var(--surface-subtle);
-  color: var(--black);
-}
-
 .clearBtn:active {
   background-color: var(--surface-hover);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .clearBtn:hover {
+    background-color: var(--surface-subtle);
+    color: var(--black);
+  }
+
+  .iconBtn:hover {
+    background-color: var(--surface-subtle);
+  }
 }
 
 /* O'ng tarafdagi harakatlar guruhi */

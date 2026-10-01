@@ -138,7 +138,14 @@
   transition: color 0.15s ease, background 0.15s ease;
 }
 
-.devBypassBtn:hover {
-  color: var(--primary);
+.devBypassBtn:active {
   background: var(--primary-subtle);
+  color: var(--primary);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .devBypassBtn:hover {
+    color: var(--primary);
+    background: var(--primary-subtle);
+  }
 }

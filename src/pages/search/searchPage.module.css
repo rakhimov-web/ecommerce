@@ -59,13 +59,15 @@
     opacity 0.15s ease;
 }
 
-.backButton:hover {
-  background-color: var(--surface-subtle);
-}
-
 .backButton:active {
   background-color: var(--surface-hover);
   opacity: 0.85;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .backButton:hover {
+    background-color: var(--surface-subtle);
+  }
 }
 
 /* 100% enni egallovchi qidiruv maydoni (Home searchBox bilan bir xil) */
@@ -132,13 +134,15 @@
     color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.clearBtn:hover {
-  background-color: var(--surface-subtle);
-  color: var(--black);
-}
-
 .clearBtn:active {
   background-color: var(--surface-hover);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .clearBtn:hover {
+    background-color: var(--surface-subtle);
+    color: var(--black);
+  }
 }
 
 /* ============================================================
@@ -196,13 +200,15 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.clearHistoryBtn:hover {
-  color: var(--black);
-  background-color: var(--surface-subtle);
-}
-
 .clearHistoryBtn:active {
   background-color: var(--border);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .clearHistoryBtn:hover {
+    color: var(--black);
+    background-color: var(--surface-subtle);
+  }
 }
 
 .recentList {
@@ -229,12 +235,14 @@
   border-bottom: none;
 }
 
-.recentItem:hover {
-  background-color: var(--background);
-}
-
 .recentItem:active {
   background-color: var(--surface-subtle);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .recentItem:hover {
+    background-color: var(--background);
+  }
 }
 
 .recentItemLeft {
@@ -275,9 +283,11 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.removeItemBtn:hover {
-  color: var(--black);
-  background-color: var(--surface-subtle);
+@media (hover: hover) and (pointer: fine) {
+  .removeItemBtn:hover {
+    color: var(--black);
+    background-color: var(--surface-subtle);
+  }
 }
 
 /* ============================================================
@@ -319,12 +329,14 @@
   border-bottom: none;
 }
 
-.categoryRow:hover {
-  background-color: var(--background);
-}
-
 .categoryRow:active {
   background-color: var(--surface-subtle);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .categoryRow:hover {
+    background-color: var(--background);
+  }
 }
 
 .categoryRowLeft {
@@ -397,9 +409,11 @@
     color 0.15s ease;
 }
 
-.categoryRow:hover .chevronIcon {
-  transform: translateX(3px);
-  color: var(--primary);
+@media (hover: hover) and (pointer: fine) {
+  .categoryRow:hover .chevronIcon {
+    transform: translateX(3px);
+    color: var(--primary);
+  }
 }
 
 /* ============================================================
@@ -466,13 +480,15 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.resetSearchBtn:hover {
-  background-color: var(--primary-hover);
-}
-
 .resetSearchBtn:active {
   background-color: var(--primary-active);
   transform: none !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .resetSearchBtn:hover {
+    background-color: var(--primary-hover);
+  }
 }
 
 /* ============================================================

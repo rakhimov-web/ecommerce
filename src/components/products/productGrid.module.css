@@ -218,12 +218,14 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.cartButton:hover {
-  background-color: var(--primary-hover);
-}
-
 .cartButton:active {
   background-color: var(--primary-active);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cartButton:hover {
+    background-color: var(--primary-hover);
+  }
 }
 
 /* Savatga tugmasidagi qisqa va nozik yuklanish animatsiyasi (Spinner) */
@@ -285,14 +287,16 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.stepperBtn:hover {
-  background-color: var(--stepper-btn-hover);
-  transform: none !important;
-}
-
 .stepperBtn:active {
   background-color: var(--stepper-btn-active);
   transform: none !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .stepperBtn:hover {
+    background-color: var(--stepper-btn-hover);
+    transform: none !important;
+  }
 }
 
 /* Stepper tugmalaridagi ([ - ] va [ + ]) mayin suv to'lqini effekti */

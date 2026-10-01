@@ -83,11 +83,15 @@
   cursor: pointer;
   outline: none;
   transition: background-color 0.15s ease, color 0.15s ease;
+.clearBtn:active {
+  background-color: var(--surface-hover);
 }
 
-.clearBtn:hover {
-  background-color: var(--surface-subtle);
-  color: var(--black);
+@media (hover: hover) and (pointer: fine) {
+  .clearBtn:hover {
+    background-color: var(--surface-subtle);
+    color: var(--black);
+  }
 }
 
 .escBadge {
@@ -107,9 +111,15 @@
   transition: all 0.15s ease;
 }
 
-.escBadge:hover {
+.escBadge:active {
   background-color: var(--surface-hover);
-  color: var(--black);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .escBadge:hover {
+    background-color: var(--surface-hover);
+    color: var(--black);
+  }
 }
 
 /* ============================================================
@@ -165,15 +175,17 @@
   transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.chipBtn:hover {
-  background-color: var(--surface-hover);
-  color: var(--black);
-  border-color: var(--border);
-}
-
 .chipBtn:active {
   background-color: var(--border);
   transform: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .chipBtn:hover {
+    background-color: var(--surface-hover);
+    color: var(--black);
+    border-color: var(--border);
+  }
 }
 
 /* 5 ta toifaning Table/List ko'rinishi */
@@ -192,12 +204,14 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.categoryItem:hover {
-  background-color: var(--background);
-}
-
 .categoryItem:active {
   background-color: var(--surface-subtle);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .categoryItem:hover {
+    background-color: var(--background);
+  }
 }
 
 .categoryLeft {
@@ -248,9 +262,11 @@
   transition: transform 0.15s ease, color 0.15s ease;
 }
 
-.categoryItem:hover .chevronIcon {
-  transform: translateX(3px);
-  color: var(--primary);
+@media (hover: hover) and (pointer: fine) {
+  .categoryItem:hover .chevronIcon {
+    transform: translateX(3px);
+    color: var(--primary);
+  }
 }
 
 /* ============================================================
@@ -273,12 +289,14 @@
   gap: 1.2rem;
 }
 
-.productRow:hover {
-  background-color: var(--background);
-}
-
 .productRow:active {
   background-color: var(--surface-subtle);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .productRow:hover {
+    background-color: var(--background);
+  }
 }
 
 .productLeft {
@@ -354,8 +372,10 @@
   flex-shrink: 0;
 }
 
-.productRow:hover .selectIndicator {
-  opacity: 1;
+@media (hover: hover) and (pointer: fine) {
+  .productRow:hover .selectIndicator {
+    opacity: 1;
+  }
 }
 
 /* ============================================================
@@ -398,8 +418,14 @@
   transition: all 0.15s ease;
 }
 
-.resetBtn:hover {
-  background-color: rgba(0, 85, 255, 0.14);
+.resetBtn:active {
+  background-color: var(--primary-hover);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .resetBtn:hover {
+    background-color: rgba(0, 85, 255, 0.14);
+  }
 }
 
 /* ============================================================

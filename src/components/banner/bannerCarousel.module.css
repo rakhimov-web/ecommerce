@@ -57,8 +57,10 @@
   z-index: 1;
 }
 
-.sideCard:hover {
-  opacity: 0.85;
+@media (hover: hover) and (pointer: fine) {
+  .sideCard:hover {
+    opacity: 0.85;
+  }
 }
 
 .imageWrapper {
@@ -147,8 +149,10 @@
   outline: none;
 }
 
-.dot:hover {
-  background-color: var(--gray);
+@media (hover: hover) and (pointer: fine) {
+  .dot:hover {
+    background-color: var(--gray);
+  }
 }
 
 .activeDot {
