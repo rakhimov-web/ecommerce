@@ -21,7 +21,6 @@
   border-top: 1px solid var(--border);
   height: var(--menu-height);
   padding: 0 0 env(safe-area-inset-bottom, 0px);
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.04);
   border-radius: 0;
 }
 
@@ -118,42 +117,8 @@
 
 .navItem.active .label {
   color: var(--primary);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.015em;
-  text-shadow: 0 0 0.35px var(--primary); /* 0px layout shift bilan silliq qalinlik optikasi */
-}
-
-/* Yuqoridagi silliq suzuvchi neon indikator (Top Floating Pill & Ambient Glow) */
-.topIndicatorTrack {
-  position: absolute;
-  top: -1px;
-  height: 100%;
-  pointer-events: none;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.topIndicatorPill {
-  width: 22px;
-  height: 2.5px;
-  background: var(--primary);
-  border-radius: 999px;
-  box-shadow: 0 1.5px 6px rgba(0, 85, 255, 0.35);
-}
-
-.topIndicatorAura {
-  position: absolute;
-  top: 0;
-  width: 48px;
-  height: 20px;
-  background: radial-gradient(
-    ellipse at top,
-    rgba(0, 85, 255, 0.12) 0%,
-    transparent 75%
-  );
-  pointer-events: none;
 }
 
 @media (max-width: 360px) {
@@ -168,11 +133,6 @@
 
   .label {
     font-size: 1.02rem; /* 10.2px */
-  }
-
-  .topIndicatorPill {
-    width: 18px;
-    height: 2px;
   }
 }
 
@@ -191,15 +151,9 @@
     max-width: 500px;
     border-radius: 999px;
     border: 1px solid var(--border);
-    box-shadow:
-      0 20px 40px -10px rgba(0, 30, 80, 0.12),
-      0 4px 12px rgba(0, 0, 0, 0.04);
+    background-color: var(--white);
     pointer-events: auto;
     overflow: hidden;
     padding: 0 0.8rem;
-  }
-
-  .indicator {
-    border-radius: 999px;
   }
 }

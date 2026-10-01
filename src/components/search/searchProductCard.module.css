@@ -55,12 +55,12 @@
 }
 
 .badgeSale {
-  background-color: #7c3aed;
+  background-color: var(--accent);
   color: var(--white);
 }
 
 .badgeNew {
-  background-color: #0055ff;
+  background-color: var(--primary);
   color: var(--white);
 }
 
@@ -79,7 +79,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #64748b;
+  color: var(--gray);
   cursor: pointer;
   padding: 0;
   transition: color 0.15s ease, background-color 0.15s ease;
@@ -87,8 +87,8 @@
 }
 
 .likeBtn.liked {
-  color: #ef4444;
-  background: rgba(254, 242, 242, 0.95);
+  color: var(--error);
+  background: var(--error-subtle);
 }
 
 /* Ma'lumotlar bloki */
@@ -107,7 +107,7 @@
 .currentPrice {
   font-size: 1.35rem; /* 13.5px */
   font-weight: 700;
-  color: #0055ff;
+  color: var(--primary);
   line-height: 1.2;
   letter-spacing: -0.01em;
 }
@@ -120,7 +120,7 @@
 
 .oldPrice {
   font-size: 1.05rem; /* 10.5px */
-  color: #94a3b8;
+  color: var(--gray-muted);
   text-decoration: line-through;
   line-height: 1;
 }
@@ -128,7 +128,7 @@
 .discountBadge {
   font-size: 1.0rem; /* 10px */
   font-weight: 700;
-  color: #ef4444;
+  color: var(--error);
   line-height: 1;
 }
 
@@ -136,8 +136,8 @@
 .installmentBadge {
   display: inline-flex;
   align-items: center;
-  background-color: #fef08a; /* Soft sariq fon */
-  color: #854d0e; /* To'q tillarang-jigarrang matn */
+  background-color: var(--installment-bg);
+  color: var(--installment-text);
   font-size: 1.02rem; /* 10.2px */
   font-weight: 600;
   padding: 0.18rem 0.45rem;
@@ -168,7 +168,7 @@
   align-items: center;
   gap: 0.8rem;
   font-size: 1.05rem; /* 10.5px */
-  color: #64748b;
+  color: var(--gray);
   margin-top: 0.1rem;
 }
 
@@ -176,7 +176,7 @@
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  color: #1e293b;
+  color: var(--black);
   font-weight: 600;
 }
 
@@ -184,9 +184,9 @@
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  color: #94a3b8;
+  color: var(--gray-muted);
 }
 
 .chatIcon {
-  color: #94a3b8;
+  color: var(--gray-muted);
 }

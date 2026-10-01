@@ -5,9 +5,9 @@ const TicketBadge = ({ type }) => {
 
   const isAksiya = type.toLowerCase() === "aksiya";
   const label = isAksiya ? "AKSIYA" : "YANGI";
-  // AKSIYA uchun brend accent rangi (#ff6430), YANGI uchun brend success yashil (#16a34a)
-  const mainColor = isAksiya ? "#ff6430" : "#16a34a";
-  const foldColor = isAksiya ? "#cc4410" : "#0f7634";
+  // AKSIYA uchun brend accent rangi, YANGI uchun brend success yashil
+  const mainColor = isAksiya ? "var(--accent)" : "var(--success)";
+  const foldColor = isAksiya ? "var(--accent-dark)" : "var(--success-dark)";
 
   return (
     <div className={styles.badgeWrapper} aria-label={label}>
@@ -40,10 +40,10 @@ const TicketBadge = ({ type }) => {
         <text
           x="34"
           y="16.5"
-          fill="#ffffff"
+          fill="var(--white)"
           fontSize="9.8"
           fontWeight="800"
-          fontFamily="'Satoshi', system-ui, -apple-system, sans-serif"
+          fontFamily="var(--font-primary)"
           textAnchor="middle"
           dominantBaseline="central"
           letterSpacing="0.8"

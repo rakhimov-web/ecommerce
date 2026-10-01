@@ -189,7 +189,7 @@ const ProductFilters = ({ onFilterChange }) => {
                     {isColorSelected && (
                       <Check
                         size={12}
-                        color={color.id === "silver" ? "#000" : "#fff"}
+                        color={color.id === "silver" ? "var(--black)" : "var(--white)"}
                         strokeWidth={3}
                       />
                     )}
@@ -341,7 +341,7 @@ const ProductFilters = ({ onFilterChange }) => {
                             {isColorSelected && (
                               <Check
                                 size={12}
-                                color={color.id === "silver" ? "#000" : "#fff"}
+                                color={color.id === "silver" ? "var(--black)" : "var(--white)"}
                                 strokeWidth={3}
                               />
                             )}

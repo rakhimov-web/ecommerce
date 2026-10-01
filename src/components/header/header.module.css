@@ -92,12 +92,12 @@
 }
 
 .clearBtn:hover {
-  background-color: rgba(22, 25, 27, 0.06);
+  background-color: var(--surface-subtle);
   color: var(--black);
 }
 
 .clearBtn:active {
-  background-color: rgba(22, 25, 27, 0.12);
+  background-color: var(--surface-hover);
 }
 
 /* O'ng tarafdagi harakatlar guruhi */
@@ -129,7 +129,7 @@
 }
 
 .iconBtn:active {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: var(--surface-subtle);
   opacity: 0.85;
 }
 

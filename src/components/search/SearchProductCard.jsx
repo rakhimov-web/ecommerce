@@ -42,8 +42,8 @@ const SearchProductCard = ({ product }) => {
         >
           <Heart
             size={15}
-            fill={isLiked ? "#ef4444" : "none"}
-            stroke={isLiked ? "#ef4444" : "currentColor"}
+            fill={isLiked ? "var(--error)" : "none"}
+            stroke={isLiked ? "var(--error)" : "currentColor"}
             strokeWidth={2}
           />
         </button>
@@ -97,7 +97,7 @@ const SearchProductCard = ({ product }) => {
         {/* Reyting va izohlar soni */}
         <div className={styles.ratingRow}>
           <span className={styles.ratingStar}>
-            <Star size={12} fill="#eab308" stroke="#eab308" />
+            <Star size={12} fill="var(--warning)" stroke="var(--warning)" />
             <span>{product.rating || "4.8"}</span>
           </span>
           <span className={styles.reviewCount}>

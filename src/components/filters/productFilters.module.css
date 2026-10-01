@@ -574,7 +574,7 @@
 }
 
 .applyBtn:hover {
-  background-color: #0047d4;
+  background-color: var(--primary-hover);
 }
 
 /* Responsive moslashuv */

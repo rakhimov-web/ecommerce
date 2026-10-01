@@ -6,8 +6,6 @@ import { useApp } from "../../context/useApp";
 import { triggerHaptic } from "../../lib/telegram";
 import styles from "./menu.module.css";
 
-const itemWidthPercent = 25; // 100 / 4
-
 const Menu = ({
   active: controlledActive,
   onTabChange,
@@ -86,28 +84,6 @@ const Menu = ({
             </button>
           );
         })}
-
-        {/*
-          Yuqoridagi silliq suzuvchi neon indikator (Top Floating Pill & Ambient Glow):
-          To'liq enli qattiq chiziq emas, balki markazlashgan, yumaloq va nurli premium pill
-        */}
-        <motion.div
-          className={styles.topIndicatorTrack}
-          initial={false}
-          animate={{
-            left: `${active * itemWidthPercent}%`,
-            width: `${itemWidthPercent}%`,
-          }}
-          transition={{
-            type: "spring",
-            stiffness: 380,
-            damping: 32,
-            mass: 0.8,
-          }}
-        >
-          <div className={styles.topIndicatorPill} />
-          <div className={styles.topIndicatorAura} />
-        </motion.div>
       </nav>
     </div>
   );

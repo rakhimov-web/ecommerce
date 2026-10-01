@@ -4,7 +4,12 @@
    ============================================================ */
 
 .shimmer {
-  background: linear-gradient(90deg, #e8edf4 0%, #f8fafc 50%, #e8edf4 100%);
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-base) 0%,
+    var(--skeleton-highlight) 50%,
+    var(--skeleton-base) 100%
+  );
   background-size: 200% 100%;
   animation: shimmerWave 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }

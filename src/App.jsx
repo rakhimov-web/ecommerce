@@ -32,6 +32,7 @@ const AppContent = () => {
   const [currentPage, setCurrentPage] = useState("home");
   const [searchQuery, setSearchQuery] = useState("");
   const [isSplashActive, setIsSplashActive] = useState(true);
+  const [activeTab, setActiveTab] = useState(0);
 
   // Sahifa yangilanganda URL ni tozalash, scrollni 0 ga surish va Telegram xususiyatlarini tayyorlash
   useEffect(() => {
@@ -57,6 +58,7 @@ const AppContent = () => {
       const query = getSearchQueryFromUrl();
       setCurrentPage(page);
       setSearchQuery(query);
+      setActiveTab(page === "search" ? 1 : 0);
     };
 
     window.addEventListener("popstate", handlePopState);
@@ -95,6 +97,7 @@ const AppContent = () => {
 
       setSearchQuery(trimmed);
       setCurrentPage("search");
+      setActiveTab(1);
 
       // Agar kategoriya bosilgan bo'lsa tepadan ochiladi, tab bosilganda saqlangan joyiga qaytadi
       const targetY = trimmed ? 0 : scrollPositions.current.search || 0;
@@ -122,6 +125,7 @@ const AppContent = () => {
     }
     setCurrentPage("home");
     setSearchQuery("");
+    setActiveTab(0);
 
     // Home sahifasidagi oldingi scroll joyini tiklash
     const targetY = scrollPositions.current.home || 0;
@@ -146,6 +150,7 @@ const AppContent = () => {
   // Pastki Tab bar menyusi orqali o'tish
   const handleTabChange = useCallback(
     (index) => {
+      setActiveTab(index);
       if (index === 1) {
         handleGoToSearch();
       } else if (index === 0) {
@@ -155,7 +160,6 @@ const AppContent = () => {
     [handleGoToSearch, handleGoToHome],
   );
 
-  const activeTab = currentPage === "search" ? 1 : 0;
   const isHomeActive = currentPage === "home";
 
   return (

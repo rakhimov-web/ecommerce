@@ -12,9 +12,9 @@
   inset: 0;
   background: linear-gradient(
     90deg,
-    #edf2f7 0%,
-    #f8fafc 50%,
-    #edf2f7 100%
+    var(--skeleton-base) 0%,
+    var(--skeleton-highlight) 50%,
+    var(--skeleton-base) 100%
   );
   background-size: 200% 100%;
   animation: smoothShimmer 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;

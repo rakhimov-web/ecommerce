@@ -10,6 +10,7 @@
 
   --accent: #ff6430; /* Aksiya / chegirma / bildirishnoma badge */
   --accent-hover: #e55320; /* Hover holati */
+  --accent-dark: #cc4410; /* Badge bukilish burchagi */
   --accent-subtle: rgba(255, 100, 48, 0.12); /* Aksiya yengil foni */
 
   /* ========================================
@@ -27,14 +28,37 @@
   --white: #ffffff; /* Kartochkalar / oq yuzalar */
 
   /* ========================================
+     DARK GLASS / HUD CAPSULE
+     ======================================== */
+  --dark-glass-bg: rgba(22, 25, 27, 0.95);
+  --dark-glass-border: rgba(255, 255, 255, 0.12);
+  --glass-bg: rgba(255, 255, 255, 0.96);
+
+  /* ========================================
+     STEPPER & CONTROL BUTTONS
+     ======================================== */
+  --stepper-btn-bg: #dbe2ea;
+  --stepper-btn-hover: #cbd5e1;
+  --stepper-btn-active: #bcc8d6;
+
+  /* ========================================
      STATUS
      ======================================== */
 
   --success: #16a34a;
+  --success-dark: #0f7634;
   --success-subtle: rgba(22, 163, 74, 0.1);
   --error: #ef4444; /* Qizil / Like / xatolik */
   --error-subtle: rgba(239, 68, 68, 0.12);
   --warning: #ff6430;
+
+  /* Bo'lib to'lash (Installment) */
+  --installment-bg: #fef08a;
+  --installment-text: #854d0e;
+
+  /* Skeleton shimmers */
+  --skeleton-base: #e8edf4;
+  --skeleton-highlight: #f8fafc;
 
   /* ========================================
      PROFESSIONAL E-COMMERCE TYPOGRAPHY SCALE
