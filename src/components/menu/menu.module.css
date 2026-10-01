@@ -81,6 +81,19 @@
   will-change: transform;
 }
 
+/* Active tab tepasidagi nozik, no-shadow yumaloq chiziqcha */
+.topIndicatorLine {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 2.5px;
+  background-color: var(--primary);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
 /* Ikonka maydoni o'lchami bilan 1-ga-1 mos markazlashgan quti (48px × 30px) */
 .pillShapeBox {
   position: relative;
@@ -170,6 +183,11 @@
     height: 5.2rem;
   }
 
+  .topIndicatorLine {
+    width: 18px;
+    height: 2px;
+  }
+
   .iconContainer {
     width: 42px;
     height: 26px;
@@ -208,6 +226,10 @@
     pointer-events: auto;
     overflow: hidden;
     padding: 0 0.8rem;
+  }
+
+  .topIndicatorLine {
+    top: 2px;
   }
 
   .pillTrack {

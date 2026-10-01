@@ -57,6 +57,9 @@ const Menu = ({
               mass: 0.6,
             }}
           >
+            {/* Active tab tepasidagi nozik yumaloq chiziqcha */}
+            <div className={styles.topIndicatorLine} />
+
             <div className={styles.pillShapeBox}>
               <div className={styles.pillShape} />
             </div>
