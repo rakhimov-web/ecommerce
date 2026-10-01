@@ -37,6 +37,33 @@ const Menu = ({
   return (
     <div className={styles.cover}>
       <nav className={styles.menu}>
+        {/*
+          Scroll-proof yagona gorizontal sirpanuvchi kapsula:
+          layoutId va DOM o'lchovlariga bog'lanmagan, shuning uchun sahifa
+          qanchalik scroll qilinganidan qat'i nazar mutlaqo Y o'qida sakramaydi
+          va faqat X o'qi bo'yicha "ship" etib silliq o'tadi.
+        */}
+        <div className={styles.pillTrack} aria-hidden="true">
+          <motion.div
+            className={styles.activeCapsule}
+            initial={false}
+            animate={{
+              x: `${active * 100}%`,
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 460,
+              damping: 34,
+              mass: 0.6,
+            }}
+          >
+            <div className={styles.pillShapeBox}>
+              <div className={styles.pillShape} />
+            </div>
+            <div className={styles.pillLabelSpacer} />
+          </motion.div>
+        </div>
+
         {items.map((item, index) => {
           const isActive = active === index;
           const Icon = item.Icon;
@@ -49,21 +76,8 @@ const Menu = ({
               type="button"
               aria-label={item.label}
             >
-              {/* Ikonka maydoni va orqa fondagi silliq harakatlanuvchi kapsula (active pill) */}
+              {/* Ikonka maydoni */}
               <div className={styles.iconContainer}>
-                {isActive && (
-                  <motion.div
-                    layoutId="activeNavPill"
-                    className={styles.activeCapsule}
-                    transition={{
-                      type: "spring",
-                      stiffness: 380,
-                      damping: 32,
-                      mass: 0.8,
-                    }}
-                  />
-                )}
-
                 <span className={styles.iconWrapper}>
                   <Icon
                     size={22}
