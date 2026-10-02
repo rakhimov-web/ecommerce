@@ -4,14 +4,11 @@ import {
   Heart,
   Minus,
   Plus,
+  ShoppingCart,
   ShoppingBag,
   Truck,
   ShieldCheck,
   RotateCcw,
-  Sparkles,
-  Zap,
-  Camera,
-  BatteryCharging,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import SmoothImage from "../../components/common/SmoothImage";
@@ -44,6 +41,7 @@ const ProductDetailPage = ({ product, onBack }) => {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [decRipples, setDecRipples] = useState([]);
   const [incRipples, setIncRipples] = useState([]);
+  const [cartBtnRipples, setCartBtnRipples] = useState([]);
   const [checkoutRipples, setCheckoutRipples] = useState([]);
   const rippleCounter = useRef(0);
 
@@ -71,7 +69,7 @@ const ProductDetailPage = ({ product, onBack }) => {
     );
   }
 
-  // Radial gradient suv to'lqini (Ripple) yaratish
+  // Native ilovadek silliq radial suv to'lqini (Ripple) yaratish
   const createRipple = (e, setter) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const rippleX =
@@ -92,22 +90,24 @@ const ProductDetailPage = ({ product, onBack }) => {
     }, 550);
   };
 
+  // Savatga dastlabki qo'shish
+  const handleInitialAdd = (e) => {
+    createRipple(e, setCartBtnRipples);
+    addToCart(product.id);
+  };
+
   // Stepper kamaytirish (-)
   const handleDecrement = (e) => {
+    e.stopPropagation();
     createRipple(e, setDecRipples);
-    if (quantity > 0) {
-      updateCartQuantity(product.id, -1);
-    }
+    updateCartQuantity(product.id, -1);
   };
 
   // Stepper oshirish (+)
   const handleIncrement = (e) => {
+    e.stopPropagation();
     createRipple(e, setIncRipples);
-    if (quantity === 0) {
-      addToCart(product.id);
-    } else {
-      updateCartQuantity(product.id, 1);
-    }
+    updateCartQuantity(product.id, 1);
   };
 
   // Rasmiylashtirish tugmasi (talabga binoan no-op)
@@ -124,11 +124,11 @@ const ProductDetailPage = ({ product, onBack }) => {
   return (
     <div className={styles.pageContainer}>
       {/* ============================================================
-          TOP HEADER:
-          - Boshqa sahifalar (Search & Home) bilan 1-ga 1 mos
+          TOP FIXED HEADER:
+          - SearchPage va Home Header bilan 1-ga 1 mos
           - Chapda: Ortga qaytish (<) tugmasi (transparent fon, hoverda surface-subtle)
           - O'rtada: Mahsulot nomi (Product Title)
-          - O'ngda: Faqatgina Like (Heart) tugmasi (transparent fon, hoverda surface-subtle)
+          - O'ngda: Faqatgina Like (Heart) tugmasi
           ============================================================ */}
       <header className={styles.header}>
         <div className={styles.headerContainer}>
@@ -147,7 +147,7 @@ const ProductDetailPage = ({ product, onBack }) => {
             <h1 className={styles.headerTitle}>{product.title}</h1>
           </div>
 
-          {/* O'ngdagi faqat Like tugmasi */}
+          {/* O'ngdagi Like tugmasi */}
           <button
             type="button"
             className={`${styles.headerBtn} ${isLiked ? styles.likedBtn : ""}`}
@@ -169,10 +169,10 @@ const ProductDetailPage = ({ product, onBack }) => {
       {/* Asosiy kontent maydoni */}
       <main className={styles.mainContent}>
         {/* ============================================================
-            1. HERO ASOSIY RASM (3/4 NISBATDA):
-            - 3/4 aspect ratio, 1px solid var(--border)
-            - Rasm ichida badge umuman bo'lmaydi
-            - Variant bosilganda glass blur bilan mayin almashadi
+            1. HERO ASOSIY RASM (3/4 NISBATDA, media_1790917535726.png):
+            - 3/4 portret nisbat, studiya foni
+            - Silliq blur-up animatsiyasi bilan chiqadi
+            - Variant bosilganda glass blur cross-fade bilan mayin almashadi
             ============================================================ */}
         <section
           className={styles.heroImageSection}
@@ -182,10 +182,10 @@ const ProductDetailPage = ({ product, onBack }) => {
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeImageIndex}
-                initial={{ opacity: 0, filter: "blur(14px)" }}
-                animate={{ opacity: 1, filter: "blur(0px)" }}
-                exit={{ opacity: 0, filter: "blur(14px)" }}
-                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                initial={{ opacity: 0, scale: 0.98, filter: "blur(12px)" }}
+                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                exit={{ opacity: 0, scale: 0.98, filter: "blur(12px)" }}
+                transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
                 className={styles.motionImageWrapper}
               >
                 <SmoothImage
@@ -199,7 +199,7 @@ const ProductDetailPage = ({ product, onBack }) => {
           </div>
 
           {/* ============================================================
-              2. PASTIDAGI 3 TA VARIANT:
+              2. PASTIDAGI 3 TA VARIANT (media_1790917535726.png):
               - 3 ta teng ustunli variant kartochkalari
               - Bosilganda yuqoridagi rasm glass blur bilan almashadi
               ============================================================ */}
@@ -231,21 +231,15 @@ const ProductDetailPage = ({ product, onBack }) => {
         {product.badge && (
           <div className={styles.badgeRow}>
             {product.badge === "aksiya" ? (
-              <span className={styles.badgeSale}>
-                <Sparkles size={12} strokeWidth={2.4} />
-                <span>Maxsus aksiya</span>
-              </span>
+              <span className={styles.badgeSale}>Maxsus aksiya</span>
             ) : (
-              <span className={styles.badgeNew}>
-                <Sparkles size={12} strokeWidth={2.4} />
-                <span>Yangi model</span>
-              </span>
+              <span className={styles.badgeNew}>Yangi model</span>
             )}
           </div>
         )}
 
         {/* ============================================================
-            4. MAHSULOT NOMI VA NARXI:
+            4. MAHSULOT NOMI VA NARXI (media_1790917535726.png):
             - Chapda: Mahsulot nomi
             - O'ngda: Narx va eski narx
             - Sharhlar va "1000% original" UMUMAN YO'Q
@@ -270,11 +264,12 @@ const ProductDetailPage = ({ product, onBack }) => {
         </section>
 
         {/* ============================================================
-            5. TAVSIF VA AFZALLIKLAR (EKSPERT DARAJASIDAGI VIZUAL PRESENTATSIYA):
-            - Monoton zerikarli emas, vizual highlight kartochkalari bilan boyitilgan
+            5. TAVSIF (Description — media_1790917535726.png):
+            - Sarlavha: Tavsif
+            - Matn va "Read more" / "Ko'proq o'qish" inline havolasi
             ============================================================ */}
         <section className={styles.descriptionSection}>
-          <h3 className={styles.sectionTitle}>Mahsulot tavsifi</h3>
+          <h3 className={styles.sectionTitle}>Tavsif</h3>
           <p
             className={`${styles.descriptionText} ${
               !isDescriptionExpanded ? styles.descriptionClamped : ""
@@ -289,53 +284,14 @@ const ProductDetailPage = ({ product, onBack }) => {
               className={styles.readMoreBtn}
               onClick={() => setIsDescriptionExpanded((prev) => !prev)}
             >
-              {isDescriptionExpanded ? "Kamroq ko'rsatish" : "To'liq tavsifni o'qish"}
+              {isDescriptionExpanded ? "Kamroq ko'rsatish" : "Ko'proq o'qish"}
             </button>
           )}
-
-          {/* Ekspert xususiyatlar bloklari (Vizual highlight kartochkalari) */}
-          <div className={styles.highlightsGrid}>
-            <div className={styles.highlightCard}>
-              <div className={styles.highlightIconBox}>
-                <Zap size={16} strokeWidth={2.2} />
-              </div>
-              <div className={styles.highlightInfo}>
-                <span className={styles.highlightTitle}>Tezkor va unumdor</span>
-                <span className={styles.highlightDesc}>
-                  Eng so'nggi texnologik chiplar bilan yuqori tezlik
-                </span>
-              </div>
-            </div>
-
-            <div className={styles.highlightCard}>
-              <div className={styles.highlightIconBox}>
-                <Camera size={16} strokeWidth={2.2} />
-              </div>
-              <div className={styles.highlightInfo}>
-                <span className={styles.highlightTitle}>Professional sifat</span>
-                <span className={styles.highlightDesc}>
-                  Har qanday sharoitda eng yuqori aniqlik va tiniqlik
-                </span>
-              </div>
-            </div>
-
-            <div className={styles.highlightCard}>
-              <div className={styles.highlightIconBox}>
-                <BatteryCharging size={16} strokeWidth={2.2} />
-              </div>
-              <div className={styles.highlightInfo}>
-                <span className={styles.highlightTitle}>Butun kunlik quvvat</span>
-                <span className={styles.highlightDesc}>
-                  Energiya tejamkor akkumulyator bilan uzoq ish faoliyati
-                </span>
-              </div>
-            </div>
-          </div>
         </section>
 
         {/* ============================================================
             6. ASOSIY XUSUSIYATLARI (Specifications):
-            - 1px solid var(--border) chegara bilan toza texnik jadval
+            - Native iOS uslubidagi toza texnik jadval
             ============================================================ */}
         {product.specs && product.specs.length > 0 && (
           <section className={styles.specsSection}>
@@ -352,74 +308,126 @@ const ProductDetailPage = ({ product, onBack }) => {
         )}
 
         {/* ============================================================
-            7. XIZMAT VA ISHONCH KAFOLATLARI (10K$ NATIVE APP FORMATIDA):
-            - Yagona toza hoshiyali konteyner, micro-pill nishonlar
+            7. XIZMAT VA KAFOLAT (10K$ NATIVE APP FORMATIDA):
+            - Yagona toza hoshiyali konteyner, micro-status nishonlar
             ============================================================ */}
-        <section className={styles.serviceCardContainer}>
-          <div className={styles.serviceCardRow}>
-            <div className={`${styles.serviceIconPill} ${styles.serviceIconDelivery}`}>
-              <Truck size={18} strokeWidth={2} />
+        <section className={styles.serviceSection}>
+          <h3 className={styles.sectionTitle}>Xizmat va kafolat</h3>
+          <div className={styles.serviceCardContainer}>
+            <div className={styles.serviceCardRow}>
+              <div className={`${styles.serviceIconBox} ${styles.serviceIconDelivery}`}>
+                <Truck size={17} strokeWidth={2} />
+              </div>
+              <div className={styles.serviceTextGroup}>
+                <span className={styles.serviceTitle}>Yetkazib berish xizmati</span>
+                <span className={styles.serviceDesc}>
+                  Ertagayoq butun O'zbekiston bo'ylab eshikkacha
+                </span>
+              </div>
+              <span className={styles.serviceStatusPill}>Bepul</span>
             </div>
-            <div className={styles.serviceTextGroup}>
-              <span className={styles.serviceTitle}>Yetkazib berish xizmati</span>
-              <span className={styles.serviceDesc}>
-                Ertagayoq butun O'zbekiston bo'ylab eshikkacha
-              </span>
-            </div>
-            <span className={styles.serviceStatusPill}>Bepul</span>
-          </div>
 
-          <div className={styles.serviceCardRow}>
-            <div className={`${styles.serviceIconPill} ${styles.serviceIconWarranty}`}>
-              <ShieldCheck size={18} strokeWidth={2} />
+            <div className={styles.serviceCardRow}>
+              <div className={`${styles.serviceIconBox} ${styles.serviceIconWarranty}`}>
+                <ShieldCheck size={17} strokeWidth={2} />
+              </div>
+              <div className={styles.serviceTextGroup}>
+                <span className={styles.serviceTitle}>1 yil rasmiy kafolat</span>
+                <span className={styles.serviceDesc}>
+                  Ishlab chiqaruvchi servis markazlarida to'liq xizmat
+                </span>
+              </div>
+              <span className={styles.serviceStatusPill}>Original</span>
             </div>
-            <div className={styles.serviceTextGroup}>
-              <span className={styles.serviceTitle}>1 yil rasmiy kafolat</span>
-              <span className={styles.serviceDesc}>
-                Ishlab chiqaruvchi servis markazlarida bepul xizmat
-              </span>
-            </div>
-            <span className={styles.serviceStatusPill}>Original</span>
-          </div>
 
-          <div className={styles.serviceCardRow}>
-            <div className={`${styles.serviceIconPill} ${styles.serviceIconReturn}`}>
-              <RotateCcw size={18} strokeWidth={2} />
+            <div className={styles.serviceCardRow}>
+              <div className={`${styles.serviceIconBox} ${styles.serviceIconReturn}`}>
+                <RotateCcw size={17} strokeWidth={2} />
+              </div>
+              <div className={styles.serviceTextGroup}>
+                <span className={styles.serviceTitle}>14 kun qaytarish kafolati</span>
+                <span className={styles.serviceDesc}>
+                  Mahsulot ma'qul kelmasa, tezkor va oson almashtirish
+                </span>
+              </div>
+              <span className={styles.serviceStatusPill}>Oson</span>
             </div>
-            <div className={styles.serviceTextGroup}>
-              <span className={styles.serviceTitle}>14 kun qaytarish kafolati</span>
-              <span className={styles.serviceDesc}>
-                Mahsulot ma'qul kelmasa, tezkor va oson almashtirish
-              </span>
-            </div>
-            <span className={styles.serviceStatusPill}>Oson</span>
           </div>
         </section>
       </main>
 
       {/* ============================================================
-          8. PASTKI QOTIRILGAN TUGMALAR (TENG 50% / 50%):
-          - Chapda: Home card dagi count stepper button bilan 1-ga 1 mos (50%)
-          - O'ngda: Home card dagi savatga button bilan 1-ga 1 mos (50%)
-          - Bosilganda radial suv to'lqini (Ripple) effekti
-          - Hover/Active va radiuslari to'liq sayt bilan uyg'un
+          8. PASTKI QOTIRILGAN TUGMALAR (TENG 50% / 50% BO'LINGAN!):
+          - media_1790917535726.png dagi kabi:
+            [ Add to cart 🛒 ] (50%)  |  [ Buy Now 🛍️ ] (50%)
+          - Savatda mahsulot bo'lsa: Card stepper [ - ] count [ + ] (50%)
+          - Savatda mahsulot bo'lmasa: Outline Savatga pill tugmasi (50%)
+          - O'ngda: Card savatga buttoni style da Rasmiylashtirish (50%)
           ============================================================ */}
       <footer className={styles.bottomBar}>
         <div className={styles.bottomBarContainer}>
-          {/* Chapdagi 50% boshqaruv: Home Card count stepper button bilan 1-ga 1 mos */}
-          <div className={styles.stepperWrapper}>
+          {/* Chapdagi 50% boshqaruv: Stepper (agar savatda bo'lsa) yoki Savatga pill tugma */}
+          {quantity > 0 ? (
+            <div
+              className={styles.stepperContainer}
+              role="group"
+              aria-label={`${product.title} miqdori`}
+            >
+              <button
+                type="button"
+                className={styles.stepperBtn}
+                onClick={handleDecrement}
+                aria-label="Bir dona kamaytirish"
+              >
+                <Minus size={15} strokeWidth={2.4} />
+                {decRipples.map((ripple) => (
+                  <span
+                    key={ripple.id}
+                    className={styles.stepperRipple}
+                    style={{
+                      left: `${ripple.x}px`,
+                      top: `${ripple.y}px`,
+                    }}
+                  />
+                ))}
+              </button>
+
+              <span className={styles.stepperCount} aria-live="polite">
+                {quantity}
+              </span>
+
+              <button
+                type="button"
+                className={styles.stepperBtn}
+                onClick={handleIncrement}
+                aria-label="Bir dona oshirish"
+              >
+                <Plus size={15} strokeWidth={2.4} />
+                {incRipples.map((ripple) => (
+                  <span
+                    key={ripple.id}
+                    className={styles.stepperRipple}
+                    style={{
+                      left: `${ripple.x}px`,
+                      top: `${ripple.y}px`,
+                    }}
+                  />
+                ))}
+              </button>
+            </div>
+          ) : (
             <button
               type="button"
-              className={styles.stepperBtn}
-              onClick={handleDecrement}
-              disabled={quantity === 0}
-              aria-label="Bir dona kamaytirish"
+              className={styles.addToCartOutlineBtn}
+              onClick={handleInitialAdd}
+              aria-label="Savatga qo'shish"
             >
-              <Minus size={15} strokeWidth={2.4} />
-              {decRipples.map((ripple) => (
+              <span className={styles.btnLabel}>Savatga</span>
+              <ShoppingCart size={17} strokeWidth={2} />
+              {cartBtnRipples.map((ripple) => (
                 <span
                   key={ripple.id}
-                  className={styles.stepperRipple}
+                  className={styles.buttonRippleDark}
                   style={{
                     left: `${ripple.x}px`,
                     top: `${ripple.y}px`,
@@ -427,44 +435,21 @@ const ProductDetailPage = ({ product, onBack }) => {
                 />
               ))}
             </button>
+          )}
 
-            <span className={styles.stepperCount} aria-live="polite">
-              {quantity}
-            </span>
-
-            <button
-              type="button"
-              className={styles.stepperBtn}
-              onClick={handleIncrement}
-              aria-label="Bir dona oshirish"
-            >
-              <Plus size={15} strokeWidth={2.4} />
-              {incRipples.map((ripple) => (
-                <span
-                  key={ripple.id}
-                  className={styles.stepperRipple}
-                  style={{
-                    left: `${ripple.x}px`,
-                    top: `${ripple.y}px`,
-                  }}
-                />
-              ))}
-            </button>
-          </div>
-
-          {/* O'ngdagi 50% boshqaruv: Home Card dagi savatga button style bilan 1-ga 1 mos */}
+          {/* O'ngdagi 50% boshqaruv: Card savatga tugmasi style dagi Rasmiylashtirish */}
           <button
             type="button"
             className={styles.checkoutBtn}
             onClick={handleCheckout}
             aria-label="Rasmiylashtirish"
           >
-            <ShoppingBag size={16} strokeWidth={2} />
-            <span className={styles.checkoutBtnLabel}>Rasmiylashtirish</span>
+            <span className={styles.btnLabel}>Rasmiylashtirish</span>
+            <ShoppingBag size={17} strokeWidth={2} />
             {checkoutRipples.map((ripple) => (
               <span
                 key={ripple.id}
-                className={styles.checkoutRipple}
+                className={styles.buttonRippleWhite}
                 style={{
                   left: `${ripple.x}px`,
                   top: `${ripple.y}px`,
