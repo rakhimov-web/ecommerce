@@ -9,6 +9,8 @@ import prodIpadAngle from "../assets/products/prod_ipad_angle.jpg";
 import prodIpadDisplay from "../assets/products/prod_ipad_display.jpg";
 import prodWatch from "../assets/products/prod_watch.jpg";
 import prodAirpods from "../assets/products/prod_airpods.jpg";
+import catWatch from "../assets/categories/apple-watch.png";
+import catAksessuarlar from "../assets/categories/aksessuarlar.png";
 
 export const productsData = [
   {
@@ -107,7 +109,7 @@ export const productsData = [
     oldPrice: 10800000,
     monthlyPrice: "999 000",
     image: prodWatch,
-    images: [prodWatch, prodWatch],
+    images: [prodWatch, catWatch, prodWatch],
     badge: "aksiya",
     category: "apple-watch",
     rating: 4.9,
@@ -135,7 +137,7 @@ export const productsData = [
     oldPrice: 3200000,
     monthlyPrice: "289 000",
     image: prodAirpods,
-    images: [prodAirpods, prodAirpods],
+    images: [prodAirpods, catAksessuarlar, prodAirpods],
     badge: "aksiya",
     category: "aksessuarlar",
     rating: 4.8,
@@ -249,7 +251,7 @@ export const productsData = [
     oldPrice: 5900000,
     monthlyPrice: "540 000",
     image: prodWatch,
-    images: [prodWatch, prodWatch],
+    images: [prodWatch, catWatch, prodWatch],
     badge: "aksiya",
     category: "apple-watch",
     rating: 4.8,
@@ -277,7 +279,7 @@ export const productsData = [
     oldPrice: 7400000,
     monthlyPrice: "680 000",
     image: prodAirpods,
-    images: [prodAirpods, prodAirpods],
+    images: [prodAirpods, catAksessuarlar, prodAirpods],
     badge: null,
     category: "aksessuarlar",
     rating: 4.6,
