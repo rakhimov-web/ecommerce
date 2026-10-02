@@ -29,6 +29,7 @@ const Home = ({
   isSplashFinished = false,
   onSearchClick,
   onCategoryClick,
+  onProductClick,
 }) => {
   const [loading, setLoading] = useState(!hasLoadedHomeOnce);
 
@@ -105,7 +106,7 @@ const Home = ({
               <CategoryGrid onCategoryClick={onCategoryClick} />
 
               {/* Tavsiya qilingan mahsulotlar (3/4 aspect ratio, 2 ustunli mobil panjara) */}
-              <ProductGrid />
+              <ProductGrid onProductClick={onProductClick} />
             </motion.div>
           )}
         </AnimatePresence>

@@ -1,15 +1,22 @@
-import { useState } from "react";
 import { Heart, Star, MessageSquare } from "lucide-react";
 import { formatPrice } from "../../data/products";
+import { useApp } from "../../context/useApp";
 import styles from "./searchProductCard.module.css";
 
-const SearchProductCard = ({ product }) => {
-  const [isLiked, setIsLiked] = useState(false);
+const SearchProductCard = ({ product, onProductClick }) => {
+  const { isLiked: checkIsLiked, toggleLike: handleToggleLikeContext } = useApp();
+  const isLiked = checkIsLiked(product.id);
 
   const toggleLike = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    setIsLiked((prev) => !prev);
+    handleToggleLikeContext(product.id);
+  };
+
+  const handleCardClick = () => {
+    if (onProductClick) {
+      onProductClick(product.id);
+    }
   };
 
   // Chegirma foizini hisoblash
@@ -19,7 +26,12 @@ const SearchProductCard = ({ product }) => {
       : null;
 
   return (
-    <article className={styles.card}>
+    <article
+      className={styles.card}
+      onClick={handleCardClick}
+      role={onProductClick ? "button" : undefined}
+      tabIndex={onProductClick ? 0 : undefined}
+    >
       {/* 3-ustunli ixcham rasm konteyneri */}
       <div className={styles.imageContainer}>
         {/* Aksiya yoki Yangi badge */}

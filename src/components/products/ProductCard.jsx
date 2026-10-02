@@ -6,7 +6,7 @@ import styles from "./productGrid.module.css";
 import { formatPrice } from "../../data/products";
 import { useApp } from "../../context/useApp";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, onProductClick }) => {
   const {
     getCartQuantity,
     addToCart,
@@ -98,8 +98,19 @@ const ProductCard = ({ product }) => {
     }, 600);
   };
 
+  const handleCardClick = () => {
+    if (onProductClick) {
+      onProductClick(product.id);
+    }
+  };
+
   return (
-    <article className={styles.card}>
+    <article
+      className={styles.card}
+      onClick={handleCardClick}
+      role={onProductClick ? "button" : undefined}
+      tabIndex={onProductClick ? 0 : undefined}
+    >
       {/* 3/4 rasm freymi - 1:1 dan balandroq, 2:3 kabi haddan tashqari uzun bo'lmagan optimal nisbat */}
       <div
         className={styles.imageContainer}

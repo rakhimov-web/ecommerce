@@ -60,7 +60,12 @@ const CATEGORIES = [
 // Dastlabki qidiruv tarixi
 const DEFAULT_RECENT = ["macbook"];
 
-const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
+const SearchPage = ({
+  onBack,
+  initialQuery = "",
+  isActive = false,
+  onProductClick,
+}) => {
   const [searchValue, setSearchValue] = useState(initialQuery);
   const [recentSearches, setRecentSearches] = useState(() => {
     try {
@@ -373,7 +378,11 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
               </div>
               <div className={styles.productGrid}>
                 {randomRecommended.map((product) => (
-                  <ProductCard key={product.id} product={product} />
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    onProductClick={onProductClick}
+                  />
                 ))}
               </div>
             </section>
@@ -401,7 +410,11 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
             {/* 3 talik emas, aynan Home pagedagi cardlar panjarasi */}
             <div className={styles.productGrid}>
               {filteredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onProductClick={onProductClick}
+                />
               ))}
             </div>
           </section>
