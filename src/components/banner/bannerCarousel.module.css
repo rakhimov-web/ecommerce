@@ -19,10 +19,6 @@
   width: 100%;
   cursor: grab;
   touch-action: pan-y;
-  will-change: transform;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 }
 
 .track:active {
@@ -43,10 +39,6 @@
   cursor: grab;
   -webkit-tap-highlight-color: transparent;
   transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity;
-  contain: paint;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 }
 
 .slideCard:active {
@@ -166,12 +158,6 @@
 .activeDot {
   width: 2.2rem;
   background-color: var(--primary);
-}
-
-@media (max-width: 768px) {
-  .bannerSection {
-    margin: 0 auto 2rem auto;
-  }
 }
 
 @media (max-width: 640px) {

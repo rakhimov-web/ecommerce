@@ -143,7 +143,6 @@ html {
   overflow-x: clip; /* Eniga scroll hosil qilmasdan ortiqcha elementlarni qirqadi */
   overscroll-behavior-y: none;
   overscroll-behavior: none;
-  -webkit-overflow-scrolling: touch;
 }
 
 body {
@@ -159,7 +158,6 @@ body {
   padding: 0;
   overscroll-behavior-y: none;
   overscroll-behavior: none;
-  -webkit-overflow-scrolling: touch;
   /* Native mobil ilovalardek tasodifiy matn tanlanib qolishini bloklash */
   user-select: none;
   -webkit-user-select: none;
