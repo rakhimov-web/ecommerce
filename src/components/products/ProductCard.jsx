@@ -165,69 +165,71 @@ const ProductCard = ({ product }) => {
           {product.description}
         </p>
 
-        {/* Savatga qo'shish yoki Miqdor boshqaruvi (Stepper — media_1790792345497.png) */}
-        {quantity > 0 ? (
-          <div
-            className={styles.stepperContainer}
-            onClick={(e) => e.stopPropagation()}
-            role="group"
-            aria-label={`${product.title} miqdori`}
-          >
-            <button
-              type="button"
-              className={styles.stepperBtn}
-              onClick={handleDecrement}
-              aria-label="Bir dona kamaytirish"
+        {/* Savatga qo'shish yoki Miqdor boshqaruvi (Balandlik va kenglik har doim 100% bir xil) */}
+        <div className={styles.actionContainer}>
+          {quantity > 0 ? (
+            <div
+              className={styles.stepperContainer}
+              onClick={(e) => e.stopPropagation()}
+              role="group"
+              aria-label={`${product.title} miqdori`}
             >
-              <Minus size={15} strokeWidth={2.4} />
-              {decRipples.map((ripple) => (
-                <span
-                  key={ripple.id}
-                  className={styles.stepperRipple}
-                  style={{
-                    left: `${ripple.x}px`,
-                    top: `${ripple.y}px`,
-                  }}
-                />
-              ))}
-            </button>
+              <button
+                type="button"
+                className={styles.stepperBtn}
+                onClick={handleDecrement}
+                aria-label="Bir dona kamaytirish"
+              >
+                <Minus size={15} strokeWidth={2.4} />
+                {decRipples.map((ripple) => (
+                  <span
+                    key={ripple.id}
+                    className={styles.stepperRipple}
+                    style={{
+                      left: `${ripple.x}px`,
+                      top: `${ripple.y}px`,
+                    }}
+                  />
+                ))}
+              </button>
 
-            <span className={styles.stepperCount} aria-live="polite">
-              {quantity}
-            </span>
+              <span className={styles.stepperCount} aria-live="polite">
+                {quantity}
+              </span>
 
-            <button
-              type="button"
-              className={styles.stepperBtn}
-              onClick={handleIncrement}
-              aria-label="Bir dona oshirish"
+              <button
+                type="button"
+                className={styles.stepperBtn}
+                onClick={handleIncrement}
+                aria-label="Bir dona oshirish"
+              >
+                <Plus size={15} strokeWidth={2.4} />
+                {incRipples.map((ripple) => (
+                  <span
+                    key={ripple.id}
+                    className={styles.stepperRipple}
+                    style={{
+                      left: `${ripple.x}px`,
+                      top: `${ripple.y}px`,
+                    }}
+                  />
+                ))}
+              </button>
+            </div>
+          ) : (
+            <Button
+              fullWidth
+              variant="primary"
+              isLoading={isAdding}
+              icon={<ShoppingCart size={16} strokeWidth={2} />}
+              onClick={handleInitialAddToCart}
+              aria-label={`${product.title}ni savatga qo'shish`}
+              className={styles.cartButton}
             >
-              <Plus size={15} strokeWidth={2.4} />
-              {incRipples.map((ripple) => (
-                <span
-                  key={ripple.id}
-                  className={styles.stepperRipple}
-                  style={{
-                    left: `${ripple.x}px`,
-                    top: `${ripple.y}px`,
-                  }}
-                />
-              ))}
-            </button>
-          </div>
-        ) : (
-          <Button
-            fullWidth
-            variant="primary"
-            isLoading={isAdding}
-            icon={<ShoppingCart size={16} strokeWidth={2} />}
-            onClick={handleInitialAddToCart}
-            aria-label={`${product.title}ni savatga qo'shish`}
-            className={styles.cartButton}
-          >
-            Savatga
-          </Button>
-        )}
+              Savatga
+            </Button>
+          )}
+        </div>
       </div>
     </article>
   );

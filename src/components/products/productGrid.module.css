@@ -193,15 +193,26 @@
   height: 3.3rem;
 }
 
-/* Savatga qo'shish tugmasi: Karta kengligi bilan teng (width: 100%) */
+/* Tugmalar joylashgan yagona ramka — Savatga va Stepper o'lchami har doim 100% teng bo'lishini va karta balandligi mutlaqo o'zgarmasligini kafolatlaydi */
+.actionContainer {
+  position: relative;
+  width: 100%;
+  height: 3.8rem;
+  margin-top: 0.6rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: stretch;
+}
+
+/* Savatga qo'shish tugmasi: Karta kengligi bilan teng (width: 100%, height: 100%) */
 .cartButton {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  width: 100%;
-  height: 3.8rem;
+  width: 100% !important;
+  height: 100% !important;
   background-color: var(--primary);
   color: var(--white);
   border: none;
@@ -212,7 +223,9 @@
   cursor: pointer;
   outline: none;
   overflow: hidden;
-  margin-top: 0.6rem;
+  margin: 0 !important;
+  padding: 0 1.2rem;
+  box-sizing: border-box;
   transform: none !important;
   box-shadow: none !important;
   transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -257,12 +270,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  height: 3.8rem;
+  width: 100% !important;
+  height: 100% !important;
   background-color: var(--surface-subtle);
   border-radius: 1.1rem;
   padding: 0.3rem;
-  margin-top: 0.6rem;
+  margin: 0 !important;
   box-sizing: border-box;
   user-select: none;
   -webkit-user-select: none;
@@ -466,6 +479,32 @@
     padding: 1rem 0.2rem 0.2rem 0.2rem;
     gap: 0.5rem;
   }
+
+  .actionContainer {
+    height: 3.6rem;
+  }
+
+  .cartButton {
+    height: 100% !important;
+    font-size: 1.2rem;
+    border-radius: 1rem;
+  }
+
+  .stepperContainer {
+    height: 100% !important;
+    border-radius: 1rem;
+    padding: 0.3rem;
+  }
+
+  .stepperBtn {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.8rem;
+  }
+
+  .stepperCount {
+    font-size: 1.38rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -510,14 +549,18 @@
     height: 3.2rem;
   }
 
-  .cartButton {
+  .actionContainer {
     height: 3.6rem;
+  }
+
+  .cartButton {
+    height: 100% !important;
     font-size: 1.2rem; /* 12px */
     border-radius: 1rem;
   }
 
   .stepperContainer {
-    height: 3.6rem;
+    height: 100% !important;
     border-radius: 1rem;
   }
 
@@ -570,13 +613,18 @@
     height: 3rem;
   }
 
-  .cartButton {
+  .actionContainer {
     height: 3.4rem;
+  }
+
+  .cartButton {
+    height: 100% !important;
     font-size: 1.15rem; /* 11.5px */
+    border-radius: 0.95rem;
   }
 
   .stepperContainer {
-    height: 3.4rem;
+    height: 100% !important;
     border-radius: 0.95rem;
   }
 
@@ -633,13 +681,18 @@
     height: 2.8rem;
   }
 
-  .cartButton {
+  .actionContainer {
     height: 3.4rem;
+  }
+
+  .cartButton {
+    height: 100% !important;
     font-size: 1.12rem;
+    border-radius: 0.95rem;
   }
 
   .stepperContainer {
-    height: 3.4rem;
+    height: 100% !important;
     border-radius: 0.95rem;
   }
 

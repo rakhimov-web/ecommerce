@@ -38,10 +38,11 @@ export const AppProvider = ({ children }) => {
     return [];
   });
 
-  // 3. Savatga qo'shilgandagi xabarnoma (Toast Alert) holati
+  // 3. Savatga qo'shilgandagi yoki yangilangandagi xabarnoma (Toast Alert) holati
   const [toast, setToast] = useState({
     visible: false,
-    message: "",
+    message: "Qo'shildi",
+    type: "cart",
     count: 1,
     id: 0,
   });
@@ -77,12 +78,15 @@ export const AppProvider = ({ children }) => {
 
   // Toast ko'rsatish: agar alert allaqachon ko'rinib turgan bo'lsa, uni yo'qotmasdan va ikkinchisini chiqarmasdan
   // mavjud alertning taymerini yangitdan boshlaydi
-  const showToast = useCallback((message = "Qo'shildi") => {
+  const showToast = useCallback((message = "Qo'shildi", type = "cart") => {
     setToast((prev) => {
       const isAlreadyVisible = prev.visible;
+      const toastType =
+        type === "refresh" || message === "Yangilandi" ? "refresh" : "cart";
       return {
         visible: true,
         message,
+        type: toastType,
         count: isAlreadyVisible ? prev.count + 1 : 1,
         id: Date.now(),
       };

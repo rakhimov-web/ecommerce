@@ -1,4 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { RotateCw } from "lucide-react";
 import { useApp } from "../../context/useApp";
 import styles from "./toastAlert.module.css";
 
@@ -30,14 +31,15 @@ const InstagramVerifiedBadge = ({ size = 18 }) => (
 
 const ToastAlert = () => {
   const { toast } = useApp();
+  const isRefresh = toast.type === "refresh";
 
   return (
     <div className={styles.toastContainer} aria-live="polite">
       <AnimatePresence>
         {toast.visible && (
           <motion.div
-            key="apple-dark-alert"
-            className={styles.alertPill}
+            key={`alert-${toast.id}`}
+            className={`${styles.alertPill} ${isRefresh ? styles.refreshPill : ""}`}
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{
@@ -50,19 +52,30 @@ const ToastAlert = () => {
               ease: [0.16, 1, 0.3, 1],
             }}
           >
-            {/* Instagram Verified Galochka belgisi */}
+            {/* Ikonka (Savat uchun Instagram badge, Refresh uchun RotateCw) */}
             <motion.span
               key={`icon-${toast.id}`}
               className={styles.iconWrapper}
-              initial={{ opacity: 0.6 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
+              initial={{ opacity: 0.6, rotate: isRefresh ? -120 : 0 }}
+              animate={{ opacity: 1, rotate: 0 }}
+              transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
             >
-              <InstagramVerifiedBadge size={19} />
+              {isRefresh ? (
+                <RotateCw
+                  size={17}
+                  stroke="var(--white)"
+                  strokeWidth={2.4}
+                  className={styles.refreshIcon}
+                />
+              ) : (
+                <InstagramVerifiedBadge size={19} />
+              )}
             </motion.span>
 
             {/* Oq rangdagi jiddiy va toza yozuv */}
-            <span className={styles.label}>Qo'shildi</span>
+            <span className={styles.label}>
+              {isRefresh ? "Yangilandi" : "Qo'shildi"}
+            </span>
           </motion.div>
         )}
       </AnimatePresence>

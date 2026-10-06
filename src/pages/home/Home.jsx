@@ -52,7 +52,7 @@ const Home = ({
       setLoading(false);
       setIsRefreshing(false);
       triggerHaptic("success");
-      showToast("Ma'lumotlar yangilandi");
+      showToast("Yangilandi", "refresh");
     }, 750);
 
     return () => clearTimeout(timer);
