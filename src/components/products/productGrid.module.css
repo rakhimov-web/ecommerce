@@ -433,6 +433,10 @@
     margin-bottom: 1.6rem;
   }
 
+  .sectionTitle {
+    font-size: 1.8rem;
+  }
+
   .grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
@@ -582,3 +586,67 @@
     font-size: 1.3rem;
   }
 }
+
+@media (max-width: 340px) {
+  .section {
+    padding: 0 1.2rem;
+    margin: 0 auto;
+  }
+
+  .sectionHeader {
+    margin-bottom: 1.2rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.6rem;
+  }
+
+  .grid {
+    gap: 1.2rem;
+  }
+
+  .badgeWrapper {
+    top: 0.6rem;
+    left: -0.35rem;
+  }
+
+  .ticketSvg {
+    width: 5rem;
+    height: 2rem;
+  }
+
+  .currentPrice {
+    font-size: 1.38rem;
+  }
+
+  .productTitle {
+    font-size: 1.24rem;
+  }
+
+  .productDescription {
+    font-size: 1.05rem;
+    height: 2.8rem;
+  }
+
+  .cartButton {
+    height: 3.4rem;
+    font-size: 1.12rem;
+  }
+
+  .stepperContainer {
+    height: 3.4rem;
+    border-radius: 0.95rem;
+  }
+
+  .stepperBtn {
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 0.7rem;
+  }
+
+  .stepperCount {
+    font-size: 1.25rem;
+    min-width: 2.2rem;
+  }
+}
+

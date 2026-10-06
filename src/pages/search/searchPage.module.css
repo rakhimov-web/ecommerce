@@ -424,22 +424,23 @@
   width: 100%;
 }
 
-/* Toza minimalist card (soyasiz) */
+/* Tabiiy, shaffof, erkin nafas oluvchi bo'shliq (border va ortiqcha card boxesiz) */
 .emptyCard {
-  background-color: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 1.8rem;
-  padding: 3.6rem 2rem;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 4.8rem 1.6rem 3.4rem 1.6rem;
   text-align: center;
-  margin-bottom: 2.8rem;
+  margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: none !important;
 }
 
 .vectorBox {
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.8rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -447,48 +448,25 @@
 
 .notFoundTitle {
   font-family: var(--font-primary);
-  font-size: var(--text-xl); /* 1.85rem - Home sectionTitle bilan bir xil */
+  font-size: var(--text-xl); /* 1.9rem - Home sectionTitle bilan bir xil */
   font-weight: 700;
   color: var(--black);
   margin: 0 0 0.8rem 0;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 .notFoundSubtitle {
   font-family: var(--font-primary);
   font-size: var(--text-base); /* 1.4rem */
   color: var(--gray);
-  max-width: 400px;
-  margin: 0 0 1.8rem 0;
+  max-width: 380px;
+  margin: 0 0 2.2rem 0;
   line-height: 1.5;
 }
 
-/* :active bo'lganda transform scale bo'lmaydi */
 .resetSearchBtn {
-  font-family: var(--font-primary);
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: var(--white);
-  background-color: var(--primary);
-  border: none;
-  border-radius: 1.1rem;
-  padding: 0.9rem 2.2rem;
-  cursor: pointer;
-  transition: background-color 0.15s ease;
-  outline: none;
-  transform: none !important;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.resetSearchBtn:active {
-  background-color: var(--primary-active);
-  transform: none !important;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .resetSearchBtn:hover {
-    background-color: var(--primary-hover);
-  }
+  min-width: 18rem;
+  margin: 0 auto;
 }
 
 /* ============================================================
@@ -651,16 +629,11 @@
   .notFoundSubtitle {
     font-size: 1.3rem;
   }
-
-  .resetSearchBtn {
-    font-size: 1.25rem;
-    padding: 0.8rem 1.8rem;
-  }
 }
 
 @media (max-width: 360px) {
   .headerContent {
-    padding: 0 1.4rem;
+    padding: 0 1.6rem;
     gap: 0.6rem;
     height: 100%;
   }
@@ -698,6 +671,46 @@
   }
 
   .recentText {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .headerContent {
+    padding: 0 1.2rem;
+    gap: 0.5rem;
+    height: 100%;
+  }
+
+  .backButton {
+    width: 3.4rem;
+    height: 3.4rem;
+  }
+
+  .mainContent {
+    padding: var(--content-gap-top) 1.2rem var(--content-gap-bottom) 1.2rem;
+  }
+
+  .productGrid {
+    gap: 1.2rem;
+  }
+
+  .sectionTitle,
+  .categorySectionTitle,
+  .notFoundTitle {
+    font-size: 1.6rem;
+  }
+
+  .sectionHeader,
+  .resultsHeaderRow {
+    margin-bottom: 1.2rem;
+  }
+
+  .recentTitle {
+    font-size: 1.35rem;
+  }
+
+  .categoryName {
     font-size: 1.25rem;
   }
 }

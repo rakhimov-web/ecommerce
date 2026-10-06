@@ -374,3 +374,28 @@
     height: 3.4rem;
   }
 }
+
+@media (max-width: 340px) {
+  .productSection {
+    padding: 0 1.2rem;
+    margin: 0 auto;
+  }
+
+  .productGrid {
+    gap: 1.2rem;
+  }
+
+  .gridContainer {
+    padding: 0 1.2rem;
+  }
+
+  .iconSkeleton {
+    width: 4.4rem;
+    height: 4.4rem;
+  }
+
+  .buttonSkeleton {
+    height: 3.4rem;
+  }
+}
+

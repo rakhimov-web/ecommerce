@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { ShoppingCart, Heart, Minus, Plus } from "lucide-react";
 import TicketBadge from "./TicketBadge";
 import SmoothImage from "../common/SmoothImage";
+import Button from "../common/Button";
 import styles from "./productGrid.module.css";
 import { formatPrice } from "../../data/products";
 import { useApp } from "../../context/useApp";
@@ -19,7 +20,6 @@ const ProductCard = ({ product }) => {
   const isLiked = checkIsLiked(product.id);
 
   const [isAdding, setIsAdding] = useState(false);
-  const [btnRipples, setBtnRipples] = useState([]);
   const [decRipples, setDecRipples] = useState([]);
   const [incRipples, setIncRipples] = useState([]);
   const [imgRipples, setImgRipples] = useState([]);
@@ -55,7 +55,6 @@ const ProductCard = ({ product }) => {
     e.stopPropagation();
     if (isAdding || quantity > 0) return;
 
-    createRipple(e, setBtnRipples);
     setIsAdding(true);
     setTimeout(() => {
       addToCart(product.id);
@@ -217,33 +216,17 @@ const ProductCard = ({ product }) => {
             </button>
           </div>
         ) : (
-          <button
-            type="button"
-            className={`${styles.cartButton} ${isAdding ? styles.loadingButton : ""}`}
+          <Button
+            fullWidth
+            variant="primary"
+            isLoading={isAdding}
+            icon={<ShoppingCart size={16} strokeWidth={2} />}
             onClick={handleInitialAddToCart}
             aria-label={`${product.title}ni savatga qo'shish`}
-            disabled={isAdding}
+            className={styles.cartButton}
           >
-            {isAdding ? (
-              <span className={styles.buttonSpinner} />
-            ) : (
-              <>
-                <ShoppingCart size={16} strokeWidth={2} />
-                <span>Savatga</span>
-              </>
-            )}
-            {btnRipples.map((ripple) => (
-              <span
-                key={ripple.id}
-                className={styles.buttonRipple}
-                style={{
-                  left: `${ripple.x}px`,
-                  top: `${ripple.y}px`,
-                }}
-              />
-            ))}
-            <div className={styles.pressHighlight} />
-          </button>
+            Savatga
+          </Button>
         )}
       </div>
     </article>

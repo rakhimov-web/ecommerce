@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, X, ChevronRight, Zap } from "lucide-react";
 import { productsData, formatPrice } from "../../data/products";
 import EmptyStateVector from "./EmptyStateVector";
+import Button from "../common/Button";
 import styles from "./appSearchModal.module.css";
 
 import telefonImg from "../../assets/categories/telefon.png";
@@ -274,8 +275,8 @@ const AppSearchModal = ({ isOpen, onClose }) => {
                     "{query}" so'rovi bo'yicha hech qanday natija topilmadi.
                     Qidiruv so'zini tekshiring yoki toifalardan birini tanlang.
                   </p>
-                  <button
-                    type="button"
+                  <Button
+                    variant="primary"
                     onClick={() => {
                       setQuery("");
                       inputRef.current?.focus();
@@ -283,7 +284,7 @@ const AppSearchModal = ({ isOpen, onClose }) => {
                     className={styles.resetBtn}
                   >
                     Qidiruvni tozalash
-                  </button>
+                  </Button>
                 </div>
               )}
             </div>

@@ -4,6 +4,7 @@ import { productsData } from "../../data/products";
 import ProductCard from "../../components/products/ProductCard";
 import EmptyStateVector from "../../components/search/EmptyStateVector";
 import SmoothImage from "../../components/common/SmoothImage";
+import Button from "../../components/common/Button";
 import styles from "./searchPage.module.css";
 
 // 5 ta asosiy toifa ikonkalari
@@ -354,13 +355,13 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
                 Qidiruv so‘zini tekshirib ko‘ring yoki toifalardan birini
                 tanlang.
               </p>
-              <button
-                type="button"
+              <Button
+                variant="primary"
                 onClick={handleClearInput}
                 className={styles.resetSearchBtn}
               >
                 Qidiruvni tozalash
-              </button>
+              </Button>
             </section>
 
             {/* Tavsiya etamiz: Home pagedagi 2-ustunli cardlar tasodifiy (randomly) tartibda */}

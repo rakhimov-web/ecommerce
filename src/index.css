@@ -116,6 +116,15 @@
   }
 }
 
+@media (max-width: 340px) {
+  :root {
+    --header-height: 5.4rem; /* 54px ultra-kichik mobil */
+    --menu-height: 5rem; /* 50px ultra-kichik mobil */
+    --content-gap-top: 1.2rem; /* 12px ultra-kichik mobil */
+    --content-gap-bottom: 2.8rem; /* 28px ultra-kichik mobil */
+  }
+}
+
 /* ========================================
    RESET & NATIVE MOBILE APP OPTIMIZATIONS
    ======================================== */

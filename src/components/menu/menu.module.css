@@ -226,6 +226,36 @@
   }
 }
 
+@media (max-width: 340px) {
+  .menu {
+    height: 5rem;
+  }
+
+  .topIndicatorLine {
+    width: 16px;
+    height: 2px;
+  }
+
+  .iconContainer {
+    width: 38px;
+    height: 24px;
+  }
+
+  .pillShapeBox {
+    width: 38px;
+    height: 24px;
+  }
+
+  .label {
+    font-size: 0.96rem;
+  }
+
+  .pillLabelSpacer {
+    font-size: 0.96rem;
+  }
+}
+
+
 /* Tablet va Katta ekranlar (Desktop/Laptop) uchun zamonaviy suzuvchi Tab Bar (Floating Pill) */
 @media (min-width: 768px) {
   .cover {
