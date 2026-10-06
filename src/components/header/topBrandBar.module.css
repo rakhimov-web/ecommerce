@@ -60,17 +60,17 @@
 }
 
 .logoSvg {
-  height: 2.3rem; /* 23px desktop: aspect ratio 5.026 bo'yicha width = ~115px */
+  height: 2.8rem; /* 28px desktop: aspect ratio 5.026 bo'yicha width = ~140px */
   width: auto;
-  max-width: 125px;
+  max-width: 150px;
   object-fit: contain;
   display: block;
 }
 
 @media (max-width: 768px) {
   .logoSvg {
-    height: 2.1rem; /* 21px mobil: width = ~105px */
-    max-width: 115px;
+    height: 2.7rem; /* 27px mobil: Telegram 36-40px buttonlari orasida optimal hajm, tepa va pastdan 14.5px teng masofada */
+    max-width: 140px;
   }
 }
 
@@ -80,14 +80,14 @@
   }
 
   .logoSvg {
-    height: 1.95rem; /* 19.5px kichik mobil: width = ~98px */
-    max-width: 105px;
+    height: 2.5rem; /* 25px kichik mobil: width = ~125px */
+    max-width: 130px;
   }
 }
 
 @media (max-width: 340px) {
   .logoSvg {
-    height: 1.85rem; /* 18.5px ultra-kichik mobil: width = ~93px */
-    max-width: 98px;
+    height: 2.4rem; /* 24px ultra-kichik mobil: width = ~120px */
+    max-width: 122px;
   }
 }

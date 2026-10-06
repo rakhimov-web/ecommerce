@@ -47,6 +47,30 @@ export const enableDevBrowserMode = () => {
   window.location.reload();
 };
 
+// Safe area insets (Telegram ekrani qirralari va native fullscreen tugmalari) ni CSS ga uzatish
+export const updateTelegramSafeArea = () => {
+  const tg = getTelegramWebApp();
+  if (!tg || typeof document === "undefined") return;
+
+  try {
+    const safeTop = tg.safeAreaInset?.top ?? 0;
+    const safeBottom = tg.safeAreaInset?.bottom ?? 0;
+    const contentSafeTop = tg.contentSafeAreaInset?.top ?? 0;
+
+    if (safeTop > 0) {
+      document.documentElement.style.setProperty("--tg-safe-top", `${safeTop}px`);
+    }
+    if (safeBottom > 0) {
+      document.documentElement.style.setProperty("--tg-safe-bottom", `${safeBottom}px`);
+    }
+    if (contentSafeTop > 0) {
+      document.documentElement.style.setProperty("--tg-content-safe-top", `${contentSafeTop}px`);
+    }
+  } catch (err) {
+    console.warn("updateTelegramSafeArea xatosi:", err);
+  }
+};
+
 // Telegram Mini App ni to'liq ishga tushirish va sozlash
 export const initTelegramApp = () => {
   const tg = getTelegramWebApp();
@@ -72,6 +96,7 @@ export const initTelegramApp = () => {
         if (typeof tg.requestFullscreen === "function" && !tg.isFullscreen) {
           try {
             tg.requestFullscreen();
+            updateTelegramSafeArea();
           } catch {}
         }
       };
@@ -106,16 +131,14 @@ export const initTelegramApp = () => {
       tg.enableClosingConfirmation();
     }
 
-    // 7. Safe area insets (Telegram ekrani qirralari) ni CSS ga ulash
-    if (tg.safeAreaInset) {
-      document.documentElement.style.setProperty(
-        "--tg-safe-top",
-        `${tg.safeAreaInset.top}px`
-      );
-      document.documentElement.style.setProperty(
-        "--tg-safe-bottom",
-        `${tg.safeAreaInset.bottom}px`
-      );
+    // 7. Safe area insets (Telegram ekrani qirralari) ni CSS ga ulash va hodisalarni tinglash
+    updateTelegramSafeArea();
+
+    if (typeof tg.onEvent === "function") {
+      tg.onEvent("safeAreaChanged", updateTelegramSafeArea);
+      tg.onEvent("contentSafeAreaChanged", updateTelegramSafeArea);
+      tg.onEvent("fullscreenChanged", updateTelegramSafeArea);
+      tg.onEvent("viewportChanged", updateTelegramSafeArea);
     }
   } catch (err) {
     console.warn("Telegram WebApp init xatosi:", err);
@@ -130,9 +153,11 @@ export const requestTelegramFullscreen = () => {
   try {
     if (typeof tg.requestFullscreen === "function") {
       tg.requestFullscreen();
+      updateTelegramSafeArea();
       return true;
     } else if (typeof tg.expand === "function") {
       tg.expand();
+      updateTelegramSafeArea();
       return true;
     }
   } catch (err) {

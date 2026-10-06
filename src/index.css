@@ -118,11 +118,17 @@
   --touch-target: 4.4rem; /* 44px - Apple HIG minimal sensor bosish maydoni */
 
   /* ========================================
+     SAFE AREA INSETS (TELEGRAM 8.0+ FULLSCREEN & HARDWARE NOTCH)
+     ======================================== */
+  --safe-area-top: max(env(safe-area-inset-top, 0px), var(--tg-safe-top, 0px));
+  --safe-area-bottom: max(env(safe-area-inset-bottom, 0px), var(--tg-safe-bottom, 0px));
+
+  /* ========================================
      UNIFIED APP LAYOUT CONSTANTS (PIXEL MATCHED)
      ======================================== */
-  --top-bar-height: 5.8rem; /* 58px desktop: 55px-60px oralig'idagi ixcham markaziy logo qatori */
+  --top-bar-height: 5.6rem; /* 56px: Telegram fullscreen da Back va More tugmalari orasidagi nativ qator balandligi */
   --header-content-height: 6.4rem; /* 64px desktop: Asl qidiruv va tugmalar qatori (o'lchamlari va paddinglari 100% o'zgarmas) */
-  --header-height: calc(var(--top-bar-height) + var(--header-content-height) + env(safe-area-inset-top, 0px));
+  --header-height: calc(var(--top-bar-height) + var(--header-content-height) + var(--safe-area-top));
 
   --menu-height: 5.6rem; /* 56px desktop va mobil */
   --content-gap-top: 1.8rem; /* 18px desktop - Apple uslubida nafas oluvchi bo'shliq */
@@ -131,9 +137,9 @@
 
 @media (max-width: 768px) {
   :root {
-    --top-bar-height: 5.6rem; /* 56px mobil: 55px-60px oralig'idagi ixcham logo balandligi */
+    --top-bar-height: 5.6rem; /* 56px mobil: Telegram nativ navigation bar balandligiga (56px) 100% mos */
     --header-content-height: 6rem; /* 60px mobil: Asl qidiruv va tugmalar qatori (padding va hajmlari o'zgarmaydi) */
-    --header-height: calc(var(--top-bar-height) + var(--header-content-height) + env(safe-area-inset-top, 0px));
+    --header-height: calc(var(--top-bar-height) + var(--header-content-height) + var(--safe-area-top));
     --content-gap-top: 1.6rem; /* 16px mobil */
     --content-gap-bottom: 3.8rem; /* 38px mobil */
   }
@@ -141,9 +147,9 @@
 
 @media (max-width: 360px) {
   :root {
-    --top-bar-height: 5.5rem; /* 55px kichik mobil */
+    --top-bar-height: 5.4rem; /* 54px kichik mobil */
     --header-content-height: 5.6rem; /* 56px kichik mobil: Asl qidiruv qatori */
-    --header-height: calc(var(--top-bar-height) + var(--header-content-height) + env(safe-area-inset-top, 0px));
+    --header-height: calc(var(--top-bar-height) + var(--header-content-height) + var(--safe-area-top));
     --menu-height: 5.2rem; /* 52px kichik mobil */
     --content-gap-top: 1.4rem; /* 14px kichik mobil */
     --content-gap-bottom: 3.2rem; /* 32px kichik mobil */
@@ -152,9 +158,9 @@
 
 @media (max-width: 340px) {
   :root {
-    --top-bar-height: 5.5rem; /* 55px ultra-kichik mobil */
+    --top-bar-height: 5.2rem; /* 52px ultra-kichik mobil */
     --header-content-height: 5.4rem; /* 54px ultra-kichik mobil: Asl qidiruv qatori */
-    --header-height: calc(var(--top-bar-height) + var(--header-content-height) + env(safe-area-inset-top, 0px));
+    --header-height: calc(var(--top-bar-height) + var(--header-content-height) + var(--safe-area-top));
     --menu-height: 5rem; /* 50px ultra-kichik mobil */
     --content-gap-top: 1.2rem; /* 12px ultra-kichik mobil */
     --content-gap-bottom: 2.8rem; /* 28px ultra-kichik mobil */

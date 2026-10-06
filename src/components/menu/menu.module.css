@@ -20,7 +20,7 @@
   background-color: var(--white);
   border-top: 1px solid var(--border);
   height: var(--menu-height);
-  padding: 0 0 env(safe-area-inset-bottom, 0px);
+  padding: 0 0 var(--safe-area-bottom);
   border-radius: 0;
 }
 

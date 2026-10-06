@@ -3,7 +3,7 @@
   min-height: 100vh;
   background-color: var(--background);
   padding-top: var(--header-height);
-  padding-bottom: calc(var(--menu-height) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(var(--menu-height) + var(--safe-area-bottom));
   font-family: var(--font-primary);
   user-select: none;
   -webkit-user-select: none;
@@ -20,7 +20,7 @@
   right: 0;
   width: 100%;
   height: var(--header-height);
-  padding-top: env(safe-area-inset-top, 0px);
+  padding-top: var(--safe-area-top);
   box-sizing: border-box;
   z-index: 1000;
   background-color: var(--white);
