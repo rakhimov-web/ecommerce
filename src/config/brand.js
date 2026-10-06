@@ -6,9 +6,9 @@
  */
 export const BRAND_CONFIG = {
   // Asosiy brend nomi (meta title va Telegram mini app-da ishlatiladi)
-  name: "NOVA",
+  name: "STORE",
   tagline: "E-Commerce",
-  shortTitle: "Nova",
+  shortTitle: "Store",
 
   // Do'kon tavsifi (SEO va Telegram Browser Gate uchun)
   description:

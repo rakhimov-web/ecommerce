@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Search, Heart, RotateCw, X } from "lucide-react";
 import NotificationBadge from "../common/NotificationBadge";
 import { useApp } from "../../context/useApp";
-import { BRAND_CONFIG } from "../../config/brand";
 import styles from "./header.module.css";
 
 const Header = ({
@@ -27,39 +26,17 @@ const Header = ({
     }
   };
 
-  const handleLogoClick = () => {
-    if (typeof window !== "undefined") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
-
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        {/* Yuqori brend logo qatori (Telegram Fullscreen da markazlashgan professional logo) */}
-        <div className={styles.topLogoRow}>
-          <div
-            className={styles.brandLogo}
-            onClick={handleLogoClick}
-            role="button"
-            tabIndex={0}
-            aria-label={`${BRAND_CONFIG.name} do'koni`}
-          >
-            <span className={styles.brandName}>{BRAND_CONFIG.name}</span>
-            <span className={styles.brandDot} />
-          </div>
-        </div>
-
-        {/* Qidiruv maydoni va harakatlar tugmalari qatori */}
-        <div className={styles.actionRow}>
-          {/* Qidiruv maydoni (bosilganda to'g'ridan-to'g'ri SearchPage ga o'tadi) */}
-          <div
-            className={styles.searchBox}
-            onClick={handleSearchBoxClick}
-            role="button"
-            tabIndex={0}
-            style={{ cursor: "pointer" }}
-          >
+        {/* Qidiruv maydoni (bosilganda to'g'ridan-to'g'ri SearchPage ga o'tadi) */}
+        <div
+          className={styles.searchBox}
+          onClick={handleSearchBoxClick}
+          role="button"
+          tabIndex={0}
+          style={{ cursor: "pointer" }}
+        >
           <Search size={18} className={styles.searchIcon} />
           <input
             type="text"
@@ -113,8 +90,7 @@ const Header = ({
           </button>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
   );
 };
 
