@@ -59,12 +59,38 @@ export const initTelegramApp = () => {
     // 2. Ilovani butun ekran bo'ylab kengaytirish
     tg.expand();
 
-    // 3. Telegram 7.7+ vertikal tortib tasodifiy yopilib ketishining oldini olish (Swipe-to-close blocking)
+    // 3. Telegram 8.0+ Native Fullscreen rejimini so'rash (To'liq nativ ilovadek ochilishi uchun)
+    if (typeof tg.requestFullscreen === "function") {
+      try {
+        tg.requestFullscreen();
+      } catch (fsErr) {
+        console.warn("Telegram requestFullscreen xatosi:", fsErr);
+      }
+
+      // Ba'zi mobil Telegram mijozlarida birinchi sensor/bosish orqali ham fullscreen kafolati
+      const handleFirstInteraction = () => {
+        if (typeof tg.requestFullscreen === "function" && !tg.isFullscreen) {
+          try {
+            tg.requestFullscreen();
+          } catch {}
+        }
+      };
+      window.addEventListener("touchstart", handleFirstInteraction, {
+        passive: true,
+        once: true,
+      });
+      window.addEventListener("click", handleFirstInteraction, {
+        passive: true,
+        once: true,
+      });
+    }
+
+    // 4. Telegram 7.7+ vertikal tortib tasodifiy yopilib ketishining oldini olish (Swipe-to-close blocking)
     if (tg.disableVerticalSwipes) {
       tg.disableVerticalSwipes();
     }
 
-    // 4. Telegram sarlavhasi va foni ranglarini sayt dizayniga moslashtirish
+    // 5. Telegram sarlavhasi va foni ranglarini sayt dizayniga moslashtirish
     if (tg.setHeaderColor) {
       tg.setHeaderColor("#ffffff");
     }
@@ -75,12 +101,12 @@ export const initTelegramApp = () => {
       tg.setBottomBarColor("#ffffff");
     }
 
-    // 5. Tasodifiy yopilishlarni oldini olish
+    // 6. Tasodifiy yopilishlarni oldini olish
     if (tg.enableClosingConfirmation) {
       tg.enableClosingConfirmation();
     }
 
-    // 6. Safe area insets (Telegram ekrani qirralari) ni CSS ga ulash
+    // 7. Safe area insets (Telegram ekrani qirralari) ni CSS ga ulash
     if (tg.safeAreaInset) {
       document.documentElement.style.setProperty(
         "--tg-safe-top",
@@ -94,6 +120,47 @@ export const initTelegramApp = () => {
   } catch (err) {
     console.warn("Telegram WebApp init xatosi:", err);
   }
+};
+
+// Telegram 8.0+ to'liq ekran (Fullscreen) rejimini so'rash yordamchisi
+export const requestTelegramFullscreen = () => {
+  const tg = getTelegramWebApp();
+  if (!tg) return false;
+
+  try {
+    if (typeof tg.requestFullscreen === "function") {
+      tg.requestFullscreen();
+      return true;
+    } else if (typeof tg.expand === "function") {
+      tg.expand();
+      return true;
+    }
+  } catch (err) {
+    console.warn("Telegram requestFullscreen xatosi:", err);
+  }
+  return false;
+};
+
+// Fullscreen holatini tekshirish
+export const isTelegramFullscreen = () => {
+  const tg = getTelegramWebApp();
+  return Boolean(tg && tg.isFullscreen);
+};
+
+// Fullscreen dan chiqish
+export const exitTelegramFullscreen = () => {
+  const tg = getTelegramWebApp();
+  if (!tg) return false;
+
+  try {
+    if (typeof tg.exitFullscreen === "function") {
+      tg.exitFullscreen();
+      return true;
+    }
+  } catch (err) {
+    console.warn("Telegram exitFullscreen xatosi:", err);
+  }
+  return false;
 };
 
 // Taktil tebranishlar (Haptic Feedback) - Mobil Telegramda jonli his qilish uchun
