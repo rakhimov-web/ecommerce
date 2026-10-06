@@ -25,7 +25,7 @@
   visibility: hidden;
 }
 
-/* Markaziy logo zonasi: 100px balandlikda X va Y bo'yicha mutlaq geometrik markazda turadi */
+/* Markaziy logo zonasi: 55px-60px balandlikda X va Y bo'yicha mutlaq geometrik markazda turadi */
 .logoCenter {
   position: absolute;
   left: 50%;
@@ -44,28 +44,33 @@
   justify-content: center;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  transition: opacity 0.15s ease, transform 0.15s ease;
   user-select: none;
-  padding: 0.6rem 1rem;
+  padding: 0;
+  background: transparent;
+  border: none;
+  outline: none;
 }
 
-.brandLogo:active {
-  opacity: 0.72;
-  transform: scale(0.97);
+.brandLogo:hover,
+.brandLogo:active,
+.brandLogo:focus {
+  opacity: 1;
+  transform: none;
+  background: transparent;
 }
 
 .logoSvg {
-  height: 3.2rem; /* 32px desktop: aspect ratio 5.026 bo'yicha width = ~160px */
+  height: 2.3rem; /* 23px desktop: aspect ratio 5.026 bo'yicha width = ~115px */
   width: auto;
-  max-width: 170px;
+  max-width: 125px;
   object-fit: contain;
   display: block;
 }
 
 @media (max-width: 768px) {
   .logoSvg {
-    height: 3.0rem; /* 30px mobil: width = ~150px */
-    max-width: 160px;
+    height: 2.1rem; /* 21px mobil: width = ~105px */
+    max-width: 115px;
   }
 }
 
@@ -75,14 +80,14 @@
   }
 
   .logoSvg {
-    height: 2.7rem; /* 27px kichik mobil: width = ~135px */
-    max-width: 145px;
+    height: 1.95rem; /* 19.5px kichik mobil: width = ~98px */
+    max-width: 105px;
   }
 }
 
 @media (max-width: 340px) {
   .logoSvg {
-    height: 2.5rem; /* 25px ultra-kichik mobil: width = ~125px */
-    max-width: 130px;
+    height: 1.85rem; /* 18.5px ultra-kichik mobil: width = ~93px */
+    max-width: 98px;
   }
 }
