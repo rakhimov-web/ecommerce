@@ -23,12 +23,15 @@ import prodIpad from "../../assets/products/prod_ipad.jpg";
 import prodWatch from "../../assets/products/prod_watch.jpg";
 import prodAirpods from "../../assets/products/prod_airpods.jpg";
 
+// Sayt birinchi marta ochilganda yoki sahifa yangilanganda skeleton ko'rsatiladi
+let hasLoadedHomeOnce = false;
+
 const Home = ({
   isActive = true,
   onSearchClick,
   onCategoryClick,
 }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(!hasLoadedHomeOnce);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const { showToast } = useApp();
 
@@ -77,6 +80,16 @@ const Home = ({
         img.decode().catch(() => {});
       }
     });
+
+    // Sayt ochilganda / sahifa qayta yuklanganda skeleton loader ko'rsatiladi
+    if (!hasLoadedHomeOnce) {
+      const timer = setTimeout(() => {
+        hasLoadedHomeOnce = true;
+        setLoading(false);
+      }, 700);
+
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   return (
@@ -107,9 +120,9 @@ const Home = ({
           ) : (
             <motion.div
               key="content-view"
-              initial={false}
+              initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.25, ease: [0.2, 0.8, 0.2, 1] }}
+              transition={{ duration: 0.3, ease: [0.2, 0.8, 0.2, 1] }}
             >
               {/* Yuqori cheksiz banner */}
               <BannerCarousel
