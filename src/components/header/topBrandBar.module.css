@@ -25,11 +25,11 @@
   visibility: hidden;
 }
 
-/* Markaziy logo zonasi: X bo'yicha markazda va yuqoriroqda turadi */
+/* Markaziy logo zonasi: Telegram tugmalari bilan X va Y bo'yicha mukammal markazda */
 .logoCenter {
   position: absolute;
   left: 50%;
-  top: calc(50% - 4px);
+  top: 50%;
   transform: translate(-50%, -50%);
   display: flex;
   align-items: center;

@@ -53,15 +53,15 @@
   transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Fokuslangan / active holat: Apple Store kabi nafis ko'k chegara va yorug' fon */
+/* Fokuslangan / active holat: Nozik va tabiiy (ko'k effektlarsiz, oq fon va nozik neytral chegara) */
 .searchBox:focus-within {
-  border-color: rgba(0, 85, 255, 0.25);
-  box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.08);
+  border-color: var(--border);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
   background-color: var(--white);
 }
 
 .searchBox:focus-within .searchIcon {
-  color: var(--primary);
+  color: var(--black);
 }
 
 .searchIcon {
@@ -80,7 +80,7 @@
   font-family: var(--font-primary);
   font-size: var(--text-base); /* 1.4rem (14px) */
   color: var(--black);
-  caret-color: var(--primary);
+  caret-color: var(--black);
 }
 
 .searchInput::placeholder {
