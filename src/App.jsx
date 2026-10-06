@@ -1,9 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import Home from "./pages/home/Home";
 import SearchPage from "./pages/search/SearchPage";
 import Menu from "./components/menu/Menu";
-import BrandSplashLoader from "./components/loader/BrandSplashLoader";
 import ToastAlert from "./components/common/ToastAlert";
 import { AppProvider } from "./context/AppContext";
 import { initTelegramApp, syncTelegramBackButton } from "./lib/telegram";
@@ -28,10 +26,8 @@ const getSearchQueryFromUrl = () => {
 };
 
 const AppContent = () => {
-  // Sayt har safar yangilanganda (refresh) to'g'ridan-to'g'ri Home sahifasidan va Brand Loader bilan ochiladi
   const [currentPage, setCurrentPage] = useState("home");
   const [searchQuery, setSearchQuery] = useState("");
-  const [isSplashActive, setIsSplashActive] = useState(true);
   const [activeTab, setActiveTab] = useState(0);
 
   // Sahifa yangilanganda URL ni tozalash, scrollni 0 ga surish va Telegram xususiyatlarini tayyorlash
@@ -68,7 +64,6 @@ const AppContent = () => {
   // Search sahifasiga o'tish (route /search yoki /search?q=... ga o'zgaradi)
   const handleGoToSearch = useCallback(
     (query = "") => {
-      // Agar allaqachon Qidiruvda bo'lsa va tab yana bosilsa -> tepaga silliq qaytish
       if (currentPage === "search" && !query) {
         window.scrollTo({ top: 0, behavior: "smooth" });
         return;
@@ -99,7 +94,6 @@ const AppContent = () => {
       setCurrentPage("search");
       setActiveTab(1);
 
-      // Agar kategoriya bosilgan bo'lsa tepadan ochiladi, tab bosilganda saqlangan joyiga qaytadi
       const targetY = trimmed ? 0 : scrollPositions.current.search || 0;
       requestAnimationFrame(() => {
         window.scrollTo({ top: targetY, behavior: "instant" });
@@ -110,7 +104,6 @@ const AppContent = () => {
 
   // Home sahifasiga qaytish (route / ga o'zgaradi)
   const handleGoToHome = useCallback(() => {
-    // Agar foydalanuvchi allaqachon Homeda bo'lsa va tabni qayta bossa -> smooth scroll tepaga
     if (currentPage === "home") {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
@@ -127,7 +120,6 @@ const AppContent = () => {
     setSearchQuery("");
     setActiveTab(0);
 
-    // Home sahifasidagi oldingi scroll joyini tiklash
     const targetY = scrollPositions.current.home || 0;
     requestAnimationFrame(() => {
       window.scrollTo({ top: targetY, behavior: "instant" });
@@ -165,41 +157,21 @@ const AppContent = () => {
   return (
     <div className="appContainer">
       {/*
-        Lottie sifatidagi yuqori darajadagi brend animatsiyali SVG loader
-        Har bir sayt ochilishida va refresh bo'lganda ko'rinadi
+        Bosh sahifa (Home) doimo DOM-da saqlanadi — hech qanday splash delaylarsiz, darhol ochiladi
       */}
-      <AnimatePresence>
-        {isSplashActive && (
-          <BrandSplashLoader
-            key="brand-splash-loader"
-            onComplete={() => setIsSplashActive(false)}
-          />
-        )}
-      </AnimatePresence>
-
-      {/*
-        Bosh sahifa (Home) doimo DOM-da saqlanadi:
-        Splash tugagach, ma'lumotlar kelgunicha Skeleton loader ko'rinadi,
-        so'ng haqiqiy kontent namoyon bo'ladi.
-      */}
-      <motion.div
+      <div
         className={`pageWrapper ${isHomeActive ? "pageFade" : ""}`}
         style={{ display: isHomeActive ? "block" : "none" }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isSplashActive ? 0 : 1 }}
-        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
       >
         <Home
           isActive={isHomeActive}
-          isSplashFinished={!isSplashActive}
           onSearchClick={() => handleGoToSearch("")}
           onCategoryClick={(catTitle) => handleGoToSearch(catTitle)}
         />
-      </motion.div>
+      </div>
 
       {/*
-        Professional Qidiruv Sahifasi (SearchPage):
-        Jahon darajasidagi e-commerce ilovalari (Apple, Uzum) standartida yaratilgan.
+        Professional Qidiruv Sahifasi (SearchPage)
       */}
       <div
         className={`pageWrapper ${currentPage === "search" ? "pageFade" : ""}`}
@@ -212,10 +184,10 @@ const AppContent = () => {
         />
       </div>
 
-      {/* Suzuvchi savatcha bildirishnomasi (Toast Alert — barmoq bilan surib yopish imkoniyati bilan) */}
+      {/* Suzuvchi savatcha bildirishnomasi */}
       <ToastAlert />
 
-      {/* Pastki navigatsiya menyusi — indicator silliq siljiydi */}
+      {/* Pastki navigatsiya menyusi — har doim o'zining barqaror o'rnida */}
       <Menu active={activeTab} onTabChange={handleTabChange} />
     </div>
   );

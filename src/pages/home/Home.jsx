@@ -23,16 +23,12 @@ import prodIpad from "../../assets/products/prod_ipad.jpg";
 import prodWatch from "../../assets/products/prod_watch.jpg";
 import prodAirpods from "../../assets/products/prod_airpods.jpg";
 
-// Birinchi marta sayt ochilganda yuklanish bayrog'i (keyingi sahifalar almashishida skeleton takrorlanmaydi)
-let hasLoadedHomeOnce = false;
-
 const Home = ({
   isActive = true,
-  isSplashFinished = false,
   onSearchClick,
   onCategoryClick,
 }) => {
-  const [loading, setLoading] = useState(!hasLoadedHomeOnce);
+  const [loading, setLoading] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const { showToast } = useApp();
 
@@ -59,8 +55,6 @@ const Home = ({
   }, [loading, isRefreshing, showToast]);
 
   useEffect(() => {
-    if (hasLoadedHomeOnce || !isSplashFinished) return;
-
     // Rasmlarni orqa fonda oldindan GPU xotirasiga dekodlab yuklash (pre-cache)
     const imagesToPreload = [
       bannerImg,
@@ -83,15 +77,7 @@ const Home = ({
         img.decode().catch(() => {});
       }
     });
-
-    // Splash tugagach, ma'lumotlar kelgunicha chiroyli skeleton loader ko'rsatiladi
-    const timer = setTimeout(() => {
-      hasLoadedHomeOnce = true;
-      setLoading(false);
-    }, 850);
-
-    return () => clearTimeout(timer);
-  }, [isSplashFinished]);
+  }, []);
 
   return (
     <div className={styles.homeContainer}>
@@ -121,9 +107,9 @@ const Home = ({
           ) : (
             <motion.div
               key="content-view"
-              initial={{ opacity: 0 }}
+              initial={false}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.35, ease: [0.2, 0.8, 0.2, 1] }}
+              transition={{ duration: 0.25, ease: [0.2, 0.8, 0.2, 1] }}
             >
               {/* Yuqori cheksiz banner */}
               <BannerCarousel
