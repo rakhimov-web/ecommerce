@@ -52,13 +52,11 @@ const Header = ({
     <header
       className={`${styles.header} ${isScrolled ? styles.headerScrolled : ""}`}
     >
-      {/* 1-QATOR: Markaziy NOVA brend logo qatori (Telegram Fullscreen da buttons orasida 100% markazlashgan) */}
-      <TopBrandBar onLogoClick={handleLogoClick} />
+      {/* 1-QATOR: Markaziy NOVA brend logo qatori (scroll qilinganda silliq kirib ketadi) */}
+      <TopBrandBar onLogoClick={handleLogoClick} isCollapsed={isScrolled} />
 
-      {/* 2-QATOR: Asl qidiruv va tugmalar qatori (scroll bo'lganda silliq yuqoriga kirib ketadi) */}
-      <div
-        className={`${styles.container} ${isScrolled ? styles.containerHidden : ""}`}
-      >
+      {/* 2-QATOR: Asl qidiruv va tugmalar qatori (doimo barqaror va ochiq turadi) */}
+      <div className={styles.container}>
         {/* Qidiruv maydoni (bosilganda to'g'ridan-to'g'ri SearchPage ga o'tadi) */}
         <div
           className={styles.searchBox}

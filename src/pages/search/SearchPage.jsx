@@ -85,7 +85,6 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
 
   // Smart collapsible header: faqat topda to'liq ko'rinadi, scroll qilsa smooth yuqoriga kirib ketadi
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isInputFocused, setIsInputFocused] = useState(false);
 
   useEffect(() => {
     if (!isActive) return;
@@ -230,15 +229,13 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
         O'ng tomonda: 100% enli qidiruv inputi
       */}
       <header
-        className={`${styles.header} ${isScrolled && !isInputFocused ? styles.headerScrolled : ""}`}
+        className={`${styles.header} ${isScrolled ? styles.headerScrolled : ""}`}
       >
-        {/* 1-QATOR: Barcha sahifalar uchun o'zgarmas markaziy NOVA logo qatori */}
-        <TopBrandBar onLogoClick={onBack} />
+        {/* 1-QATOR: Barcha sahifalar uchun o'zgarmas markaziy NOVA logo qatori (scroll qilinganda silliq kirib ketadi) */}
+        <TopBrandBar onLogoClick={onBack} isCollapsed={isScrolled} />
 
-        {/* 2-QATOR: Asl qidiruv maydoni va ortga qaytish tugmasi (scroll bo'lganda silliq kirib ketadi) */}
-        <div
-          className={`${styles.headerContent} ${isScrolled && !isInputFocused ? styles.headerContentHidden : ""}`}
-        >
+        {/* 2-QATOR: Asl qidiruv maydoni va ortga qaytish tugmasi (doimo ko'rinib turadi) */}
+        <div className={styles.headerContent}>
           {/* Ortga qaytish tugmasi */}
           <button
             type="button"
@@ -258,8 +255,6 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
               value={searchValue}
               onChange={(e) => handleSearchChange(e.target.value)}
               onKeyDown={handleKeyDown}
-              onFocus={() => setIsInputFocused(true)}
-              onBlur={() => setIsInputFocused(false)}
               placeholder="Mahsulot va toifalarni qidirish"
               className={styles.searchInput}
               autoComplete="off"
