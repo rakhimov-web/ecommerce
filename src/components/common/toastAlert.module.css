@@ -1,7 +1,7 @@
 /* Master Apple-Grade Minimalist Confirmation Capsule HUD */
 .toastContainer {
   position: fixed;
-  bottom: calc(var(--menu-height) + 1.4rem);
+  bottom: calc(var(--menu-height) + var(--safe-area-bottom) + 1.4rem);
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -101,7 +101,7 @@
 
 @media (max-width: 360px) {
   .toastContainer {
-    bottom: calc(var(--menu-height) + 1.2rem);
+    bottom: calc(var(--menu-height) + var(--safe-area-bottom) + 1.2rem);
   }
 
   .alertPill {

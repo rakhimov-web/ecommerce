@@ -83,6 +83,23 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
     setSearchValue(initialQuery || "");
   }
 
+  // Smart collapsible header: faqat topda to'liq ko'rinadi, scroll qilsa smooth yuqoriga kirib ketadi
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isInputFocused, setIsInputFocused] = useState(false);
+
+  useEffect(() => {
+    if (!isActive) return;
+    const handleScroll = () => {
+      const currentY =
+        window.scrollY || document.documentElement.scrollTop || 0;
+      setIsScrolled(currentY > 25);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isActive]);
+
   // Sahifa ochilganda yoki faollashganda (agar bo'sh qidiruv bo'lsa) inputga fokus berish
   useEffect(() => {
     if (isActive && !searchValue && inputRef.current) {
@@ -212,12 +229,16 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
         Chap tomonda: Home header iconBtn o'lcham va uslubidagi ortga qaytish tugmasi
         O'ng tomonda: 100% enli qidiruv inputi
       */}
-      <header className={styles.header}>
+      <header
+        className={`${styles.header} ${isScrolled && !isInputFocused ? styles.headerScrolled : ""}`}
+      >
         {/* 1-QATOR: Barcha sahifalar uchun o'zgarmas markaziy NOVA logo qatori */}
         <TopBrandBar onLogoClick={onBack} />
 
-        {/* 2-QATOR: Asl qidiruv maydoni va ortga qaytish tugmasi (padding va hajmlari 100% o'zgarmas!) */}
-        <div className={styles.headerContent}>
+        {/* 2-QATOR: Asl qidiruv maydoni va ortga qaytish tugmasi (scroll bo'lganda silliq kirib ketadi) */}
+        <div
+          className={`${styles.headerContent} ${isScrolled && !isInputFocused ? styles.headerContentHidden : ""}`}
+        >
           {/* Ortga qaytish tugmasi */}
           <button
             type="button"
@@ -237,6 +258,8 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
               value={searchValue}
               onChange={(e) => handleSearchChange(e.target.value)}
               onKeyDown={handleKeyDown}
+              onFocus={() => setIsInputFocused(true)}
+              onBlur={() => setIsInputFocused(false)}
               placeholder="Mahsulot va toifalarni qidirish"
               className={styles.searchInput}
               autoComplete="off"
