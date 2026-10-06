@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 1000px;
   position: relative;
-  margin: 0 auto 2.6rem auto;
+  margin: 0 auto 2.2rem auto;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -170,13 +170,13 @@
 
 @media (max-width: 768px) {
   .bannerSection {
-    margin: 0 auto 2.4rem auto;
+    margin: 0 auto 2rem auto;
   }
 }
 
 @media (max-width: 640px) {
   .bannerSection {
-    margin: 0 auto 2.2rem auto;
+    margin: 0 auto 1.8rem auto;
   }
 
   .slideCard {
@@ -186,7 +186,7 @@
 
 @media (max-width: 360px) {
   .bannerSection {
-    margin: 0 auto 2rem auto;
+    margin: 0 auto 1.5rem auto;
   }
 
   .slideCard {
@@ -196,7 +196,7 @@
 
 @media (max-width: 340px) {
   .bannerSection {
-    margin: 0 auto 1.8rem auto;
+    margin: 0 auto 1.2rem auto;
   }
 
   .slideCard {

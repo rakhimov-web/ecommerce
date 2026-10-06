@@ -13,7 +13,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.8rem;
 }
 
 .sectionTitle {
@@ -476,7 +476,7 @@
   }
 
   .sectionHeader {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.5rem;
   }
 
   .sectionTitle {
@@ -536,10 +536,6 @@
   .section {
     padding: 0 1.6rem;
     margin: 0 auto;
-  }
-
-  .sectionHeader {
-    margin-bottom: 1rem;
   }
 
   .sectionTitle {
