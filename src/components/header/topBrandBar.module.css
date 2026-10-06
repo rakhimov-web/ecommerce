@@ -6,6 +6,7 @@
   max-width: 1000px;
   margin: 0 auto;
   height: var(--top-bar-height);
+  flex-shrink: 0;
   padding: 0 1.6rem;
   box-sizing: border-box;
   position: relative;
@@ -21,16 +22,20 @@
   display: flex;
   align-items: center;
   pointer-events: none;
+  visibility: hidden;
 }
 
-/* Markaziy logo zonasi: doimo ekranning mutlaq geometrik markazida X va Y bo'yicha turadi */
+/* Markaziy logo zonasi: 100px balandlikda X va Y bo'yicha mutlaq geometrik markazda turadi */
 .logoCenter {
-  flex: 1;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
   text-align: center;
+  z-index: 1;
 }
 
 .brandLogo {
@@ -41,7 +46,7 @@
   -webkit-tap-highlight-color: transparent;
   transition: opacity 0.15s ease, transform 0.15s ease;
   user-select: none;
-  padding: 0.4rem 0.8rem;
+  padding: 0.6rem 1rem;
 }
 
 .brandLogo:active {
@@ -50,17 +55,17 @@
 }
 
 .logoSvg {
-  height: 2.8rem; /* 28px desktop: aspect ratio 5.026 bo'yicha width = ~140px */
+  height: 3.2rem; /* 32px desktop: aspect ratio 5.026 bo'yicha width = ~160px */
   width: auto;
-  max-width: 155px;
+  max-width: 170px;
   object-fit: contain;
   display: block;
 }
 
 @media (max-width: 768px) {
   .logoSvg {
-    height: 2.6rem; /* 26px mobil: width = ~130px */
-    max-width: 145px;
+    height: 3.0rem; /* 30px mobil: width = ~150px */
+    max-width: 160px;
   }
 }
 
@@ -69,25 +74,15 @@
     padding: 0 1.2rem;
   }
 
-  .tgSideZone {
-    width: 4.6rem;
-    min-width: 4.6rem;
-  }
-
   .logoSvg {
-    height: 2.3rem; /* 23px kichik mobil: width = ~115px */
-    max-width: 125px;
+    height: 2.7rem; /* 27px kichik mobil: width = ~135px */
+    max-width: 145px;
   }
 }
 
 @media (max-width: 340px) {
-  .tgSideZone {
-    width: 4.0rem;
-    min-width: 4.0rem;
-  }
-
   .logoSvg {
-    height: 2.1rem; /* 21px ultra-kichik mobil: width = ~105px */
-    max-width: 110px;
+    height: 2.5rem; /* 25px ultra-kichik mobil: width = ~125px */
+    max-width: 130px;
   }
 }
