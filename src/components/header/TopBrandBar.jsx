@@ -1,4 +1,4 @@
-import { BRAND_CONFIG } from "../../config/brand";
+import logoSvg from "../../assets/icons/logo.svg";
 import { triggerHaptic } from "../../lib/telegram";
 import styles from "./topBrandBar.module.css";
 
@@ -14,27 +14,32 @@ const TopBrandBar = ({ onLogoClick }) => {
 
   return (
     <div className={styles.topBrandBar}>
-      {/* Chap taraf: Telegram nativ Back/Close tugmasi zonasi (48px - 56px) */}
+      {/* Chap taraf: Telegram nativ Back/Close tugmasi zonasi */}
       <div className={styles.tgSideZone} aria-hidden="true" />
 
-      {/* Markaz: Barcha sahifalar uchun o'zgarmas, professional NOVA brend logotipi */}
+      {/* Markaz: Barcha sahifalar uchun o'zgarmas, professional SVG logotipi (X va Y bo'yicha mutlaq markazda) */}
       <div className={styles.logoCenter}>
         <div
           className={styles.brandLogo}
           onClick={handleClick}
           role="button"
           tabIndex={0}
-          aria-label={`${BRAND_CONFIG.name} do'koni`}
+          aria-label="Nova do'koni"
         >
-          <span className={styles.brandName}>{BRAND_CONFIG.name}</span>
-          <span className={styles.brandDot} />
+          <img
+            src={logoSvg}
+            alt="Nova"
+            className={styles.logoSvg}
+            draggable={false}
+          />
         </div>
       </div>
 
-      {/* O'ng taraf: Telegram nativ Options/More (...) menyu tugmasi zonasi (48px - 56px) */}
+      {/* O'ng taraf: Telegram nativ Options/More (...) menyu tugmasi zonasi */}
       <div className={styles.tgSideZone} aria-hidden="true" />
     </div>
   );
 };
 
 export default TopBrandBar;
+

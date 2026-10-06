@@ -15,15 +15,15 @@
 
 /* Telegram nativ tugmalari (chapda Back/Close, o'ngda Menu/More) uchun xavfsiz bufer zonalar */
 .tgSideZone {
-  width: 5.2rem;
-  min-width: 5.2rem;
+  width: 5.6rem;
+  min-width: 5.6rem;
   height: 100%;
   display: flex;
   align-items: center;
   pointer-events: none;
 }
 
-/* Markaziy logo zonasi: doimo ekranning mutlaq geometrik markazida turadi */
+/* Markaziy logo zonasi: doimo ekranning mutlaq geometrik markazida X va Y bo'yicha turadi */
 .logoCenter {
   flex: 1;
   display: flex;
@@ -37,12 +37,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.35rem;
-  padding: 0.4rem 1.2rem;
-  border-radius: 999px;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition: opacity 0.15s ease, transform 0.15s ease;
+  user-select: none;
+  padding: 0.4rem 0.8rem;
 }
 
 .brandLogo:active {
@@ -50,23 +49,19 @@
   transform: scale(0.97);
 }
 
-.brandName {
-  font-family: var(--font-primary);
-  font-size: 1.85rem;
-  font-weight: 800;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--black);
-  line-height: 1;
+.logoSvg {
+  height: 2.8rem; /* 28px desktop: aspect ratio 5.026 bo'yicha width = ~140px */
+  width: auto;
+  max-width: 155px;
+  object-fit: contain;
+  display: block;
 }
 
-.brandDot {
-  display: inline-block;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background-color: var(--primary);
-  margin-top: 0.15rem;
+@media (max-width: 768px) {
+  .logoSvg {
+    height: 2.6rem; /* 26px mobil: width = ~130px */
+    max-width: 145px;
+  }
 }
 
 @media (max-width: 360px) {
@@ -75,29 +70,24 @@
   }
 
   .tgSideZone {
-    width: 4.4rem;
-    min-width: 4.4rem;
+    width: 4.6rem;
+    min-width: 4.6rem;
   }
 
-  .brandName {
-    font-size: 1.65rem;
-    letter-spacing: 0.18em;
-  }
-
-  .brandDot {
-    width: 0.45rem;
-    height: 0.45rem;
+  .logoSvg {
+    height: 2.3rem; /* 23px kichik mobil: width = ~115px */
+    max-width: 125px;
   }
 }
 
 @media (max-width: 340px) {
   .tgSideZone {
-    width: 3.8rem;
-    min-width: 3.8rem;
+    width: 4.0rem;
+    min-width: 4.0rem;
   }
 
-  .brandName {
-    font-size: 1.55rem;
-    letter-spacing: 0.16em;
+  .logoSvg {
+    height: 2.1rem; /* 21px ultra-kichik mobil: width = ~105px */
+    max-width: 110px;
   }
 }
