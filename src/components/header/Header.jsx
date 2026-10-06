@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Search, Heart, RotateCw, X } from "lucide-react";
 import NotificationBadge from "../common/NotificationBadge";
+import TopBrandBar from "./TopBrandBar";
 import { useApp } from "../../context/useApp";
 import styles from "./header.module.css";
 
@@ -26,8 +27,18 @@ const Header = ({
     }
   };
 
+  const handleLogoClick = () => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <header className={styles.header}>
+      {/* 1-QATOR: Markaziy NOVA brend logo qatori (Telegram Fullscreen da buttons orasida 100% markazlashgan) */}
+      <TopBrandBar onLogoClick={handleLogoClick} />
+
+      {/* 2-QATOR: Asl qidiruv va tugmalar qatori (padding va o'lchamlari 100% o'zgarmas!) */}
       <div className={styles.container}>
         {/* Qidiruv maydoni (bosilganda to'g'ridan-to'g'ri SearchPage ga o'tadi) */}
         <div

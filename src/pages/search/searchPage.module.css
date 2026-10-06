@@ -20,11 +20,17 @@
   right: 0;
   width: 100%;
   height: var(--header-height);
+  padding-top: env(safe-area-inset-top, 0px);
+  box-sizing: border-box;
   z-index: 1000;
   background-color: var(--white);
   border-bottom: 1px solid var(--border);
   margin: 0;
-  padding: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .headerContent {
@@ -35,7 +41,8 @@
   margin: 0 auto;
   padding: 0 2rem;
   gap: 1.2rem;
-  height: 100%;
+  height: var(--header-content-height);
+  box-sizing: border-box;
 }
 
 /* Home sahifasidagi iconBtn bilan 1-ga 1 mos ortga qaytish tugmasi */

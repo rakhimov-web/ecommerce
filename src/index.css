@@ -120,7 +120,10 @@
   /* ========================================
      UNIFIED APP LAYOUT CONSTANTS (PIXEL MATCHED)
      ======================================== */
-  --header-height: 6.4rem; /* 64px desktop */
+  --top-bar-height: 4.4rem; /* 44px: Telegram native controls va markaziy NOVA logo qatori */
+  --header-content-height: 6.4rem; /* 64px desktop: Asl qidiruv va tugmalar qatori (o'lchamlari va paddinglari 100% o'zgarmas) */
+  --header-height: calc(var(--top-bar-height) + var(--header-content-height) + env(safe-area-inset-top, 0px));
+
   --menu-height: 5.6rem; /* 56px desktop va mobil */
   --content-gap-top: 1.8rem; /* 18px desktop - Apple uslubida nafas oluvchi bo'shliq */
   --content-gap-bottom: 4.2rem; /* 42px desktop */
@@ -128,7 +131,9 @@
 
 @media (max-width: 768px) {
   :root {
-    --header-height: 6rem; /* 60px mobil */
+    --top-bar-height: 4.4rem; /* 44px mobil */
+    --header-content-height: 6rem; /* 60px mobil: Asl qidiruv va tugmalar qatori (padding va hajmlari o'zgarmaydi) */
+    --header-height: calc(var(--top-bar-height) + var(--header-content-height) + env(safe-area-inset-top, 0px));
     --content-gap-top: 1.6rem; /* 16px mobil */
     --content-gap-bottom: 3.8rem; /* 38px mobil */
   }
@@ -136,7 +141,9 @@
 
 @media (max-width: 360px) {
   :root {
-    --header-height: 5.6rem; /* 56px kichik mobil */
+    --top-bar-height: 4.0rem; /* 40px kichik mobil */
+    --header-content-height: 5.6rem; /* 56px kichik mobil: Asl qidiruv qatori */
+    --header-height: calc(var(--top-bar-height) + var(--header-content-height) + env(safe-area-inset-top, 0px));
     --menu-height: 5.2rem; /* 52px kichik mobil */
     --content-gap-top: 1.4rem; /* 14px kichik mobil */
     --content-gap-bottom: 3.2rem; /* 32px kichik mobil */
@@ -145,7 +152,9 @@
 
 @media (max-width: 340px) {
   :root {
-    --header-height: 5.4rem; /* 54px ultra-kichik mobil */
+    --top-bar-height: 3.8rem; /* 38px ultra-kichik mobil */
+    --header-content-height: 5.4rem; /* 54px ultra-kichik mobil: Asl qidiruv qatori */
+    --header-height: calc(var(--top-bar-height) + var(--header-content-height) + env(safe-area-inset-top, 0px));
     --menu-height: 5rem; /* 50px ultra-kichik mobil */
     --content-gap-top: 1.2rem; /* 12px ultra-kichik mobil */
     --content-gap-bottom: 2.8rem; /* 28px ultra-kichik mobil */

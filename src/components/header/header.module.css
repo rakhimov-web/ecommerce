@@ -10,7 +10,11 @@
   border-bottom: 1px solid var(--border);
   margin: 0;
   padding: 0;
+  padding-top: env(safe-area-inset-top, 0px);
+  box-sizing: border-box;
   font-family: var(--font-primary);
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
@@ -22,7 +26,8 @@
   margin: 0 auto;
   padding: 0 2rem;
   gap: 1.2rem;
-  height: 100%;
+  height: var(--header-content-height);
+  box-sizing: border-box;
 }
 
 /* Qidiruv maydoni (Native app uslubida tinch va toza, nozik kulrang fon) */

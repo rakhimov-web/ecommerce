@@ -5,6 +5,7 @@ import ProductCard from "../../components/products/ProductCard";
 import EmptyStateVector from "../../components/search/EmptyStateVector";
 import SmoothImage from "../../components/common/SmoothImage";
 import Button from "../../components/common/Button";
+import TopBrandBar from "../../components/header/TopBrandBar";
 import styles from "./searchPage.module.css";
 
 // 5 ta asosiy toifa ikonkalari
@@ -212,6 +213,10 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
         O'ng tomonda: 100% enli qidiruv inputi
       */}
       <header className={styles.header}>
+        {/* 1-QATOR: Barcha sahifalar uchun o'zgarmas markaziy NOVA logo qatori */}
+        <TopBrandBar onLogoClick={onBack} />
+
+        {/* 2-QATOR: Asl qidiruv maydoni va ortga qaytish tugmasi (padding va hajmlari 100% o'zgarmas!) */}
         <div className={styles.headerContent}>
           {/* Ortga qaytish tugmasi */}
           <button
