@@ -2,7 +2,7 @@ import logoSvg from "../../assets/icons/logo.svg";
 import { triggerHaptic } from "../../lib/telegram";
 import styles from "./topBrandBar.module.css";
 
-const TopBrandBar = ({ onLogoClick, isCollapsed = false }) => {
+const TopBrandBar = ({ onLogoClick }) => {
   const handleClick = () => {
     triggerHaptic("selection");
     if (onLogoClick) {
@@ -13,9 +13,7 @@ const TopBrandBar = ({ onLogoClick, isCollapsed = false }) => {
   };
 
   return (
-    <div
-      className={`${styles.topBrandBar} ${isCollapsed ? styles.topBrandBarCollapsed : ""}`}
-    >
+    <div className={styles.topBrandBar}>
       {/* Chap taraf: Telegram nativ Back/Close tugmasi zonasi */}
       <div className={styles.tgSideZone} aria-hidden="true" />
 

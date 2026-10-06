@@ -83,7 +83,7 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
     setSearchValue(initialQuery || "");
   }
 
-  // Smart collapsible header: faqat topda to'liq ko'rinadi, scroll qilsa smooth yuqoriga kirib ketadi
+  // Scroll bo'lganda headerga nozik Apple-uslubidagi ko'tarilish soyasi (elevation) beriladi
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -91,7 +91,7 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
     const handleScroll = () => {
       const currentY =
         window.scrollY || document.documentElement.scrollTop || 0;
-      setIsScrolled(currentY > 25);
+      setIsScrolled(currentY > 10);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -229,10 +229,10 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
         O'ng tomonda: 100% enli qidiruv inputi
       */}
       <header
-        className={`${styles.header} ${isScrolled ? styles.headerScrolled : ""}`}
+        className={`${styles.header} ${isScrolled ? styles.headerElevated : ""}`}
       >
-        {/* 1-QATOR: Barcha sahifalar uchun o'zgarmas markaziy NOVA logo qatori (scroll qilinganda silliq kirib ketadi) */}
-        <TopBrandBar onLogoClick={onBack} isCollapsed={isScrolled} />
+        {/* 1-QATOR: Barcha sahifalar uchun o'zgarmas markaziy NOVA logo qatori */}
+        <TopBrandBar onLogoClick={onBack} />
 
         {/* 2-QATOR: Asl qidiruv maydoni va ortga qaytish tugmasi (doimo ko'rinib turadi) */}
         <div className={styles.headerContent}>

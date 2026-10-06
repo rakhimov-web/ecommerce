@@ -33,14 +33,14 @@ const Header = ({
     }
   };
 
-  // Smart collapsible header: faqat topda to'liq ko'rinadi, scroll qilsa smooth yuqoriga kirib ketadi
+  // Scroll qilinganda headerga nozik Apple-uslubidagi ko'tarilish soyasi (elevation) beriladi
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentY =
         window.scrollY || document.documentElement.scrollTop || 0;
-      setIsScrolled(currentY > 25);
+      setIsScrolled(currentY > 10);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -50,10 +50,10 @@ const Header = ({
 
   return (
     <header
-      className={`${styles.header} ${isScrolled ? styles.headerScrolled : ""}`}
+      className={`${styles.header} ${isScrolled ? styles.headerElevated : ""}`}
     >
-      {/* 1-QATOR: Markaziy NOVA brend logo qatori (scroll qilinganda silliq kirib ketadi) */}
-      <TopBrandBar onLogoClick={handleLogoClick} isCollapsed={isScrolled} />
+      {/* 1-QATOR: Markaziy NOVA brend logo qatori (Telegram Fullscreen da Back va Menu tugmalari orasida 100% xavfsiz va markazlashgan) */}
+      <TopBrandBar onLogoClick={handleLogoClick} />
 
       {/* 2-QATOR: Asl qidiruv va tugmalar qatori (doimo barqaror va ochiq turadi) */}
       <div className={styles.container}>

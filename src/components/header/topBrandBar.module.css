@@ -12,23 +12,6 @@
   z-index: 10;
   user-select: none;
   -webkit-user-select: none;
-  overflow: hidden;
-  transform: translateY(0);
-  opacity: 1;
-  transition:
-    height 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.22s ease;
-  will-change: height, transform, opacity;
-}
-
-/* Scroll qilinganda logotip qatori yuqoriga silliq kirib ketadi */
-.topBrandBarCollapsed {
-  height: 0;
-  min-height: 0;
-  transform: translateY(-100%);
-  opacity: 0;
-  pointer-events: none;
 }
 
 /* Telegram nativ tugmalari (chapda Back/Close, o'ngda Menu/More) uchun xavfsiz bufer zonalar */
