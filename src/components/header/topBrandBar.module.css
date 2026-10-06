@@ -25,11 +25,11 @@
   visibility: hidden;
 }
 
-/* Markaziy logo zonasi: 55px-60px balandlikda X bo'yicha markazda va 5px yuqoriroqda turadi */
+/* Markaziy logo zonasi: X bo'yicha markazda va yuqoriroqda turadi */
 .logoCenter {
   position: absolute;
   left: 50%;
-  top: calc(50% - 5px);
+  top: calc(50% - 4px);
   transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
