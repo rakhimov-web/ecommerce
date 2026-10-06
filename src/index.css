@@ -127,43 +127,44 @@
      UNIFIED APP LAYOUT CONSTANTS (PIXEL MATCHED)
      ======================================== */
   --top-bar-height: 5.6rem; /* 56px: Telegram fullscreen da Back va More tugmalari orasidagi nativ qator balandligi */
-  --header-content-height: 6.4rem; /* 64px desktop: Asl qidiruv va tugmalar qatori (o'lchamlari va paddinglari 100% o'zgarmas) */
+  --header-content-height: 6.4rem; /* 64px desktop: Asl qidiruv va tugmalar qatori */
   --header-height: calc(var(--top-bar-height) + var(--header-content-height) + var(--safe-area-top));
 
-  --menu-height: 5.6rem; /* 56px desktop va mobil */
-  --content-gap-top: 1.8rem; /* 18px desktop - Apple uslubida nafas oluvchi bo'shliq */
-  --content-gap-bottom: 4.2rem; /* 42px desktop */
+  --menu-height: 6.2rem; /* 62px desktop va mobil: E-commerce ergonomik balandlik, qulay bosish maydoni */
+  --content-gap-top: 2.2rem; /* 22px desktop: Apple uslubida nafas oluvchi yuqori bo'shliq */
+  --content-gap-bottom: 4.4rem; /* 44px desktop */
 }
 
 @media (max-width: 768px) {
   :root {
     --top-bar-height: 5.6rem; /* 56px mobil: Telegram nativ navigation bar balandligiga (56px) 100% mos */
-    --header-content-height: 6rem; /* 60px mobil: Asl qidiruv va tugmalar qatori (padding va hajmlari o'zgarmaydi) */
+    --header-content-height: 6rem; /* 60px mobil: Asl qidiruv va tugmalar qatori */
     --header-height: calc(var(--top-bar-height) + var(--header-content-height) + var(--safe-area-top));
-    --content-gap-top: 1.6rem; /* 16px mobil */
-    --content-gap-bottom: 3.8rem; /* 38px mobil */
+    --menu-height: 6.0rem; /* 60px mobil: Ergonomik e-commerce pastki bar balandligi */
+    --content-gap-top: 2.0rem; /* 20px mobil: Kontent va header orasidagi optimal nafas oluvchi bo'shliq */
+    --content-gap-bottom: 4.0rem; /* 40px mobil */
   }
 }
 
 @media (max-width: 360px) {
   :root {
     --top-bar-height: 5.4rem; /* 54px kichik mobil */
-    --header-content-height: 5.6rem; /* 56px kichik mobil: Asl qidiruv qatori */
+    --header-content-height: 5.6rem; /* 56px kichik mobil */
     --header-height: calc(var(--top-bar-height) + var(--header-content-height) + var(--safe-area-top));
-    --menu-height: 5.2rem; /* 52px kichik mobil */
-    --content-gap-top: 1.4rem; /* 14px kichik mobil */
-    --content-gap-bottom: 3.2rem; /* 32px kichik mobil */
+    --menu-height: 5.8rem; /* 58px kichik mobil */
+    --content-gap-top: 1.8rem; /* 18px kichik mobil */
+    --content-gap-bottom: 3.6rem; /* 36px kichik mobil */
   }
 }
 
 @media (max-width: 340px) {
   :root {
     --top-bar-height: 5.2rem; /* 52px ultra-kichik mobil */
-    --header-content-height: 5.4rem; /* 54px ultra-kichik mobil: Asl qidiruv qatori */
+    --header-content-height: 5.4rem; /* 54px ultra-kichik mobil */
     --header-height: calc(var(--top-bar-height) + var(--header-content-height) + var(--safe-area-top));
-    --menu-height: 5rem; /* 50px ultra-kichik mobil */
-    --content-gap-top: 1.2rem; /* 12px ultra-kichik mobil */
-    --content-gap-bottom: 2.8rem; /* 28px ultra-kichik mobil */
+    --menu-height: 5.6rem; /* 56px ultra-kichik mobil */
+    --content-gap-top: 1.6rem; /* 16px ultra-kichik mobil */
+    --content-gap-bottom: 3.2rem; /* 32px ultra-kichik mobil */
   }
 }
 
