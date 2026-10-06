@@ -66,6 +66,12 @@
   border-radius: 999px;
 }
 
+@media (max-width: 768px) {
+  .bannerSection {
+    margin: 0 auto 2rem auto;
+  }
+}
+
 @media (max-width: 640px) {
   .bannerSection {
     margin: 0 auto 1.8rem auto;
@@ -76,13 +82,25 @@
   }
 }
 
+@media (max-width: 360px) {
+  .bannerSection {
+    margin: 0 auto 1.5rem auto;
+  }
+}
+
+@media (max-width: 340px) {
+  .bannerSection {
+    margin: 0 auto 1.2rem auto;
+  }
+}
+
 /* ============================================================
    2. CATEGORY SKELETON (SPACE-BETWEEN, 5 TA ITEM)
    ============================================================ */
 
 .categorySection {
   width: 100%;
-  margin: 0.6rem 0 3.2rem 0;
+  margin: 0 0 2.2rem 0;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -130,7 +148,7 @@
 
 @media (max-width: 768px) {
   .categorySection {
-    margin: 0.4rem 0 2.8rem 0;
+    margin: 0 0 2rem 0;
   }
 
   .categoryContainer {
@@ -156,6 +174,10 @@
 }
 
 @media (max-width: 480px) {
+  .categorySection {
+    margin: 0 0 1.8rem 0;
+  }
+
   .categoryContainer {
     padding: 0 2rem;
   }
@@ -173,6 +195,10 @@
 }
 
 @media (max-width: 360px) {
+  .categorySection {
+    margin: 0 0 1.5rem 0;
+  }
+
   .categoryContainer {
     padding: 0 1.6rem;
   }
@@ -376,6 +402,10 @@
 }
 
 @media (max-width: 340px) {
+  .categorySection {
+    margin: 0 0 1.2rem 0;
+  }
+
   .productSection {
     padding: 0 1.2rem;
     margin: 0 auto;

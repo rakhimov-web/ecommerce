@@ -87,16 +87,23 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
     [containerWidth, slideWidth, gap],
   );
 
-  // Har safar currentIndex o'zgarganda (avtomatik yoki dot bosilganda) x koordinatasini mayin, sakrashlarsiz animatsiya qilish
+  const hasInitialized = useRef(false);
+
+  // Har safar currentIndex o'zgarganda x koordinatasini mayin animatsiya qilish (dastlabki ochilishda markazda statik turadi)
   useEffect(() => {
     if (containerWidth > 0 && !isDragging.current && isActive) {
       const target = getTargetX(currentIndex);
-      animate(x, target, {
-        type: "spring",
-        stiffness: 115,
-        damping: 18,
-        mass: 0.85,
-      });
+      if (!hasInitialized.current) {
+        x.set(target);
+        hasInitialized.current = true;
+      } else {
+        animate(x, target, {
+          type: "spring",
+          stiffness: 115,
+          damping: 18,
+          mass: 0.85,
+        });
+      }
     }
   }, [currentIndex, getTargetX, containerWidth, x, isActive]);
 

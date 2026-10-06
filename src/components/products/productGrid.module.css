@@ -31,6 +31,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   width: 100%;
+  contain: layout style;
 }
 
 /* Kartaning o'zida border va orqa fon umuman yo'q - mutlaqo toza va yengil */
@@ -45,6 +46,8 @@
   box-shadow: none !important;
   transform: none !important;
   padding: 0;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 350px;
 }
 
 /* Optimal 3:4 portret rasm freymi - 1:1 dan balandroq, 2:3 kabi haddan tashqari cho'zilmagan */
