@@ -1,6 +1,6 @@
 .section {
   width: 100%;
-  margin: 0.6rem 0 3.2rem 0;
+  margin: 2.2rem 0;
   font-family: var(--font-primary);
   user-select: none;
   -webkit-user-select: none;
@@ -130,7 +130,7 @@
 /* Mobil ekranlar uchun moslashuv */
 @media (max-width: 768px) {
   .section {
-    margin: 0.4rem 0 2.8rem 0;
+    margin: 2rem 0;
   }
 
   .gridContainer {
@@ -153,6 +153,10 @@
 }
 
 @media (max-width: 480px) {
+  .section {
+    margin: 1.8rem 0;
+  }
+
   .gridContainer {
     padding: 0 2rem;
   }
@@ -172,6 +176,10 @@
 
 /* Kichik ekranlar (360px va undan kichik) */
 @media (max-width: 360px) {
+  .section {
+    margin: 1.6rem 0;
+  }
+
   .gridContainer {
     padding: 0 1.6rem;
   }
@@ -191,6 +199,10 @@
 }
 
 @media (max-width: 340px) {
+  .section {
+    margin: 1.4rem 0;
+  }
+
   .gridContainer {
     padding: 0 1.2rem;
   }
