@@ -1,33 +1,19 @@
-import { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Home from "./pages/home/Home";
 import SearchPage from "./pages/search/SearchPage";
-import ProductDetailPage from "./pages/product/ProductDetailPage";
 import Menu from "./components/menu/Menu";
 import BrandSplashLoader from "./components/loader/BrandSplashLoader";
 import ToastAlert from "./components/common/ToastAlert";
 import { AppProvider } from "./context/AppContext";
 import { initTelegramApp, syncTelegramBackButton } from "./lib/telegram";
-import { productsData } from "./data/products";
 import "./App.css";
 
-// URL dan joriy sahifani aniqlash (/search -> "search", /product/:id -> "product", boshqasi -> "home")
+// URL dan joriy sahifani aniqlash (/search -> "search", boshqasi -> "home")
 const getPageFromPath = () => {
   if (typeof window === "undefined") return "home";
   const path = window.location.pathname.toLowerCase();
-  if (path.startsWith("/search")) return "search";
-  if (path.startsWith("/product/")) return "product";
-  return "home";
-};
-
-// URL dan mahsulot ID sini olish (/product/1 -> 1)
-const getProductIdFromPath = () => {
-  if (typeof window === "undefined") return null;
-  const path = window.location.pathname;
-  const match = path.match(/^\/product\/([^/?#]+)/i);
-  if (!match) return null;
-  const idNum = Number(match[1]);
-  return isNaN(idNum) ? match[1] : idNum;
+  return path.startsWith("/search") ? "search" : "home";
 };
 
 // URL dan qidiruv parametrini olish (?q=...)
@@ -45,12 +31,8 @@ const AppContent = () => {
   // Sayt har safar yangilanganda (refresh) to'g'ridan-to'g'ri Home sahifasidan va Brand Loader bilan ochiladi
   const [currentPage, setCurrentPage] = useState("home");
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedProductId, setSelectedProductId] = useState(null);
   const [isSplashActive, setIsSplashActive] = useState(true);
   const [activeTab, setActiveTab] = useState(0);
-
-  // Qaysi sahifadan Product Detail ga o'tganimizni eslab qolish ("home" yoki "search")
-  const previousPageRef = useRef("home");
 
   // Sahifa yangilanganda URL ni tozalash, scrollni 0 ga surish va Telegram xususiyatlarini tayyorlash
   useEffect(() => {
@@ -74,16 +56,9 @@ const AppContent = () => {
     const handlePopState = () => {
       const page = getPageFromPath();
       const query = getSearchQueryFromUrl();
-      const prodId = getProductIdFromPath();
       setCurrentPage(page);
       setSearchQuery(query);
-      setSelectedProductId(prodId);
-
-      if (page === "home") {
-        setActiveTab(0);
-      } else if (page === "search") {
-        setActiveTab(1);
-      }
+      setActiveTab(page === "search" ? 1 : 0);
     };
 
     window.addEventListener("popstate", handlePopState);
@@ -93,6 +68,7 @@ const AppContent = () => {
   // Search sahifasiga o'tish (route /search yoki /search?q=... ga o'zgaradi)
   const handleGoToSearch = useCallback(
     (query = "") => {
+      // Agar allaqachon Qidiruvda bo'lsa va tab yana bosilsa -> tepaga silliq qaytish
       if (currentPage === "search" && !query) {
         window.scrollTo({ top: 0, behavior: "smooth" });
         return;
@@ -123,6 +99,7 @@ const AppContent = () => {
       setCurrentPage("search");
       setActiveTab(1);
 
+      // Agar kategoriya bosilgan bo'lsa tepadan ochiladi, tab bosilganda saqlangan joyiga qaytadi
       const targetY = trimmed ? 0 : scrollPositions.current.search || 0;
       requestAnimationFrame(() => {
         window.scrollTo({ top: targetY, behavior: "instant" });
@@ -133,6 +110,7 @@ const AppContent = () => {
 
   // Home sahifasiga qaytish (route / ga o'zgaradi)
   const handleGoToHome = useCallback(() => {
+    // Agar foydalanuvchi allaqachon Homeda bo'lsa va tabni qayta bossa -> smooth scroll tepaga
     if (currentPage === "home") {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
@@ -149,78 +127,16 @@ const AppContent = () => {
     setSearchQuery("");
     setActiveTab(0);
 
+    // Home sahifasidagi oldingi scroll joyini tiklash
     const targetY = scrollPositions.current.home || 0;
     requestAnimationFrame(() => {
       window.scrollTo({ top: targetY, behavior: "instant" });
     });
   }, [currentPage]);
 
-  // Mahsulot batafsil sahifasiga o'tish (/product/:id)
-  const handleGoToProduct = useCallback(
-    (productId) => {
-      if (currentPage === "home") {
-        scrollPositions.current.home = window.scrollY;
-        previousPageRef.current = "home";
-      } else if (currentPage === "search") {
-        scrollPositions.current.search = window.scrollY;
-        previousPageRef.current = "search";
-      }
-
-      setSelectedProductId(productId);
-      setCurrentPage("product");
-
-      window.history.pushState(
-        { page: "product", id: productId },
-        "",
-        `/product/${productId}`,
-      );
-
-      requestAnimationFrame(() => {
-        window.scrollTo({ top: 0, behavior: "instant" });
-      });
-    },
-    [currentPage],
-  );
-
-  // Mahsulot batafsil sahifasidan ortga qaytish (foydalanuvchi kelgan joyiga mos ravishda)
-  const handleBackFromProduct = useCallback(() => {
-    if (previousPageRef.current === "search") {
-      const targetUrl = searchQuery
-        ? `/search?q=${encodeURIComponent(searchQuery)}`
-        : "/search";
-      if (window.location.pathname !== "/search") {
-        window.history.pushState(
-          { page: "search", query: searchQuery },
-          "",
-          targetUrl,
-        );
-      }
-      setCurrentPage("search");
-      setActiveTab(1);
-
-      const targetY = scrollPositions.current.search || 0;
-      requestAnimationFrame(() => {
-        window.scrollTo({ top: targetY, behavior: "instant" });
-      });
-    } else {
-      if (window.location.pathname !== "/") {
-        window.history.pushState({ page: "home" }, "", "/");
-      }
-      setCurrentPage("home");
-      setActiveTab(0);
-
-      const targetY = scrollPositions.current.home || 0;
-      requestAnimationFrame(() => {
-        window.scrollTo({ top: targetY, behavior: "instant" });
-      });
-    }
-  }, [searchQuery]);
-
   // Telegram nativ orqaga qaytish (BackButton) tugmasini sahifalar bilan sinxronlash
   useEffect(() => {
-    if (currentPage === "product") {
-      syncTelegramBackButton(true, handleBackFromProduct);
-    } else if (currentPage === "search") {
+    if (currentPage === "search") {
       syncTelegramBackButton(true, handleGoToHome);
     } else {
       syncTelegramBackButton(false);
@@ -229,7 +145,7 @@ const AppContent = () => {
     return () => {
       syncTelegramBackButton(false);
     };
-  }, [currentPage, handleBackFromProduct, handleGoToHome]);
+  }, [currentPage, handleGoToHome]);
 
   // Pastki Tab bar menyusi orqali o'tish
   const handleTabChange = useCallback(
@@ -243,18 +159,6 @@ const AppContent = () => {
     },
     [handleGoToSearch, handleGoToHome],
   );
-
-  // Tanlangan mahsulot obyektini topish
-  const selectedProduct = useMemo(() => {
-    if (!selectedProductId) return null;
-    return (
-      productsData.find(
-        (p) =>
-          p.id === selectedProductId ||
-          String(p.id) === String(selectedProductId),
-      ) || productsData[0]
-    );
-  }, [selectedProductId]);
 
   const isHomeActive = currentPage === "home";
 
@@ -290,7 +194,6 @@ const AppContent = () => {
           isSplashFinished={!isSplashActive}
           onSearchClick={() => handleGoToSearch("")}
           onCategoryClick={(catTitle) => handleGoToSearch(catTitle)}
-          onProductClick={handleGoToProduct}
         />
       </motion.div>
 
@@ -306,36 +209,14 @@ const AppContent = () => {
           isActive={currentPage === "search"}
           onBack={handleGoToHome}
           initialQuery={searchQuery}
-          onProductClick={handleGoToProduct}
         />
       </div>
-
-      {/*
-        Mahsulot Batafsil Sahifasi (ProductDetailPage):
-        - Headerda faqat Ortga qaytish, Like va Savatcha
-        - Katta, swipe qilinadigan karusel galereyasi
-        - Narx, muddatli to'lov va to'liq tavsif
-        - Pastki sticky checkout bari (Stepper + Rasmiylashtirish)
-      */}
-      {currentPage === "product" && (
-        <div className="pageWrapper pageFade">
-          <ProductDetailPage
-            product={selectedProduct}
-            onBack={handleBackFromProduct}
-          />
-        </div>
-      )}
 
       {/* Suzuvchi savatcha bildirishnomasi (Toast Alert — barmoq bilan surib yopish imkoniyati bilan) */}
       <ToastAlert />
 
-      {/*
-        Pastki navigatsiya menyusi — faqat Home va Search sahifalarida ko'rinadi.
-        Product Detail sahifasida to'liq yashiriladi.
-      */}
-      {currentPage !== "product" && (
-        <Menu active={activeTab} onTabChange={handleTabChange} />
-      )}
+      {/* Pastki navigatsiya menyusi — indicator silliq siljiydi */}
+      <Menu active={activeTab} onTabChange={handleTabChange} />
     </div>
   );
 };

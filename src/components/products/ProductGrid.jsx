@@ -2,7 +2,7 @@ import ProductCard from "./ProductCard";
 import styles from "./productGrid.module.css";
 import { productsData } from "../../data/products";
 
-const ProductGrid = ({ onProductClick }) => {
+const ProductGrid = () => {
   return (
     <section className={styles.section} aria-label="Tavsiya qilingan mahsulotlar">
       <div className={styles.sectionHeader}>
@@ -11,11 +11,7 @@ const ProductGrid = ({ onProductClick }) => {
 
       <div className={styles.grid}>
         {productsData.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            onProductClick={onProductClick}
-          />
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </section>
