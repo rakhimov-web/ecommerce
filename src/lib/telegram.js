@@ -84,31 +84,24 @@ export const initTelegramApp = () => {
     tg.expand();
 
     // 3. Telegram 8.0+ Native Fullscreen rejimini so'rash (To'liq nativ ilovadek ochilishi uchun)
-    if (typeof tg.requestFullscreen === "function") {
-      try {
-        tg.requestFullscreen();
-      } catch (fsErr) {
-        console.warn("Telegram requestFullscreen xatosi:", fsErr);
-      }
+    requestTelegramFullscreen();
 
-      // Ba'zi mobil Telegram mijozlarida birinchi sensor/bosish orqali ham fullscreen kafolati
-      const handleFirstInteraction = () => {
-        if (typeof tg.requestFullscreen === "function" && !tg.isFullscreen) {
-          try {
-            tg.requestFullscreen();
-            updateTelegramSafeArea();
-          } catch {}
-        }
-      };
-      window.addEventListener("touchstart", handleFirstInteraction, {
-        passive: true,
-        once: true,
-      });
-      window.addEventListener("click", handleFirstInteraction, {
-        passive: true,
-        once: true,
-      });
-    }
+    // Ba'zi mobil Telegram mijozlarida birinchi sensor/bosish orqali ham fullscreen kafolati
+    const handleFirstInteraction = () => {
+      requestTelegramFullscreen();
+    };
+    window.addEventListener("touchstart", handleFirstInteraction, {
+      passive: true,
+      once: true,
+    });
+    window.addEventListener("pointerdown", handleFirstInteraction, {
+      passive: true,
+      once: true,
+    });
+    window.addEventListener("click", handleFirstInteraction, {
+      passive: true,
+      once: true,
+    });
 
     // 4. Telegram 7.7+ vertikal tortib tasodifiy yopilib ketishining oldini olish (Swipe-to-close blocking)
     if (tg.disableVerticalSwipes) {
@@ -155,14 +148,36 @@ export const requestTelegramFullscreen = () => {
       tg.requestFullscreen();
       updateTelegramSafeArea();
       return true;
-    } else if (typeof tg.expand === "function") {
-      tg.expand();
-      updateTelegramSafeArea();
-      return true;
     }
   } catch (err) {
     console.warn("Telegram requestFullscreen xatosi:", err);
   }
+
+  // Telegram Native WebView postEvent fallback
+  try {
+    if (window.TelegramWebviewProxy && window.TelegramWebviewProxy.postEvent) {
+      window.TelegramWebviewProxy.postEvent("web_app_request_fullscreen", JSON.stringify({}));
+      updateTelegramSafeArea();
+      return true;
+    } else if (window.external && window.external.notify) {
+      window.external.notify(JSON.stringify({ eventType: "web_app_request_fullscreen", eventData: {} }));
+      updateTelegramSafeArea();
+      return true;
+    } else if (window.parent && window.parent.postMessage) {
+      window.parent.postMessage(JSON.stringify({ eventType: "web_app_request_fullscreen", eventData: {} }), "*");
+      updateTelegramSafeArea();
+      return true;
+    }
+  } catch {}
+
+  try {
+    if (typeof tg.expand === "function") {
+      tg.expand();
+      updateTelegramSafeArea();
+      return true;
+    }
+  } catch {}
+
   return false;
 };
 

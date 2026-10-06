@@ -60,17 +60,17 @@
 }
 
 .logoSvg {
-  height: 2.8rem; /* 28px desktop: aspect ratio 5.026 bo'yicha width = ~140px */
+  height: 2.1rem; /* 21px desktop: kichik, nafis va ixcham logo (aspect ratio 5.026 -> width = ~105px) */
   width: auto;
-  max-width: 150px;
+  max-width: 110px;
   object-fit: contain;
   display: block;
 }
 
 @media (max-width: 768px) {
   .logoSvg {
-    height: 2.7rem; /* 27px mobil: Telegram 36-40px buttonlari orasida optimal hajm, tepa va pastdan 14.5px teng masofada */
-    max-width: 140px;
+    height: 1.95rem; /* 19.5px mobil: ixcham nafis logo (width = ~98px), 56px container ichida tepa-pastdan 18.25px teng masofada */
+    max-width: 102px;
   }
 }
 
@@ -80,14 +80,14 @@
   }
 
   .logoSvg {
-    height: 2.5rem; /* 25px kichik mobil: width = ~125px */
-    max-width: 130px;
+    height: 1.8rem; /* 18px kichik mobil: width = ~90px */
+    max-width: 95px;
   }
 }
 
 @media (max-width: 340px) {
   .logoSvg {
-    height: 2.4rem; /* 24px ultra-kichik mobil: width = ~120px */
-    max-width: 122px;
+    height: 1.7rem; /* 17px ultra-kichik mobil: width = ~85px */
+    max-width: 88px;
   }
 }
