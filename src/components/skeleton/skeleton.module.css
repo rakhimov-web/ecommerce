@@ -30,7 +30,7 @@
 .bannerSection {
   width: 100%;
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 0 auto 2.2rem auto;
   padding: 0.4rem 0;
   user-select: none;
   -webkit-user-select: none;
@@ -40,8 +40,7 @@
   width: 85%;
   max-width: 940px;
   margin: 0 auto;
-  aspect-ratio: 2.1 / 1;
-  max-height: 400px;
+  aspect-ratio: 984 / 323;
   border-radius: 1.8rem;
   overflow: hidden;
   border: none !important;
@@ -68,6 +67,10 @@
 }
 
 @media (max-width: 640px) {
+  .bannerSection {
+    margin: 0 auto 1.8rem auto;
+  }
+
   .bannerCard {
     border-radius: 1.4rem;
   }
@@ -79,7 +82,7 @@
 
 .categorySection {
   width: 100%;
-  margin: 2.2rem 0;
+  margin: 0.6rem 0 3.2rem 0;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -127,7 +130,7 @@
 
 @media (max-width: 768px) {
   .categorySection {
-    margin: 2rem 0;
+    margin: 0.4rem 0 2.8rem 0;
   }
 
   .categoryContainer {
@@ -153,10 +156,6 @@
 }
 
 @media (max-width: 480px) {
-  .categorySection {
-    margin: 1.8rem 0;
-  }
-
   .categoryContainer {
     padding: 0 2rem;
   }
@@ -174,10 +173,6 @@
 }
 
 @media (max-width: 360px) {
-  .categorySection {
-    margin: 1.6rem 0;
-  }
-
   .categoryContainer {
     padding: 0 1.6rem;
   }
@@ -381,10 +376,6 @@
 }
 
 @media (max-width: 340px) {
-  .categorySection {
-    margin: 1.4rem 0;
-  }
-
   .productSection {
     padding: 0 1.2rem;
     margin: 0 auto;

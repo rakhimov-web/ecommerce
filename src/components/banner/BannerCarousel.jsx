@@ -75,8 +75,8 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
     }
   }, [isActive, updateDimensions]);
 
-  // Card balandligi (Mashhur e-commerce ilovalari standarti: 2.1 : 1 nisbatda)
-  const slideHeight = Math.min(Math.round(slideWidth / 2.1), 400);
+  // Card balandligi (984 / 323 proporsiyasi bo'yicha)
+  const slideHeight = Math.round(slideWidth * (323 / 984));
 
   // Markazga mos keluvchi koordinata
   const getTargetX = useCallback(
@@ -87,24 +87,16 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
     [containerWidth, slideWidth, gap],
   );
 
-  const hasInitialized = useRef(false);
-
-  // Har safar currentIndex o'zgarganda x koordinatasini mayin animatsiya qilish (dastlabki ochilishda sakramasdan markazda turadi)
+  // Har safar currentIndex o'zgarganda (avtomatik yoki dot bosilganda) x koordinatasini mayin, sakrashlarsiz animatsiya qilish
   useEffect(() => {
     if (containerWidth > 0 && !isDragging.current && isActive) {
       const target = getTargetX(currentIndex);
-      if (!hasInitialized.current) {
-        // Dastlabki yuklanganda yondan sakrab kelmaydi, birdaniga markazda turadi
-        x.set(target);
-        hasInitialized.current = true;
-      } else {
-        animate(x, target, {
-          type: "spring",
-          stiffness: 115,
-          damping: 18,
-          mass: 0.85,
-        });
-      }
+      animate(x, target, {
+        type: "spring",
+        stiffness: 115,
+        damping: 18,
+        mass: 0.85,
+      });
     }
   }, [currentIndex, getTargetX, containerWidth, x, isActive]);
 
