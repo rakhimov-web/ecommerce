@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, Search, X, ChevronRight, Clock } from "lucide-react";
 import { productsData } from "../../data/products";
 import ProductCard from "../../components/products/ProductCard";
@@ -180,10 +180,29 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
 
   const isNotFound = hasQuery && filteredProducts.length === 0;
 
-  // Tavsiya etiladigan mahsulotlar: 6 ta Home cardlari
-  const randomRecommended = useMemo(() => {
-    return productsData.slice(0, 6);
-  }, []);
+  // Tavsiya etiladigan mahsulotlar: 6 ta tasodifiy (randomly) tanlangan mahsulot
+  const [randomRecommended, setRandomRecommended] = useState(() => {
+    const list = [...productsData];
+    for (let i = list.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [list[i], list[j]] = [list[j], list[i]];
+    }
+    return list.slice(0, 6);
+  });
+
+  const prevIsActiveRef = useRef(isActive);
+  useEffect(() => {
+    // Qidiruv sahifasiga qaytadan kirilganda yangi 6 ta tasodifiy mahsulotlar to'plami yaratiladi
+    if (isActive && !prevIsActiveRef.current) {
+      const list = [...productsData];
+      for (let i = list.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [list[i], list[j]] = [list[j], list[i]];
+      }
+      setRandomRecommended(list.slice(0, 6));
+    }
+    prevIsActiveRef.current = isActive;
+  }, [isActive]);
 
   return (
     <div className={styles.searchPageContainer}>
@@ -331,6 +350,21 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
                       />
                     </div>
                   </div>
+                ))}
+              </div>
+            </section>
+
+            {/* 3. Tavsiya qilamiz: 6 ta tasodifiy (randomly) mahsulotlar panjarasi */}
+            <section
+              className={styles.recommendSection}
+              aria-label="Tavsiya etamiz"
+            >
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Tavsiya qilamiz</h2>
+              </div>
+              <div className={styles.productGrid}>
+                {randomRecommended.map((product) => (
+                  <ProductCard key={product.id} product={product} />
                 ))}
               </div>
             </section>

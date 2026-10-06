@@ -165,7 +165,7 @@
    ============================================================ */
 
 .recentSection {
-  margin-bottom: 2.6rem;
+  margin-bottom: 3.2rem;
 }
 
 .recentHeader {
@@ -295,7 +295,7 @@
    ============================================================ */
 
 .categorySection {
-  margin-bottom: 0;
+  margin-bottom: 3.2rem;
 }
 
 .categorySectionTitle {
@@ -303,8 +303,8 @@
   font-size: var(--text-xl);
   font-weight: 700;
   color: var(--black);
-  margin: 0 0 1.6rem 0;
-  letter-spacing: -0.02em;
+  margin: 0 0 1.8rem 0;
+  letter-spacing: -0.025em;
 }
 
 .categoryTable {
@@ -433,7 +433,7 @@
   box-shadow: none !important;
   padding: 4.8rem 1.6rem 3.4rem 1.6rem;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -473,9 +473,13 @@
    6. NATIJALAR VA TAVSIYA ETAMIZ (HOME CARDS PANJARASI)
    ============================================================ */
 
-.resultsSection,
-.recommendSection {
+.resultsSection {
   margin-top: 0.6rem;
+  width: 100%;
+}
+
+.recommendSection {
+  margin-top: 0;
   width: 100%;
 }
 
@@ -484,16 +488,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.8rem;
 }
 
 .sectionTitle {
   font-family: var(--font-primary);
-  font-size: var(--text-xl); /* 1.85rem (18.5px) */
+  font-size: var(--text-xl); /* 1.9rem (19px) - Home sectionTitle bilan bir xil */
   font-weight: 700;
   color: var(--black);
   margin: 0;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 .countBadge {
@@ -552,6 +556,17 @@
     padding: var(--content-gap-top) 2rem var(--content-gap-bottom) 2rem;
   }
 
+  .recentSection,
+  .categorySection,
+  .emptyCard {
+    margin-bottom: 2.8rem;
+  }
+
+  .resultsHeaderRow,
+  .sectionHeader {
+    margin-bottom: 1.6rem;
+  }
+
   .sectionTitle,
   .categorySectionTitle,
   .notFoundTitle {
@@ -582,6 +597,12 @@
     padding: var(--content-gap-top) 2rem var(--content-gap-bottom) 2rem;
   }
 
+  .recentSection,
+  .categorySection,
+  .emptyCard {
+    margin-bottom: 2.8rem;
+  }
+
   .productGrid {
     gap: 2rem; /* Kichik telefonlarda ham 2.0rem saqlanadi */
   }
@@ -593,6 +614,11 @@
     font-size: 1.75rem; /* 17.5px — Home sectionTitle bilan bir xil */
   }
 
+  .resultsHeaderRow,
+  .sectionHeader {
+    margin-bottom: 1.5rem;
+  }
+
   .recentTitle {
     font-size: 1.45rem; /* 14.5px */
   }
@@ -602,7 +628,7 @@
   }
 
   .categorySectionTitle {
-    margin-bottom: 1.4rem;
+    margin-bottom: 1.5rem;
   }
 
   .categoryName {
@@ -645,6 +671,12 @@
 
   .mainContent {
     padding: var(--content-gap-top) 1.6rem var(--content-gap-bottom) 1.6rem;
+  }
+
+  .recentSection,
+  .categorySection,
+  .emptyCard {
+    margin-bottom: 2.4rem;
   }
 
   .productGrid {
@@ -691,6 +723,12 @@
     padding: var(--content-gap-top) 1.2rem var(--content-gap-bottom) 1.2rem;
   }
 
+  .recentSection,
+  .categorySection,
+  .emptyCard {
+    margin-bottom: 2.2rem;
+  }
+
   .productGrid {
     gap: 1.2rem;
   }
@@ -703,6 +741,10 @@
 
   .sectionHeader,
   .resultsHeaderRow {
+    margin-bottom: 1.2rem;
+  }
+
+  .categorySectionTitle {
     margin-bottom: 1.2rem;
   }
 
