@@ -120,15 +120,30 @@
   /* ========================================
      UNIFIED APP LAYOUT CONSTANTS (PIXEL MATCHED)
      ======================================== */
-  --header-height: 6.4rem; /* 64px desktop */
-  --menu-height: 5.6rem; /* 56px desktop va mobil */
+  --header-base-height: 8.8rem; /* 88px desktop: 32px logo + 44px search + gap */
+  --header-height: calc(var(--header-base-height) + env(safe-area-inset-top, 0px));
+  --search-header-base-height: 6.4rem; /* 64px desktop */
+  --search-header-height: calc(var(--search-header-base-height) + env(safe-area-inset-top, 0px));
+
+  --menu-base-height: 5.6rem; /* 56px desktop va mobil */
+  --menu-bottom-padding: max(1.2rem, env(safe-area-inset-bottom, 0px));
+  --menu-height: calc(var(--menu-base-height) + var(--menu-bottom-padding));
+
   --content-gap-top: 1.8rem; /* 18px desktop - Apple uslubida nafas oluvchi bo'shliq */
   --content-gap-bottom: 4.2rem; /* 42px desktop */
 }
 
 @media (max-width: 768px) {
   :root {
-    --header-height: 6rem; /* 60px mobil */
+    --header-base-height: 8.6rem; /* 86px mobil */
+    --header-height: calc(var(--header-base-height) + env(safe-area-inset-top, 0px));
+    --search-header-base-height: 6.0rem; /* 60px mobil */
+    --search-header-height: calc(var(--search-header-base-height) + env(safe-area-inset-top, 0px));
+
+    --menu-base-height: 5.4rem;
+    --menu-bottom-padding: max(1.4rem, env(safe-area-inset-bottom, 0px));
+    --menu-height: calc(var(--menu-base-height) + var(--menu-bottom-padding));
+
     --content-gap-top: 1.6rem; /* 16px mobil */
     --content-gap-bottom: 3.8rem; /* 38px mobil */
   }
@@ -136,8 +151,15 @@
 
 @media (max-width: 360px) {
   :root {
-    --header-height: 5.6rem; /* 56px kichik mobil */
-    --menu-height: 5.2rem; /* 52px kichik mobil */
+    --header-base-height: 8.0rem; /* 80px kichik mobil */
+    --header-height: calc(var(--header-base-height) + env(safe-area-inset-top, 0px));
+    --search-header-base-height: 5.6rem; /* 56px kichik mobil */
+    --search-header-height: calc(var(--search-header-base-height) + env(safe-area-inset-top, 0px));
+
+    --menu-base-height: 5.0rem; /* 50px kichik mobil */
+    --menu-bottom-padding: max(1.2rem, env(safe-area-inset-bottom, 0px));
+    --menu-height: calc(var(--menu-base-height) + var(--menu-bottom-padding));
+
     --content-gap-top: 1.4rem; /* 14px kichik mobil */
     --content-gap-bottom: 3.2rem; /* 32px kichik mobil */
   }
@@ -145,8 +167,15 @@
 
 @media (max-width: 340px) {
   :root {
-    --header-height: 5.4rem; /* 54px ultra-kichik mobil */
-    --menu-height: 5rem; /* 50px ultra-kichik mobil */
+    --header-base-height: 7.8rem; /* 78px ultra-kichik mobil */
+    --header-height: calc(var(--header-base-height) + env(safe-area-inset-top, 0px));
+    --search-header-base-height: 5.4rem;
+    --search-header-height: calc(var(--search-header-base-height) + env(safe-area-inset-top, 0px));
+
+    --menu-base-height: 4.8rem;
+    --menu-bottom-padding: max(1.0rem, env(safe-area-inset-bottom, 0px));
+    --menu-height: calc(var(--menu-base-height) + var(--menu-bottom-padding));
+
     --content-gap-top: 1.2rem; /* 12px ultra-kichik mobil */
     --content-gap-bottom: 2.8rem; /* 28px ultra-kichik mobil */
   }

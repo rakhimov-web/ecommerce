@@ -20,7 +20,9 @@
   background-color: var(--white);
   border-top: 1px solid var(--border);
   height: var(--menu-height);
-  padding: 0 0 env(safe-area-inset-bottom, 0px);
+  padding-top: 0.5rem;
+  padding-bottom: var(--menu-bottom-padding);
+  box-sizing: border-box;
   border-radius: 0;
 }
 
@@ -36,7 +38,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 0.35rem 0.2rem;
+  padding: 0.2rem 0.2rem;
   color: var(--gray);
   font-family: var(--font-primary);
   border-radius: 0;
@@ -58,10 +60,10 @@
 /* Scroll-proof gorizontal rels (Pill Track) */
 .pillTrack {
   position: absolute;
-  top: 0;
+  top: 0.5rem;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: var(--menu-bottom-padding);
   pointer-events: none;
   z-index: 1;
   display: flex;
@@ -274,10 +276,13 @@
     background-color: var(--white);
     pointer-events: auto;
     overflow: hidden;
+    height: 5.6rem;
     padding: 0 0.8rem;
   }
 
   .pillTrack {
+    top: 0;
+    bottom: 0;
     left: 0.8rem;
     right: 0.8rem;
     width: calc(100% - 1.6rem);
