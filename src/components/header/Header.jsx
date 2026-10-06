@@ -33,32 +33,13 @@ const Header = ({
     }
   };
 
-  // Smart collapsible header: faqat topda to'liq ko'rinadi, scroll qilsa smooth yuqoriga kirib ketadi
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentY =
-        window.scrollY || document.documentElement.scrollTop || 0;
-      setIsScrolled(currentY > 25);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
-    <header
-      className={`${styles.header} ${isScrolled ? styles.headerScrolled : ""}`}
-    >
+    <header className={styles.header}>
       {/* 1-QATOR: Markaziy NOVA brend logo qatori (Telegram Fullscreen da buttons orasida 100% markazlashgan) */}
       <TopBrandBar onLogoClick={handleLogoClick} />
 
-      {/* 2-QATOR: Asl qidiruv va tugmalar qatori (scroll bo'lganda silliq yuqoriga kirib ketadi) */}
-      <div
-        className={`${styles.container} ${isScrolled ? styles.containerHidden : ""}`}
-      >
+      {/* 2-QATOR: Asl qidiruv va tugmalar qatori (padding va o'lchamlari 100% o'zgarmas!) */}
+      <div className={styles.container}>
         {/* Qidiruv maydoni (bosilganda to'g'ridan-to'g'ri SearchPage ga o'tadi) */}
         <div
           className={styles.searchBox}

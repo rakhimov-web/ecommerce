@@ -3,7 +3,7 @@
   min-height: 100vh;
   background-color: var(--background);
   padding-top: var(--header-height);
-  padding-bottom: calc(var(--menu-height) + var(--safe-area-bottom) + 2.4rem);
+  padding-bottom: calc(var(--menu-height) + var(--safe-area-bottom));
   font-family: var(--font-primary);
   user-select: none;
   -webkit-user-select: none;
