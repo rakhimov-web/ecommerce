@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import styles from "./brandSplashLoader.module.css";
 
-// 10 ta original SVG path-lari (shakllari mutlaqo tegilmagan original vektorlar)
+// 10 ta original SVG path-lari (assets/icons/logo.svg dan aynan olingan, shakllari mutlaqo tegilmagan)
 const BLUE_BAG_PATH =
   "M220.37 95.5531C222.18 95.5531 223.22 91.8431 199.19 171.553C195.8 182.833 191.96 193.893 190.67 196.133C187.5 201.663 181.13 207.233 174.34 210.413C168.72 213.053 168.72 213.053 110.72 213.053C46.1197 213.053 49.1597 213.353 39.2097 206.043C30.7897 199.863 29.5997 197.003 13.7697 145.053C-2.26029 92.4031 -2.0603 93.5431 3.1797 85.2731C7.0697 79.1331 14.3397 75.5531 22.8997 75.5531C28.6197 75.5531 29.2197 75.3531 29.6197 73.3031C31.8497 61.6931 32.7597 58.1931 34.9797 52.5531C46.2797 23.9131 72.0397 4.04313 102.49 0.493126C131.5 -2.89687 161.53 11.4231 177.63 36.3131C182.76 44.2331 183.17 46.3832 180.12 49.1432C177.24 51.7432 175.42 55.5131 174.14 61.5031C173.05 66.5531 173.05 66.5531 168.39 66.5531C163.72 66.5431 163.72 66.5431 160.07 58.8031C153.55 44.9431 141 34.0431 126.36 29.5131C118.6 27.1131 105.14 26.9031 96.9197 29.0431C78.8197 33.7531 62.8697 49.0231 57.7997 66.4831C54.8597 76.6031 48.1197 75.5531 115.75 75.5531C171.57 75.5531 175.32 75.6631 175.83 77.3031C179.01 87.4731 183.86 93.1231 193 97.3031C197.49 99.3631 199.52 99.7031 205.54 99.3831C209.63 99.1631 214.19 98.2531 216.12 97.2731C218 96.3331 219.91 95.5531 220.37 95.5531ZM167.22 139.303C167.22 133.863 162.93 129.543 157.55 129.573C153.16 129.603 150.81 131.283 146.8 137.283C138.89 149.123 123.29 156.273 107.52 155.293C93.3997 154.413 82.5497 147.943 71.4097 133.763C68.4097 129.933 67.6997 129.553 63.6197 129.553C57.3497 129.553 54.2197 132.723 54.2197 139.073C54.2197 144.543 57.3797 149.693 65.7497 157.863C77.5597 169.403 93.0497 175.713 109.72 175.793C127.41 175.873 141.64 170.493 154 159.053C163.08 150.643 167.22 144.463 167.22 139.303Z";
 
 const ORANGE_DOT_PATH =
   "M223.38 59.9831C226.21 66.0431 225.56 75.9331 221.97 81.3631C218.04 87.2831 211.38 90.8831 204.35 90.8831C197.92 90.8731 194.11 89.2032 189.58 84.3932C182.65 77.0132 181.38 69.0431 185.68 59.8131C188.43 53.9031 194.67 49.1631 201.12 48.0731C209.63 46.6331 219.65 51.9931 223.38 59.9831Z";
 
-// 'savatcha' matnining 8 ta harfi
+// 'savatcha' matnining 8 ta harfi tartibi bilan
 const LETTERS = [
   // s
   "M349.74 135.523C350.64 138.303 351.07 142.763 350.87 147.053C350.13 162.543 339.09 173.943 321.22 177.653C312.19 179.533 293.08 178.293 285.01 175.313C274.3 171.353 261.93 160.353 263.52 156.213C264.17 154.523 282.72 141.553 284.47 141.563C285.16 141.573 287.29 143.193 289.21 145.163C293.82 149.903 298.89 152.393 305.4 153.093C312.22 153.833 317.56 151.413 318.03 147.363C318.48 143.513 315.59 142.003 300.15 137.993C275.09 131.503 266.24 123.413 266.23 106.983C266.22 97.9931 268.74 91.8731 275.07 85.5431C284.3 76.3131 299.31 72.1331 315.48 74.2931C329.89 76.2231 339.52 81.0531 346.63 89.9131C349.72 93.7631 349.72 93.7631 346.08 96.9231C344.08 98.6531 339.23 102.283 335.31 104.993C328.18 109.903 328.18 109.903 324.95 106.383C320.14 101.133 315.7 99.1631 308.58 99.1031C302.05 99.0531 298.22 101.063 298.22 104.553C298.22 107.743 301.86 109.523 315.7 113.063C336.96 118.513 346.24 124.633 349.74 135.523Z",
@@ -31,7 +31,7 @@ const LETTERS = [
 
 const BrandSplashLoader = ({ onComplete }) => {
   useEffect(() => {
-    // 1.55s: Qalam chizilishi, rang to'lishi, nur o'tishi va shopping settle yakunlanadi
+    // 1.55s: Qalam chizilishi, rang to'lishi va nafis sheen yakunlangach, silliq o'tish
     const timer = setTimeout(() => {
       if (onComplete) onComplete();
     }, 1550);
@@ -42,27 +42,25 @@ const BrandSplashLoader = ({ onComplete }) => {
   return (
     <motion.div
       className={styles.splashOverlay}
-      initial={{ opacity: 1, y: "0%" }}
+      initial={{ opacity: 1 }}
       exit={{
         opacity: 0,
-        y: "-8%",
-        transition: { duration: 0.42, ease: [0.22, 1, 0.36, 1] },
+        transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
       }}
     >
-      {/* Orqa fondagi nozik brend nuri (Ambient soft glow) */}
-      <div className={styles.ambientGlow} />
-
       <motion.div
         className={styles.loaderContent}
-        initial={{ opacity: 1, scale: 1, y: 0 }}
+        initial={{ opacity: 1, scale: 1 }}
+        animate={{ opacity: 1, scale: 1 }}
         exit={{
           opacity: 0,
-          scale: 1.035,
-          y: -16,
-          transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
+          scale: 1.008,
+          filter: "blur(2.5px)",
+          transition: { duration: 0.38, ease: [0.22, 1, 0.36, 1] },
         }}
+        transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
       >
-        {/* Asosiy animatsiyali SVG logotip */}
+        {/* Asosiy animatsiyali SVG logotip — sof oq fonda, mutlaqo tegilmagan original shakllar */}
         <div className={styles.svgWrapper}>
           <svg
             className={styles.logoSvg}
@@ -86,133 +84,107 @@ const BrandSplashLoader = ({ onComplete }) => {
 
             {/*
               1. Moviy rangli savat/xalta belgisi:
-              Qalam bilan arxitekturaviy aniqlikda chiziladi, rang bilan to'ladi va
-              yengil taktil shopping settle (yuklanish hissi) tebranishini beradi.
+              Qalam bilan chizilayotgandek chiziq (stroke-draw) bo'ylab nozik chiziladi,
+              so'ngra ichki qismi moviy rang bilan to'lib, qat'iy va jiddiy original shaklga aylanadi.
             */}
-            <motion.g
-              initial={{ scale: 0.98, y: 0 }}
+            <motion.path
+              d={BLUE_BAG_PATH}
+              stroke="var(--primary)"
+              strokeWidth={3.6}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="var(--primary)"
+              fillRule="evenodd"
+              clipRule="evenodd"
+              initial={{
+                pathLength: 0,
+                opacity: 0,
+                strokeOpacity: 1,
+                fillOpacity: 0,
+              }}
               animate={{
-                scale: [0.98, 1.02, 1],
-                y: [0, -3, 0],
+                pathLength: 1,
+                opacity: 1,
+                strokeOpacity: 0,
+                fillOpacity: 1,
               }}
               transition={{
-                duration: 0.42,
-                ease: [0.175, 0.885, 0.32, 1.15],
-                delay: 0.62,
+                opacity: { duration: 0.04, delay: 0.06 },
+                pathLength: {
+                  duration: 0.72,
+                  ease: [0.65, 0, 0.35, 1],
+                  delay: 0.06,
+                },
+                fillOpacity: {
+                  duration: 0.32,
+                  ease: [0.25, 0.1, 0.25, 1],
+                  delay: 0.58,
+                },
+                strokeOpacity: {
+                  duration: 0.22,
+                  ease: "easeOut",
+                  delay: 0.78,
+                },
               }}
-              style={{ transformOrigin: "110px 106px" }}
-            >
-              <motion.path
-                d={BLUE_BAG_PATH}
-                stroke="var(--primary)"
-                strokeWidth={2.4}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="var(--primary)"
-                fillRule="evenodd"
-                clipRule="evenodd"
-                initial={{
-                  pathLength: 0,
-                  opacity: 0,
-                  strokeOpacity: 1,
-                  fillOpacity: 0,
-                }}
-                animate={{
-                  pathLength: 1,
-                  opacity: 1,
-                  strokeOpacity: 0,
-                  fillOpacity: 1,
-                }}
-                transition={{
-                  opacity: { duration: 0.04, delay: 0.05 },
-                  pathLength: {
-                    duration: 0.62,
-                    ease: [0.22, 1, 0.36, 1],
-                    delay: 0.05,
-                  },
-                  fillOpacity: {
-                    duration: 0.28,
-                    ease: [0.22, 1, 0.36, 1],
-                    delay: 0.45,
-                  },
-                  strokeOpacity: {
-                    duration: 0.18,
-                    ease: "easeOut",
-                    delay: 0.64,
-                  },
-                }}
-              />
-            </motion.g>
+            />
 
             {/*
-              2. Zarg'aldoq aksent:
-              Savatga tushgan mahsulot/bildirishnoma kabi o'z joyiga sakrab tushib nurlanadi.
+              2. Zarg'aldoq dumaloq aksent nuqta:
+              Chizilish bilan boshlanadi va yorqin brend gradienti bilan nurlanadi.
             */}
-            <motion.g
-              initial={{ y: -12, scale: 0, opacity: 0 }}
+            <motion.path
+              d={ORANGE_DOT_PATH}
+              stroke="var(--accent)"
+              strokeWidth={3.6}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="url(#loader_orange_grad)"
+              fillRule="evenodd"
+              clipRule="evenodd"
+              initial={{
+                pathLength: 0,
+                opacity: 0,
+                strokeOpacity: 1,
+                fillOpacity: 0,
+              }}
               animate={{
-                y: [-12, 0],
-                scale: [0, 1.25, 0.96, 1],
+                pathLength: 1,
                 opacity: 1,
+                strokeOpacity: 0,
+                fillOpacity: 1,
               }}
               transition={{
-                duration: 0.46,
-                ease: [0.175, 0.885, 0.32, 1.2],
-                delay: 0.36,
+                opacity: { duration: 0.04, delay: 0.24 },
+                pathLength: {
+                  duration: 0.48,
+                  ease: [0.65, 0, 0.35, 1],
+                  delay: 0.24,
+                },
+                fillOpacity: {
+                  duration: 0.28,
+                  ease: [0.25, 0.1, 0.25, 1],
+                  delay: 0.54,
+                },
+                strokeOpacity: {
+                  duration: 0.2,
+                  ease: "easeOut",
+                  delay: 0.72,
+                },
               }}
-              style={{ transformOrigin: "205px 70px" }}
-            >
-              <motion.path
-                d={ORANGE_DOT_PATH}
-                stroke="var(--accent)"
-                strokeWidth={2.4}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="url(#loader_orange_grad)"
-                fillRule="evenodd"
-                clipRule="evenodd"
-                initial={{
-                  pathLength: 0,
-                  strokeOpacity: 1,
-                  fillOpacity: 0,
-                }}
-                animate={{
-                  pathLength: 1,
-                  strokeOpacity: 0,
-                  fillOpacity: 1,
-                }}
-                transition={{
-                  pathLength: {
-                    duration: 0.36,
-                    ease: [0.22, 1, 0.36, 1],
-                    delay: 0.36,
-                  },
-                  fillOpacity: {
-                    duration: 0.22,
-                    ease: [0.22, 1, 0.36, 1],
-                    delay: 0.5,
-                  },
-                  strokeOpacity: {
-                    duration: 0.16,
-                    ease: "easeOut",
-                    delay: 0.66,
-                  },
-                }}
-              />
-            </motion.g>
+            />
 
             {/*
               3. 'savatcha' matnining 8 ta harfi:
-              Jiddiy va ravon kadans bilan ketma-ket chiziladi va to'liq brend tipografiyasiga aylanadi.
+              Ketma-ket tartibda chizmachilik aniqligida chiziladi va to'liq jiddiy brend tipografiyasiga aylanadi.
             */}
             {LETTERS.map((letterPath, index) => {
-              const letterDelay = 0.16 + index * 0.045;
+              const letterDelay = 0.18 + index * 0.06;
               return (
                 <motion.path
                   key={index}
                   d={letterPath}
                   stroke="var(--black)"
-                  strokeWidth={2.2}
+                  strokeWidth={3.2}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   fill="var(--black)"
@@ -231,21 +203,21 @@ const BrandSplashLoader = ({ onComplete }) => {
                     fillOpacity: 1,
                   }}
                   transition={{
-                    opacity: { duration: 0.03, delay: letterDelay },
+                    opacity: { duration: 0.04, delay: letterDelay },
                     pathLength: {
-                      duration: 0.42,
-                      ease: [0.22, 1, 0.36, 1],
+                      duration: 0.5,
+                      ease: [0.65, 0, 0.35, 1],
                       delay: letterDelay,
                     },
                     fillOpacity: {
-                      duration: 0.22,
-                      ease: [0.22, 1, 0.36, 1],
-                      delay: letterDelay + 0.24,
+                      duration: 0.28,
+                      ease: [0.25, 0.1, 0.25, 1],
+                      delay: letterDelay + 0.3,
                     },
                     strokeOpacity: {
-                      duration: 0.16,
+                      duration: 0.2,
                       ease: "easeOut",
-                      delay: letterDelay + 0.38,
+                      delay: letterDelay + 0.46,
                     },
                   }}
                 />
@@ -253,46 +225,18 @@ const BrandSplashLoader = ({ onComplete }) => {
             })}
           </svg>
 
-          {/* Logotip uzra o'tuvchi mayin specular yorug'lik nuri (Specular gleam) */}
+          {/* Logotip ustidan o'tuvchi nafis, minimalist yorug'lik nuri (Specular gleam) */}
           <motion.div
             className={styles.shimmerBeam}
-            initial={{ left: "-50%", opacity: 0 }}
-            animate={{ left: "150%", opacity: [0, 0.65, 0] }}
+            initial={{ x: "-120px", opacity: 0 }}
+            animate={{ x: ["-120px", "380px"], opacity: [0, 0.55, 0] }}
             transition={{
-              duration: 0.68,
+              duration: 0.65,
               ease: [0.25, 0.1, 0.25, 1],
-              delay: 0.86,
+              delay: 1.02,
             }}
           />
         </div>
-
-        {/* Shopping atmosferasini beruvchi nozik brend taglayn va progress chizig'i */}
-        <motion.div
-          className={styles.shoppingFooter}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.4,
-            ease: [0.22, 1, 0.36, 1],
-            delay: 0.52,
-          }}
-        >
-          {/* Zamonaviy e-commerce progress indikatori */}
-          <div className={styles.progressTrack}>
-            <motion.div
-              className={styles.progressBar}
-              initial={{ width: "0%" }}
-              animate={{ width: "100%" }}
-              transition={{
-                duration: 0.95,
-                ease: [0.32, 0.72, 0, 1],
-                delay: 0.52,
-              }}
-            />
-          </div>
-
-          <span className={styles.tagline}>ONLAYN XARIDLAR</span>
-        </motion.div>
       </motion.div>
     </motion.div>
   );

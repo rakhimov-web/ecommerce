@@ -145,6 +145,34 @@
   right: 0.2rem;
 }
 
+/* Yangilash (Refresh) tugmasi va aylanuvchi animatsiya */
+.refreshIcon {
+  color: var(--black);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.iconBtn:active .refreshIcon {
+  transform: scale(0.9);
+}
+
+.refreshBtnActive {
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.spinAnimation {
+  animation: spinRefresh 0.75s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+@keyframes spinRefresh {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /* Mobil ekranlar uchun moslashuv */
 @media (max-width: 768px) {
   .container {

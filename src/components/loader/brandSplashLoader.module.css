@@ -11,34 +11,12 @@
   -webkit-user-select: none;
   touch-action: none;
   pointer-events: all;
-  will-change: transform, opacity;
-  transform: translateZ(0);
-}
-
-/* Orqa fondagi nafis markaziy brend nuri (Ambient soft glow) */
-.ambientGlow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 340px;
-  height: 340px;
-  transform: translate(-50%, -50%) translateZ(0);
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(0, 85, 255, 0.04) 0%,
-    rgba(255, 100, 48, 0.02) 45%,
-    transparent 70%
-  );
-  pointer-events: none;
-  z-index: 1;
 }
 
 .loaderContent {
   position: relative;
   z-index: 2;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
@@ -48,7 +26,7 @@
   backface-visibility: hidden;
 }
 
-/* Asosiy Brand SVG konteyneri */
+/* Asosiy Brand SVG konteyneri — hech qanday ko'k nur yoki soyasiz, ultra toza */
 .svgWrapper {
   position: relative;
   width: 260px;
@@ -57,7 +35,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
   filter: none !important;
   will-change: transform, opacity;
   transform: translateZ(0);
@@ -70,84 +47,27 @@
   display: block;
 }
 
-/* Logotip uzra o'tuvchi mayin nur (Specular gleam - GPU transform) */
+/* Logotip uzra o'tuvchi mayin nur (Shimmer gleam - GPU transform) */
 .shimmerBeam {
   position: absolute;
-  top: -20%;
-  bottom: -20%;
+  top: -10%;
+  bottom: -10%;
   left: 0;
-  width: 70px;
+  width: 60px;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.85) 50%,
+    rgba(255, 255, 255, 0.8) 50%,
     transparent 100%
   );
-  transform: skewX(-20deg) translateZ(0);
+  transform: skewX(-22deg) translateZ(0);
   pointer-events: none;
   z-index: 5;
-  will-change: left, opacity;
-}
-
-/* Shopping atmosferasini beruvchi progress va taglayn qismi */
-.shoppingFooter {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.2rem;
-  margin-top: 2.8rem;
-  user-select: none;
-  -webkit-user-select: none;
   will-change: transform, opacity;
-}
-
-.progressTrack {
-  width: 120px;
-  height: 2.5px;
-  background-color: var(--border-subtle);
-  border-radius: 999px;
-  overflow: hidden;
-  position: relative;
-}
-
-.progressBar {
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    var(--primary) 0%,
-    var(--accent) 100%
-  );
-  border-radius: 999px;
-  will-change: width;
-}
-
-.tagline {
-  font-family: var(--font-primary);
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--gray-muted);
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  margin: 0;
-  padding-left: 0.24em; /* letter-spacing optik markazlashtirish */
 }
 
 @media (min-width: 768px) {
   .svgWrapper {
     width: 320px;
-  }
-
-  .ambientGlow {
-    width: 420px;
-    height: 420px;
-  }
-
-  .progressTrack {
-    width: 140px;
-    height: 3px;
-  }
-
-  .tagline {
-    font-size: 1.15rem;
   }
 }

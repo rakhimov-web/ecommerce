@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, Heart, ShoppingCart, X } from "lucide-react";
+import { Search, Heart, RotateCw, X } from "lucide-react";
 import NotificationBadge from "../common/NotificationBadge";
 import { useApp } from "../../context/useApp";
 import styles from "./header.module.css";
@@ -7,13 +7,12 @@ import styles from "./header.module.css";
 const Header = ({
   onSearchClick,
   likedCount: propLikedCount,
-  cartCount: propCartCount,
+  onRefresh,
+  isRefreshing = false,
 }) => {
-  const { totalLikedCount, totalCartCount } = useApp();
+  const { totalLikedCount } = useApp();
   const likedCount =
     propLikedCount !== undefined ? propLikedCount : totalLikedCount;
-  const cartCount =
-    propCartCount !== undefined ? propCartCount : totalCartCount;
   const [searchValue, setSearchValue] = useState("");
 
   const handleClear = (e) => {
@@ -61,7 +60,7 @@ const Header = ({
           )}
         </div>
 
-        {/* O'ng tarafdagi harakatlar: Sevimlilar (3 ta) va Savatcha (2 ta) */}
+        {/* O'ng tarafdagi harakatlar: Sevimlilar va Saytni yangilash (Refresh) */}
         <div className={styles.actionGroup}>
           <button
             type="button"
@@ -77,13 +76,16 @@ const Header = ({
 
           <button
             type="button"
-            className={styles.iconBtn}
-            aria-label="Savatcha"
+            className={`${styles.iconBtn} ${isRefreshing ? styles.refreshBtnActive : ""}`}
+            onClick={onRefresh}
+            disabled={isRefreshing}
+            aria-label="Saytni yangilash"
+            title="Yangilash"
           >
-            <ShoppingCart size={22} strokeWidth={1.8} />
-            <NotificationBadge
-              count={cartCount}
-              className={styles.headerBadge}
+            <RotateCw
+              size={20}
+              strokeWidth={1.8}
+              className={`${styles.refreshIcon} ${isRefreshing ? styles.spinAnimation : ""}`}
             />
           </button>
         </div>

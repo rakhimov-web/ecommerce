@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from "../../components/header/Header";
 import BannerCarousel from "../../components/banner/BannerCarousel";
@@ -7,6 +7,8 @@ import ProductGrid from "../../components/products/ProductGrid";
 import BannerSkeleton from "../../components/skeleton/BannerSkeleton";
 import CategorySkeleton from "../../components/skeleton/CategorySkeleton";
 import ProductGridSkeleton from "../../components/skeleton/ProductGridSkeleton";
+import { useApp } from "../../context/useApp";
+import { triggerHaptic } from "../../lib/telegram";
 import styles from "./home.module.css";
 
 import bannerImg from "../../assets/images/banner.png";
@@ -31,6 +33,30 @@ const Home = ({
   onCategoryClick,
 }) => {
   const [loading, setLoading] = useState(!hasLoadedHomeOnce);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const { showToast } = useApp();
+
+  // Sayt ma'lumotlarini qayta yuklash (Refresh)
+  const handleRefresh = useCallback(() => {
+    if (loading || isRefreshing) return;
+
+    triggerHaptic("medium");
+    setIsRefreshing(true);
+    setLoading(true);
+
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    const timer = setTimeout(() => {
+      setLoading(false);
+      setIsRefreshing(false);
+      triggerHaptic("success");
+      showToast("Ma'lumotlar yangilandi");
+    }, 750);
+
+    return () => clearTimeout(timer);
+  }, [loading, isRefreshing, showToast]);
 
   useEffect(() => {
     if (hasLoadedHomeOnce || !isSplashFinished) return;
@@ -69,7 +95,11 @@ const Home = ({
 
   return (
     <div className={styles.homeContainer}>
-      <Header onSearchClick={onSearchClick} />
+      <Header
+        onSearchClick={onSearchClick}
+        onRefresh={handleRefresh}
+        isRefreshing={isRefreshing}
+      />
       <main className={styles.mainContent}>
         <AnimatePresence mode="wait">
           {loading ? (
