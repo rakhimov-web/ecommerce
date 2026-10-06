@@ -38,8 +38,8 @@ const ToastAlert = () => {
       <AnimatePresence>
         {toast.visible && (
           <motion.div
-            key={`alert-${toast.id}`}
-            className={`${styles.alertPill} ${isRefresh ? styles.refreshPill : ""}`}
+            key="app-toast-alert"
+            className={styles.alertPill}
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{
@@ -52,30 +52,36 @@ const ToastAlert = () => {
               ease: [0.16, 1, 0.3, 1],
             }}
           >
-            {/* Ikonka (Savat uchun Instagram badge, Refresh uchun RotateCw) */}
-            <motion.span
-              key={`icon-${toast.id}`}
-              className={styles.iconWrapper}
-              initial={{ opacity: 0.6, rotate: isRefresh ? -120 : 0 }}
-              animate={{ opacity: 1, rotate: 0 }}
-              transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+            {/*
+              Ichki kontent: Ketma-ket alert chaqirilganda kapsula o'rnidan jilmaydi yoki sakramaydi,
+              shunchaki ichki kontent nozik mikropuls bilan yangilanadi va vaqti uzayadi.
+            */}
+            <motion.div
+              key={`toast-content-${toast.id}`}
+              className={styles.pillContent}
+              initial={{ opacity: 0.5, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
             >
-              {isRefresh ? (
-                <RotateCw
-                  size={17}
-                  stroke="var(--white)"
-                  strokeWidth={2.4}
-                  className={styles.refreshIcon}
-                />
-              ) : (
-                <InstagramVerifiedBadge size={19} />
-              )}
-            </motion.span>
+              {/* Ikonka (Savat uchun Instagram badge, Refresh uchun RotateCw) */}
+              <span className={styles.iconWrapper}>
+                {isRefresh ? (
+                  <RotateCw
+                    size={17}
+                    stroke="var(--white)"
+                    strokeWidth={2.4}
+                    className={styles.refreshIcon}
+                  />
+                ) : (
+                  <InstagramVerifiedBadge size={19} />
+                )}
+              </span>
 
-            {/* Oq rangdagi jiddiy va toza yozuv */}
-            <span className={styles.label}>
-              {isRefresh ? "Yangilandi" : "Qo'shildi"}
-            </span>
+              {/* Oq rangdagi jiddiy va toza yozuv */}
+              <span className={styles.label}>
+                {isRefresh ? "Yangilandi" : "Qo'shildi"}
+              </span>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
