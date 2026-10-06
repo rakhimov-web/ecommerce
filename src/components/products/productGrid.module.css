@@ -96,7 +96,7 @@
   display: block;
   width: 5.6rem;
   height: auto;
-  aspect-ratio: 75 / 52;
+  aspect-ratio: 75 / 44;
 }
 
 /* Sevimlilar (Like) yurakcha tugmasi — BORDERSIZ, SOYASIZ VA OPACITY LI FON */
@@ -459,7 +459,7 @@
   .ticketSvg {
     width: 5.2rem;
     height: auto;
-    aspect-ratio: 75 / 52;
+    aspect-ratio: 75 / 44;
   }
 
   .content {
@@ -494,7 +494,7 @@
   .ticketSvg {
     width: 4.8rem;
     height: auto;
-    aspect-ratio: 75 / 52;
+    aspect-ratio: 75 / 44;
   }
 
   .currentPrice {
@@ -554,7 +554,7 @@
   .ticketSvg {
     width: 4.3rem;
     height: auto;
-    aspect-ratio: 75 / 52;
+    aspect-ratio: 75 / 44;
   }
 
   .currentPrice {
@@ -617,7 +617,7 @@
   .ticketSvg {
     width: 3.9rem;
     height: auto;
-    aspect-ratio: 75 / 52;
+    aspect-ratio: 75 / 44;
   }
 
   .currentPrice {

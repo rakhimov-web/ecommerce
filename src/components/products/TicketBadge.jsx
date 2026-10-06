@@ -13,42 +13,42 @@ const TicketBadge = ({ type }) => {
     <div className={styles.badgeWrapper} aria-label={label}>
       <svg
         className={styles.ticketSvg}
-        viewBox="0 0 75 52"
+        viewBox="0 0 75 44"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
         {/* Chap yuqori burchakdagi 3D orqaga qayrilgan burchak (fold flap) */}
-        <path d="M 0 4.4 L 6.4 0 L 6.4 4.8 Z" fill={foldColor} />
+        <path d="M 0 3.8 L 6.2 0 L 6.2 4.2 Z" fill={foldColor} />
 
-        {/* Yuqori va pastki qirrasida chuqur yarim doira o'yig'i (notches) bo'lgan asosiy chipta tanasi */}
+        {/* Yuqori va pastki qirrasida chuqur yarim doira o'yig'i bo'lgan ixcham chipta tanasi */}
         <path
-          d="M 0 4.4 
-             L 33 7.6 
-             A 6 6 0 0 0 44.6 8.8 
-             L 71.6 12 
-             Q 74.8 12.4 74.8 15.2 
-             L 74.8 48.4 
-             Q 74.8 51.6 71.6 51.6 
-             L 40.6 48.6 
-             A 6 6 0 0 0 29 47.4 
-             L 3.2 44.8 
-             Q 0 44.4 0 41.6 
-             L 0 4.4 
+          d="M 0 3.8 
+             L 33 6.6 
+             A 6 6 0 0 0 44.6 7.6 
+             L 71.6 10.4 
+             Q 75 10.8 75 13.5 
+             L 75 41 
+             Q 75 44 71.6 44 
+             L 40.6 41.4 
+             A 6 6 0 0 0 29 40.4 
+             L 3.2 38.2 
+             Q 0 37.8 0 35.2 
+             L 0 3.8 
              Z"
           fill={mainColor}
         />
 
-        {/* Chipta markazidagi oq qalin matn */}
+        {/* Chipta markazidagi oq qalin matn — biroz kattalashtirilgan */}
         <text
           x="37.5"
-          y="29"
+          y="24.8"
           fill="var(--white)"
-          fontSize="11"
+          fontSize="12.2"
           fontWeight="800"
           fontFamily="var(--font-primary)"
           textAnchor="middle"
           dominantBaseline="central"
-          letterSpacing="0.8"
+          letterSpacing="0.9"
         >
           {label}
         </text>
