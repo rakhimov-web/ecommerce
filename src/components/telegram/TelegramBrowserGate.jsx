@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Send, Smartphone, Code } from "lucide-react";
 import logoImg from "../../assets/icons/logo.svg";
 import { enableDevBrowserMode } from "../../lib/telegram";
+import { BRAND_CONFIG } from "../../config/brand";
 import styles from "./telegramBrowserGate.module.css";
 
 const TelegramBrowserGate = ({ onDevBypass }) => {
@@ -31,7 +32,7 @@ const TelegramBrowserGate = ({ onDevBypass }) => {
 
         <img
           src={logoImg}
-          alt="Savatcha"
+          alt={BRAND_CONFIG.shortTitle}
           className={styles.logoPreview}
           draggable={false}
         />
@@ -43,8 +44,9 @@ const TelegramBrowserGate = ({ onDevBypass }) => {
         <h1 className={styles.title}>Faqat Telegramda ishlaydi</h1>
 
         <p className={styles.description}>
-          Savatcha internet-do'koni eng qulay xarid va tezkor buyurtmalar uchun
-          Telegram Mini App formatida yaratilgan. Do'konni bot orqali oching.
+          {BRAND_CONFIG.shortTitle} internet-do'koni eng qulay xarid va tezkor
+          buyurtmalar uchun Telegram Mini App formatida yaratilgan. Do'konni bot
+          orqali oching.
         </p>
 
         <a
