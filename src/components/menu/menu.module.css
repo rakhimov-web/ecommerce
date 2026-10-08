@@ -33,6 +33,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  min-height: var(--touch-target);
   flex: 1;
   background: transparent;
   border: none;

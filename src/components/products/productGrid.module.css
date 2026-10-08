@@ -146,6 +146,17 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* 44x44px touch target hit area */
+.favoriteBtn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--touch-target);
+  height: var(--touch-target);
+  transform: translate(-50%, -50%);
+}
+
 .favoriteBtn::after {
   content: "";
   position: absolute;
@@ -355,6 +366,17 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+/* 44x44px touch target hit area */
+.stepperBtn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--touch-target);
+  height: var(--touch-target);
+  transform: translate(-50%, -50%);
+}
+
 .stepperBtn::after {
   content: "";
   position: absolute;
@@ -396,15 +418,15 @@
 }
 
 /* Tablet ekranlar uchun 3 ustunli qulay panjara */
-@media (min-width: 769px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
   }
 }
 
-/* Mobil ekranlar uchun moslashuv */
-@media (max-width: 768px) {
+/* Mobil ekranlar uchun moslashuv (320px - 767px: 2 ustunli panjara) */
+@media (max-width: 767px) {
   .section {
     padding: 0 2rem;
     margin: 0 auto;

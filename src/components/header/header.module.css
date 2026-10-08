@@ -108,6 +108,17 @@
   touch-action: manipulation;
 }
 
+/* 44x44px touch target hit area */
+.clearBtn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--touch-target);
+  height: var(--touch-target);
+  transform: translate(-50%, -50%);
+}
+
 .clearBtn::after {
   content: "";
   position: absolute;

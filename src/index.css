@@ -274,7 +274,7 @@
 }
 
 html {
-  font-size: 10px;
+  font-size: 62.5%;
   -webkit-text-size-adjust: 100%;
   overflow-y: scroll; /* Doimo barqaror sichqoncha bilan scroll bo'lishi uchun */
   overflow-x: clip; /* Eniga scroll hosil qilmasdan ortiqcha elementlarni qirqadi */
