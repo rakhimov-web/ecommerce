@@ -158,6 +158,7 @@ const AppSearchModal = ({ isOpen, onClose }) => {
                 onClick={onClose}
                 className={styles.escBadge}
                 title="Yopish"
+                aria-label="Yopish"
               >
                 ESC
               </button>
@@ -192,8 +193,15 @@ const AppSearchModal = ({ isOpen, onClose }) => {
                         key={cat.id}
                         className={styles.categoryItem}
                         onClick={() => setQuery(cat.title)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            setQuery(cat.title);
+                          }
+                        }}
                         role="button"
                         tabIndex={0}
+                        aria-label={cat.title}
                       >
                         <div className={styles.categoryLeft}>
                           <div className={styles.catIconWrap}>
@@ -230,8 +238,15 @@ const AppSearchModal = ({ isOpen, onClose }) => {
                         key={prod.id}
                         className={styles.productRow}
                         onClick={() => handleSelectProduct(prod)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            handleSelectProduct(prod);
+                          }
+                        }}
                         role="button"
                         tabIndex={0}
+                        aria-label={prod.title}
                       >
                         <div className={styles.productLeft}>
                           <img

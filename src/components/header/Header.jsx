@@ -61,8 +61,15 @@ const Header = ({
         <div
           className={styles.searchBox}
           onClick={handleSearchBoxClick}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              handleSearchBoxClick();
+            }
+          }}
           role="button"
           tabIndex={0}
+          aria-label="Qidiruv maydoni"
           style={{ cursor: "pointer" }}
         >
           <Search size={18} className={styles.searchIcon} />

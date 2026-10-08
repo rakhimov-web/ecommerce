@@ -324,6 +324,19 @@ textarea {
 }
 
 /* ========================================
+   ACCESSIBILITY & FOCUS RING
+   ======================================== */
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ========================================
    COMMON UI
    ======================================== */
 

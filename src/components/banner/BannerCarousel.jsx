@@ -259,6 +259,12 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
                   height: `${slideHeight}px`,
                 }}
                 onClick={() => handleCardClick(bannerData)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handleCardClick(bannerData);
+                  }
+                }}
                 role="button"
                 tabIndex={isCenter ? 0 : -1}
                 aria-label={bannerData.alt}

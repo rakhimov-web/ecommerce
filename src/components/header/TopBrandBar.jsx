@@ -19,11 +19,10 @@ const TopBrandBar = ({ onLogoClick }) => {
 
       {/* Markaz: Barcha sahifalar uchun o'zgarmas, professional SVG logotipi (X va Y bo'yicha mutlaq markazda) */}
       <div className={styles.logoCenter}>
-        <div
+        <button
+          type="button"
           className={styles.brandLogo}
           onClick={handleClick}
-          role="button"
-          tabIndex={0}
           aria-label="Nova do'koni"
         >
           <img
@@ -32,7 +31,7 @@ const TopBrandBar = ({ onLogoClick }) => {
             className={styles.logoSvg}
             draggable={false}
           />
-        </div>
+        </button>
       </div>
 
       {/* O'ng taraf: Telegram nativ Options/More (...) menyu tugmasi zonasi */}

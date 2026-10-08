@@ -263,8 +263,15 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
                       key={term}
                       className={styles.recentItem}
                       onClick={() => handleSelectRecent(term)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          handleSelectRecent(term);
+                        }
+                      }}
                       role="button"
                       tabIndex={0}
+                      aria-label={`${term} bo'yicha qidirish`}
                     >
                       <div className={styles.recentItemLeft}>
                         <Clock
@@ -300,8 +307,15 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
                     key={cat.id}
                     className={styles.categoryRow}
                     onClick={() => handleCategoryClick(cat)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        handleCategoryClick(cat);
+                      }
+                    }}
                     role="button"
                     tabIndex={0}
+                    aria-label={`${cat.title} toifasiga o'tish`}
                   >
                     <div className={styles.categoryRowLeft}>
                       {/* Squircle konteyner: rasmlar object-fit: cover */}
