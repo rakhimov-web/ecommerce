@@ -90,17 +90,30 @@ export const updateTelegramSafeArea = () => {
       document.documentElement.style.setProperty("--tg-content-safe-top", `${contentSafeTop}px`);
     }
 
-    // Top brand bar: safeAreaInset.top + contentSafeAreaInset.top
-    // Fullscreen bo'lmaganda har ikkisi 0 va brand bar 0 ga kollaps bo'ladi
-    const totalTopInsets = safeTop + contentSafeTop;
-    if (totalTopInsets > 0) {
-      const barHeightPx = Math.max(totalTopInsets, 44);
-      document.documentElement.style.setProperty("--top-bar-height", `${barHeightPx / 10}rem`);
-    } else if (isFullscreen) {
-      document.documentElement.style.setProperty("--top-bar-height", "4.8rem");
-    } else {
-      document.documentElement.style.setProperty("--top-bar-height", "0rem");
+    // Telegram nativ tugmalari (Back/Close va ...) status-bar ostidagi navigation qatorda joylashgan.
+    // .header elementi yuqoridan safe-area-top (notch/status bar) bilan surilgan.
+    // Shuning uchun --top-bar-height AYNAN Telegram nativ tugmalar qatori balandligiga teng bo'lishi shart.
+    let buttonBarHeightPx = 48;
+
+    if (contentSafeTop > safeTop) {
+      buttonBarHeightPx = contentSafeTop - safeTop;
+    } else if (contentSafeTop > 0) {
+      buttonBarHeightPx = contentSafeTop;
+    } else if (isFullscreen || safeTop > 0 || isTelegramApp()) {
+      const isIOS =
+        tg.platform === "ios" ||
+        (typeof navigator !== "undefined" &&
+          /iphone|ipad|ipod/i.test(navigator.userAgent));
+      buttonBarHeightPx = isIOS ? 44 : 48;
     }
+
+    // Telegram nativ header tugmalari qatori: kamida 44px (iOS) va ko'pi bilan 56px (Android)
+    buttonBarHeightPx = Math.min(Math.max(buttonBarHeightPx, 44), 56);
+
+    document.documentElement.style.setProperty(
+      "--top-bar-height",
+      `${buttonBarHeightPx / 10}rem`
+    );
   } catch (err) {
     console.warn("updateTelegramSafeArea xatosi:", err);
   }

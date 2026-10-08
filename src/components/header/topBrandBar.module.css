@@ -13,7 +13,6 @@
   overflow: hidden;
   user-select: none;
   -webkit-user-select: none;
-  transition: height var(--dur-ui) var(--ease-out);
 }
 
 /* Telegram nativ tugmalari (chapda Back/Close, o'ngda Menu/More) uchun xavfsiz bufer zonalar */

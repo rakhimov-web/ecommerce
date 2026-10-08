@@ -100,7 +100,7 @@
 
 .categorySection {
   width: 100%;
-  margin: 1.0rem auto 3.2rem auto;
+  margin: 1.4rem auto 3.0rem auto;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -148,7 +148,7 @@
 
 @media (max-width: 768px) {
   .categorySection {
-    margin: 0.8rem auto 2.8rem auto;
+    margin: 1.2rem auto 2.8rem auto;
   }
 
   .categoryContainer {
@@ -175,7 +175,7 @@
 
 @media (max-width: 480px) {
   .categorySection {
-    margin: 0.8rem auto 2.8rem auto;
+    margin: 1.2rem auto 2.8rem auto;
   }
 
   .categoryContainer {
@@ -196,7 +196,7 @@
 
 @media (max-width: 360px) {
   .categorySection {
-    margin: 0.6rem auto 2.4rem auto;
+    margin: 1.0rem auto 2.4rem auto;
   }
 
   .categoryContainer {
