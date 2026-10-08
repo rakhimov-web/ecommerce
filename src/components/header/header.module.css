@@ -51,18 +51,21 @@
   height: 4rem;
   outline: none;
   touch-action: manipulation;
-  transition: border-color var(--dur-ui) var(--ease-out);
+  transition:
+    border-color var(--dur-ui) var(--ease-out),
+    box-shadow var(--dur-ui) var(--ease-out),
+    background-color var(--dur-ui) var(--ease-out);
 }
 
-/* Fokuslangan / active holat: deyarli bilinmaydi, bg oq bo'lmaydi, biroz borderda bilinadi */
+/* Fokuslangan / active holat: Apple & shadcn uslubidagi silliq 3px brend halqa (ring) animatsiyasi */
 .searchBox:focus-within {
-  border-color: var(--border);
-  background-color: var(--surface-subtle);
-  box-shadow: none;
+  border-color: var(--primary);
+  background-color: var(--white);
+  box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.15);
 }
 
 .searchBox:focus-within .searchIcon {
-  color: var(--gray);
+  color: var(--primary);
 }
 
 .searchIcon {
