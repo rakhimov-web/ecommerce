@@ -47,34 +47,18 @@ export const enableDevBrowserMode = () => {
   window.location.reload();
 };
 
-// Theme sinxronizatsiyasi (Telegram colorScheme / themeParams)
+// Theme sinxronizatsiyasi: Toza yorug' (Light) rejim
 export const syncTelegramTheme = () => {
   const tg = getTelegramWebApp();
   if (typeof document === "undefined") return;
 
-  const colorScheme =
-    tg?.colorScheme ||
-    (typeof window !== "undefined" &&
-    window.matchMedia?.("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light");
-  const isDark = colorScheme === "dark";
-
-  if (isDark) {
-    document.documentElement.setAttribute("data-theme", "dark");
-  } else {
-    document.documentElement.removeAttribute("data-theme");
-  }
+  document.documentElement.removeAttribute("data-theme");
 
   if (tg) {
-    const headerColor = isDark ? "#171b21" : "#ffffff";
-    const bgColor = isDark ? "#0f1216" : "#f8fafd";
-    const bottomColor = isDark ? "#171b21" : "#ffffff";
-
     try {
-      if (tg.setHeaderColor) tg.setHeaderColor(headerColor);
-      if (tg.setBackgroundColor) tg.setBackgroundColor(bgColor);
-      if (tg.setBottomBarColor) tg.setBottomBarColor(bottomColor);
+      if (tg.setHeaderColor) tg.setHeaderColor("#ffffff");
+      if (tg.setBackgroundColor) tg.setBackgroundColor("#f8fafd");
+      if (tg.setBottomBarColor) tg.setBottomBarColor("#ffffff");
     } catch {}
   }
 };

@@ -11,6 +11,8 @@
 
 .mainContent {
   width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
   padding-top: var(--content-gap-top);
   padding-bottom: var(--content-gap-bottom);
 }

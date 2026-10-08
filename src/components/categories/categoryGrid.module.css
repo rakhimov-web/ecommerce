@@ -1,6 +1,6 @@
 .section {
   width: 100%;
-  margin: 0 0 var(--section-gap) 0;
+  margin: 1.0rem auto 3.2rem auto;
   font-family: var(--font-primary);
   user-select: none;
   -webkit-user-select: none;
@@ -12,7 +12,7 @@
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
-  max-width: 1000px;
+  max-width: 640px;
   margin: 0 auto;
   padding: 0 var(--page-gutter);
 }
@@ -98,6 +98,10 @@
 
 /* Mobil ekranlar uchun moslashuv */
 @media (max-width: 768px) {
+  .section {
+    margin: 0.8rem auto 2.8rem auto;
+  }
+
   .iconWrapper {
     width: 5.6rem;
     height: 5.6rem;
@@ -125,6 +129,10 @@
 }
 
 @media (max-width: 360px) {
+  .section {
+    margin: 0.6rem auto 2.4rem auto;
+  }
+
   .iconWrapper {
     width: 4.8rem;
     height: 4.8rem;
@@ -138,6 +146,10 @@
 }
 
 @media (max-width: 340px) {
+  .section {
+    margin: 0.6rem auto 2.2rem auto;
+  }
+
   .iconWrapper {
     width: 4.4rem;
     height: 4.4rem;

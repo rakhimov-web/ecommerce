@@ -45,24 +45,24 @@
   align-items: center;
   flex: 1;
   background-color: var(--surface-subtle);
-  border: 1px solid transparent;
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   padding: 0 var(--space-3);
   height: 4rem;
   outline: none;
   touch-action: manipulation;
-  transition: background-color var(--dur-ui) var(--ease-out), border-color var(--dur-ui) var(--ease-out), box-shadow var(--dur-ui) var(--ease-out);
+  transition: border-color var(--dur-ui) var(--ease-out);
 }
 
-/* Fokuslangan / active holat: Nozik va tabiiy */
+/* Fokuslangan / active holat: deyarli bilinmaydi, bg oq bo'lmaydi, biroz borderda bilinadi */
 .searchBox:focus-within {
   border-color: var(--border);
-  box-shadow: var(--shadow-sm);
-  background-color: var(--white);
+  background-color: var(--surface-subtle);
+  box-shadow: none;
 }
 
 .searchBox:focus-within .searchIcon {
-  color: var(--black);
+  color: var(--gray);
 }
 
 .searchIcon {
