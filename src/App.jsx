@@ -31,6 +31,8 @@ const AppContent = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState(0);
 
+  const isHomeActive = currentPage === "home";
+
   // Sahifa yangilanganda URL ni tozalash, scrollni 0 ga surish va Telegram xususiyatlarini tayyorlash
   useEffect(() => {
     if (typeof window !== "undefined") {
