@@ -1,6 +1,5 @@
 .gateContainer {
-  min-height: 100vh;
-  min-height: 100dvh;
+  min-height: var(--tg-viewport-stable-height, 100dvh);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,7 +61,7 @@
   background: var(--primary-subtle);
   border: 1px solid var(--border);
   color: var(--primary);
-  font-size: 0.8125rem;
+  font-size: var(--text-xs); /* 1.2rem (12px min) */
   font-weight: 600;
   padding: 0.4rem 0.875rem;
   border-radius: 999px;
@@ -88,7 +87,7 @@
 }
 
 .title {
-  font-size: 1.375rem;
+  font-size: var(--text-xl);
   font-weight: 700;
   color: var(--black);
   margin: 0 0 0.75rem 0;
@@ -96,7 +95,7 @@
 }
 
 .description {
-  font-size: 0.9375rem;
+  font-size: var(--text-base);
   color: var(--gray);
   line-height: 1.55;
   margin: 0 0 1.75rem 0;
@@ -110,13 +109,14 @@
   gap: 0.625rem;
   background: var(--primary);
   color: var(--white);
-  font-size: 1rem;
+  font-size: var(--text-base);
   font-weight: 600;
-  padding: 0.9375rem 1.5rem;
+  padding: 1.2rem 1.6rem;
   border-radius: 16px;
   text-decoration: none;
   border: none;
   cursor: pointer;
+  touch-action: manipulation;
   transition: opacity 0.2s ease, background 0.2s ease;
 }
 
@@ -130,11 +130,12 @@
   background: transparent;
   border: none;
   color: var(--gray-muted);
-  font-size: 0.84rem;
+  font-size: var(--text-xs); /* 1.2rem (12px min) */
   font-weight: 500;
   cursor: pointer;
   padding: 0.5rem 1rem;
   border-radius: 10px;
+  touch-action: manipulation;
   transition: color 0.15s ease, background 0.15s ease;
 }
 

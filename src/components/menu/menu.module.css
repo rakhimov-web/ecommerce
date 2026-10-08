@@ -41,7 +41,8 @@
   color: var(--gray);
   font-family: var(--font-primary);
   border-radius: 0;
-  transition: color 0.18s ease;
+  touch-action: manipulation;
+  transition: color var(--dur-ui) var(--ease-out), opacity var(--dur-ui) var(--ease-out);
   transform: none !important; /* Hech qanday scale yoki transform sakrashi yo'q */
   -webkit-tap-highlight-color: transparent;
   outline: none;
@@ -232,11 +233,11 @@
   }
 
   .label {
-    font-size: 1.02rem; /* 10.2px */
+    font-size: var(--text-xs); /* 1.2rem (12px min) */
   }
 
   .pillLabelSpacer {
-    font-size: 1.02rem;
+    font-size: var(--text-xs);
   }
 }
 
@@ -274,11 +275,11 @@
   }
 
   .label {
-    font-size: 0.96rem;
+    font-size: var(--text-xs); /* 1.2rem (12px min) */
   }
 
   .pillLabelSpacer {
-    font-size: 0.96rem;
+    font-size: var(--text-xs);
   }
 }
 

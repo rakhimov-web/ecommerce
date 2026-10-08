@@ -1,13 +1,12 @@
 .section {
   width: 100%;
-  margin: 0 0 3.2rem 0;
+  margin: 0 0 var(--section-gap) 0;
   font-family: var(--font-primary);
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
 }
 
-/* Ekranga to'liq space-between bilan yoyilgan, ikkita cheti aynan 2.0rem */
 .gridContainer {
   display: flex;
   justify-content: space-between;
@@ -15,7 +14,7 @@
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 var(--page-gutter);
 }
 
 .categoryItem {
@@ -27,29 +26,44 @@
   outline: none;
   flex: 0 0 auto;
   -webkit-tap-highlight-color: transparent;
-  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  touch-action: manipulation;
+  transition: opacity var(--dur-ui) var(--ease-out);
 }
 
 .categoryItem:active {
   opacity: 0.88;
 }
 
-/* Kattalashtirilgan, MUTLAQO BORDERSIZ silliq squircle kartochka */
 .iconWrapper {
   position: relative;
   width: 6.4rem;
   height: 6.4rem;
-  border-radius: 1.8rem;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   background-color: var(--white);
   border: 1px solid var(--border);
-  box-shadow: none !important;
-  transform: none !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.7rem;
-  transition: opacity 0.2s ease;
+  margin-bottom: var(--space-2);
+}
+
+/* CSS press overlay: 40ms delay to prevent scroll flashes, fades out over --dur-press-out */
+.iconWrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--press-bg-light);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-press-out) var(--ease-out);
+}
+
+.categoryItem:active .iconWrapper::after {
+  opacity: 1;
+  transition-delay: var(--press-delay);
+  transition-duration: var(--dur-press-in);
 }
 
 .categoryIcon {
@@ -62,17 +76,17 @@
   -webkit-user-drag: none;
 }
 
-/* Kategoriya sarlavhasi — Standart 12px (mobil e-commerce standarti) */
+/* Kategoriya sarlavhasi — Kamida 12px (WCAG AA & mobile standard) */
 .categoryTitle {
   font-family: var(--font-primary);
-  font-size: var(--text-sm); /* 1.2rem (12px) */
+  font-size: var(--text-xs); /* 1.2rem (12px min) */
   font-weight: 500;
   color: var(--black);
   text-align: center;
   line-height: 1.25;
   width: 100%;
   max-width: 6.4rem;
-  height: 2.7rem;
+  height: 3rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -82,138 +96,56 @@
   letter-spacing: -0.01em;
 }
 
-/* Native-uslubdagi mayin to'lqin (ripple) effekti */
-.ripple {
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(
-    circle,
-    rgba(0, 85, 255, 0.14) 0%,
-    rgba(0, 0, 0, 0.035) 60%,
-    transparent 100%
-  );
-  pointer-events: none;
-  animation: nativeRippleSpread 0.55s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
-}
-
-@keyframes nativeRippleSpread {
-  0% {
-    width: 16px;
-    height: 16px;
-    opacity: 0.9;
-  }
-  100% {
-    width: 150px;
-    height: 150px;
-    opacity: 0;
-  }
-}
-
-/* Bosilgandagi sayoz iOS bosilish nuri (press highlight) */
-.pressHighlight {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: rgba(0, 0, 0, 0.035);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.15s ease;
-}
-
-.categoryItem:active .pressHighlight {
-  opacity: 1;
-}
-
 /* Mobil ekranlar uchun moslashuv */
 @media (max-width: 768px) {
-  .section {
-    margin: 0 0 2.8rem 0;
-  }
-
-  .gridContainer {
-    /* Mobilda ham aynan 2.0rem qat'iy chet padding */
-    padding: 0 2rem;
-  }
-
   .iconWrapper {
     width: 5.6rem;
     height: 5.6rem;
-    border-radius: 1.6rem;
-    margin-bottom: 0.5rem;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-1);
   }
 
   .categoryTitle {
-    font-size: 1.15rem; /* 11.5px */
     max-width: 5.8rem;
-    height: 2.6rem;
+    font-size: var(--text-xs); /* 12px min saqlanadi */
   }
 }
 
 @media (max-width: 480px) {
-  .section {
-    margin: 0 0 2.8rem 0;
-  }
-
-  .gridContainer {
-    padding: 0 2rem;
-  }
-
   .iconWrapper {
     width: 5.4rem;
     height: 5.4rem;
-    border-radius: 1.55rem;
-    margin-bottom: 0.45rem;
+    border-radius: var(--radius-md);
   }
 
   .categoryTitle {
-    font-size: 1.12rem;
     max-width: 5.6rem;
+    font-size: var(--text-xs); /* 12px min saqlanadi */
   }
 }
 
-/* Kichik ekranlar (360px va undan kichik) */
 @media (max-width: 360px) {
-  .section {
-    margin: 0 0 2.4rem 0;
-  }
-
-  .gridContainer {
-    padding: 0 1.6rem;
-  }
-
   .iconWrapper {
     width: 4.8rem;
     height: 4.8rem;
-    border-radius: 1.35rem;
-    margin-bottom: 0.4rem;
+    border-radius: var(--radius-sm);
   }
 
   .categoryTitle {
-    font-size: 1.05rem; /* 10.5px */
     max-width: 5rem;
-    height: 2.4rem;
+    font-size: var(--text-xs); /* 12px min saqlanadi */
   }
 }
 
 @media (max-width: 340px) {
-  .section {
-    margin: 0 0 2.2rem 0;
-  }
-
   .iconWrapper {
     width: 4.4rem;
     height: 4.4rem;
-    border-radius: 1.25rem;
-    margin-bottom: 0.35rem;
+    border-radius: var(--radius-sm);
   }
 
   .categoryTitle {
-    font-size: 0.98rem;
     max-width: 4.6rem;
-    height: 2.2rem;
+    font-size: var(--text-xs); /* 12px min saqlanadi */
   }
 }
-

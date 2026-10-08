@@ -36,13 +36,11 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
   const [slideWidth, setSlideWidth] = useState(340);
   const [containerWidth, setContainerWidth] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [ripples, setRipples] = useState([]);
 
   const containerRef = useRef(null);
   const isDragging = useRef(false);
   const dragDistance = useRef(0);
   const autoplayTimer = useRef(null);
-  const rippleCounter = useRef(0);
 
   // Motion qiymati
   const x = useMotionValue(0);
@@ -171,35 +169,6 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
     }
   };
 
-  // iOS-style to'lqin (ripple) effekti — transform siz, sayoz nur tarqalishi
-  const handleCardPointerDown = (e, cardIndex) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const rippleX =
-      (e.clientX ||
-        (e.touches && e.touches[0].clientX) ||
-        rect.left + rect.width / 2) - rect.left;
-    const rippleY =
-      (e.clientY ||
-        (e.touches && e.touches[0].clientY) ||
-        rect.top + rect.height / 2) - rect.top;
-
-    rippleCounter.current += 1;
-    const rippleId = rippleCounter.current;
-
-    const newRipple = {
-      id: rippleId,
-      cardIndex,
-      x: rippleX,
-      y: rippleY,
-    };
-
-    setRipples((prev) => [...prev, newRipple]);
-
-    setTimeout(() => {
-      setRipples((prev) => prev.filter((r) => r.id !== rippleId));
-    }, 600);
-  };
-
   // Card bosilganda mahsulotga/qidiruvga o'tish (faqat surilmagan bo'lsa)
   const handleCardClick = (bannerData) => {
     if (dragDistance.current < 6) {
@@ -261,9 +230,6 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
           {visibleIndices.map((virtualIndex) => {
             const bannerData = baseBanners[((virtualIndex % L) + L) % L];
             const isCenter = virtualIndex === currentIndex;
-            const cardRipples = ripples.filter(
-              (r) => r.cardIndex === virtualIndex,
-            );
 
             return (
               <div
@@ -276,7 +242,6 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
                   width: `${slideWidth}px`,
                   height: `${slideHeight}px`,
                 }}
-                onPointerDown={(e) => handleCardPointerDown(e, virtualIndex)}
                 onClick={() => handleCardClick(bannerData)}
                 role="button"
                 tabIndex={isCenter ? 0 : -1}
@@ -290,21 +255,6 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
                     loading={isCenter ? "eager" : "lazy"}
                     draggable={false}
                   />
-
-                  {/* iOS uslubidagi mayin to'lqin (ripple) effekti */}
-                  {cardRipples.map((ripple) => (
-                    <span
-                      key={ripple.id}
-                      className={styles.ripple}
-                      style={{
-                        left: `${ripple.x}px`,
-                        top: `${ripple.y}px`,
-                      }}
-                    />
-                  ))}
-
-                  {/* Bosilgandagi mayin nur yoyilishi (sayoz flash) */}
-                  <div className={styles.pressHighlight} />
                 </div>
               </div>
             );

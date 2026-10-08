@@ -1,6 +1,6 @@
 .homeContainer {
   width: 100%;
-  min-height: 100vh;
+  min-height: var(--tg-viewport-stable-height, 100dvh);
   background-color: var(--background);
   padding-top: var(--header-height);
   padding-bottom: calc(var(--menu-height) + var(--safe-area-bottom) + 2.4rem);

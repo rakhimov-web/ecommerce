@@ -46,7 +46,7 @@
   top: 0.6rem;
   left: 0.6rem;
   z-index: 3;
-  font-size: 0.9rem;
+  font-size: var(--text-xs); /* 1.2rem (12px min) */
   font-weight: 700;
   padding: 0.2rem 0.5rem;
   border-radius: 0.4rem;
@@ -119,14 +119,14 @@
 }
 
 .oldPrice {
-  font-size: 1.05rem; /* 10.5px */
+  font-size: var(--text-xs); /* 1.2rem (12px min) */
   color: var(--gray-muted);
   text-decoration: line-through;
   line-height: 1;
 }
 
 .discountBadge {
-  font-size: 1.0rem; /* 10px */
+  font-size: var(--text-xs); /* 1.2rem (12px min) */
   font-weight: 700;
   color: var(--error);
   line-height: 1;
@@ -138,7 +138,7 @@
   align-items: center;
   background-color: var(--installment-bg);
   color: var(--installment-text);
-  font-size: 1.02rem; /* 10.2px */
+  font-size: var(--text-xs); /* 1.2rem (12px min) */
   font-weight: 600;
   padding: 0.18rem 0.45rem;
   border-radius: 0.4rem;
@@ -149,7 +149,7 @@
 
 /* Mahsulot nomi — 2 qator bilan cheklangan */
 .title {
-  font-size: 1.15rem; /* 11.5px */
+  font-size: var(--text-xs); /* 1.2rem (12px min) */
   font-weight: 500;
   color: var(--black);
   margin: 0.2rem 0 0 0;
@@ -167,7 +167,7 @@
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  font-size: 1.05rem; /* 10.5px */
+  font-size: var(--text-xs); /* 1.2rem (12px min) */
   color: var(--gray);
   margin-top: 0.1rem;
 }

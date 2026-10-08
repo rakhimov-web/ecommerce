@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, memo } from "react";
 import { ShoppingCart, Heart, Minus, Plus } from "lucide-react";
 import TicketBadge from "./TicketBadge";
 import SmoothImage from "../common/SmoothImage";
@@ -20,35 +20,11 @@ const ProductCard = ({ product }) => {
   const isLiked = checkIsLiked(product.id);
 
   const [isAdding, setIsAdding] = useState(false);
-  const [decRipples, setDecRipples] = useState([]);
-  const [incRipples, setIncRipples] = useState([]);
-  const [imgRipples, setImgRipples] = useState([]);
-  const rippleCounter = useRef(0);
 
   const toggleLike = (e) => {
     e.stopPropagation();
     e.preventDefault();
     handleToggleLikeContext(product.id);
-  };
-
-  const createRipple = (e, setter) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const rippleX =
-      (e.clientX ||
-        (e.touches && e.touches[0]?.clientX) ||
-        rect.left + rect.width / 2) - rect.left;
-    const rippleY =
-      (e.clientY ||
-        (e.touches && e.touches[0]?.clientY) ||
-        rect.top + rect.height / 2) - rect.top;
-
-    rippleCounter.current += 1;
-    const rippleId = rippleCounter.current;
-    setter((prev) => [...prev, { id: rippleId, x: rippleX, y: rippleY }]);
-
-    setTimeout(() => {
-      setter((prev) => prev.filter((r) => r.id !== rippleId));
-    }, 550);
   };
 
   const handleInitialAddToCart = (e) => {
@@ -64,46 +40,18 @@ const ProductCard = ({ product }) => {
 
   const handleDecrement = (e) => {
     e.stopPropagation();
-    createRipple(e, setDecRipples);
     updateCartQuantity(product.id, -1);
   };
 
   const handleIncrement = (e) => {
     e.stopPropagation();
-    createRipple(e, setIncRipples);
     updateCartQuantity(product.id, 1);
-  };
-
-  const handleImagePointerDown = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const rippleX =
-      (e.clientX ||
-        (e.touches && e.touches[0]?.clientX) ||
-        rect.left + rect.width / 2) - rect.left;
-    const rippleY =
-      (e.clientY ||
-        (e.touches && e.touches[0]?.clientY) ||
-        rect.top + rect.height / 2) - rect.top;
-
-    rippleCounter.current += 1;
-    const rippleId = rippleCounter.current;
-    setImgRipples((prev) => [
-      ...prev,
-      { id: rippleId, x: rippleX, y: rippleY },
-    ]);
-
-    setTimeout(() => {
-      setImgRipples((prev) => prev.filter((r) => r.id !== rippleId));
-    }, 600);
   };
 
   return (
     <article className={styles.card}>
       {/* 3/4 rasm freymi - 1:1 dan balandroq, 2:3 kabi haddan tashqari uzun bo'lmagan optimal nisbat */}
-      <div
-        className={styles.imageContainer}
-        onPointerDown={handleImagePointerDown}
-      >
+      <div className={styles.imageContainer}>
         {/* 3D Ticket Coupon Badge */}
         {product.badge && <TicketBadge type={product.badge} />}
 
@@ -132,17 +80,6 @@ const ProductCard = ({ product }) => {
             className={styles.productImage}
             draggable={false}
           />
-          {imgRipples.map((ripple) => (
-            <span
-              key={ripple.id}
-              className={styles.imageRipple}
-              style={{
-                left: `${ripple.x}px`,
-                top: `${ripple.y}px`,
-              }}
-            />
-          ))}
-          <div className={styles.imageHighlight} />
         </div>
       </div>
 
@@ -181,16 +118,6 @@ const ProductCard = ({ product }) => {
                 aria-label="Bir dona kamaytirish"
               >
                 <Minus size={15} strokeWidth={2.4} />
-                {decRipples.map((ripple) => (
-                  <span
-                    key={ripple.id}
-                    className={styles.stepperRipple}
-                    style={{
-                      left: `${ripple.x}px`,
-                      top: `${ripple.y}px`,
-                    }}
-                  />
-                ))}
               </button>
 
               <span className={styles.stepperCount} aria-live="polite">
@@ -204,16 +131,6 @@ const ProductCard = ({ product }) => {
                 aria-label="Bir dona oshirish"
               >
                 <Plus size={15} strokeWidth={2.4} />
-                {incRipples.map((ripple) => (
-                  <span
-                    key={ripple.id}
-                    className={styles.stepperRipple}
-                    style={{
-                      left: `${ripple.x}px`,
-                      top: `${ripple.y}px`,
-                    }}
-                  />
-                ))}
               </button>
             </div>
           ) : (
@@ -235,4 +152,4 @@ const ProductCard = ({ product }) => {
   );
 };
 
-export default ProductCard;
+export default memo(ProductCard);

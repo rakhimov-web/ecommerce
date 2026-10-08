@@ -5,19 +5,21 @@
   width: 100%;
   height: var(--top-bar-height);
   flex-shrink: 0;
-  padding: 0 1.6rem;
+  padding: 0 var(--page-gutter);
   box-sizing: border-box;
   position: relative;
   background-color: var(--white);
-  z-index: 10;
+  z-index: var(--z-header);
+  overflow: hidden;
   user-select: none;
   -webkit-user-select: none;
+  transition: height var(--dur-ui) var(--ease-out);
 }
 
 /* Telegram nativ tugmalari (chapda Back/Close, o'ngda Menu/More) uchun xavfsiz bufer zonalar */
 .tgSideZone {
-  width: 5.6rem;
-  min-width: 5.6rem;
+  width: 5.2rem;
+  min-width: 5.2rem;
   height: 100%;
   display: flex;
   align-items: center;
@@ -44,6 +46,7 @@
   justify-content: center;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   user-select: none;
   padding: 0;
   background: transparent;
@@ -51,43 +54,29 @@
   outline: none;
 }
 
-.brandLogo:hover,
-.brandLogo:active,
-.brandLogo:focus {
-  opacity: 1;
-  transform: none;
-  background: transparent;
-}
-
 .logoSvg {
-  height: 2.1rem; /* 21px desktop: kichik, nafis va ixcham logo (aspect ratio 5.026 -> width = ~105px) */
+  height: 2.3rem; /* 23px: 22-24px oralig'ida premium e-commerce brend logotipi */
   width: auto;
-  max-width: 110px;
+  max-width: 120px;
   object-fit: contain;
   display: block;
 }
 
-@media (max-width: 768px) {
-  .logoSvg {
-    height: 1.95rem; /* 19.5px mobil: ixcham nafis logo (width = ~98px), 56px container ichida tepa-pastdan 18.25px teng masofada */
-    max-width: 102px;
-  }
-}
-
 @media (max-width: 360px) {
-  .topBrandBar {
-    padding: 0 1.2rem;
-  }
-
   .logoSvg {
-    height: 1.8rem; /* 18px kichik mobil: width = ~90px */
-    max-width: 95px;
+    height: 2.2rem; /* 22px kichik ekranlarda */
+    max-width: 110px;
   }
 }
 
-@media (max-width: 340px) {
+@media (max-width: 320px) {
+  .tgSideZone {
+    width: 4.4rem;
+    min-width: 4.4rem;
+  }
+
   .logoSvg {
-    height: 1.7rem; /* 17px ultra-kichik mobil: width = ~85px */
-    max-width: 88px;
+    height: 2.1rem;
+    max-width: 100px;
   }
 }

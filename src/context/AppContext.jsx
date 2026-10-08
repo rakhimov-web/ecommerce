@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { triggerHaptic } from "../lib/telegram";
+import { triggerHaptic, updateClosingConfirmation } from "../lib/telegram";
 import { AppContext } from "./AppContextInstance";
 
 const CART_STORAGE_KEY = "ecommerce_cart_items";
@@ -47,13 +47,15 @@ export const AppProvider = ({ children }) => {
     id: 0,
   });
 
-  // Savatcha o'zgarganda localStorage ga saqlash
+  // Savatcha o'zgarganda localStorage ga saqlash va Telegram closing confirmation ni sinxronlash
   useEffect(() => {
     try {
       localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
     } catch {
       // ignore
     }
+    const hasItems = Object.values(cart).some((qty) => qty > 0);
+    updateClosingConfirmation(hasItems);
   }, [cart]);
 
   // Sevimlilar o'zgarganda localStorage ga saqlash

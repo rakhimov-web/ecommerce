@@ -454,7 +454,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 1.1rem;
+  font-size: var(--text-xs); /* 1.2rem (12px min) */
   color: var(--gray);
 }
 

@@ -47,7 +47,39 @@ export const enableDevBrowserMode = () => {
   window.location.reload();
 };
 
-// Safe area insets (Telegram ekrani qirralari va native fullscreen tugmalari) ni CSS ga uzatish
+// Theme sinxronizatsiyasi (Telegram colorScheme / themeParams)
+export const syncTelegramTheme = () => {
+  const tg = getTelegramWebApp();
+  if (typeof document === "undefined") return;
+
+  const colorScheme =
+    tg?.colorScheme ||
+    (typeof window !== "undefined" &&
+    window.matchMedia?.("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light");
+  const isDark = colorScheme === "dark";
+
+  if (isDark) {
+    document.documentElement.setAttribute("data-theme", "dark");
+  } else {
+    document.documentElement.removeAttribute("data-theme");
+  }
+
+  if (tg) {
+    const headerColor = isDark ? "#171b21" : "#ffffff";
+    const bgColor = isDark ? "#0f1216" : "#f8fafd";
+    const bottomColor = isDark ? "#171b21" : "#ffffff";
+
+    try {
+      if (tg.setHeaderColor) tg.setHeaderColor(headerColor);
+      if (tg.setBackgroundColor) tg.setBackgroundColor(bgColor);
+      if (tg.setBottomBarColor) tg.setBottomBarColor(bottomColor);
+    } catch {}
+  }
+};
+
+// Safe area insets va top brand bar balandligini hisoblash
 export const updateTelegramSafeArea = () => {
   const tg = getTelegramWebApp();
   if (!tg || typeof document === "undefined") return;
@@ -56,78 +88,89 @@ export const updateTelegramSafeArea = () => {
     const safeTop = tg.safeAreaInset?.top ?? 0;
     const safeBottom = tg.safeAreaInset?.bottom ?? 0;
     const contentSafeTop = tg.contentSafeAreaInset?.top ?? 0;
+    const isFullscreen = Boolean(tg.isFullscreen);
 
     if (safeTop > 0) {
       document.documentElement.style.setProperty("--tg-safe-top", `${safeTop}px`);
+    } else {
+      document.documentElement.style.removeProperty("--tg-safe-top");
     }
+
     if (safeBottom > 0) {
       document.documentElement.style.setProperty("--tg-safe-bottom", `${safeBottom}px`);
+    } else {
+      document.documentElement.style.removeProperty("--tg-safe-bottom");
     }
+
     if (contentSafeTop > 0) {
       document.documentElement.style.setProperty("--tg-content-safe-top", `${contentSafeTop}px`);
+    }
+
+    // Top brand bar: safeAreaInset.top + contentSafeAreaInset.top
+    // Fullscreen bo'lmaganda har ikkisi 0 va brand bar 0 ga kollaps bo'ladi
+    const totalTopInsets = safeTop + contentSafeTop;
+    if (totalTopInsets > 0) {
+      const barHeightPx = Math.max(totalTopInsets, 44);
+      document.documentElement.style.setProperty("--top-bar-height", `${barHeightPx / 10}rem`);
+    } else if (isFullscreen) {
+      document.documentElement.style.setProperty("--top-bar-height", "4.8rem");
+    } else {
+      document.documentElement.style.setProperty("--top-bar-height", "0rem");
     }
   } catch (err) {
     console.warn("updateTelegramSafeArea xatosi:", err);
   }
 };
 
-// Telegram Mini App ni to'liq ishga tushirish va sozlash
-export const initTelegramApp = () => {
+// Savat holatiga qarab closing confirmation ni boshqarish
+export const updateClosingConfirmation = (hasItems) => {
   const tg = getTelegramWebApp();
   if (!tg) return;
 
   try {
-    // 1. Mini App tayyorligini botga bildirish
-    tg.ready();
+    if (hasItems) {
+      if (tg.enableClosingConfirmation) tg.enableClosingConfirmation();
+    } else {
+      if (tg.disableClosingConfirmation) tg.disableClosingConfirmation();
+    }
+  } catch {}
+};
 
-    // 2. Ilovani butun ekran bo'ylab kengaytirish
+// iOS WKWebView da :active ishlashi uchun passive no-op touchstart listener
+if (typeof document !== "undefined") {
+  document.addEventListener("touchstart", () => {}, { passive: true });
+}
+
+// Telegram Mini App ni to'liq ishga tushirish (faqat bir marta chaqiriladi)
+export const initTelegramApp = () => {
+  const tg = getTelegramWebApp();
+  if (!tg) {
+    syncTelegramTheme();
+    return;
+  }
+
+  try {
+    // 1. Mini App tayyorligi va kengaytirish
+    tg.ready();
     tg.expand();
 
-    // 3. Telegram 8.0+ Native Fullscreen rejimini so'rash (To'liq nativ ilovadek ochilishi uchun)
+    // 2. Bir marta to'liq ekran so'rash (ready dan keyin)
     requestTelegramFullscreen();
 
-    // Ba'zi mobil Telegram mijozlarida birinchi sensor/bosish orqali ham fullscreen kafolati
-    const handleFirstInteraction = () => {
-      requestTelegramFullscreen();
-    };
-    window.addEventListener("touchstart", handleFirstInteraction, {
-      passive: true,
-      once: true,
-    });
-    window.addEventListener("pointerdown", handleFirstInteraction, {
-      passive: true,
-      once: true,
-    });
-    window.addEventListener("click", handleFirstInteraction, {
-      passive: true,
-      once: true,
-    });
-
-    // 4. Telegram 7.7+ vertikal tortib tasodifiy yopilib ketishining oldini olish (Swipe-to-close blocking)
+    // 3. Vertikal tasodifiy yopilishni bloklash
     if (tg.disableVerticalSwipes) {
       tg.disableVerticalSwipes();
     }
 
-    // 5. Telegram sarlavhasi va foni ranglarini sayt dizayniga moslashtirish
-    if (tg.setHeaderColor) {
-      tg.setHeaderColor("#ffffff");
-    }
-    if (tg.setBackgroundColor) {
-      tg.setBackgroundColor("#f8fafd");
-    }
-    if (tg.setBottomBarColor) {
-      tg.setBottomBarColor("#ffffff");
-    }
+    // 4. Faol mavzuni (Dark / Light) sinxronlash
+    syncTelegramTheme();
 
-    // 6. Tasodifiy yopilishlarni oldini olish
-    if (tg.enableClosingConfirmation) {
-      tg.enableClosingConfirmation();
-    }
-
-    // 7. Safe area insets (Telegram ekrani qirralari) ni CSS ga ulash va hodisalarni tinglash
+    // 5. Safe areani yangilash
     updateTelegramSafeArea();
 
+    // 6. Hodisalarni tinglash
     if (typeof tg.onEvent === "function") {
+      tg.onEvent("themeChanged", syncTelegramTheme);
       tg.onEvent("safeAreaChanged", updateTelegramSafeArea);
       tg.onEvent("contentSafeAreaChanged", updateTelegramSafeArea);
       tg.onEvent("fullscreenChanged", updateTelegramSafeArea);
@@ -275,4 +318,10 @@ export const syncTelegramBackButton = (show, onClick) => {
   } catch {
     // Ignore in non-TMA
   }
+};
+
+// Telegram nativ BackButton mavjudligini tekshirish
+export const isTelegramBackButtonAvailable = () => {
+  const tg = getTelegramWebApp();
+  return Boolean(tg && tg.BackButton && typeof tg.BackButton.show === "function");
 };

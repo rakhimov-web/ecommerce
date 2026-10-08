@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { ChevronLeft, Search, X, ChevronRight, Clock } from "lucide-react";
 import { productsData } from "../../data/products";
 import ProductCard from "../../components/products/ProductCard";
@@ -8,61 +8,15 @@ import Button from "../../components/common/Button";
 import TopBrandBar from "../../components/header/TopBrandBar";
 import styles from "./searchPage.module.css";
 
-// 5 ta asosiy toifa ikonkalari
-import telefonImg from "../../assets/categories/telefon.png";
-import noutbukImg from "../../assets/categories/noutbuk.png";
-import ipadImg from "../../assets/categories/ipad.png";
-import watchImg from "../../assets/categories/apple-watch.png";
-import aksessuarlarImg from "../../assets/categories/aksessuarlar.png";
-
-// Asosiy toifalar ro'yxati (media_1790692262832)
-const CATEGORIES = [
-  {
-    id: "telefon",
-    title: "Telefon",
-    subtitle: "Apple iPhone va smartfonlar",
-    icon: telefonImg,
-    query: "telefon",
-    count: "3 ta model",
-  },
-  {
-    id: "noutbuk",
-    title: "Noutbuk",
-    subtitle: "Apple MacBook va noutbuklar",
-    icon: noutbukImg,
-    query: "noutbuk",
-    count: "3 ta model",
-  },
-  {
-    id: "ipad",
-    title: "iPad",
-    subtitle: "Apple iPad va planshetlar",
-    icon: ipadImg,
-    query: "ipad",
-    count: "2 ta model",
-  },
-  {
-    id: "apple-watch",
-    title: "Apple Watch",
-    subtitle: "Apple Watch va aqlli soatlar",
-    icon: watchImg,
-    query: "watch",
-    count: "2 ta model",
-  },
-  {
-    id: "aksessuarlar",
-    title: "Aksessuarlar",
-    subtitle: "AirPods va qo'shimcha jihozlar",
-    icon: aksessuarlarImg,
-    query: "aksessuarlar",
-    count: "2 ta model",
-  },
-];
+import { getCategoriesWithCounts } from "../../data/categories";
+import { isTelegramBackButtonAvailable } from "../../lib/telegram";
 
 // Dastlabki qidiruv tarixi
 const DEFAULT_RECENT = ["macbook"];
 
 const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
+  const categoriesList = useMemo(() => getCategoriesWithCounts(), []);
+  const hasNativeBack = isTelegramBackButtonAvailable();
   const [searchValue, setSearchValue] = useState(initialQuery);
   const [recentSearches, setRecentSearches] = useState(() => {
     try {
@@ -236,15 +190,17 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
 
         {/* 2-QATOR: Asl qidiruv maydoni va ortga qaytish tugmasi (doimo ko'rinib turadi) */}
         <div className={styles.headerContent}>
-          {/* Ortga qaytish tugmasi */}
-          <button
-            type="button"
-            className={styles.backButton}
-            onClick={onBack}
-            aria-label="Bosh sahifaga qaytish"
-          >
-            <ChevronLeft size={22} strokeWidth={1.8} />
-          </button>
+          {/* Ortga qaytish tugmasi: Faqat Telegram nativ BackButton bo'lmaganda (brauzerda) ko'rinadi */}
+          {!hasNativeBack && (
+            <button
+              type="button"
+              className={styles.backButton}
+              onClick={onBack}
+              aria-label="Bosh sahifaga qaytish"
+            >
+              <ChevronLeft size={22} strokeWidth={1.8} />
+            </button>
+          )}
 
           {/* 100% qidiruv maydoni (Home search inputi bilan bir xil dizayn) */}
           <div className={styles.searchBox}>
@@ -339,7 +295,7 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
             >
               <h2 className={styles.categorySectionTitle}>Kategoriyalar</h2>
               <div className={styles.categoryTable}>
-                {CATEGORIES.map((cat) => (
+                {categoriesList.map((cat) => (
                   <div
                     key={cat.id}
                     className={styles.categoryRow}

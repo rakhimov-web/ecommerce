@@ -98,7 +98,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: var(--text-xs); /* 1.2rem (12px min) */
   font-weight: 600;
   font-family: inherit;
   color: var(--gray);
@@ -259,12 +259,11 @@
 
 .chevronIcon {
   color: var(--gray-muted);
-  transition: transform 0.15s ease, color 0.15s ease;
+  transition: color 0.15s ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .categoryItem:hover .chevronIcon {
-    transform: translateX(3px);
     color: var(--primary);
   }
 }
@@ -340,7 +339,7 @@
 }
 
 .productCategory {
-  font-size: 1.15rem;
+  font-size: var(--text-xs); /* 1.2rem (12px min) */
   font-weight: 500;
   color: var(--gray);
   text-transform: capitalize;
@@ -354,7 +353,7 @@
 }
 
 .productOldPrice {
-  font-size: 1.1rem;
+  font-size: var(--text-xs); /* 1.2rem (12px min) */
   color: var(--gray-muted);
   text-decoration: line-through;
   line-height: 1;
@@ -440,7 +439,7 @@
 .kbdKey {
   display: inline-block;
   font-family: inherit;
-  font-size: 1.05rem;
+  font-size: var(--text-xs); /* 1.2rem (12px min) */
   font-weight: 600;
   background-color: var(--white);
   border: 1px solid var(--border);

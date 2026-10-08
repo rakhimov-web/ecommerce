@@ -1,6 +1,6 @@
 .searchPageContainer {
   width: 100%;
-  min-height: 100vh;
+  min-height: var(--tg-viewport-stable-height, 100dvh);
   background-color: var(--background);
   padding-top: var(--header-height);
   padding-bottom: calc(var(--menu-height) + var(--safe-area-bottom) + 2.4rem);
@@ -46,8 +46,8 @@
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 0 2rem;
-  gap: 1.2rem;
+  padding: 0 var(--page-gutter);
+  gap: var(--space-3);
   height: var(--header-content-height);
   flex-shrink: 0;
   box-sizing: border-box;
@@ -59,9 +59,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 4.2rem;
-  height: 4.2rem;
-  border-radius: 50%;
+  width: var(--touch-target); /* 4.4rem / 44px */
+  height: var(--touch-target);
+  border-radius: var(--radius-full);
   background-color: transparent;
   border: none;
   color: var(--black);
@@ -69,23 +69,38 @@
   outline: none;
   flex-shrink: 0;
   -webkit-tap-highlight-color: transparent;
-  transition:
-    background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.15s ease;
+  touch-action: manipulation;
+  padding: 0;
 }
 
-.backButton:active {
-  background-color: var(--surface-subtle);
-  opacity: 0.85;
+.backButton::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4rem; /* 40px visible circle */
+  height: 4rem;
+  transform: translate(-50%, -50%);
+  border-radius: var(--radius-full);
+  background-color: var(--press-bg-light);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-press-out) var(--ease-out);
+}
+
+.backButton:active::after {
+  opacity: 1;
+  transition-delay: var(--press-delay);
+  transition-duration: var(--dur-press-in);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .backButton:hover {
-    background-color: var(--surface-subtle);
+  .backButton:hover::after {
+    opacity: 0.5;
   }
 }
 
-/* 100% enni egallovchi qidiruv maydoni (Home searchBox bilan bir xil) */
+/* 100% enni egallovchi qidiruv maydoni (Home searchBox bilan 1-ga 1 mos) */
 .searchBox {
   position: relative;
   display: flex;
@@ -93,17 +108,18 @@
   flex: 1;
   background-color: var(--surface-subtle);
   border: 1px solid transparent;
-  border-radius: 1.2rem;
-  padding: 0 1.2rem;
+  border-radius: var(--radius-md);
+  padding: 0 var(--space-3);
   height: 4rem;
   outline: none;
-  transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+  touch-action: manipulation;
+  transition: background-color var(--dur-ui) var(--ease-out), border-color var(--dur-ui) var(--ease-out), box-shadow var(--dur-ui) var(--ease-out);
 }
 
-/* Fokuslangan / active holat: Nozik va tabiiy (ko'k effektlarsiz, oq fon va nozik neytral chegara) */
+/* Fokuslangan / active holat: Nozik va tabiiy */
 .searchBox:focus-within {
   border-color: var(--border);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-sm);
   background-color: var(--white);
 }
 
@@ -113,9 +129,9 @@
 
 .searchIcon {
   color: var(--gray);
-  margin-right: 0.8rem;
+  margin-right: var(--space-2);
   flex-shrink: 0;
-  transition: color 0.2s ease;
+  transition: color var(--dur-ui) var(--ease-out);
 }
 
 .searchInput {
@@ -124,7 +140,7 @@
   background: transparent;
   outline: none;
   font-family: var(--font-primary);
-  font-size: var(--text-base);
+  font-size: var(--text-lg); /* 1.6rem (16px) — iOS zoom oldini olish */
   color: var(--black);
   caret-color: var(--black);
   user-select: text;
@@ -138,25 +154,37 @@
 }
 
 .clearBtn {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 2.6rem;
   height: 2.6rem;
-  border-radius: 50%;
+  border-radius: var(--radius-full);
   background: transparent;
   border: none;
   color: var(--gray);
   cursor: pointer;
-  margin-left: 0.4rem;
+  margin-left: var(--space-1);
   outline: none;
-  transition:
-    background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-    color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  touch-action: manipulation;
 }
 
-.clearBtn:active {
-  background-color: var(--surface-hover);
+.clearBtn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--press-bg-light);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-press-out) var(--ease-out);
+}
+
+.clearBtn:active::after {
+  opacity: 1;
+  transition-delay: var(--press-delay);
+  transition-duration: var(--dur-press-in);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -242,22 +270,36 @@
 }
 
 .recentItem {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1.3rem 1.6rem;
   border-bottom: 1px solid var(--border-subtle);
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+}
+
+.recentItem::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--press-bg-light);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-press-out) var(--ease-out);
 }
 
 .recentItem:last-child {
   border-bottom: none;
 }
 
-.recentItem:active {
-  background-color: var(--surface-subtle);
+.recentItem:active::after {
+  opacity: 1;
+  transition-delay: var(--press-delay);
+  transition-duration: var(--dur-press-in);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -336,22 +378,36 @@
 }
 
 .categoryRow {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1.2rem 1.6rem;
   border-bottom: 1px solid var(--border-subtle);
   cursor: pointer;
-  transition: background-color 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+}
+
+.categoryRow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--press-bg-light);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-press-out) var(--ease-out);
 }
 
 .categoryRow:last-child {
   border-bottom: none;
 }
 
-.categoryRow:active {
-  background-color: var(--surface-subtle);
+.categoryRow:active::after {
+  opacity: 1;
+  transition-delay: var(--press-delay);
+  transition-duration: var(--dur-press-in);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -425,14 +481,11 @@
 .chevronIcon {
   color: var(--gray-muted);
   flex-shrink: 0;
-  transition:
-    transform 0.15s ease,
-    color 0.15s ease;
+  transition: color 0.15s ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .categoryRow:hover .chevronIcon {
-    transform: translateX(3px);
     color: var(--primary);
   }
 }
@@ -658,7 +711,7 @@
 
   .categorySubtitle,
   .categoryCount {
-    font-size: 1.15rem; /* 11.5px */
+    font-size: var(--text-xs); /* 1.2rem (12px min) */
   }
 
   .recentText {
@@ -720,7 +773,7 @@
 
   .categorySubtitle,
   .categoryCount {
-    font-size: 1.1rem;
+    font-size: var(--text-xs); /* 1.2rem (12px min) */
   }
 
   .recentText {

@@ -4,17 +4,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: var(
-    --accent
-  ); /* #ff6430 / #FD7434 brend qizil-to'q sariq */
+  background-color: var(--accent);
   color: var(--white);
   font-family: var(--font-primary);
-  font-size: var(--text-2xs); /* 1.05rem (10.5px) */
+  font-size: var(--text-xs); /* 1.2rem (12px min) */
   font-weight: 700;
   line-height: 1;
-  min-width: 1.7rem;
-  height: 1.7rem;
-  padding: 0 0.35rem;
+  min-width: 1.8rem;
+  height: 1.8rem;
+  padding: 0 0.4rem;
   border-radius: 999px;
   border: 1.5px solid var(--white);
   box-shadow: none;
@@ -29,22 +27,22 @@
 
 /* 2 yoki 3 xonali (masalan: 12, 99, 99+) bo'lganda kapsulaning silliq kengayishi */
 .pill {
-  padding: 0 0.45rem;
-  min-width: 2rem;
-  font-size: 0.98rem;
+  padding: 0 0.5rem;
+  min-width: 2.2rem;
+  font-size: var(--text-xs);
 }
 
 @media (max-width: 360px) {
   .badge {
-    min-width: 1.55rem;
-    height: 1.55rem;
-    font-size: 0.95rem;
-    padding: 0 0.3rem;
+    min-width: 1.7rem;
+    height: 1.7rem;
+    font-size: var(--text-xs);
+    padding: 0 0.35rem;
   }
 
   .pill {
-    min-width: 1.8rem;
-    padding: 0 0.4rem;
-    font-size: 0.9rem;
+    min-width: 2rem;
+    padding: 0 0.45rem;
+    font-size: var(--text-xs);
   }
 }
