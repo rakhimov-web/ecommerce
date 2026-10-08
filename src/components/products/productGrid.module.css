@@ -106,8 +106,8 @@
 /* Maxsus 3D Ticket Coupon Badge (AKSIYA va YANGI) */
 .badgeWrapper {
   position: absolute;
-  top: 1.2rem;
-  left: -0.6rem; /* Ramka chetidan 6px chapga chiqib 3D qatlanadi */
+  top: 1.0rem;
+  left: -0.4rem; /* Ramka chetidan 4px chapga chiqib 3D qatlanadi */
   z-index: 4;
   pointer-events: none;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.12));
@@ -115,9 +115,9 @@
 
 .ticketSvg {
   display: block;
-  width: 6.8rem;
-  height: 2.7rem;
-  aspect-ratio: 68 / 27;
+  width: 5.6rem;
+  height: auto;
+  aspect-ratio: 74 / 42;
 }
 
 /* Sevimlilar (Like) yurakcha tugmasi — BORDERSIZ, SOYASIZ VA OPACITY LI FON */
@@ -454,14 +454,14 @@
   }
 
   .badgeWrapper {
-    top: 1.0rem;
-    left: -0.5rem;
+    top: 0.9rem;
+    left: -0.35rem;
   }
 
   .ticketSvg {
-    width: 6.2rem;
-    height: 2.45rem;
-    aspect-ratio: 68 / 27;
+    width: 5.2rem;
+    height: auto;
+    aspect-ratio: 74 / 42;
   }
 
   .content {
@@ -516,13 +516,13 @@
 
   .badgeWrapper {
     top: 0.8rem;
-    left: -0.45rem;
+    left: -0.3rem;
   }
 
   .ticketSvg {
-    width: 5.8rem;
-    height: 2.3rem;
-    aspect-ratio: 68 / 27;
+    width: 4.8rem;
+    height: auto;
+    aspect-ratio: 74 / 42;
   }
 
   .currentPrice {
@@ -580,13 +580,13 @@
 
   .badgeWrapper {
     top: 0.7rem;
-    left: -0.4rem;
+    left: -0.25rem;
   }
 
   .ticketSvg {
-    width: 5.4rem;
-    height: 2.15rem;
-    aspect-ratio: 68 / 27;
+    width: 4.4rem;
+    height: auto;
+    aspect-ratio: 74 / 42;
   }
 
   .currentPrice {
@@ -648,13 +648,13 @@
 
   .badgeWrapper {
     top: 0.6rem;
-    left: -0.35rem;
+    left: -0.2rem;
   }
 
   .ticketSvg {
-    width: 5.0rem;
-    height: 2.0rem;
-    aspect-ratio: 68 / 27;
+    width: 4.0rem;
+    height: auto;
+    aspect-ratio: 74 / 42;
   }
 
   .currentPrice {
@@ -696,4 +696,3 @@
     min-width: 2.2rem;
   }
 }
-
