@@ -53,15 +53,15 @@ const SearchPage = ({ onBack, initialQuery = "", isActive = false }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isActive]);
 
-  // Sahifa ochilganda yoki faollashganda (agar bo'sh qidiruv bo'lsa) inputga fokus berish
+  // Sahifa ochilganda yoki faollashganda avtomatik ravishda inputga fokus berish
   useEffect(() => {
-    if (isActive && !searchValue && inputRef.current) {
+    if (isActive && inputRef.current) {
       const timer = setTimeout(() => {
         inputRef.current?.focus();
-      }, 50);
+      }, 40);
       return () => clearTimeout(timer);
     }
-  }, [isActive, searchValue]);
+  }, [isActive]);
 
   // URL ni qidiruv so'ziga qarab jonli yangilab borish (/search?q=...)
   const syncUrlWithQuery = (val) => {

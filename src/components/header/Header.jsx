@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Search, Heart, RotateCw, X } from "lucide-react";
+import { Search, Heart, RotateCw } from "lucide-react";
 import NotificationBadge from "../common/NotificationBadge";
 import TopBrandBar from "./TopBrandBar";
 import { useApp } from "../../context/useApp";
@@ -14,12 +14,6 @@ const Header = ({
   const { totalLikedCount } = useApp();
   const likedCount =
     propLikedCount !== undefined ? propLikedCount : totalLikedCount;
-  const [searchValue, setSearchValue] = useState("");
-
-  const handleClear = (e) => {
-    e.stopPropagation();
-    setSearchValue("");
-  };
 
   const handleSearchBoxClick = () => {
     if (onSearchClick) {
@@ -57,7 +51,7 @@ const Header = ({
 
       {/* 2-QATOR: Asl qidiruv va tugmalar qatori (doimo barqaror va ochiq turadi) */}
       <div className={styles.container}>
-        {/* Qidiruv maydoni (bosilganda to'g'ridan-to'g'ri SearchPage ga o'tadi) */}
+        {/* Qidiruv maydoni (faqat SearchPage ga o'tish vazifasini bajaradi, input fokus bo'lmaydi) */}
         <div
           className={styles.searchBox}
           onClick={handleSearchBoxClick}
@@ -69,30 +63,12 @@ const Header = ({
           }}
           role="button"
           tabIndex={0}
-          aria-label="Qidiruv maydoni"
-          style={{ cursor: "pointer" }}
+          aria-label="Mahsulot va toifalarni qidirish"
         >
           <Search size={18} className={styles.searchIcon} />
-          <input
-            type="text"
-            readOnly={!!onSearchClick}
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-            onClick={handleSearchBoxClick}
-            placeholder="Mahsulot va toifalarni qidirish"
-            className={styles.searchInput}
-            style={{ cursor: onSearchClick ? "pointer" : "text" }}
-          />
-          {searchValue && (
-            <button
-              type="button"
-              onClick={handleClear}
-              className={styles.clearBtn}
-              aria-label="Tozalash"
-            >
-              <X size={15} />
-            </button>
-          )}
+          <span className={styles.searchPlaceholder}>
+            Mahsulot va toifalarni qidirish
+          </span>
         </div>
 
         {/* O'ng tarafdagi harakatlar: Sevimlilar va Saytni yangilash (Refresh) */}

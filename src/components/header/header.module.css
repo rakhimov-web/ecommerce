@@ -38,7 +38,7 @@
   box-sizing: border-box;
 }
 
-/* Qidiruv maydoni (Native app uslubida tinch va toza) */
+/* Qidiruv maydoni (Home pageda faqat SearchPage ga o'tkazish vazifasini bajaradi, fokus va glow bo'lmaydi) */
 .searchBox {
   position: relative;
   display: flex;
@@ -50,22 +50,20 @@
   padding: 0 var(--space-3);
   height: 4rem;
   outline: none;
+  cursor: pointer;
   touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   transition:
     border-color var(--dur-ui) var(--ease-out),
-    box-shadow var(--dur-ui) var(--ease-out),
     background-color var(--dur-ui) var(--ease-out);
 }
 
-/* Fokuslangan / active holat: Apple & shadcn uslubidagi silliq 3px brend halqa (ring) animatsiyasi */
-.searchBox:focus-within {
-  border-color: var(--primary);
-  background-color: var(--white);
-  box-shadow: 0 0 0 3px rgba(0, 85, 255, 0.15);
+.searchBox:active {
+  background-color: var(--surface);
 }
 
-.searchBox:focus-within .searchIcon {
-  color: var(--primary);
+.searchBox:focus-visible {
+  outline: none;
 }
 
 .searchIcon {
@@ -75,40 +73,18 @@
   transition: color var(--dur-ui) var(--ease-out);
 }
 
-/* Qidiruv matni — iOS Safari zoom-oldini olish uchun >= 16px */
-.searchInput {
+/* Home pagedagi qidiruv placeholder matni */
+.searchPlaceholder {
   width: 100%;
-  border: none;
-  background: transparent;
-  outline: none;
-  font-family: var(--font-primary);
-  font-size: var(--text-lg); /* 1.6rem (16px) */
-  color: var(--black);
-  caret-color: var(--black);
-}
-
-.searchInput::placeholder {
   color: var(--gray);
   font-size: var(--text-base); /* 14px */
   font-weight: 400;
-}
-
-/* Qidiruvni tozalash tugmasi */
-.clearBtn {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.6rem;
-  height: 2.6rem;
-  border-radius: var(--radius-full);
-  background: transparent;
-  border: none;
-  color: var(--gray);
-  cursor: pointer;
-  margin-left: var(--space-1);
-  outline: none;
-  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
 }
 
 /* 44x44px touch target hit area */
