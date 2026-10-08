@@ -4,6 +4,7 @@ import SearchPage from "./pages/search/SearchPage";
 import Menu from "./components/menu/Menu";
 import ToastAlert from "./components/common/ToastAlert";
 import { AppProvider } from "./context/AppContext";
+import { ToastProvider } from "./context/ToastContext";
 import { initTelegramApp, syncTelegramBackButton } from "./lib/telegram";
 import "./App.css";
 
@@ -152,7 +153,16 @@ const AppContent = () => {
     [handleGoToSearch, handleGoToHome],
   );
 
-  const isHomeActive = currentPage === "home";
+  const handleHomeSearchClick = useCallback(() => {
+    handleGoToSearch("");
+  }, [handleGoToSearch]);
+
+  const handleHomeCategoryClick = useCallback(
+    (catTitle) => {
+      handleGoToSearch(catTitle);
+    },
+    [handleGoToSearch],
+  );
 
   return (
     <div className="appContainer">
@@ -165,8 +175,8 @@ const AppContent = () => {
       >
         <Home
           isActive={isHomeActive}
-          onSearchClick={() => handleGoToSearch("")}
-          onCategoryClick={(catTitle) => handleGoToSearch(catTitle)}
+          onSearchClick={handleHomeSearchClick}
+          onCategoryClick={handleHomeCategoryClick}
         />
       </div>
 
@@ -195,9 +205,11 @@ const AppContent = () => {
 
 const App = () => {
   return (
-    <AppProvider>
-      <AppContent />
-    </AppProvider>
+    <ToastProvider>
+      <AppProvider>
+        <AppContent />
+      </AppProvider>
+    </ToastProvider>
   );
 };
 

@@ -110,7 +110,7 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
 
   // 4.5 soniyalik autoplay (faqat sahifa ko'rinib turganda va pauza bo'lmaganda)
   useEffect(() => {
-    if (isPaused || !isActive) return;
+    if (isPaused || !isActive || (typeof document !== "undefined" && document.hidden)) return;
 
     autoplayTimer.current = setInterval(() => {
       nextSlide();
@@ -122,6 +122,22 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
       }
     };
   }, [nextSlide, isPaused, isActive]);
+
+  // Hujjat ko'rinmay qolganda (fon rejimiga o'tganda) autoplayni to'xtatish
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        setIsPaused(true);
+      } else {
+        setIsPaused(false);
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
 
   // Drag boshlanishi
   const handleDragStart = () => {

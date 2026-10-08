@@ -1,11 +1,14 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { triggerHaptic, updateClosingConfirmation } from "../lib/telegram";
 import { AppContext } from "./AppContextInstance";
+import { useToast } from "./useToast";
 
 const CART_STORAGE_KEY = "ecommerce_cart_items";
 const LIKES_STORAGE_KEY = "ecommerce_liked_ids";
 
 export const AppProvider = ({ children }) => {
+  const { showToast, hideToast } = useToast();
+
   // 1. Savatcha holati (localStorage bilan sinxron)
   const [cart, setCart] = useState(() => {
     try {
@@ -38,15 +41,6 @@ export const AppProvider = ({ children }) => {
     return [];
   });
 
-  // 3. Savatga qo'shilgandagi yoki yangilangandagi xabarnoma (Toast Alert) holati
-  const [toast, setToast] = useState({
-    visible: false,
-    message: "Qo'shildi",
-    type: "cart",
-    count: 1,
-    id: 0,
-  });
-
   // Savatcha o'zgarganda localStorage ga saqlash va Telegram closing confirmation ni sinxronlash
   useEffect(() => {
     try {
@@ -66,39 +60,6 @@ export const AppProvider = ({ children }) => {
       // ignore
     }
   }, [likedIds]);
-
-  // Toast avtomatik yopilishi uchun taymer (har safar yangi qo'shilganda yangilanadi)
-  useEffect(() => {
-    if (!toast.visible) return;
-
-    const timer = setTimeout(() => {
-      setToast((prev) => ({ ...prev, visible: false, count: 1 }));
-    }, 2800);
-
-    return () => clearTimeout(timer);
-  }, [toast.visible, toast.id]);
-
-  // Toast ko'rsatish: agar alert allaqachon ko'rinib turgan bo'lsa, uni yo'qotmasdan va ikkinchisini chiqarmasdan
-  // mavjud alertning taymerini yangitdan boshlaydi
-  const showToast = useCallback((message = "Qo'shildi", type = "cart") => {
-    setToast((prev) => {
-      const isAlreadyVisible = prev.visible;
-      const toastType =
-        type === "refresh" || message === "Yangilandi" ? "refresh" : "cart";
-      return {
-        visible: true,
-        message,
-        type: toastType,
-        count: isAlreadyVisible ? prev.count + 1 : 1,
-        id: Date.now(),
-      };
-    });
-  }, []);
-
-  // Toast yopish
-  const hideToast = useCallback(() => {
-    setToast((prev) => ({ ...prev, visible: false, count: 1 }));
-  }, []);
 
   // Mahsulotning savatdagi soni
   const getCartQuantity = useCallback(
@@ -194,7 +155,6 @@ export const AppProvider = ({ children }) => {
       isLiked,
       toggleLike,
       totalLikedCount,
-      toast,
       showToast,
       hideToast,
     }),
@@ -208,7 +168,6 @@ export const AppProvider = ({ children }) => {
       isLiked,
       toggleLike,
       totalLikedCount,
-      toast,
       showToast,
       hideToast,
     ],

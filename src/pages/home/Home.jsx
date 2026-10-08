@@ -1,96 +1,35 @@
-import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useCallback } from "react";
 import Header from "../../components/header/Header";
 import BannerCarousel from "../../components/banner/BannerCarousel";
 import CategoryGrid from "../../components/categories/CategoryGrid";
 import ProductGrid from "../../components/products/ProductGrid";
-import BannerSkeleton from "../../components/skeleton/BannerSkeleton";
-import CategorySkeleton from "../../components/skeleton/CategorySkeleton";
-import ProductGridSkeleton from "../../components/skeleton/ProductGridSkeleton";
 import { useApp } from "../../context/useApp";
 import { triggerHaptic } from "../../lib/telegram";
 import styles from "./home.module.css";
-
-import bannerImg from "../../assets/images/banner.png";
-import telefonImg from "../../assets/categories/telefon.png";
-import noutbukImg from "../../assets/categories/noutbuk.png";
-import ipadImg from "../../assets/categories/ipad.png";
-import watchImg from "../../assets/categories/apple-watch.png";
-import aksessuarlarImg from "../../assets/categories/aksessuarlar.png";
-import prodIphone from "../../assets/products/prod_iphone.jpg";
-import prodMacbook from "../../assets/products/prod_macbook.jpg";
-import prodIpad from "../../assets/products/prod_ipad.jpg";
-import prodWatch from "../../assets/products/prod_watch.jpg";
-import prodAirpods from "../../assets/products/prod_airpods.jpg";
-
-// Sayt birinchi marta ochilganda yoki sahifa yangilanganda skeleton ko'rsatiladi
-let hasLoadedHomeOnce = false;
 
 const Home = ({
   isActive = true,
   onSearchClick,
   onCategoryClick,
 }) => {
-  const [loading, setLoading] = useState(!hasLoadedHomeOnce);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const { showToast } = useApp();
 
-  // Sayt ma'lumotlarini qayta yuklash (Refresh)
+  // Sayt ma'lumotlarini qayta yangilash (Refresh)
   const handleRefresh = useCallback(() => {
-    if (loading || isRefreshing) return;
+    if (isRefreshing) return;
 
     triggerHaptic("medium");
     setIsRefreshing(true);
-    setLoading(true);
 
     if (typeof window !== "undefined") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    const timer = setTimeout(() => {
-      setLoading(false);
-      setIsRefreshing(false);
-      triggerHaptic("success");
-      showToast("Yangilandi", "refresh");
-    }, 750);
-
-    return () => clearTimeout(timer);
-  }, [loading, isRefreshing, showToast]);
-
-  useEffect(() => {
-    // Rasmlarni orqa fonda oldindan GPU xotirasiga dekodlab yuklash (pre-cache)
-    const imagesToPreload = [
-      bannerImg,
-      telefonImg,
-      noutbukImg,
-      ipadImg,
-      watchImg,
-      aksessuarlarImg,
-      prodIphone,
-      prodMacbook,
-      prodIpad,
-      prodWatch,
-      prodAirpods,
-    ];
-
-    imagesToPreload.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-      if (img.decode) {
-        img.decode().catch(() => {});
-      }
-    });
-
-    // Sayt ochilganda / sahifa qayta yuklanganda skeleton loader ko'rsatiladi
-    if (!hasLoadedHomeOnce) {
-      const timer = setTimeout(() => {
-        hasLoadedHomeOnce = true;
-        setLoading(false);
-      }, 700);
-
-      return () => clearTimeout(timer);
-    }
-  }, []);
+    triggerHaptic("success");
+    showToast("Yangilandi", "refresh");
+    setIsRefreshing(false);
+  }, [isRefreshing, showToast]);
 
   return (
     <div className={styles.homeContainer}>
@@ -100,44 +39,17 @@ const Home = ({
         isRefreshing={isRefreshing}
       />
       <main className={styles.mainContent}>
-        <AnimatePresence mode="wait">
-          {loading ? (
-            <motion.div
-              key="skeleton-view"
-              initial={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25, ease: [0.2, 0.8, 0.2, 1] }}
-            >
-              {/* Banner Skeleton */}
-              <BannerSkeleton />
+        {/* Yuqori cheksiz banner */}
+        <BannerCarousel
+          isActive={isActive}
+          onBannerClick={onCategoryClick}
+        />
 
-              {/* Toifalar Skeleton */}
-              <CategorySkeleton />
+        {/* Asosiy toifalar (Telefon, Noutbuk, iPad, Apple Watch, Aksessuarlar) */}
+        <CategoryGrid onCategoryClick={onCategoryClick} />
 
-              {/* Mahsulotlar panjarasi Skeleton */}
-              <ProductGridSkeleton />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="content-view"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3, ease: [0.2, 0.8, 0.2, 1] }}
-            >
-              {/* Yuqori cheksiz banner */}
-              <BannerCarousel
-                isActive={isActive}
-                onBannerClick={onCategoryClick}
-              />
-
-              {/* Asosiy toifalar (Telefon, Noutbuk, iPad, Apple Watch, Aksessuarlar) */}
-              <CategoryGrid onCategoryClick={onCategoryClick} />
-
-              {/* Tavsiya qilingan mahsulotlar (3/4 aspect ratio, 2 ustunli mobil panjara) */}
-              <ProductGrid />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Tavsiya qilingan mahsulotlar (3/4 aspect ratio, 2 ustunli mobil panjara) */}
+        <ProductGrid />
       </main>
     </div>
   );

@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { RotateCw } from "lucide-react";
-import { useApp } from "../../context/useApp";
+import { useToast } from "../../context/useToast";
 import styles from "./toastAlert.module.css";
 
 // Instagram rasmiy tasdiqlangan (verified) nishoni (scalloped rosette + oq galochka)
@@ -30,7 +30,7 @@ const InstagramVerifiedBadge = ({ size = 18 }) => (
 );
 
 const ToastAlert = () => {
-  const { toast } = useApp();
+  const { toast } = useToast();
   const isRefresh = toast.type === "refresh";
 
   return (

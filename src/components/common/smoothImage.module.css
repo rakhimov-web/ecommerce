@@ -38,27 +38,17 @@
   }
 }
 
-/* Asosiy rasm: yuklanishidan oldin mayin blurry va 1.04 scale */
+/* Asosiy rasm: yuklanishidan oldin opacity 0 */
 .image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
   opacity: 0;
-  filter: blur(12px);
-  transform: scale(1.04) translateZ(0);
-  transition:
-    opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, filter, transform;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+  transition: opacity var(--dur-ui) var(--ease-out);
 }
 
-/* Rasm to'liq kelganda — 100% tiniq va silliq Apple blur-up paydo bo'lishi */
+/* Rasm to'liq yuklanganda — silliq opacity animatsiyasi */
 .imageLoaded {
   opacity: 1;
-  filter: blur(0px);
-  transform: scale(1) translateZ(0);
 }
