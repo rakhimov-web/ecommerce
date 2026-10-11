@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
 import { motion, useMotionValue, animate } from "framer-motion";
 import bannerImg from "../../assets/images/banner.png";
 import SmoothImage from "../common/SmoothImage";
@@ -41,12 +41,29 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
   const isDragging = useRef(false);
   const dragDistance = useRef(0);
   const autoplayTimer = useRef(null);
+  const isFirstMount = useRef(true);
 
   // Motion qiymati
   const x = useMotionValue(0);
 
   // Cardlar orasidagi masofa
   const gap = 16;
+
+  // Dastlabki renderda layoutdan oldin darhol markazlashtirish (o'ngdan sakrab kirmasligi uchun)
+  useLayoutEffect(() => {
+    if (containerRef.current) {
+      const cWidth = containerRef.current.offsetWidth;
+      if (cWidth > 0) {
+        setContainerWidth(cWidth);
+        const calculatedWidth = Math.min(Math.round(cWidth * 0.85), 940);
+        setSlideWidth(calculatedWidth);
+        const centerOffset = (cWidth - calculatedWidth) / 2;
+        const initialTarget = centerOffset - currentIndex * (calculatedWidth + gap);
+        x.set(initialTarget);
+        isFirstMount.current = false;
+      }
+    }
+  }, [currentIndex, x]);
 
   // Ekran o'lchamini hisoblash
   const updateDimensions = useCallback(() => {
@@ -89,6 +106,11 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
   useEffect(() => {
     if (containerWidth > 0 && !isDragging.current && isActive) {
       const target = getTargetX(currentIndex);
+      if (isFirstMount.current) {
+        isFirstMount.current = false;
+        x.set(target); // Dastlabki yuklanishda hech qanday o'ngdan sirg'alib kirish animatsiyasisiz statik o'rnashadi
+        return;
+      }
       animate(x, target, {
         type: "spring",
         stiffness: 115,
@@ -108,15 +130,24 @@ const BannerCarousel = ({ isActive = true, onBannerClick }) => {
     setCurrentIndex((prev) => prev - 1);
   }, []);
 
-  // 4.5 soniyalik autoplay (faqat sahifa ko'rinib turganda va pauza bo'lmaganda)
+  // Autoplay: sayt ochilgandan 5 soniya o'tgach boshlanadi (darhol aylanib ketmaydi)
   useEffect(() => {
     if (isPaused || !isActive || (typeof document !== "undefined" && document.hidden)) return;
 
-    autoplayTimer.current = setInterval(() => {
+    let intervalId = null;
+    const initialDelay = setTimeout(() => {
       nextSlide();
-    }, 4500);
+      intervalId = setInterval(() => {
+        nextSlide();
+      }, 4500);
+      autoplayTimer.current = intervalId;
+    }, 5000);
 
     return () => {
+      clearTimeout(initialDelay);
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
       if (autoplayTimer.current) {
         clearInterval(autoplayTimer.current);
       }

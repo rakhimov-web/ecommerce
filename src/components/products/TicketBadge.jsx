@@ -13,36 +13,37 @@ const TicketBadge = ({ type }) => {
     <div className={styles.badgeWrapper} aria-label={label}>
       <svg
         className={styles.ticketSvg}
-        viewBox="0 0 74 42"
+        viewBox="0 0 74 40"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Chap yuqori burchakdagi 3D orqaga qayrilgan burchak (fold flap) */}
-        <path d="M 0 3.3 L 6.3 0 L 6.3 4.0 Z" fill={foldColor} />
+        {/* Chap qirradagi 3D orqaga qayrilgan burchak (fold flap) */}
+        <path d="M 0 5.2 L 6.5 1.5 L 6.5 6.8 Z" fill={foldColor} />
 
-        {/* Yuqori va pastki qirrasida chuqur yarim doira o'yig'i (notches) bo'lgan dinamik qiya chipta tanasi */}
+        {/* Yuqori va pastki qirrasida yarim doira o'yig'i (notches) bo'lgan dinamik qiya chipta tanasi */}
         <path
-          d="M 0 3.3 
-             L 0 33.5 
-             Q 0 36.2 2.8 35.6 
-             L 29.1 37.3 
-             A 5.6 5.6 0 0 1 40.2 36.7 
-             L 71.0 39.3 
-             Q 74.0 39.5 74.0 37.2 
-             L 74.0 11.8 
-             Q 74.0 9.5 71.0 10.0 
-             L 44.1 8.3 
-             A 5.6 5.6 0 0 1 33.0 6.2 
-             L 6.3 4.0 
-             L 0 3.3 
+          d="M 0 5.2 
+             L 0 31.5 
+             Q 0 33.6 2.5 33.0 
+             L 30.5 35.8 
+             A 4.8 4.8 0 0 1 40.5 36.8 
+             L 70.0 39.8 
+             Q 74.0 40.0 74.0 37.0 
+             L 74.0 12.0 
+             Q 74.0 9.2 70.0 9.6 
+             L 40.5 6.6 
+             A 4.8 4.8 0 0 1 30.5 5.6 
+             L 6.5 3.2 
+             L 0 5.2 
              Z"
           fill={mainColor}
         />
 
-        {/* Chipta markazidagi oq qalin matn — sayt shrifti va proporsional o'lcham */}
+        {/* Chipta markazidagi oq qalin matn — qiyalik bo'yicha tabiiy burchakda joylashgan */}
         <text
           x="37"
-          y="23.5"
+          y="22.5"
+          transform="rotate(3.5 37 22.5)"
           fill="var(--white)"
           fontSize="11.5"
           fontWeight="800"

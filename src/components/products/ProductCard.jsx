@@ -1,8 +1,9 @@
 import { useState, memo } from "react";
-import { ShoppingCart, Heart, Minus, Plus } from "lucide-react";
+import { Heart, Minus, Plus } from "lucide-react";
 import TicketBadge from "./TicketBadge";
 import SmoothImage from "../common/SmoothImage";
 import Button from "../common/Button";
+import ShoppingBagPlusIcon from "../common/ShoppingBagPlusIcon";
 import styles from "./productGrid.module.css";
 import { formatPrice } from "../../data/products";
 import { useApp } from "../../context/useApp";
@@ -136,9 +137,9 @@ const ProductCard = ({ product }) => {
           ) : (
             <Button
               fullWidth
-              variant="primary"
+              variant="subtle"
               isLoading={isAdding}
-              icon={<ShoppingCart size={16} strokeWidth={2} />}
+              icon={<ShoppingBagPlusIcon size={17} strokeWidth={2.2} />}
               onClick={handleInitialAddToCart}
               aria-label={`${product.title}ni savatga qo'shish`}
               className={styles.cartButton}
