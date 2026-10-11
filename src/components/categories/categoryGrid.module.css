@@ -1,6 +1,6 @@
 .section {
   width: 100%;
-  margin: 1.8rem auto 3.2rem auto;
+  margin: 2.2rem auto 3.4rem auto;
   font-family: var(--font-primary);
   user-select: none;
   -webkit-user-select: none;
@@ -27,11 +27,6 @@
   flex: 0 0 auto;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
-  transition: opacity var(--dur-ui) var(--ease-out);
-}
-
-.categoryItem:active {
-  opacity: 0.88;
 }
 
 .iconWrapper {
@@ -99,13 +94,13 @@
 /* Mobil ekranlar uchun moslashuv */
 @media (max-width: 768px) {
   .section {
-    margin: 1.6rem auto 3.0rem auto;
+    margin: 2.0rem auto 3.2rem auto;
   }
 
   .iconWrapper {
     width: 5.6rem;
     height: 5.6rem;
-    border-radius: var(--radius-md);
+    border-radius: 1.4rem; /* Mobil mahsulot kartasi va banner bilan uyg'un */
     margin-bottom: var(--space-1);
   }
 
@@ -116,10 +111,14 @@
 }
 
 @media (max-width: 480px) {
+  .section {
+    margin: 1.8rem auto 3.0rem auto;
+  }
+
   .iconWrapper {
     width: 5.4rem;
     height: 5.4rem;
-    border-radius: var(--radius-md);
+    border-radius: 1.35rem;
   }
 
   .categoryTitle {
@@ -130,13 +129,13 @@
 
 @media (max-width: 360px) {
   .section {
-    margin: 1.4rem auto 2.6rem auto;
+    margin: 1.6rem auto 2.8rem auto;
   }
 
   .iconWrapper {
     width: 4.8rem;
     height: 4.8rem;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md); /* 1.2rem — 48px uchun 25% Apple squircle nisbati */
   }
 
   .categoryTitle {
@@ -147,13 +146,13 @@
 
 @media (max-width: 340px) {
   .section {
-    margin: 1.2rem auto 2.4rem auto;
+    margin: 1.5rem auto 2.6rem auto;
   }
 
   .iconWrapper {
     width: 4.4rem;
     height: 4.4rem;
-    border-radius: var(--radius-sm);
+    border-radius: 1.1rem; /* 44px uchun 25% Apple squircle nisbati */
   }
 
   .categoryTitle {

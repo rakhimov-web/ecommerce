@@ -138,13 +138,13 @@
   /* ========================================
      MOTION & PRESS FEEDBACK TOKENS
      ======================================== */
-  --dur-press-in: 0ms;
-  --press-delay: 40ms; /* Skroll paytida miltillashni oldini olish */
-  --dur-press-out: 200ms;
+  --dur-press-in: 120ms; /* iOS / Telegram uslubidagi silliq yoyiluvchi bosilish effekti */
+  --press-delay: 25ms; /* Skroll paytida noo'rin miltillashni oldini olish */
+  --dur-press-out: 240ms; /* Yumshoq va tabiiy o'chish */
   --dur-ui: 200ms;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 
-  --press-bg-light: rgba(22, 25, 27, 0.08);
+  --press-bg-light: rgba(22, 25, 27, 0.06); /* iOS/Telegram yumshoq qora tusi */
   --press-bg-on-dark: rgba(255, 255, 255, 0.14);
 
   /* ========================================

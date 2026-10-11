@@ -59,7 +59,8 @@
 }
 
 .searchBox:active {
-  background-color: var(--surface);
+  /* Bosilganda fon rangi sakramaydi, u shunchaki qidiruv sahifasiga yo'naltiruvchi route sifatida ishlaydi */
+  background-color: var(--surface-subtle);
 }
 
 .searchBox:focus-visible {

@@ -54,17 +54,17 @@
 }
 
 .logoSvg {
-  height: 2.3rem; /* 23px: 22-24px oralig'ida premium e-commerce brend logotipi */
+  height: 2.0rem; /* 20px: nafis, ixcham va premium e-commerce brend logotipi */
   width: auto;
-  max-width: 120px;
+  max-width: 105px;
   object-fit: contain;
   display: block;
 }
 
 @media (max-width: 360px) {
   .logoSvg {
-    height: 2.2rem; /* 22px kichik ekranlarda */
-    max-width: 110px;
+    height: 1.9rem; /* 19px kichik ekranlarda */
+    max-width: 95px;
   }
 }
 
@@ -75,7 +75,7 @@
   }
 
   .logoSvg {
-    height: 2.1rem;
-    max-width: 100px;
+    height: 1.8rem;
+    max-width: 90px;
   }
 }
