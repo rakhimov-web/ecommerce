@@ -1,14 +1,19 @@
 {
   "common": {
-    "intro": "Основа магазина готова.",
     "language": "Русский",
-    "sample": "Oʻzbekcha: oʻ, gʻ, maʼno · Русский: электроника",
+    "intro": "Надёжная основа для нового магазина.",
+    "stage": "Основа · 1A",
     "gallery": "Дизайн-система",
     "colors": "Цвета",
-    "type": "Типографика",
+    "typography": "Типографика",
     "spacing": "Отступы",
-    "radius": "Радиусы",
-    "placeholder": "Пример изображения"
+    "rounded": "Радиусы",
+    "motion": "Движение",
+    "placeholder": "Пример изображения",
+    "sampleUz": "Oʻzbekcha: oʻ, gʻ, maʼno",
+    "sampleRu": "Русский: техника для дома",
+    "fontInter": "Inter",
+    "fontOswald": "Oswald"
   },
   "tabs": {
     "home": "Главная",
@@ -33,6 +38,6 @@
     "title": "Вход"
   },
   "errors": {
-    "title": "Ошибка"
+    "title": "Произошла ошибка"
   }
 }

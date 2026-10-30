@@ -1,22 +1,23 @@
 "use client";
-import { useState } from "react";
 import Image from "next/image";
+import { useState } from "react";
 import { brand } from "@/config/brand";
-export function ProductImage({ src, alt }: { src?: string; alt: string }) {
+function ImageState({ src, alt }: { src?: string; alt: string }) {
   const [failed, setFailed] = useState(false);
-  const fallback = !src || failed;
+  const placeholder = !src || failed;
   return (
-    <div className="relative aspect-square bg-soft-cloud">
+    <div className="product-stage">
       <Image
-        src={fallback ? brand.placeholder : src}
+        src={placeholder ? brand.placeholder : src}
         alt={alt}
         fill
         sizes="(max-width:640px) 100vw, 400px"
-        className={
-          fallback ? "object-contain p-[30%]" : "object-contain p-[10%]"
-        }
+        className={placeholder ? "product-placeholder" : "product-image"}
         onError={() => setFailed(true)}
       />
     </div>
   );
+}
+export function ProductImage(props: { src?: string; alt: string }) {
+  return <ImageState key={props.src} {...props} />;
 }

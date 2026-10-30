@@ -2,6 +2,11 @@
   "name": "texno-store",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,10 +15,11 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "format": "prettier --write .",
-    "e2e": "node -e \"console.log('TODO: Playwright in Stage 3')\"",
-    "db:generate": "node -e \"console.log('TODO: Drizzle in Stage 5')\"",
-    "db:migrate": "node -e \"console.log('TODO: migrations in Stage 5')\"",
-    "db:seed": "node -e \"console.log('TODO: seed in Stage 5')\""
+    "tokens": "node tools/generateTokens.mjs",
+    "e2e": "node -e \"console.log('TODO — Playwright: Stage 3')\"",
+    "db:generate": "node -e \"console.log('TODO — Drizzle: Stage 5')\"",
+    "db:migrate": "node -e \"console.log('TODO — Migrations: Stage 5')\"",
+    "db:seed": "node -e \"console.log('TODO — Demo seed: Stage 5')\""
   },
   "dependencies": {
     "next": "16.4.3",
@@ -34,10 +40,8 @@
     "jsdom": "30.1.3",
     "prettier": "3.9.10",
     "tailwindcss": "4.3.3",
-    "typescript": "6.0.3",
+    "typescript": "^6.0.3",
     "vitest": "5.0.5",
     "yaml": "2.9.1"
-  },
-  "packageManager": "pnpm@11.25.0",
-  "type": "module"
+  }
 }

@@ -1,6 +1,6 @@
 import createNextIntlPlugin from "next-intl/plugin";
 export default createNextIntlPlugin("./src/lib/i18n/request.ts")({
-  // Preserve the supplied AGENTS.md byte for byte.
+  // Supplied instructions must remain byte-identical.
   agentRules: false,
   pageExtensions:
     process.env.NODE_ENV === "production"

@@ -2,7 +2,8 @@ AGENTS.md
 SPEC.md
 DESIGN.md
 public/
-pnpm-lock.yaml
-.next/
 node_modules/
+.next/
+.vite/
+pnpm-lock.yaml
 src/assets/fonts/
