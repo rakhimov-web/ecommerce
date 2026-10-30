@@ -1,0 +1,5 @@
+import type { ReactNode } from "react";
+import { ShopShell } from "@/components/shop/ShopShell";
+export default function Layout({ children }: { children: ReactNode }) {
+  return <ShopShell>{children}</ShopShell>;
+}
