@@ -18,22 +18,15 @@ const clientSnapshot = () => true;
 const serverSnapshot = () => false;
 const focusable =
   'button:not(:disabled),a[href],input:not(:disabled),select:not(:disabled),textarea:not(:disabled),[tabindex="0"]';
-export function BottomSheet({
-  open,
+function SheetSurface({
   onClose,
   title,
   children,
 }: {
-  open: boolean;
   onClose: () => void;
   title: string;
   children: ReactNode;
 }) {
-  const mounted = useSyncExternalStore(
-    subscribe,
-    clientSnapshot,
-    serverSnapshot,
-  );
   const t = useTranslations("ui");
   const id = useId();
   const overlay = useRef<HTMLDivElement>(null);
@@ -41,7 +34,6 @@ export function BottomSheet({
   const reduced = useReducedMotion();
   const requestClose = useEffectEvent(onClose);
   useEffect(() => {
-    if (!open || !mounted) return;
     const previous = document.activeElement;
     const overflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -97,52 +89,76 @@ export function BottomSheet({
       if (previous instanceof HTMLElement && previous.isConnected)
         previous.focus();
     };
-  }, [open, mounted]);
+  }, []);
+  return (
+    <motion.div
+      ref={overlay}
+      className="sheet-scrim"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{
+        duration: reduced
+          ? motionTokens.duration.instant
+          : motionTokens.duration.fast,
+      }}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <motion.div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={id}
+        tabIndex={-1}
+        ref={panel}
+        className="bottom-sheet"
+        initial={{ y: reduced ? 0 : "100%" }}
+        animate={{ y: 0 }}
+        exit={{
+          y: reduced ? 0 : "100%",
+          transition: {
+            duration: reduced ? 0 : motionTokens.duration.fast,
+            ease: motionTokens.ease.exit,
+          },
+        }}
+        transition={{
+          duration: reduced ? 0 : motionTokens.duration.base,
+          ease: motionTokens.ease.enter,
+        }}
+      >
+        <div className="sheet-handle" aria-hidden="true" />
+        <div className="sheet-heading">
+          <h2 id={id} className="type-heading-lg">
+            {title}
+          </h2>
+          <IconButton aria-label={t("close")} onClick={onClose}>
+            <X size={24} />
+          </IconButton>
+        </div>
+        {children}
+      </motion.div>
+    </motion.div>
+  );
+}
+
+export function BottomSheet({
+  open,
+  ...props
+}: {
+  open: boolean;
+  onClose: () => void;
+  title: string;
+  children: ReactNode;
+}) {
+  const mounted = useSyncExternalStore(
+    subscribe,
+    clientSnapshot,
+    serverSnapshot,
+  );
   if (!mounted) return null;
   return createPortal(
-    <div ref={overlay}>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            className="sheet-scrim"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: motionTokens.duration.fast }}
-            onClick={(e) => {
-              if (e.target === e.currentTarget) onClose();
-            }}
-          >
-            <motion.div
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby={id}
-              tabIndex={-1}
-              ref={panel}
-              className="bottom-sheet"
-              initial={{ y: reduced ? 0 : "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: reduced ? 0 : "100%" }}
-              transition={{
-                duration: reduced ? 0 : motionTokens.duration.base,
-                ease: motionTokens.ease.enter,
-              }}
-            >
-              <div className="sheet-handle" aria-hidden="true" />
-              <div className="sheet-heading">
-                <h2 id={id} className="type-heading-lg">
-                  {title}
-                </h2>
-                <IconButton aria-label={t("close")} onClick={onClose}>
-                  <X size={24} />
-                </IconButton>
-              </div>
-              {children}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>,
+    <AnimatePresence>{open && <SheetSurface {...props} />}</AnimatePresence>,
     document.body,
   );
 }

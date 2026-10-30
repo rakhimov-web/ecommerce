@@ -28,7 +28,16 @@ export function Toast({
       style={{ x: "-50%" }}
       initial={{ y: reduced ? 0 : "var(--toast-offset)", opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      exit={{ y: reduced ? 0 : "var(--toast-offset)", opacity: 0 }}
+      exit={{
+        y: reduced ? 0 : "var(--toast-offset)",
+        opacity: 0,
+        transition: {
+          duration: reduced
+            ? motionTokens.duration.instant
+            : motionTokens.duration.fast,
+          ease: motionTokens.ease.exit,
+        },
+      }}
       transition={{
         duration: reduced
           ? motionTokens.duration.instant

@@ -101,6 +101,13 @@
   --typography-tab-label-fontSize: 11px;
   --typography-tab-label-fontWeight: 500;
   --typography-tab-label-lineHeight: 1.2;
+  --component-button-primary-padding: 0 32px;
+  --component-button-secondary-padding: 0 32px;
+  --component-button-outline-on-image-padding: 12px 24px;
+  --component-filter-chip-padding: 0 16px;
+  --component-search-pill-padding: 0 16px;
+  --component-text-field-padding: 0 16px;
+  --component-badge-promo-padding: 4px 12px;
 }
 @theme inline {
   --color-ink: var(--colors-ink);
@@ -577,7 +584,7 @@ textarea {
   border: 1px solid var(--colors-hairline);
   border-radius: var(--rounded-lg);
   background: var(--colors-canvas);
-  padding: 0 var(--spacing-lg);
+  padding: var(--component-filter-chip-padding);
   font-size: var(--typography-button-sm-fontSize);
   white-space: nowrap;
 }
@@ -605,10 +612,10 @@ textarea {
   gap: var(--spacing-sm);
   height: var(--control-sm);
   background: var(--colors-soft-cloud);
-  border: 2px solid transparent;
+  position: relative;
+  border: 0;
   border-radius: var(--rounded-md);
-  padding-left: var(--spacing-md);
-  padding-right: var(--spacing-xxs);
+  padding: var(--component-search-pill-padding);
   min-width: 0;
 }
 .search-pill:focus-within {
@@ -643,7 +650,7 @@ textarea {
   min-height: var(--control-md);
   border: 1px solid var(--colors-hairline);
   border-radius: var(--rounded-md);
-  padding: 0 var(--spacing-lg);
+  padding: var(--component-text-field-padding);
   background: var(--colors-canvas);
 }
 .field input:focus-visible {
@@ -823,7 +830,7 @@ textarea {
   position: fixed;
   z-index: 110;
   bottom: calc(
-    var(--tab-height) + var(--spacing-lg) + env(safe-area-inset-bottom)
+    var(--tab-height) + var(--toast-offset) + env(safe-area-inset-bottom)
   );
   left: 50%;
   transform: translateX(-50%);
@@ -934,6 +941,7 @@ textarea {
   padding-bottom: env(safe-area-inset-bottom);
 }
 .bottom-tab-bar a {
+  position: relative;
   min-height: var(--tab-height);
   display: flex;
   flex-direction: column;
@@ -946,7 +954,7 @@ textarea {
 .bottom-tab-bar .tab-active {
   color: var(--colors-ink);
 }
-.bottom-tab-bar a > span:last-child {
+.bottom-tab-bar .tab-label {
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1171,9 +1179,6 @@ textarea {
   .product-grid {
     gap: var(--spacing-xs);
   }
-  .product-card .price-current {
-    font-size: var(--typography-caption-md-fontSize);
-  }
   .product-card .quantity-stepper .icon-button {
     width: var(--control-sm);
   }
@@ -1277,4 +1282,37 @@ textarea {
   font-size: var(--typography-heading-lg-fontSize);
   text-transform: uppercase;
   letter-spacing: var(--typography-display-campaign-letterSpacing);
+}
+
+/* Reserve the full documented 44px search hit area; focus border overlays it. */
+.search-pill:focus-within::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--colors-ink);
+  border-radius: inherit;
+  pointer-events: none;
+}
+.otp-row {
+  flex-wrap: wrap;
+}
+.otp-row input {
+  min-width: var(--control-sm);
+  flex: 1 0 var(--control-sm);
+}
+.mobile-logo-row > a,
+.primary-nav > a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-sm);
+  min-width: var(--control-sm);
+}
+
+.tab-cart-count {
+  top: var(--spacing-xs);
+  right: calc(50% - var(--icon-size) / 2);
+}
+.utility-bar a {
+  min-width: var(--control-sm);
+  justify-content: center;
 }

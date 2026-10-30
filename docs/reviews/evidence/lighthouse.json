@@ -1,0 +1,31 @@
+{
+  "initial": {
+    "lighthouse_version": "13.6.0",
+    "url": "http://127.0.0.1:3040/dev/gallery",
+    "fetched_at": "2026-10-30T09:48:50.540Z",
+    "accessibility_score": 100,
+    "failed_audits": [
+      {
+        "id": "label-content-name-mismatch",
+        "title": "Elements with visible text labels do not have matching accessible names."
+      }
+    ],
+    "runtime_error": null
+  },
+  "mobile": {
+    "lighthouse_version": "13.6.0",
+    "url": "http://127.0.0.1:3040/dev/gallery",
+    "fetched_at": "2026-10-30T10:04:14.116Z",
+    "accessibility_score": 100,
+    "failed_audits": [],
+    "runtime_error": null
+  },
+  "desktop": {
+    "lighthouse_version": "13.6.0",
+    "url": "http://127.0.0.1:3040/dev/gallery",
+    "fetched_at": "2026-10-30T10:09:36.629Z",
+    "accessibility_score": 100,
+    "failed_audits": [],
+    "runtime_error": null
+  }
+}

@@ -105,6 +105,8 @@
     "price": "Narxlar",
     "images": "Tasvirlar va bannerlar",
     "banner": "Banner namunasi",
-    "sample": "Namuna"
+    "sample": "Namuna",
+    "tabNavigation": "Pastki sahifa navigatsiyasi",
+    "desktopNavigation": "Yuqori doʻkon navigatsiyasi"
   }
 }

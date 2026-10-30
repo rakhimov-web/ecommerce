@@ -1,0 +1,61 @@
+$ eslint .
+$ tsc --noEmit
+$ vitest run
+
+ RUN  v5.0.5 /workspace/ecommerce
+
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+Not implemented: HTMLCanvasElement's getContext() method: without installing the canvas npm package
+
+ Test Files  10 passed (10)
+      Tests  208 passed (208)
+   Start at  10:09:35
+   Duration  6.27s (environment 51%, tests 20%, import 15%, setup 8%, transform 4%)
+
+Environment  jsdom was created 10 times · 8.01s total, 51% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+
+$ next build
+▲ Next.js 16.4.3 (Turbopack)
+✓ Running next.config.ts took 53ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 468ms
+  Running TypeScript ...
+  Finished TypeScript in 2.1s ...
+  Collecting page data using 4 workers ...
+  Generating static pages using 4 workers (0/14) ...
+  Generating static pages using 4 workers (3/14) 
+  Generating static pages using 4 workers (6/14) 
+  Generating static pages using 4 workers (10/14) 
+✓ Generating static pages using 4 workers (14/14) in 359ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /_not-found
+├   /[locale]
+│ ├ ● /uz
+│ └ ● /ru
+├   /[locale]/cart
+│ ├ ● /uz/cart
+│ └ ● /ru/cart
+├   /[locale]/catalog
+│ ├ ● /uz/catalog
+│ └ ● /ru/catalog
+├   /[locale]/favorites
+│ ├ ● /uz/favorites
+│ └ ● /ru/favorites
+├   /[locale]/info/demo
+│ ├ ● /uz/info/demo
+│ └ ● /ru/info/demo
+└   /[locale]/profile
+  ├ ● /uz/profile
+  └ ● /ru/profile
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)  prerendered as static content
+●  (SSG)     prerendered as static HTML (uses generateStaticParams)
+

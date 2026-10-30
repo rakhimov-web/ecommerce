@@ -11,7 +11,7 @@ export function PrimaryNav({ cartCount = 0 }: { cartCount?: number }) {
   const t = useTranslations("tabs");
   const ui = useTranslations("ui");
   return (
-    <nav className="primary-nav" aria-label={ui("navigation")}>
+    <nav className="primary-nav" aria-label={ui("desktopNavigation")}>
       <Link href={`/${locale}`}>
         <BrandLogo />
       </Link>

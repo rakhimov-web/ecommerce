@@ -1,0 +1,66 @@
+[
+  {
+    "path": "/uz",
+    "status": 200,
+    "lang": "uz"
+  },
+  {
+    "path": "/uz/catalog",
+    "status": 200,
+    "lang": "uz"
+  },
+  {
+    "path": "/uz/cart",
+    "status": 200,
+    "lang": "uz"
+  },
+  {
+    "path": "/uz/favorites",
+    "status": 200,
+    "lang": "uz"
+  },
+  {
+    "path": "/uz/profile",
+    "status": 200,
+    "lang": "uz"
+  },
+  {
+    "path": "/uz/info/demo",
+    "status": 200,
+    "lang": "uz"
+  },
+  {
+    "path": "/ru",
+    "status": 200,
+    "lang": "ru"
+  },
+  {
+    "path": "/ru/catalog",
+    "status": 200,
+    "lang": "ru"
+  },
+  {
+    "path": "/ru/cart",
+    "status": 200,
+    "lang": "ru"
+  },
+  {
+    "path": "/ru/favorites",
+    "status": 200,
+    "lang": "ru"
+  },
+  {
+    "path": "/ru/profile",
+    "status": 200,
+    "lang": "ru"
+  },
+  {
+    "path": "/ru/info/demo",
+    "status": 200,
+    "lang": "ru"
+  },
+  {
+    "path": "/dev/gallery",
+    "status": 404
+  }
+]

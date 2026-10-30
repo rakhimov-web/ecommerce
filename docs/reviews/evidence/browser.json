@@ -1,0 +1,403 @@
+{
+  "routes": [
+    {
+      "path": "/uz",
+      "width": 320,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/catalog",
+      "width": 320,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/cart",
+      "width": 320,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/favorites",
+      "width": 320,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/profile",
+      "width": 320,
+      "status": "pass"
+    },
+    {
+      "path": "/ru",
+      "width": 320,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/catalog",
+      "width": 320,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/cart",
+      "width": 320,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/favorites",
+      "width": 320,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/profile",
+      "width": 320,
+      "status": "pass"
+    },
+    {
+      "path": "/uz",
+      "width": 360,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/catalog",
+      "width": 360,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/cart",
+      "width": 360,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/favorites",
+      "width": 360,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/profile",
+      "width": 360,
+      "status": "pass"
+    },
+    {
+      "path": "/ru",
+      "width": 360,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/catalog",
+      "width": 360,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/cart",
+      "width": 360,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/favorites",
+      "width": 360,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/profile",
+      "width": 360,
+      "status": "pass"
+    },
+    {
+      "path": "/uz",
+      "width": 640,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/catalog",
+      "width": 640,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/cart",
+      "width": 640,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/favorites",
+      "width": 640,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/profile",
+      "width": 640,
+      "status": "pass"
+    },
+    {
+      "path": "/ru",
+      "width": 640,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/catalog",
+      "width": 640,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/cart",
+      "width": 640,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/favorites",
+      "width": 640,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/profile",
+      "width": 640,
+      "status": "pass"
+    },
+    {
+      "path": "/uz",
+      "width": 1023,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/catalog",
+      "width": 1023,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/cart",
+      "width": 1023,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/favorites",
+      "width": 1023,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/profile",
+      "width": 1023,
+      "status": "pass"
+    },
+    {
+      "path": "/ru",
+      "width": 1023,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/catalog",
+      "width": 1023,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/cart",
+      "width": 1023,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/favorites",
+      "width": 1023,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/profile",
+      "width": 1023,
+      "status": "pass"
+    },
+    {
+      "path": "/uz",
+      "width": 1024,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/catalog",
+      "width": 1024,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/cart",
+      "width": 1024,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/favorites",
+      "width": 1024,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/profile",
+      "width": 1024,
+      "status": "pass"
+    },
+    {
+      "path": "/ru",
+      "width": 1024,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/catalog",
+      "width": 1024,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/cart",
+      "width": 1024,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/favorites",
+      "width": 1024,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/profile",
+      "width": 1024,
+      "status": "pass"
+    },
+    {
+      "path": "/uz",
+      "width": 1280,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/catalog",
+      "width": 1280,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/cart",
+      "width": 1280,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/favorites",
+      "width": 1280,
+      "status": "pass"
+    },
+    {
+      "path": "/uz/profile",
+      "width": 1280,
+      "status": "pass"
+    },
+    {
+      "path": "/ru",
+      "width": 1280,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/catalog",
+      "width": 1280,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/cart",
+      "width": 1280,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/favorites",
+      "width": 1280,
+      "status": "pass"
+    },
+    {
+      "path": "/ru/profile",
+      "width": 1280,
+      "status": "pass"
+    }
+  ],
+  "gallery": [
+    {
+      "width": 320,
+      "locale": "uz",
+      "axe_version": "4.14.0",
+      "axe_violations": 0,
+      "axe_passes": 41,
+      "columns": 2,
+      "display_size": "40px",
+      "minimum_targets": "44px",
+      "glyph_samples": "pass"
+    },
+    {
+      "width": 320,
+      "locale": "ru",
+      "axe_version": "4.14.0",
+      "axe_violations": 0,
+      "axe_passes": 41,
+      "columns": 2,
+      "display_size": "40px",
+      "minimum_targets": "44px",
+      "glyph_samples": "pass"
+    },
+    {
+      "width": 360,
+      "locale": "uz",
+      "axe_version": "4.14.0",
+      "axe_violations": 0,
+      "axe_passes": 41,
+      "columns": 2,
+      "display_size": "40px",
+      "minimum_targets": "44px",
+      "glyph_samples": "pass"
+    },
+    {
+      "width": 360,
+      "locale": "ru",
+      "axe_version": "4.14.0",
+      "axe_violations": 0,
+      "axe_passes": 41,
+      "columns": 2,
+      "display_size": "40px",
+      "minimum_targets": "44px",
+      "glyph_samples": "pass"
+    },
+    {
+      "width": 768,
+      "locale": "uz",
+      "axe_version": "4.14.0",
+      "axe_violations": 0,
+      "axe_passes": 40,
+      "columns": 3,
+      "display_size": "64px",
+      "minimum_targets": "44px",
+      "glyph_samples": "pass"
+    },
+    {
+      "width": 768,
+      "locale": "ru",
+      "axe_version": "4.14.0",
+      "axe_violations": 0,
+      "axe_passes": 41,
+      "columns": 3,
+      "display_size": "64px",
+      "minimum_targets": "44px",
+      "glyph_samples": "pass"
+    },
+    {
+      "width": 1280,
+      "locale": "uz",
+      "axe_version": "4.14.0",
+      "axe_violations": 0,
+      "axe_passes": 42,
+      "columns": 4,
+      "display_size": "96px",
+      "minimum_targets": "44px",
+      "glyph_samples": "pass"
+    },
+    {
+      "width": 1280,
+      "locale": "ru",
+      "axe_version": "4.14.0",
+      "axe_violations": 0,
+      "axe_passes": 42,
+      "columns": 4,
+      "display_size": "96px",
+      "minimum_targets": "44px",
+      "glyph_samples": "pass"
+    }
+  ],
+  "errors": [],
+  "external_requests": [],
+  "chromium": "154.0.8037.57",
+  "reduced_motion": "pass",
+  "component_spacing_and_long_strings": "pass",
+  "sticky_header": "pass",
+  "modal_exit_isolation": "pass",
+  "root_redirect_and_no_tab_bar": "pass",
+  "otp_slot_editing": "pass"
+}
