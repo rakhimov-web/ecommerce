@@ -32,7 +32,7 @@ export function CategoryGrid({ categories }: { categories: Category[] }) {
         return (
           <Link key={category.id} href={`/${locale}/c/${category.slug}`}>
             <span className="category-icon">
-              <Icon size={48} strokeWidth={1.75} aria-hidden="true" />
+              <Icon size={72} strokeWidth={1.75} aria-hidden="true" />
             </span>
             <span className="type-caption-md line-clamp-2">
               {category.name[locale === "ru" ? "ru" : "uz"]}
@@ -42,7 +42,7 @@ export function CategoryGrid({ categories }: { categories: Category[] }) {
       })}
       <Link href={`/${locale}/catalog`}>
         <span className="category-icon">
-          <LayoutGrid size={48} strokeWidth={1.75} aria-hidden="true" />
+          <LayoutGrid size={72} strokeWidth={1.75} aria-hidden="true" />
         </span>
         <span className="type-caption-md">{t("allCategories")}</span>
       </Link>

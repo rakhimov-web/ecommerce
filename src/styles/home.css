@@ -51,6 +51,10 @@
   height: 72px;
   max-width: 100%;
 }
+.category-icon > svg {
+  max-width: 100%;
+  height: auto;
+}
 .category-grid .type-caption-md {
   max-width: 100%;
   overflow-wrap: anywhere;
