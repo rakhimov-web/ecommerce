@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useId } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { House, LayoutGrid, ShoppingBag, Heart, UserRound } from "lucide-react";
 export const tabs = [
@@ -18,42 +19,46 @@ export function BottomTabBar({
   cartCount?: number;
   hidden?: boolean;
 }) {
+  const countId = useId();
   const locale = useLocale();
   const t = useTranslations("tabs");
   const ui = useTranslations("ui");
   if (hidden) return null;
   return (
-    <nav aria-label={ui("navigation")} className="bottom-tab-bar">
-      {tabs.map(({ key, path, icon: Icon }) => {
-        const href = `/${locale}${path}`;
-        const active = pathname === href;
-        return (
-          <Link
-            href={href}
-            key={key}
-            aria-current={active ? "page" : undefined}
-            className={active ? "tab-active" : ""}
-            aria-label={
-              key === "cart" ? ui("cartCount", { count: cartCount }) : t(key)
-            }
-          >
-            <span className="tab-icon">
-              <Icon
-                size={24}
-                strokeWidth={1.75}
-                fill={active ? "currentColor" : "none"}
-                aria-hidden="true"
-              />
+    <>
+      <nav aria-label={ui("tabNavigation")} className="bottom-tab-bar">
+        {tabs.map(({ key, path, icon: Icon }) => {
+          const href = `/${locale}${path}`;
+          const active = pathname === href;
+          return (
+            <Link
+              href={href}
+              key={key}
+              aria-current={active ? "page" : undefined}
+              className={active ? "tab-active" : ""}
+              aria-describedby={key === "cart" ? countId : undefined}
+            >
+              <span className="tab-icon">
+                <Icon
+                  size={24}
+                  strokeWidth={1.75}
+                  fill={active ? "currentColor" : "none"}
+                  aria-hidden="true"
+                />
+              </span>
+              <span className="type-tab-label tab-label">{t(key)}</span>
               {key === "cart" && cartCount > 0 && (
-                <span className="cart-count" aria-hidden="true">
+                <span className="cart-count tab-cart-count" aria-hidden="true">
                   {cartCount}
                 </span>
               )}
-            </span>
-            <span className="type-tab-label">{t(key)}</span>
-          </Link>
-        );
-      })}
-    </nav>
+            </Link>
+          );
+        })}
+      </nav>
+      <span id={countId} hidden>
+        {ui("cartCount", { count: cartCount })}
+      </span>
+    </>
   );
 }

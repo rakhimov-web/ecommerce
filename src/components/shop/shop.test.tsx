@@ -2,9 +2,11 @@ import { afterEach, describe, it, expect, vi } from "vitest";
 import { screen, fireEvent, cleanup } from "@testing-library/react";
 import axe from "axe-core";
 import { renderUI } from "@/test/render";
+import { PrimaryNav } from "./PrimaryNav";
 import { ProductCard } from "./ProductCard";
 import { BottomTabBar } from "./BottomTabBar";
 import { demoProducts } from "@/server/repositories/mock/products";
+vi.mock("next/navigation", () => ({ usePathname: () => "/uz" }));
 afterEach(cleanup);
 describe("ProductCard", () => {
   it("renders its image, two-line name, rating, discount and add control", () => {
@@ -72,10 +74,14 @@ it("BottomTabBar marks only the active tab and announces cart count", () => {
     "aria-current",
     "page",
   );
-  expect(
-    screen.getByRole("link", { name: "Savat, 3 ta mahsulot" }),
-  ).toHaveAttribute("href", "/uz/cart");
+  expect(screen.getByRole("link", { name: "Savat" })).toHaveAttribute(
+    "href",
+    "/uz/cart",
+  );
   expect(screen.getByText("3")).toHaveClass("cart-count");
+  expect(
+    screen.getByRole("link", { name: "Savat" }),
+  ).toHaveAccessibleDescription("Savat, 3 ta mahsulot");
 });
 it("BottomTabBar supports Russian routes and omits itself on request", () => {
   renderUI(<BottomTabBar pathname="/ru/profile" />, "ru");
@@ -101,4 +107,22 @@ it("product card and tab navigation have no structural a11y violations", async (
       })
     ).violations,
   ).toEqual([]);
+});
+
+it("navigation landmarks are distinct and the cart keeps its visible name and count description", () => {
+  renderUI(
+    <>
+      <PrimaryNav />
+      <BottomTabBar pathname="/uz" cartCount={3} />
+    </>,
+  );
+  expect(
+    screen.getByRole("navigation", { name: "Yuqori doʻkon navigatsiyasi" }),
+  ).toBeInTheDocument();
+  const tabs = screen.getByRole("navigation", {
+    name: "Pastki sahifa navigatsiyasi",
+  });
+  const cart = tabs.querySelector('a[href="/uz/cart"]');
+  expect(cart).toHaveAccessibleName("Savat");
+  expect(cart).toHaveAccessibleDescription("Savat, 3 ta mahsulot");
 });

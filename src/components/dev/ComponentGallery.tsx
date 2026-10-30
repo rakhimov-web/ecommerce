@@ -3,7 +3,7 @@ import { GalleryButtonStates as States } from "./GalleryButtonStates";
 import { GalleryFields as Fields } from "./GalleryFields";
 import { TokenGallery } from "./TokenGallery";
 import { AnimatePresence } from "motion/react";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import Link from "next/link";
 import { NextIntlClientProvider, useLocale, useTranslations } from "next-intl";
 import { PackageOpen } from "lucide-react";
@@ -162,7 +162,7 @@ function Contents({ onLocale }: { onLocale: (value: "uz" | "ru") => void }) {
   const t = useTranslations("ui");
   const locale = useLocale();
   return (
-    <main>
+    <main lang={locale}>
       <header className="gallery-nav">
         <h1 className="type-heading-xl">{t("gallery")}</h1>
         <div className="gallery-actions">
@@ -177,10 +177,16 @@ function Contents({ onLocale }: { onLocale: (value: "uz" | "ru") => void }) {
           </Link>
         </div>
       </header>
-      <States />
-      <NextIntlClientProvider locale="ru" messages={ru}>
-        <States />
-      </NextIntlClientProvider>
+      <div lang="uz">
+        <NextIntlClientProvider locale="uz" messages={uz}>
+          <States />
+        </NextIntlClientProvider>
+      </div>
+      <div lang="ru">
+        <NextIntlClientProvider locale="ru" messages={ru}>
+          <States />
+        </NextIntlClientProvider>
+      </div>
       <Fields />
       <Feedback />
       <Products />
@@ -191,6 +197,13 @@ function Contents({ onLocale }: { onLocale: (value: "uz" | "ru") => void }) {
 }
 export function ComponentGallery() {
   const [locale, setLocale] = useState<"uz" | "ru">("uz");
+  useEffect(() => {
+    const previous = document.documentElement.lang;
+    document.documentElement.lang = locale;
+    return () => {
+      document.documentElement.lang = previous;
+    };
+  }, [locale]);
   return (
     <NextIntlClientProvider
       locale={locale}
