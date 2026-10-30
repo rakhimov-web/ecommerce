@@ -1101,9 +1101,6 @@ textarea {
 .gallery-skeleton {
   aspect-ratio: 1;
 }
-.gallery-banner {
-  max-width: 24rem;
-}
 .gallery-sticky-sample {
   position: relative;
 }
@@ -1146,16 +1143,6 @@ textarea {
     opacity: 0;
   }
   to {
-    opacity: 1;
-  }
-}
-@keyframes toast-enter {
-  from {
-    transform: translate(-50%, var(--spacing-lg));
-    opacity: 0;
-  }
-  to {
-    transform: translate(-50%, 0);
     opacity: 1;
   }
 }
