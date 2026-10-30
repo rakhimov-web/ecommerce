@@ -2,7 +2,15 @@
 import Image from "next/image";
 import { useState } from "react";
 import { brand } from "@/config/brand";
-function ImageState({ src, alt }: { src?: string; alt: string }) {
+function ImageState({
+  src,
+  alt,
+  fit = "contain",
+}: {
+  src?: string;
+  alt: string;
+  fit?: "contain" | "cover";
+}) {
   const [failed, setFailed] = useState(false);
   const placeholder = !src || failed;
   return (
@@ -12,12 +20,22 @@ function ImageState({ src, alt }: { src?: string; alt: string }) {
         alt={alt}
         fill
         sizes="(max-width:640px) 100vw, 400px"
-        className={placeholder ? "product-placeholder" : "product-image"}
+        className={
+          placeholder
+            ? "product-placeholder"
+            : fit === "cover"
+              ? "product-cover"
+              : "product-image"
+        }
         onError={() => setFailed(true)}
       />
     </div>
   );
 }
-export function ProductImage(props: { src?: string; alt: string }) {
+export function ProductImage(props: {
+  src?: string;
+  alt: string;
+  fit?: "contain" | "cover";
+}) {
   return <ImageState key={props.src} {...props} />;
 }

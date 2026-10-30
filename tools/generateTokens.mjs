@@ -34,6 +34,7 @@ for (const name of Object.keys(design.motion).filter((n) =>
 ))
   css += `@utility ${name}{transition-duration:var(--motion-${name});}\n`;
 css += readFileSync("src/styles/base.css", "utf8");
+css += readFileSync("src/styles/components.css", "utf8");
 writeFileSync("src/app/globals.css", await format(css, { parser: "css" }));
 writeFileSync(
   "src/styles/tokenNames.ts",
