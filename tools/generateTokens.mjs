@@ -12,6 +12,9 @@ for (const group of ["colors", "rounded", "spacing", "motion", "typography"]) {
     else css += `--${group}-${name}: ${value};\n`;
   }
 }
+for (const [name, props] of Object.entries(design.components)) {
+  if (props.padding) css += `--component-${name}-padding: ${props.padding};\n`;
+}
 css += "}\n@theme inline {\n";
 for (const [group, prefix] of [
   ["colors", "color"],
