@@ -1,0 +1,43 @@
+{
+  "common": {
+    "language": "Русский",
+    "intro": "Надёжная основа для нового магазина.",
+    "stage": "Основа · 1A",
+    "gallery": "Дизайн-система",
+    "colors": "Цвета",
+    "typography": "Типографика",
+    "spacing": "Отступы",
+    "rounded": "Радиусы",
+    "motion": "Движение",
+    "placeholder": "Пример изображения",
+    "sampleUz": "Oʻzbekcha: oʻ, gʻ, maʼno",
+    "sampleRu": "Русский: техника для дома",
+    "fontInter": "Inter",
+    "fontOswald": "Oswald"
+  },
+  "tabs": {
+    "home": "Главная",
+    "catalog": "Каталог",
+    "cart": "Корзина",
+    "favorites": "Избранное",
+    "profile": "Профиль"
+  },
+  "search": {
+    "title": "Поиск"
+  },
+  "product": {
+    "title": "Товар"
+  },
+  "cart": {
+    "title": "Корзина"
+  },
+  "checkout": {
+    "title": "Оформление"
+  },
+  "auth": {
+    "title": "Вход"
+  },
+  "errors": {
+    "title": "Произошла ошибка"
+  }
+}

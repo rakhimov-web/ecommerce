@@ -1,0 +1,43 @@
+{
+  "common": {
+    "language": "Oʻzbekcha",
+    "intro": "Yangi doʻkon uchun mustahkam poydevor.",
+    "stage": "Poydevor · 1A",
+    "gallery": "Dizayn tizimi",
+    "colors": "Ranglar",
+    "typography": "Tipografiya",
+    "spacing": "Oraliqlar",
+    "rounded": "Burchaklar",
+    "motion": "Harakat",
+    "placeholder": "Namuna tasvir",
+    "sampleUz": "Oʻzbekcha: oʻ, gʻ, maʼno",
+    "sampleRu": "Русский: техника для дома",
+    "fontInter": "Inter",
+    "fontOswald": "Oswald"
+  },
+  "tabs": {
+    "home": "Bosh sahifa",
+    "catalog": "Katalog",
+    "cart": "Savat",
+    "favorites": "Sevimlilar",
+    "profile": "Profil"
+  },
+  "search": {
+    "title": "Qidirish"
+  },
+  "product": {
+    "title": "Mahsulot"
+  },
+  "cart": {
+    "title": "Savat"
+  },
+  "checkout": {
+    "title": "Buyurtma"
+  },
+  "auth": {
+    "title": "Kirish"
+  },
+  "errors": {
+    "title": "Xatolik yuz berdi"
+  }
+}
