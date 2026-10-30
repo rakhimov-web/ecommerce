@@ -1,6 +1,6 @@
 # Texno Demo Store
 
-Fresh Stage 1A foundations for a mobile-first Uzbek/Russian electronics storefront. This part contains the scaffold, design system, utilities and gallery; no catalog, cart, authentication or database features.
+Stage 1A foundations and Stage 1B components/shell for a mobile-first Uzbek/Russian electronics storefront. Includes shared controls, accessible overlays, presentational product cards and five navigable placeholder pages; no catalog fetching, cart business logic, authentication or database.
 
 ## Run
 
@@ -13,7 +13,7 @@ pnpm lint && pnpm typecheck && pnpm test && pnpm build
 pnpm start
 ```
 
-Routes: `/` redirects to `/uz`; `/uz` and `/ru` show the localized foundation page. `/dev/gallery` exists only during development: `page.dev.tsx` is excluded from production route discovery. E2E and database commands print TODOs for their later stages.
+Routes: `/` redirects to `/uz`; both locales have Home, `/catalog`, `/cart`, `/favorites` and `/profile` shell placeholders. `/[locale]/info/demo` demonstrates a no-tab-bar sub-page. `/dev/gallery` exists only during development: `page.dev.tsx` is excluded from production route discovery. E2E and database commands print TODOs for their later stages.
 
 ## Map
 
@@ -38,4 +38,4 @@ TypeScript 6.0.3 is pinned because the current ESLint TypeScript parser rejects 
 
 `SITE_URL` is an optional zod-validated canonical origin; no secrets are required. Vercel is explicitly configured for Next.js and `.next` output. Actual Vercel deployment and Lighthouse auditing are not part of the local verification.
 
-Next task: Stage 1B responsive shopping shell and shared UI primitives.
+Stage 1B usage and verification: [docs/stage1b.md](docs/stage1b.md). Next task: Stage 2 mock catalog flows.

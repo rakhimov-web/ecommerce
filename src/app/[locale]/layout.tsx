@@ -1,3 +1,4 @@
+import { MotionProvider } from "@/components/ui/MotionProvider";
 import type { Metadata, Viewport } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
@@ -29,7 +30,9 @@ export default async function Layout({
   return (
     <html lang={locale}>
       <body className={`${inter.variable} ${oswald.variable}`}>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          <MotionProvider>{children}</MotionProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
