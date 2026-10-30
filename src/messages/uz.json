@@ -1,0 +1,38 @@
+{
+  "common": {
+    "intro": "Doʻkon poydevori tayyor.",
+    "language": "Oʻzbekcha",
+    "sample": "Oʻzbekcha: oʻ, gʻ, maʼno · Русский: электроника",
+    "gallery": "Dizayn tizimi",
+    "colors": "Ranglar",
+    "type": "Tipografiya",
+    "spacing": "Oraliqlar",
+    "radius": "Burchaklar",
+    "placeholder": "Namuna tasvir"
+  },
+  "tabs": {
+    "home": "Bosh sahifa",
+    "catalog": "Katalog",
+    "cart": "Savat",
+    "favorites": "Sevimlilar",
+    "profile": "Profil"
+  },
+  "search": {
+    "title": "Qidirish"
+  },
+  "product": {
+    "title": "Mahsulot"
+  },
+  "cart": {
+    "title": "Savat"
+  },
+  "checkout": {
+    "title": "Buyurtma"
+  },
+  "auth": {
+    "title": "Kirish"
+  },
+  "errors": {
+    "title": "Xatolik"
+  }
+}
