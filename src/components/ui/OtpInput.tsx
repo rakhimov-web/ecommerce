@@ -18,18 +18,33 @@ export function OtpInput({
 }) {
   const t = useTranslations("ui");
   const errorId = useId();
-  const [internal, setInternal] = useState(defaultValue);
-  const current = value ?? internal;
+  function toSlots(text: string) {
+    const digits = text.replace(/\D/g, "").slice(0, 6);
+    return Array.from({ length: 6 }, (_, i) => digits[i] ?? "");
+  }
+  // Keep editing positions locally. The public value remains digits-only; echoing
+  // that value from a controlled parent must not collapse an empty middle slot.
+  const [draft, setDraft] = useState(() => ({
+    slots: toSlots(defaultValue),
+    emitted: defaultValue,
+  }));
+  const slots =
+    value === undefined || value === draft.emitted
+      ? draft.slots
+      : toSlots(value);
   const refs = useRef<(HTMLInputElement | null)[]>([]);
   function update(index: number, text: string) {
     const digits = text.replace(/\D/g, "").slice(0, 6 - index);
-    const next = (
-      current.slice(0, index) +
-      digits +
-      current.slice(index + Math.max(digits.length, 1))
-    ).slice(0, 6);
-    if (value === undefined) setInternal(next);
-    onValueChange?.(next);
+    if (text && !digits) return;
+    const next = [...slots];
+    if (!text) next[index] = "";
+    else
+      Array.from(digits).forEach((digit, offset) => {
+        next[index + offset] = digit;
+      });
+    const emitted = next.join("");
+    setDraft({ slots: next, emitted });
+    onValueChange?.(emitted);
     if (digits) refs.current[Math.min(index + digits.length, 5)]?.focus();
   }
   return (
@@ -42,20 +57,21 @@ export function OtpInput({
             ref={(el) => {
               refs.current[i] = el;
             }}
-            value={current[i] ?? ""}
+            value={slots[i]}
             inputMode="numeric"
             autoComplete={i === 0 ? "one-time-code" : "off"}
             aria-label={t("otpDigit", { number: i + 1 })}
             aria-invalid={!!error || undefined}
             aria-describedby={error ? errorId : undefined}
             maxLength={1}
+            onFocus={(e) => e.currentTarget.select()}
             onChange={(e) => update(i, e.target.value)}
             onPaste={(e) => {
               e.preventDefault();
               update(i, e.clipboardData.getData("text"));
             }}
             onKeyDown={(e) => {
-              if (e.key === "Backspace" && !current[i])
+              if (e.key === "Backspace" && !slots[i])
                 refs.current[Math.max(0, i - 1)]?.focus();
               if (e.key === "ArrowLeft")
                 refs.current[Math.max(0, i - 1)]?.focus();

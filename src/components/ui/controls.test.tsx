@@ -277,3 +277,102 @@ it("loading buttons keep exactly one accessible label", () => {
     "Loading",
   );
 });
+it.each([false, true])(
+  "OTP keeps empty middle slots and supports replacement (controlled=%s)",
+  (controlled) => {
+    const change = vi.fn();
+    function Harness() {
+      const [value, setValue] = useState("123456");
+      return (
+        <OtpInput
+          label="Code"
+          defaultValue="123456"
+          value={controlled ? value : undefined}
+          onValueChange={(v) => {
+            change(v);
+            setValue(v);
+          }}
+        />
+      );
+    }
+    renderUI(<Harness />);
+    const inputs = screen.getAllByRole("textbox");
+    fireEvent.change(inputs[1], { target: { value: "" } });
+    expect(inputs.map((x) => (x as HTMLInputElement).value)).toEqual([
+      "1",
+      "",
+      "3",
+      "4",
+      "5",
+      "6",
+    ]);
+    expect(change).toHaveBeenLastCalledWith("13456");
+    fireEvent.change(inputs[1], { target: { value: "9" } });
+    expect(inputs.map((x) => (x as HTMLInputElement).value)).toEqual([
+      "1",
+      "9",
+      "3",
+      "4",
+      "5",
+      "6",
+    ]);
+    expect(change).toHaveBeenLastCalledWith("193456");
+    fireEvent.paste(inputs[2], { clipboardData: { getData: () => "a!" } });
+    expect(change).toHaveBeenLastCalledWith("193456");
+    fireEvent.paste(inputs[2], { clipboardData: { getData: () => "87" } });
+    expect(inputs.map((x) => (x as HTMLInputElement).value)).toEqual([
+      "1",
+      "9",
+      "8",
+      "7",
+      "5",
+      "6",
+    ]);
+  },
+);
+it("OTP accepts a controlled external reset after partial editing", () => {
+  function Harness() {
+    const [value, setValue] = useState("123456");
+    return (
+      <>
+        <OtpInput label="Code" value={value} onValueChange={setValue} />
+        <button onClick={() => setValue("")}>Reset</button>
+      </>
+    );
+  }
+  renderUI(<Harness />);
+  fireEvent.change(screen.getAllByRole("textbox")[2], {
+    target: { value: "" },
+  });
+  fireEvent.click(screen.getByRole("button", { name: "Reset" }));
+  screen
+    .getAllByRole("textbox")
+    .forEach((input) => expect(input).toHaveValue(""));
+});
+it("BottomSheet keeps background inert and focus isolated until exit completes", async () => {
+  function Harness() {
+    const [open, setOpen] = useState(false);
+    return (
+      <>
+        <button onClick={() => setOpen(true)}>Open</button>
+        <BottomSheet open={open} title="Sheet" onClose={() => setOpen(false)}>
+          <Button>Last</Button>
+        </BottomSheet>
+      </>
+    );
+  }
+  const { container } = renderUI(<Harness />);
+  const trigger = screen.getByRole("button", { name: "Open" });
+  trigger.focus();
+  fireEvent.click(trigger);
+  fireEvent.keyDown(document, { key: "Escape" });
+  const dialog = screen.getByRole("dialog");
+  expect(dialog).toContainElement(document.activeElement as HTMLElement);
+  expect(document.body.style.overflow).toBe("hidden");
+  expect(container.inert).toBe(true);
+  await waitFor(() =>
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
+  );
+  expect(container.inert).not.toBe(true);
+  expect(trigger).toHaveFocus();
+});
