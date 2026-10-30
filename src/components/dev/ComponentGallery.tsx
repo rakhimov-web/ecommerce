@@ -113,6 +113,14 @@ function Products() {
           <ProductImage src="/missing-gallery-image.webp" alt={t("sample")} />
           <ProductImage src={brand.placeholder} alt={t("banner")} fit="cover" />
         </div>
+        <ProductImage alt={t("banner")} aspect="banner" fit="cover" />
+        <ProductImage
+          src={brand.placeholder}
+          mobileSrc={brand.placeholder}
+          alt={t("banner")}
+          aspect="banner"
+          fit="cover"
+        />
       </section>
       <section className="gallery-section">
         <h2 className="type-heading-lg">{t("products")}</h2>
