@@ -1,0 +1,12 @@
+{
+  "Inter": {
+    "sample": "Oʻzbek gʻ maʼno Русский ЙЁйё",
+    "missing_codepoints": [],
+    "local_file": "src/assets/fonts/Inter.woff2"
+  },
+  "Oswald": {
+    "sample": "Oʻzbek gʻ maʼno Русский ЙЁйё",
+    "missing_codepoints": [],
+    "local_file": "src/assets/fonts/Oswald.woff2"
+  }
+}
