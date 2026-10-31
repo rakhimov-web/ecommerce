@@ -1,8 +1,9 @@
 "use client";
+import Link from "next/link";
 import { Heart, Plus, Star } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { brand } from "@/config/brand";
-import type { Product } from "@/features/catalog/types";
+import type { ProductSummary } from "@/features/catalog/types";
 import { ProductImage } from "@/components/ui/ProductImage";
 import { Badge } from "@/components/ui/Badge";
 import { IconButton } from "@/components/ui/IconButton";
@@ -15,7 +16,7 @@ export function ProductCard({
   onLike,
   onQuantityChange,
 }: {
-  product: Product;
+  product: ProductSummary;
   liked?: boolean;
   quantity?: number;
   onLike?: () => void;
@@ -28,7 +29,13 @@ export function ProductCard({
   return (
     <article className="product-card">
       <div className={`product-card-stage ${available ? "" : "out-of-stock"}`}>
-        <ProductImage src={product.image} alt={name} />
+        <Link
+          className="product-detail-link"
+          href={`/${locale}/p/${product.slug}`}
+          aria-label={name}
+        >
+          <ProductImage src={product.image} alt={name} />
+        </Link>
         <div className="product-badge">
           {!available ? (
             <Badge>{t("outOfStock")}</Badge>
@@ -41,13 +48,21 @@ export function ProductCard({
             aria-label={t("favorite", { name })}
             aria-pressed={liked}
             onClick={onLike}
+            disabled={!onLike}
           >
             <Heart size={20} fill={liked ? "currentColor" : "none"} />
           </IconButton>
         </div>
       </div>
       <div className="product-meta">
-        <h3 className="type-product-name line-clamp-2 product-name">{name}</h3>
+        <Link
+          className="product-title-link"
+          href={`/${locale}/p/${product.slug}`}
+        >
+          <h3 className="type-product-name line-clamp-2 product-name">
+            {name}
+          </h3>
+        </Link>
         {brand.features.reviews && product.rating && (
           <p
             className="rating type-caption-sm"
@@ -76,6 +91,7 @@ export function ProductCard({
             (quantity > 0 ? (
               <QuantityStepper
                 value={quantity}
+                disabled={!onQuantityChange}
                 min={0}
                 max={Math.min(product.stock, 10)}
                 onChange={(value) => onQuantityChange?.(value)}
@@ -83,6 +99,7 @@ export function ProductCard({
             ) : (
               <IconButton
                 variant="ink"
+                disabled={!onQuantityChange}
                 aria-label={t("add", { name })}
                 onClick={() => onQuantityChange?.(1)}
               >

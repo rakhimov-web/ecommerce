@@ -201,18 +201,21 @@ describe("BottomSheet", () => {
     expect(close).toHaveFocus();
     expect(document.body.style.overflow).toBe("hidden");
     fireEvent.keyDown(document, { key: "Escape" });
-    await waitFor(() =>
-      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
-    );
-    expect(trigger).toHaveFocus();
-    expect(document.body.style.overflow).toBe("");
+    // Presence removal can precede React's passive isolation cleanup.
+    await waitFor(() => {
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+      expect(trigger).toHaveFocus();
+      expect(document.body.style.overflow).toBe("");
+    });
     fireEvent.click(trigger);
     const backdrop = screen.getByRole("dialog").parentElement;
     if (!backdrop) throw new Error("Missing scrim");
     fireEvent.click(backdrop);
-    await waitFor(() =>
-      expect(screen.queryByRole("dialog")).not.toBeInTheDocument(),
-    );
+    await waitFor(() => {
+      expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+      expect(trigger).toHaveFocus();
+      expect(document.body.style.overflow).toBe("");
+    });
   });
   it("does not close on panel clicks", () => {
     const close = vi.fn();

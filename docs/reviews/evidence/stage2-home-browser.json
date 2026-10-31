@@ -1,0 +1,91 @@
+{
+  "cases": [
+    {
+      "locale": "uz",
+      "width": 320,
+      "height": 900,
+      "horizontalOverflow": false,
+      "smallTargets": [],
+      "gridProducts": 30,
+      "duplicateProducts": false,
+      "bannerRatio": "4 / 5",
+      "axeViolations": [],
+      "loadingMode": "fallback button"
+    },
+    {
+      "locale": "uz",
+      "width": 360,
+      "height": 900,
+      "horizontalOverflow": false,
+      "smallTargets": [],
+      "gridProducts": 30,
+      "duplicateProducts": false,
+      "bannerRatio": "4 / 5",
+      "axeViolations": [],
+      "loadingMode": "intersection observer"
+    },
+    {
+      "locale": "uz",
+      "width": 1280,
+      "height": 900,
+      "horizontalOverflow": false,
+      "smallTargets": [],
+      "gridProducts": 30,
+      "duplicateProducts": false,
+      "bannerRatio": "16 / 9",
+      "axeViolations": [],
+      "loadingMode": "intersection observer"
+    },
+    {
+      "locale": "ru",
+      "width": 320,
+      "height": 900,
+      "horizontalOverflow": false,
+      "smallTargets": [],
+      "gridProducts": 30,
+      "duplicateProducts": false,
+      "bannerRatio": "4 / 5",
+      "axeViolations": [],
+      "loadingMode": "fallback button"
+    },
+    {
+      "locale": "ru",
+      "width": 360,
+      "height": 900,
+      "horizontalOverflow": false,
+      "smallTargets": [],
+      "gridProducts": 30,
+      "duplicateProducts": false,
+      "bannerRatio": "4 / 5",
+      "axeViolations": [],
+      "loadingMode": "intersection observer"
+    },
+    {
+      "locale": "ru",
+      "width": 1280,
+      "height": 900,
+      "horizontalOverflow": false,
+      "smallTargets": [],
+      "gridProducts": 30,
+      "duplicateProducts": false,
+      "bannerRatio": "16 / 9",
+      "axeViolations": [],
+      "loadingMode": "intersection observer"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "docs/screenshots/stage2-home-360.jpg",
+      "bytes": 121833
+    },
+    {
+      "path": "docs/screenshots/stage2-home-1280.jpg",
+      "bytes": 219805
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "chromium": "154.0.8037.57",
+  "axe": "4.14.0",
+  "apiLimitAndProductPlaceholder": "pass"
+}
